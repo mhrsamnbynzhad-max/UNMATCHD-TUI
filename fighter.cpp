@@ -1,0 +1,116 @@
+#include "fighter.h"
+#include<iostream>
+
+using namespace std;
+Fighter::Fighter(string name,int health,bool ranged , int  movement , bool heroteam)
+{
+    this->name = name;
+    this->health =  health;
+    this->ranged = ranged;
+    this->movement = movement;
+    this->heroteam = heroteam;
+    position = nullptr;
+}
+
+string Fighter::getName() const
+{
+    return name;
+}
+
+int Fighter::getHealth() const
+{
+    return health;
+}
+int Fighter::getmovement() const
+{
+    return movement;
+}
+void Fighter::takeDamage(int damage)
+{
+    health-=damage;
+    if(health<0)
+    health = 0;
+}
+
+bool Fighter::isRanged() const
+{
+    return ranged;
+}
+bool Fighter::isalive() const
+{
+    return health>0;
+}
+
+Zone* Fighter::getPosition() const
+{
+    return position;
+}
+
+void Fighter::setPosition(Zone* zone)
+{
+    position=zone;
+}
+void Fighter :: heal (int amount )
+{
+    health += amount;
+                    
+}
+    void Fighter :: addcard(Card card)
+    {
+       deck.push_back(card);
+
+    }
+    void Fighter :: drawcard()
+    {
+       if(deck.empty())
+       return;
+
+       hand.push_back(deck.back());
+       deck.pop_back();
+    }
+    void Fighter :: showhand()const
+    {
+        for(int i = 0 ; i <hand.size() ; i ++)
+        {
+             cout<<hand[i].getName()<<endl;
+        }
+    }
+
+    int Fighter :: handsize() const
+    {
+            return hand.size();
+    }
+
+    Card Fighter :: playcard(int index)
+    {
+        Card selected = hand[index];
+        hand.erase(hand.begin()+index);
+        return selected;
+    }
+
+
+    Card  Fighter :: remove_ranodmcard()
+    {
+        int index = rand()% hand.size();
+        Card temp = hand[index];
+
+        hand.erase(hand.begin()+ index);
+
+        return temp;
+    }
+
+
+    bool  Fighter:: isenemy (Fighter* other )
+    {
+        return ranged != other->ranged;
+
+    }
+
+    bool Fighter :: isheroteam() const
+    {
+        return heroteam;
+    }
+
+
+  
+
