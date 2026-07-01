@@ -1,9 +1,10 @@
 #include "battle.h"
 #include <iostream>
+#include <queue>
 
 using namespace std;
 
-    Battle::Battle():  sherlock(),  watson(),  dracula()
+    Battle::Battle():  sherlock(),  watson(),  dracula() , player1("Player 1") , player2("Player 2")
     {
         for(int i=0 ; i<3 ; i++)
         {
@@ -11,6 +12,18 @@ using namespace std;
                 Fighter("Sister",1,false,2 , false)
             );
         }
+
+        player1.chooseHero(&sherlock , &dracula);
+       if(player1.getHero() == &sherlock)
+       {
+         player2.setHero(&dracula);
+       }
+       else
+       {
+         player2.setHero(&sherlock);
+          
+       }
+       cout<<"Player 2 atuomatically gets "<<player2.getHero()->getName()<<"!\n";
 
         setuppositions();
 
@@ -28,7 +41,7 @@ using namespace std;
         cin>>choice;
           if(getfighterat(map.getZone(choice)))
             {
-                cout<<"occuiped!\\n";
+                cout<<"occuiped!\n";
             }
             else
             {
@@ -175,6 +188,35 @@ void Battle::draculaability(Fighter* target)
 
         Card attackcard = attracker->playcard(0);
         Card defendcard = defender->playcard(0);
+         
+        int attackValue = attackcard.getValue();
+
+        if (attackcard.getcardname() == BLOOD_THIRST)
+            {
+                Zone* enemyZone = defender->getPosition();          // Place of defender
+                char color = enemyZone->getColor();                 // Color of defender place
+
+                vector<Zone*> sameColorZones = map.getZonebycolor(color);   // All places that is the same color 
+
+                int counter = 0;
+
+                for (const Fighter& sis : sisters)                 
+                {
+                    Zone* sisPos = sis.getPosition();               // Sister's place
+
+                    for (Zone* zone : sameColorZones)               // Check the places that share the same color as the second fighter's place 
+                    {
+                        if (sisPos->getId() == zone->getId())       // If a sister is found on any of the same-colored places, increase the counter
+                        {
+                            counter++;
+                            if (counter == 3) break;                // The maximum allowed value for the counter is 3 .
+                        }
+                    }
+                    if (counter == 3) break;
+                }
+
+                attackValue += counter;                             // Increases attack 
+            }
             cout<<"Attacker played :"<<attackcard.getName()<<endl;
             cout<<"Defender played :"<<defendcard.getName()<<endl;
 
@@ -192,29 +234,77 @@ void Battle::draculaability(Fighter* target)
   
 void Battle::buildsherlockdeck()
 {
-    sherlock.addcard(Card(NEVER_CEASES,"Never Ceases","Any",VERSATILE,AFTER_COMBAT,"Draw Cards",3,1));
+    for(int i = 0 ; i <2 ; i ++)
+    {
+        sherlock.addcard(Card(LEARNING_NEVER_ENDS,"Learning never ends","Any",VERSATILE,AFTER_COMBAT,"Draw Cards",3,1));
+    }
+    for(int i = 0 ; i <3 ; i ++)
+    {
+        sherlock.addcard( Card(STRATEGIC_DEDUCTION,"Strategic Deduction","Sherlock",VERSATILE,DURING_COMBAT,"Use Boost Value",3,1));
+    }
 
-  sherlock.addcard( Card(STRATEGIC_DEDUCTION,"Strategic Deduction","Sherlock",VERSATILE,DURING_COMBAT,"Use Boost Value",3,1));
+    for(int i = 0 ; i <3 ; i ++)
+    {
+        sherlock.addcard(Card(COUNTER_ATTACK,"Counter attack","Sherlock",VERSATILE,AFTER_COMBAT,"Deal 2 Damage",3,1));
+    }
 
-  sherlock.addcard(Card(COUNTER_PUNCH,"Counter Punch","Sherlock",VERSATILE,AFTER_COMBAT,"Deal 2 Damage",3,1));
+    for(int i = 0 ; i <2 ; i ++)
+    {
+        sherlock.addcard(Card(SIDEARM,"Sidearm","Watson",ATTACK,NONE,"None",5,3));
+    }
 
-  sherlock.addcard(Card(PISTOL,"Pistol","Watson",ATTACK,NONE,"None",5,3));
+    for(int i = 0 ; i <2 ; i ++)
+    {
+        sherlock.addcard(Card(FIXED_POINT,"Fixed Point","Watson",VERSATILE,AFTER_COMBAT,"Heal Watson Holmes",3,1));
+        
+    }
 
-  sherlock.addcard(Card(FIXED_POINT,"Fixed Point","Watson",VERSATILE,AFTER_COMBAT,"Heal Watson Holmes",3,1));
+    for(int i = 0 ; i <2 ; i ++)
+    {
 
-  sherlock.addcard(Card(SERVICE,"Service","Watson",SCHEME,IMMEDIATE,"Heal Holmes",0,2));
+        sherlock.addcard(Card(SERVICE,"Service","Watson",SCHEME,IMMEDIATE,"Heal Holmes",0,2)); //EMERGENCY AID
+    }
 
-  sherlock.addcard(Card(METHODS_OF_STUDY,"Methods Of Study","Any",VERSATILE,AFTER_COMBAT,"See Enemy Hand",3,2));
+    for(int i = 0 ; i <2 ; i ++)
+    {
 
-  sherlock.addcard(Card(ELEMENTARY,"Elementary","Sherlock",DEFENSE,DURING_COMBAT,"Prediction",3,3));
+        sherlock.addcard(Card(STUDY_METHOD,"Study method","Any",VERSATILE,AFTER_COMBAT,"See Enemy Hand",3,2));
+    }
 
-  sherlock.addcard(Card(IMPOSSIBLE,"Impossible","Sherlock",SCHEME,IMMEDIATE,"Burn Enemy Card",0,2));
+    for(int i = 0 ; i <2 ; i ++)
+    {
+        sherlock.addcard(Card(ELEMENTARY,"Elementary","Sherlock",DEFENSE,DURING_COMBAT,"Prediction",3,3));
 
-  sherlock.addcard(Card(MASTER_OF_DISGUISE,"Master Of Disguise","Sherlock",SCHEME,IMMEDIATE,"Swap Positions",0,2));
+    }
 
-  sherlock.addcard(Card(GAME_IS_AFOOT,"The Game Is Afoot","Sherlock",ATTACK,AFTER_COMBAT,"Move Holmes",5,2));
-  
-  sherlock.addcard(Card(CONFIRM_SUSPICION,"Suspected Confirmed","Sherlock",SCHEME,IMMEDIATE,"Guess Card Value",0,1));
+    for(int i = 0 ; i <2 ; i ++)
+    {
+        sherlock.addcard(Card(IMPOSSIBLE,"Impossible","Sherlock",SCHEME,IMMEDIATE,"Burn Enemy Card",0,2)); //ELIMINTE IMPOSSIBLE
+
+    }
+
+    for(int i = 0 ; i <2 ; i ++)
+    {
+        sherlock.addcard(Card(MASTER_OF_DISGUISE,"Master Of Disguise","Sherlock",SCHEME,IMMEDIATE,"Swap Positions",0,2));
+
+    }
+
+    for(int i = 0 ; i <2 ; i ++)
+    {
+        sherlock.addcard(Card(GAME_ON,"The Game Is Afoot","Sherlock",ATTACK,AFTER_COMBAT,"Move Holmes",5,2));//THE GAME IS ON
+
+    }
+
+    for(int i = 0 ; i <3 ; i ++)
+  {
+      sherlock.addcard(Card(CONFIRM_SUSPICION,"Suspected Confirmed","Sherlock",SCHEME,IMMEDIATE,"Guess Card Value",0,1));
+
+  }
+   for(int i = 0 ; i <3 ; i ++)
+  {
+      sherlock.addcard(Card(DECEPTION,"Deception","Any",SCHEME,BEFOR_COMBAT,"Cncel all effects on your opponent's card",2,1));
+
+  }
 }
 
 
@@ -222,7 +312,7 @@ void Battle::buildsherlockdeck()
   {
      switch (card.getcardname())
      {  
-         case GAME_IS_AFOOT:
+         case GAME_ON:
         cout<<"Move holmes 3 spaces"<<endl;
         break;
 
@@ -243,15 +333,15 @@ void Battle::buildsherlockdeck()
         cout<<"Watson and  Holmes healed"<<endl;
         break;
 
-         case COUNTER_PUNCH:
+         case COUNTER_ATTACK:
         cout<<"Deal 2 extra damage"<<endl;
         break;
 
-         case METHODS_OF_STUDY:
+         case STUDY_METHOD:
         cout<<"See enemy hand"<<endl;
         break;
 
-         case NEVER_CEASES:
+         case LEARNING_NEVER_ENDS:
         cout<<"DRAW cards depending on result"<<endl;
         break;
       
@@ -344,7 +434,7 @@ void Battle::buildsherlockdeck()
     {
 
         showPossiblemoves(fighter);
-      Zone* destination = map. getZone(destinationid);
+      Zone* destination = map.getZone(destinationid);
 
       if(destination == fighter.getPosition())
       {
@@ -421,3 +511,41 @@ void Battle::buildsherlockdeck()
          cout<<endl;
     }
     
+    void Battle::startGame()
+{
+    std::queue<Player*> turnQueue;
+    turnQueue.push(&player1);
+    turnQueue.push(&player2);
+
+    while(true)
+    {
+        Player* current = turnQueue.front();
+        turnQueue.pop();
+
+        cout << "\nTurn : " << current->getName() << endl;
+        cout << "1) Draw\n2) Maneuver\n3) Attack\n4) Scheme\n";
+
+        int choice;
+        cin >> choice;
+
+        Player* enemy = (current == &player1 ? &player2 : &player1);
+
+        try
+        {
+            switch(choice)
+            {
+                case 1: current->drawCard(); break;
+                case 2: current->maneuver(*this); break;
+                case 3: current->attack(*enemy, *this); break;
+                case 4: current->playScheme(*enemy, *this); break;
+                default: throw invalid_argument("Invalid input...");
+            }
+        }
+        catch(const exception& e)
+        {
+            cout << "Error: " << e.what() << endl;
+        }
+
+        turnQueue.push(current);
+    }
+}

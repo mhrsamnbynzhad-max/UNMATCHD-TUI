@@ -1,6 +1,7 @@
 #ifndef BATTLE_H
 #define BATTLE_H
 
+#include "Player.h"
 #include "fighter.h"
 #include "dracula.h"
 #include "watson.h"
@@ -19,12 +20,15 @@ private:
     std::vector<Fighter> sisters;
 
     Map map;
+    Player player1;
+    Player player2;
+
     bool canreach(Zone*  , Zone*  , int  , Fighter&);
 
 public:
 
     Battle();
-
+    void startGame();
     void setuppositions();
 
     void draculaability(Fighter* target);

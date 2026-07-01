@@ -1,5 +1,8 @@
 #include "fighter.h"
 #include<iostream>
+#include<algorithm>
+#include<random>
+#include<cstdlib>
 
 using namespace std;
 Fighter::Fighter(string name,int health,bool ranged , int  movement , bool heroteam)
@@ -62,11 +65,7 @@ void Fighter :: heal (int amount )
     }
     void Fighter :: drawcard()
     {
-       if(deck.empty())
-       return;
-
-       hand.push_back(deck.back());
-       deck.pop_back();
+      
     }
     void Fighter :: showhand()const
     {
@@ -110,6 +109,46 @@ void Fighter :: heal (int amount )
     {
         return heroteam;
     }
+
+    vector<Card>  Fighter :: getrandomcard(int count )
+    {
+        vector<int>index;
+        for(int i = 0 ; i <deck.size(); i++)
+        {
+            index.push_back(i);
+        }
+        std::shuffle (index.begin() , index.end(), std:: default_random_engine{});
+        
+        vector<Card>rand;
+         for(int i = 0 ; i < count ; i++)
+         {
+            rand.push_back(deck[index[i]]);
+         }
+         
+         sort(index.begin() , index.begin()+ count ,greater<int>());
+         
+         for(int  i = 0 ; i < count ; i ++)
+         deck.erase(deck.begin() + index[i]);
+         
+         cout<<"++++++++++"<<deck.size()<<endl;
+
+         return rand;
+    }
+
+
+    void Fighter :: addtohand(const std:: vector<Card>& cards)
+    {
+           for(const auto& c : cards)
+           hand.push_back(c);
+    }
+
+    int  Fighter :: getdecksize()const
+    {
+        return deck.size();
+    }
+
+
+
 
 
   

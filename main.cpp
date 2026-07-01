@@ -6,8 +6,8 @@ int main()
 {
     Map map;
 
-   // map.printallzones();
    Battle battle;
+   battle.startGame();
    battle.printfighters();
     return 0;
 }

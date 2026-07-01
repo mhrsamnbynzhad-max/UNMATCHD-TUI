@@ -48,10 +48,9 @@ class Fighter
     bool isenemy (Fighter* );
 
     bool isheroteam() const;
-
-
-    
-
+    vector<Card> getrandomcard(int);
+    void addtohand(const std:: vector<Card>&);
+    int getdecksize()const;
 };
 
 #endif
