@@ -38,7 +38,7 @@ class Fighter
     void setPosition(Zone*);
     void heal (int );
     void addcard(Card);
-    void drawcard();
+
     void showhand()const;
     int handsize() const;
     Card playcard(int);
@@ -51,6 +51,8 @@ class Fighter
     vector<Card> getrandomcard(int);
     void addtohand(const std:: vector<Card>&);
     int getdecksize()const;
+    Card removerandomcard();
+    void setdeck(const vector<Card>& );
 };
 
 #endif

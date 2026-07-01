@@ -35,10 +35,9 @@ public:
 
     void printfighters();
 
-    void builddraculadeck();
+   
     void combat(Fighter*,Fighter*  );
 
-    void buildsherlockdeck();
     void applycardeffect(Card);
 
 
@@ -48,6 +47,7 @@ public:
     void showPossiblemoves(Fighter&);
     Fighter* getfighterat(Zone* );
     void showplacementzone(Fighter& );
+
    
     
 };

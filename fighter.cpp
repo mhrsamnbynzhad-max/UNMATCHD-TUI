@@ -63,10 +63,7 @@ void Fighter :: heal (int amount )
        deck.push_back(card);
 
     }
-    void Fighter :: drawcard()
-    {
-      
-    }
+    
     void Fighter :: showhand()const
     {
         for(int i = 0 ; i <hand.size() ; i ++)
@@ -146,6 +143,22 @@ void Fighter :: heal (int amount )
     {
         return deck.size();
     }
+    
+    Card Fighter :: removerandomcard()
+    {
+              int index = rand()% hand.size();
+              Card temp = hand[index];
+              hand.erase(hand.begin()+index);
+              return temp;
+    }
+
+    void  Fighter :: setdeck(const vector<Card>& d)
+    {
+        deck = d;
+
+    }
+
+
 
 
 

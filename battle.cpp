@@ -1,4 +1,5 @@
 #include "battle.h"
+#include "cardfactory.h"
 #include <iostream>
 #include <queue>
 
@@ -26,10 +27,9 @@ using namespace std;
        cout<<"Player 2 atuomatically gets "<<player2.getHero()->getName()<<"!\n";
 
         setuppositions();
-
-        builddraculadeck();
-
-        buildsherlockdeck();
+        dracula.setdeck(CardFactory::createDraculaDeck());
+        sherlock.setdeck(CardFactory::createSherlockDeck());
+      
     }
 
     void Battle:: setuppositions()
@@ -113,65 +113,7 @@ void Battle::draculaability(Fighter* target)
       
     }
 
-    void Battle:: builddraculadeck()
-    {
-        for(int i = 0 ; i <2 ; i ++)
-        {
-            dracula.addcard(Card(BEAST_FORM , "Beast Form", "Dracula",ATTACK,DURING_COMBAT,"Discard cards +1 attack",6 ,4));
-        }
 
-         for(int i = 0 ; i <2 ; i ++)
-        {
-            dracula.addcard(Card(FEAST,"Feast", "Dracula",SCHEME,IMMEDIATE,"Heal 2  and  reivve sister",0 ,2));
-        }
-
-         for(int i = 0 ; i <2 ; i ++)
-        {
-            dracula.addcard(Card(MIST_FORM ,"Mist Form", "Dracula",SCHEME,IMMEDIATE,"Teleport and gain action",0 ,2));
-        }
-        
-        
-         for(int i = 0 ; i <2 ; i ++)
-        {
-            dracula.addcard(Card(HUNT , "Hunt", "Dracula",SCHEME,IMMEDIATE,"Damage adjacent enemies",0 ,4));
-        }
-
-         for(int i = 0 ; i <2 ; i ++)
-        {
-            dracula.addcard(Card(BLOOD_THIRST,"Blood Thirst", "Dracula",ATTACK,DURING_COMBAT,"Attack increaces by sisters",2,3));
-        }
-
-        for(int i = 0 ; i <3 ; i ++)
-        {
-            dracula.addcard(Card(LOOK_INTO_MY_EYES,"Look Into My Eyes", "Dracula",DEFENSE,DURING_COMBAT,"Add opponent boost",1,2));
-        }
-
-           for(int i = 0 ; i <2 ; i ++)
-        {
-            dracula.addcard(Card(AMBUSH,"Ambush", "Any",ATTACK,DURING_COMBAT,"Discard random enemy card",2,3));
-        }
-         for(int i = 0 ; i <3 ; i ++)
-        {
-            dracula.addcard(Card(FEINT,"Feint", "Any",VERSATILE,BEFOR_COMBAT,"Cancel opponent effect",2,2));
-        }
-          for(int i = 0 ; i <3 ; i ++)
-        {
-            dracula.addcard(Card( MANEUVER, "Maneuver", "Any",VERSATILE,AFTER_COMBAT," Move 3 spaces",3,1));
-        }
-          for(int i = 0 ; i <3 ; i ++)
-        {
-            dracula.addcard(Card(EXPLOIT,"Exploit", "Any",VERSATILE,AFTER_COMBAT,"Draw card",4,1));
-        }
-        for(int i=0;i<3;i++)
-            {
-                dracula.addcard( Card(SURVIVAL_INSTINCT,"Survival Instinct", "Sister",ATTACK,AFTER_COMBAT,"Move Dracula near enemy",3, 3));
-            }
-
-     for(int i=0;i<3;i++)
-      {
-                    dracula.addcard(Card(SEDUCTIVE_CALL, "Seductive Call", "Sister", SCHEME,IMMEDIATE, "Move fighter and deal damage", 0, 2));
-      }
-    }
     void Battle :: combat(Fighter* attracker,Fighter* defender )
     {
 
@@ -187,9 +129,28 @@ void Battle::draculaability(Fighter* target)
         }
 
         Card attackcard = attracker->playcard(0);
-        Card defendcard = defender->playcard(0);
-         
-        int attackValue = attackcard.getValue();
+        Card defendcard ;
+
+        bool isdefended = false;
+        cout<<defender->getName()<<"  Do yo want to defend? (yes(1) or no (0))\n";
+        int choose;
+        cin>>choose;
+
+         if(choose == 1 && defender->handsize()>0)
+         {
+            isdefended = true;
+            defendcard = (*defender).playcard(0);
+         }
+         else
+         {
+            isdefended = false;
+            defendcard;
+         }
+         int attackValue = attackcard.getValue();
+
+         int defederValue = isdefended ? defendcard.getValue() : 0;
+
+         int damage = attackValue - defederValue;
 
         if (attackcard.getcardname() == BLOOD_THIRST)
             {
@@ -204,7 +165,7 @@ void Battle::draculaability(Fighter* target)
                 {
                     Zone* sisPos = sis.getPosition();               // Sister's place
 
-                    for (Zone* zone : sameColorZones)               // Check the places that share the same color as the second fighter's place 
+                    for (Zone* zone : sameColorZones)               // Check the places that share the same color as the defender's place 
                     {
                         if (sisPos->getId() == zone->getId())       // If a sister is found on any of the same-colored places, increase the counter
                         {
@@ -220,7 +181,7 @@ void Battle::draculaability(Fighter* target)
             cout<<"Attacker played :"<<attackcard.getName()<<endl;
             cout<<"Defender played :"<<defendcard.getName()<<endl;
 
-            int damage = attackcard.getValue() - defendcard.getValue();
+            damage =  attackValue - defendcard.getValue();
             if(damage >0 )
             {
                 defender->takeDamage(damage);
@@ -232,82 +193,6 @@ void Battle::draculaability(Fighter* target)
     }
 
   
-void Battle::buildsherlockdeck()
-{
-    for(int i = 0 ; i <2 ; i ++)
-    {
-        sherlock.addcard(Card(LEARNING_NEVER_ENDS,"Learning never ends","Any",VERSATILE,AFTER_COMBAT,"Draw Cards",3,1));
-    }
-    for(int i = 0 ; i <3 ; i ++)
-    {
-        sherlock.addcard( Card(STRATEGIC_DEDUCTION,"Strategic Deduction","Sherlock",VERSATILE,DURING_COMBAT,"Use Boost Value",3,1));
-    }
-
-    for(int i = 0 ; i <3 ; i ++)
-    {
-        sherlock.addcard(Card(COUNTER_ATTACK,"Counter attack","Sherlock",VERSATILE,AFTER_COMBAT,"Deal 2 Damage",3,1));
-    }
-
-    for(int i = 0 ; i <2 ; i ++)
-    {
-        sherlock.addcard(Card(SIDEARM,"Sidearm","Watson",ATTACK,NONE,"None",5,3));
-    }
-
-    for(int i = 0 ; i <2 ; i ++)
-    {
-        sherlock.addcard(Card(FIXED_POINT,"Fixed Point","Watson",VERSATILE,AFTER_COMBAT,"Heal Watson Holmes",3,1));
-        
-    }
-
-    for(int i = 0 ; i <2 ; i ++)
-    {
-
-        sherlock.addcard(Card(SERVICE,"Service","Watson",SCHEME,IMMEDIATE,"Heal Holmes",0,2)); //EMERGENCY AID
-    }
-
-    for(int i = 0 ; i <2 ; i ++)
-    {
-
-        sherlock.addcard(Card(STUDY_METHOD,"Study method","Any",VERSATILE,AFTER_COMBAT,"See Enemy Hand",3,2));
-    }
-
-    for(int i = 0 ; i <2 ; i ++)
-    {
-        sherlock.addcard(Card(ELEMENTARY,"Elementary","Sherlock",DEFENSE,DURING_COMBAT,"Prediction",3,3));
-
-    }
-
-    for(int i = 0 ; i <2 ; i ++)
-    {
-        sherlock.addcard(Card(IMPOSSIBLE,"Impossible","Sherlock",SCHEME,IMMEDIATE,"Burn Enemy Card",0,2)); //ELIMINTE IMPOSSIBLE
-
-    }
-
-    for(int i = 0 ; i <2 ; i ++)
-    {
-        sherlock.addcard(Card(MASTER_OF_DISGUISE,"Master Of Disguise","Sherlock",SCHEME,IMMEDIATE,"Swap Positions",0,2));
-
-    }
-
-    for(int i = 0 ; i <2 ; i ++)
-    {
-        sherlock.addcard(Card(GAME_ON,"The Game Is Afoot","Sherlock",ATTACK,AFTER_COMBAT,"Move Holmes",5,2));//THE GAME IS ON
-
-    }
-
-    for(int i = 0 ; i <3 ; i ++)
-  {
-      sherlock.addcard(Card(CONFIRM_SUSPICION,"Suspected Confirmed","Sherlock",SCHEME,IMMEDIATE,"Guess Card Value",0,1));
-
-  }
-   for(int i = 0 ; i <3 ; i ++)
-  {
-      sherlock.addcard(Card(DECEPTION,"Deception","Any",SCHEME,BEFOR_COMBAT,"Cncel all effects on your opponent's card",2,1));
-
-  }
-}
-
-
  void Battle::applycardeffect(Card card)
   {
      switch (card.getcardname())
