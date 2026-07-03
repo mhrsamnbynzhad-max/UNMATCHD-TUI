@@ -1,16 +1,12 @@
 #ifndef FIGHTER_H
 #define FIGHTER_H
-#include "Zone.h"
+#include "zone.h"
 #include "card.h"
-
 #include <string>
 #include <vector>
 
-
-
 class Fighter
 {
-
     std::string name;
     int health;
     bool ranged;
@@ -41,6 +37,7 @@ class Fighter
 
     void showhand()const;
     int handsize() const;
+    std::vector<Card>& gethand();
     Card playcard(int);
 
     Card remove_ranodmcard();
@@ -52,7 +49,7 @@ class Fighter
     void addtohand(const std:: vector<Card>&);
     int getdecksize()const;
     Card removerandomcard();
-    void setdeck(const vector<Card>& );
+    void setdeck(const std::vector<Card>& );
 };
 
 #endif

@@ -1,4 +1,6 @@
-#include "Card.h"
+#include "card.h"
+#include "cardeffect.h"
+
 
 vector<Cardinfo> Card::draculaCardDB = {
     { BEAST_FORM, "Beast Form", "Dracula", ATTACK, DURING_COMBAT, "Discard cards +1 attack", 6, 4, 2 },
@@ -33,7 +35,12 @@ vector<Cardinfo> Card::sherlockCardDB = {
 
 Card Card::createFromInfo(const Cardinfo& info)
 {
-    return Card(info.name, info.title, info.owner,info.type, info.timing, info.effect,info.value, info.boost);
+     Card c(info.name, info.title, info.owner,info.type, info.timing, info.effect,info.value, info.boost);
+
+     if(info.name == BLOOD_THIRST)
+     c.effectroles = new BloodThirstEffect();
+
+     return c;
 }
 
 Card::Card(Cardname cn,string n, string f, Cardtype c,CardTime ti , string e, int v,int b)
@@ -46,6 +53,7 @@ Card::Card(Cardname cn,string n, string f, Cardtype c,CardTime ti , string e, in
     timing = ti;
     value = v;
     boost = b;
+   
 }
 
 string Card::getName() const
@@ -74,7 +82,12 @@ int Card::getValue() const
     return value;
 }
 
-int Card::getBoost() const
-{
-    return boost;
-}
+ void Card:: setValue(int v)
+ {
+     value = v ;
+ }
+
+CardEffect* Card:: getEffect()const
+ {
+    return effectroles;
+ }

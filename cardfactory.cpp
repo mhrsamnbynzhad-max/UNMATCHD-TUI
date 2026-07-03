@@ -1,4 +1,6 @@
 #include "cardfactory.h"
+#include "cardeffect.h"
+#include "card.h"
 
 using namespace std;
 

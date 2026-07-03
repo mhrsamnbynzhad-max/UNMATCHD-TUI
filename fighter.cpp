@@ -1,4 +1,5 @@
 #include "fighter.h"
+#include "card.h"
 #include<iostream>
 #include<algorithm>
 #include<random>
@@ -76,6 +77,12 @@ void Fighter :: heal (int amount )
     {
             return hand.size();
     }
+
+    vector<Card>&  Fighter :: gethand()
+    {
+        return hand;
+    }
+
 
     Card Fighter :: playcard(int index)
     {

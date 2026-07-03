@@ -9,6 +9,9 @@
 #include "map.h"
 #include <vector>
 
+class Card;
+class CardEffect;
+
 class Battle
 {
 private:
@@ -38,7 +41,7 @@ public:
    
     void combat(Fighter*,Fighter*  );
 
-    void applycardeffect(Card);
+    void applycardeffect(Card& , Fighter* ,Fighter* );
 
 
     bool areadjacent(Fighter& ,Fighter&  );
@@ -47,6 +50,9 @@ public:
     void showPossiblemoves(Fighter&);
     Fighter* getfighterat(Zone* );
     void showplacementzone(Fighter& );
+    const std::vector<Fighter>& getsisters()const;
+    Map& getMap();
+  
 
    
     

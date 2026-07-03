@@ -1,5 +1,6 @@
 #include "battle.h"
 #include "cardfactory.h"
+#include "cardeffect.h"
 #include <iostream>
 #include <queue>
 
@@ -32,6 +33,7 @@ using namespace std;
       
     }
 
+    
     void Battle:: setuppositions()
     {
         sherlock.setPosition(map.getZone(1));
@@ -48,8 +50,8 @@ using namespace std;
                     watson.setPosition(map.getZone(choice));
             } 
 
-           dracula.setPosition(map.getZone(2));
-          showplacementzone(dracula);
+            dracula.setPosition(map.getZone(2));
+            showplacementzone(dracula);
           for(int i = 0 ; i < 3 ; i++)
           {
             int choice;
@@ -62,20 +64,28 @@ using namespace std;
             }
             sisters[i].setPosition(map.getZone(choice));
          }
-
-       
-    }
-
-
+         
+         
+        }
+        
+        
+  const std::vector<Fighter>& Battle:: getsisters()const
+ {
+   return sisters;
+  }
+ Map& Battle::  getMap()
+ {
+    return map;
+ }
 void Battle::draculaability(Fighter* target)
 {
     if(target == nullptr)
     {
         return;
     }
-
+    
     target->takeDamage(1);
-
+    
     cout << "Dracula damaged "
          << target->getName()
          << " for 1 damage\n";
@@ -128,7 +138,21 @@ void Battle::draculaability(Fighter* target)
             return;
         }
 
-        Card attackcard = attracker->playcard(0);
+        int attackindex = -1;
+        for(int i = 0 ; i<attracker->handsize() ; i++)
+        {
+            if(attracker->gethand()[i].getcardType() == ATTACK)
+            {
+                attackindex = i ;
+                break;
+            }
+        }
+        if(attackindex == -1)
+        {
+            cout<<attracker->getName()<<"Has no attack card\n";
+            return;
+        }
+        Card attackcard = attracker->playcard(attackindex);
         Card defendcard ;
 
         bool isdefended = false;
@@ -146,38 +170,13 @@ void Battle::draculaability(Fighter* target)
             isdefended = false;
             defendcard;
          }
+         applycardeffect(attackcard ,attracker ,defender);
          int attackValue = attackcard.getValue();
 
          int defederValue = isdefended ? defendcard.getValue() : 0;
 
          int damage = attackValue - defederValue;
 
-        if (attackcard.getcardname() == BLOOD_THIRST)
-            {
-                Zone* enemyZone = defender->getPosition();          // Place of defender
-                char color = enemyZone->getColor();                 // Color of defender place
-
-                vector<Zone*> sameColorZones = map.getZonebycolor(color);   // All places that is the same color 
-
-                int counter = 0;
-
-                for (const Fighter& sis : sisters)                 
-                {
-                    Zone* sisPos = sis.getPosition();               // Sister's place
-
-                    for (Zone* zone : sameColorZones)               // Check the places that share the same color as the defender's place 
-                    {
-                        if (sisPos->getId() == zone->getId())       // If a sister is found on any of the same-colored places, increase the counter
-                        {
-                            counter++;
-                            if (counter == 3) break;                // The maximum allowed value for the counter is 3 .
-                        }
-                    }
-                    if (counter == 3) break;
-                }
-
-                attackValue += counter;                             // Increases attack 
-            }
             cout<<"Attacker played :"<<attackcard.getName()<<endl;
             cout<<"Defender played :"<<defendcard.getName()<<endl;
 
@@ -188,63 +187,17 @@ void Battle::draculaability(Fighter* target)
 
                 cout<<"Damage"<<damage<<endl;
             }
-
-
     }
 
-  
- void Battle::applycardeffect(Card card)
-  {
-     switch (card.getcardname())
-     {  
-         case GAME_ON:
-        cout<<"Move holmes 3 spaces"<<endl;
-        break;
 
-         case MASTER_OF_DISGUISE:
-        cout<<"Swap holems and enemy"<<endl;
-        break;
-
-
-          case IMPOSSIBLE:
-        cout<<"Look at enemy hand"<<endl;
-        break;
-
-        case SERVICE:
-        cout<<"Holmes healed"<<endl;
-        break;
-        
-         case FIXED_POINT:
-        cout<<"Watson and  Holmes healed"<<endl;
-        break;
-
-         case COUNTER_ATTACK:
-        cout<<"Deal 2 extra damage"<<endl;
-        break;
-
-         case STUDY_METHOD:
-        cout<<"See enemy hand"<<endl;
-        break;
-
-         case LEARNING_NEVER_ENDS:
-        cout<<"DRAW cards depending on result"<<endl;
-        break;
-      
-         case STRATEGIC_DEDUCTION:
-        cout<<"Replace value with boost"<<endl;
-        break;
-
-         case ELEMENTARY:
-        cout<<"Prediction defends"<<endl;
-        break;
-
-         case CONFIRM_SUSPICION:
-        cout<<"Guess enemy value"<<endl;
-        break;
-    
-     }
-  
-  }
+    void Battle :: applycardeffect(Card& card , Fighter* attacker ,Fighter* defender)
+    {
+           CardEffect* effect = card.getEffect();
+           if(effect)
+           {
+              effect->apply(attacker,defender,this,card);
+           }
+    }
 
 
     bool Battle :: areadjacent(Fighter& a ,Fighter& b )

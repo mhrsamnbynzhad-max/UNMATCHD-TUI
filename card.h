@@ -1,8 +1,8 @@
 #ifndef CARD_H
 #define CARD_H
-
 #include <string>
 #include <vector>
+class CardEffect;
 
 using namespace std;
 enum Cardtype {ATTACK, DEFENSE , VERSATILE , SCHEME};
@@ -40,6 +40,9 @@ private:
     int value;
 
     int boost;
+
+    CardEffect* effectroles = nullptr;
+
     
     
 public:    
@@ -50,18 +53,14 @@ public:
     {
     }
     Card(Cardname,string ,string,Cardtype, CardTime, string ,int,int);
-     
+
     string getName() const;
-
     string getfighterType() const;
-
     Cardtype getcardType() const;
-
     int getValue() const;
-
-    int getBoost() const;
     Cardname getcardname() const;
+    void setValue(int);
+    CardEffect* getEffect()const;
+    
 };
-
-
 #endif
