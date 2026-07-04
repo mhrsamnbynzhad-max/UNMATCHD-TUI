@@ -30,16 +30,33 @@ vector<Cardinfo> Card::sherlockCardDB = {
     { MASTER_OF_DISGUISE,"Master Of Disguise","Sherlock",SCHEME,IMMEDIATE,"Swap Positions",0,2,2 },
     { GAME_ON,"The Game Is Afoot","Sherlock",ATTACK,AFTER_COMBAT,"Move Holmes",5,2,2},//THE GAME IS ON
     { CONFIRM_SUSPICION,"Suspected Confirmed","Sherlock",SCHEME,IMMEDIATE,"Guess Card Value",0,1,3 },
-    {DECEPTION,"Deception","Any",SCHEME,BEFOR_COMBAT,"Cncel all effects on your opponent's card",2,1,3}
+    {DECEPTION,"Deception","Any",SCHEME,BEFOR_COMBAT,"Cancel all effects on your opponent's card",2,1,3}
 };
 
 Card Card::createFromInfo(const Cardinfo& info)
 {
      Card c(info.name, info.title, info.owner,info.type, info.timing, info.effect,info.value, info.boost);
 
-     if(info.name == BLOOD_THIRST)
-     c.effectroles = new BloodThirstEffect();
 
+     switch (info.name)
+     {
+     case BLOOD_THIRST:
+        c.effectroles = new BloodThirstEffect(); 
+        break;
+
+    case AMBUSH:
+        c.effectroles = new AmbushEffect(); 
+        break;
+
+    case FEAST:
+        c.effectroles = new FeastEffect(); 
+        break;
+     
+     default:
+        break;
+     }
+
+    
      return c;
 }
 
@@ -91,3 +108,16 @@ CardEffect* Card:: getEffect()const
  {
     return effectroles;
  }
+
+int Card::  getBoost()const
+{
+    return boost;
+}
+ void Card:: setBoost( int b)
+ {
+    boost = b ;
+ }
+  void Card:: increaseBoost(int amount)
+  {
+     boost += amount ;
+  }

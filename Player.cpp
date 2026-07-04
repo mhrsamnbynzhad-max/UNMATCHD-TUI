@@ -112,6 +112,8 @@ void Player::attack(Player& enemy, Battle& battle)
 
 void Player::playScheme(Player& enemy, Battle& battle)
 {
+    Card schemecard = hero->playcard(0);
+    battle.applycardeffect(schemecard,hero,enemy.getHero());
     cout << "Card execuation Scheme (Development..)\n";
 }
 

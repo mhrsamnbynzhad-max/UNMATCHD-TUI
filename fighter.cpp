@@ -164,7 +164,10 @@ void Fighter :: heal (int amount )
         deck = d;
 
     }
-
+void  Fighter :: sethealth(int h)
+{
+    health = h;
+}
 
 
 

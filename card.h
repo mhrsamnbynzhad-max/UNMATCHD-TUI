@@ -60,6 +60,9 @@ public:
     int getValue() const;
     Cardname getcardname() const;
     void setValue(int);
+    int getBoost()const;
+    void setBoost( int );
+    void increaseBoost(int);
     CardEffect* getEffect()const;
     
 };

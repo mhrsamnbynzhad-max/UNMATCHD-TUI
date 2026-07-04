@@ -21,5 +21,18 @@ public:
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
   
 };
+class AmbushEffect : public CardEffect
+{
+public:
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+  
+};
+
+class FeastEffect : public CardEffect
+{
+public:
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+  
+};
 
 #endif

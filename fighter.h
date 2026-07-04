@@ -50,6 +50,7 @@ class Fighter
     int getdecksize()const;
     Card removerandomcard();
     void setdeck(const std::vector<Card>& );
+    void sethealth(int);
 };
 
 #endif

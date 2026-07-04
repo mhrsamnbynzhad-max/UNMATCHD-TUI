@@ -14,7 +14,7 @@ using namespace std;
                 Fighter("Sister",1,false,2 , false)
             );
         }
-
+        
         player1.chooseHero(&sherlock , &dracula);
        if(player1.getHero() == &sherlock)
        {
@@ -29,7 +29,12 @@ using namespace std;
 
         setuppositions();
         dracula.setdeck(CardFactory::createDraculaDeck());
+        
+         dracula.gethand().clear();
+         dracula.addtohand({Card:: createFromInfo(Card::draculaCardDB[1])});
+
         sherlock.setdeck(CardFactory::createSherlockDeck());
+        
       
     }
 
@@ -69,7 +74,7 @@ using namespace std;
         }
         
         
-  const std::vector<Fighter>& Battle:: getsisters()const
+ vector<Fighter>& Battle:: getsisters()
  {
    return sisters;
   }

@@ -50,7 +50,7 @@ public:
     void showPossiblemoves(Fighter&);
     Fighter* getfighterat(Zone* );
     void showplacementzone(Fighter& );
-    const std::vector<Fighter>& getsisters()const;
+    std::vector<Fighter>& getsisters();
     Map& getMap();
   
 
