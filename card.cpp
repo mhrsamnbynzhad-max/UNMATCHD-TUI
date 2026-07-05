@@ -51,7 +51,13 @@ Card Card::createFromInfo(const Cardinfo& info)
     case FEAST:
         c.effectroles = new FeastEffect(); 
         break;
-     
+
+     case BEAST_FORM:
+        c.effectroles = new MonesterFormEffect(); 
+        break;
+     case MANEUVER:
+        c.effectroles = new  ManeuverEffect (); 
+        break;
      default:
         break;
      }

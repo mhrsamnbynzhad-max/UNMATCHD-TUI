@@ -11,7 +11,11 @@
 
 class Card;
 class CardEffect;
-
+struct ZoneCheckResult
+{
+   bool allow ;
+   std :: string  blocker = "";
+};
 class Battle
 {
 private:
@@ -52,6 +56,7 @@ public:
     void showplacementzone(Fighter& );
     std::vector<Fighter>& getsisters();
     Map& getMap();
+    ZoneCheckResult canEnterzone(Fighter* , Fighter* ,int );
   
 
    

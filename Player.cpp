@@ -65,10 +65,8 @@ void Player::drawCard()
 
         auto cards = hero->getrandomcard(5);
 
-        for(auto& c : cards)
-        {
-            hero->addtohand(cards);
-        }
+        hero->addtohand(cards);
+  
 
     cout << name << " DRAW 5 CARDs...\n";
 

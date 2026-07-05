@@ -35,4 +35,17 @@ public:
   
 };
 
+class MonesterFormEffect : public CardEffect
+{
+public:
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+  
+};
+
+class ManeuverEffect : public CardEffect
+{
+public:
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+  
+};
 #endif

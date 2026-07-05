@@ -14,7 +14,6 @@ using namespace std;
                 Fighter("Sister",1,false,2 , false)
             );
         }
-        
         player1.chooseHero(&sherlock , &dracula);
        if(player1.getHero() == &sherlock)
        {
@@ -29,19 +28,48 @@ using namespace std;
 
         setuppositions();
         dracula.setdeck(CardFactory::createDraculaDeck());
-        
          dracula.gethand().clear();
-         dracula.addtohand({Card:: createFromInfo(Card::draculaCardDB[1])});
+         dracula.addtohand({Card:: createFromInfo(Card::draculaCardDB[8])});
 
         sherlock.setdeck(CardFactory::createSherlockDeck());
         
       
     }
 
-    
+     ZoneCheckResult  Battle:: canEnterzone(Fighter* mover , Fighter* occupant ,int moveleft )
+     {
+        ZoneCheckResult result;
+        result.allow = true;
+        if(!occupant)
+         return result;
+
+        string name = occupant ->getName();
+
+         if(name == "Sherlock" || name == "Watson")
+         {
+            result.allow = false;
+            result.blocker = name;
+            return result;
+         }
+
+         if(name == "Sister")
+         {
+            if(moveleft == 0)
+            {
+                 result.allow = false;
+                 result.blocker = "Sister";
+                 return result;
+            }
+             result.allow = true;
+             result.blocker = "Sister";
+             return result;
+         }
+
+         return result;
+     }
     void Battle:: setuppositions()
     {
-        sherlock.setPosition(map.getZone(1));
+        sherlock.setPosition(map.getZone(18));
         
         showplacementzone(sherlock);
         int choice;
@@ -392,3 +420,4 @@ void Battle::draculaability(Fighter* target)
         turnQueue.push(current);
     }
 }
+
