@@ -47,7 +47,7 @@ void AmbushEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle,
         int opponentBoost = remove.getBoost();
         card.setValue(card.getValue() +  opponentBoost);
 
-        cout<<"Ambush : oppenet discarded "<<remove.getName()<<" and + " <<opponentBoost <<" attack added . \n";
+        cout<<"Ambush : opponent discarded "<<remove.getName()<<" and + " <<opponentBoost <<" attack added . \n";
 
 }
 
@@ -242,3 +242,258 @@ void AmbushEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle,
           }
     }
   }
+
+  void  ExploitEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) 
+  {
+    auto cards = attacker->getrandomcard(1);
+    if(!cards.empty())
+    {
+        attacker->addtohand(cards);
+        cout<<"Draw a card . added to your hand .\n";
+    }
+  }
+
+  void LookIntoMyEyesEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+  {
+    int oppBoost = battle->gelastattackcard().getBoost();
+
+    card.setValue(card.getValue() + oppBoost);
+
+    cout<<" opponent  boost ("<<oppBoost<<" 0 added to this defense.\n";
+  }
+
+void HuntEyesEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) 
+{
+  Zone* dracula = attacker->getPosition();
+  vector<Zone*> connected = dracula->getNei();
+
+  int  healcount = 0;
+
+  for (Zone* place : connected)
+  {
+    Fighter* novalid = battle->getfighterat(place);
+
+    if(novalid != nullptr)
+    {
+        if(novalid->isheroteam() != attacker->isheroteam())
+        {
+            cout<<"Hunt : opponent found in zone "<< place->getId()<<"\n";
+
+            novalid->takeDamage(1);
+            cout<<novalid->getName()<<" take 1 damage .\n";
+
+            healcount++;
+        }
+    }
+  }
+  
+ for (int i = 0; i < healcount; i++)
+ {
+    cout<<"dracula hp "<<attacker->getHealth()<<"/"<<attacker->getMaxealth()<<endl;
+    if(attacker->getHealth() < attacker->getMaxealth())
+    {
+        attacker->heal(1);
+        cout<<"Dracula haled 1 HP (current HP : "<<attacker->getHealth()<<")\n";
+    }
+
+ }
+ 
+}
+
+void SeductivecallEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+{
+    vector<Fighter*> fighters;
+    fighters.push_back(&battle->getDracual());
+    fighters.push_back(&battle->getSherlock());
+    fighters.push_back(&battle->getWatson());
+
+    for(auto& sisi : battle->getsisters())
+    {
+        fighters.push_back(&sisi);
+    }
+
+    cout<<" which one fighter do you want to move?\n";
+    for (int i = 0; i < fighters.size(); i++)
+    {
+        cout<< i+1 <<" )"<<fighters[i]->getName()<<"  (Zone "<<fighters[i]->getPosition()->getId()<<" )\n";
+    }
+
+    int choose;
+    cin>>choose;
+    choose--;
+    if(choose < 0 || choose>= fighters.size())
+    {
+        cout<<"Invalid choose\n";
+        return ;
+    }
+   
+    Fighter* selected = fighters[choose];
+
+    int moves = 0;
+
+    while ( moves <2)
+    {
+       cout<<"Move ? ( yes (1) , no (0))";
+       int ok;
+       cin>> ok;
+       if(ok == 0 )
+       {
+         cout<<" stoped move\n";
+         break;
+       }
+       Zone* current = selected->getPosition();
+       vector<Zone*>connected = current->getNei();
+       cout<<" Connected zones : ";
+       for(Zone* z : connected)
+       {
+        cout<<z->getId()<<" ";
+       }
+       int dest;
+       cin>>dest;
+       bool valid = battle->movefighter(*selected,dest ,1);
+
+       if(!valid)
+       {
+          cout<<"Invalid move..\n";
+          continue;
+       }
+
+       moves++;
+       
+       if(moves == 2)
+       {
+           cout<<"Maximum movement reched (2)\n";
+           break;
+        }
+    }
+
+       if(selected->getName() == "Sister")
+       {
+          cout<<" no damage , fighter selected for moove is sister .\n";
+          return;
+       }
+       Zone* now = selected->getPosition();
+       vector<Zone*>connected = now->getNei();
+
+       bool sisternearby = false;
+       for(Zone* z : connected)
+       {
+         Fighter* occ = battle->getfighterat(z);
+         if(occ && occ->getName() == "Sister")
+         {
+            sisternearby = true;
+         }
+
+       }
+
+       if(sisternearby)
+       {
+          cout<<" found a sister "<<selected->getName()<<" take 1 damage .\n";
+          selected->takeDamage(1);
+
+       }
+       else{
+        cout<<" no found sister.\n";
+       }
+}
+
+ void  SurvivalInstinctEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+ {
+     // 1) Calculate combat result
+    int finalAttack = card.getValue();
+    int finalDefense = battle->getlastdefend();
+
+    cout << "Final Attack = " << finalAttack << " | Final Defense = " << finalDefense << endl;
+
+    if(finalAttack <= finalDefense)
+    {
+        cout << "The Sister did not win the combat. Nothing happens.\n";
+        return;
+    }
+
+    cout << "The Sister won the combat! Dracula may be placed next to the enemy fighter.\n";
+
+    // 2) Choose opponent target (Sherlock or Watson)
+    vector<Fighter*> opponent;
+    opponent.push_back(&battle->getSherlock());
+    opponent.push_back(&battle->getWatson());
+
+    cout << "Dracula wants to move next to which opponent?\n";
+    for(int i = 0; i < opponent.size(); i++)
+    {
+        cout << i+1 << ") " << opponent[i]->getName()
+             << " (Zone " << opponent[i]->getPosition()->getId() << ")\n";
+    }
+
+    int choice;
+    cin >> choice;
+    choice--;
+
+    if(choice < 0 || choice >= opponent.size())
+    {
+        cout << "Invalid choice.\n";
+        return;
+    }
+
+    Fighter* targetopponent= opponent[choice];
+    Zone* opponentZone = targetopponent->getPosition();
+
+    // 3) Find adjacent zones to the opponent
+    vector<Zone*> neighbors = opponentZone->getNei();
+    vector<Zone*> emptyZones;
+
+    cout << "Adjacent zones to the enemy:\n";
+    for(Zone* z : neighbors)
+    {
+        Fighter* occ = battle->getfighterat(z);
+        cout << "Zone " << z->getId();
+
+        if(occ == nullptr)
+        {
+            cout << " (Empty)\n";
+            emptyZones.push_back(z);
+        }
+        else
+        {
+            cout << " (Occupied by " << occ->getName() << ")\n";
+        }
+    }
+
+
+    if(emptyZones.empty())
+    {
+        cout << "There are no empty adjacent zones. Dracula cannot be moved.\n";
+        return;
+    }
+
+    // 4) Choose empty zone for Dracula
+    cout << "Dracula can move to these empty zones:\n";
+    for(int i = 0; i < emptyZones.size(); i++)
+    {
+        cout << i+1 << ") Zone " << emptyZones[i]->getId() << endl;
+    }
+
+    int destChoice;
+    cin >> destChoice;
+    destChoice--;
+
+    if(destChoice < 0 || destChoice >= emptyZones.size())
+    {
+        cout << "Invalid choice.\n";
+        return;
+    }
+
+    Zone* finalZone = emptyZones[destChoice];
+
+    // 5) Move Dracula
+    Fighter& dracula = battle->getDracual();
+    dracula.setPosition(finalZone);
+
+    cout << "Dracula moved to Zone " << finalZone->getId() << ".\n";
+ }
+
+ void FeintEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+ {
+    cout<<"Opponent card's effect is cancelled\n";
+    battle->setCancel(true);
+ }

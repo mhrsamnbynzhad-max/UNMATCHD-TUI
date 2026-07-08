@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Dracula::Dracula() : Fighter("Dracula",13,false,2 , false)
+Dracula::Dracula() : Fighter("Dracula",13,13,false,2 , false)
 {
 }
 

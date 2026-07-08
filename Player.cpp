@@ -97,7 +97,7 @@ void Player::maneuver(Battle& battle)
     cout << hero->getName() << " Move completed.\n";
 }
 
-void Player::attack(Player& enemy, Battle& battle)
+void Player::attack(Player& enemy, Battle& battle, int cardindex)
 {
     if(hero == nullptr || enemy.getHero() == nullptr)
         throw logic_error("No fighter selected ..");
@@ -105,16 +105,17 @@ void Player::attack(Player& enemy, Battle& battle)
     cout << hero->getName() << "ATTACKS... " 
          << enemy.getHero()->getName() << endl;
 
-    battle.combat(hero, enemy.getHero());
+    battle.combat(hero, enemy.getHero() , cardindex);
 }
 
-void Player::playScheme(Player& enemy, Battle& battle)
-{
-    Card schemecard = hero->playcard(0);
-    battle.applycardeffect(schemecard,hero,enemy.getHero());
-    cout << "Card execuation Scheme (Development..)\n";
-}
+   void Player::playScheme(Player& enemy, Battle& battle, int cardindex)
+    {
+        Card schemecard = hero->playcard(cardindex);
 
+        battle.applycardeffect(schemecard,hero,enemy.getHero());
+
+        cout << "Card execution Scheme\n";
+    }
     void Player:: setHero(Fighter*  h )
     {
               hero = h ;

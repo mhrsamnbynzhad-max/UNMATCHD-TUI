@@ -5,10 +5,18 @@
 #include <string>
 #include <vector>
 
+class Battle;
+
+struct AttackCardInfo
+{
+    int index;
+    bool usable;
+};
 class Fighter
 {
     std::string name;
     int health;
+    int Maxhealth;
     bool ranged;
     int movement;
     
@@ -17,7 +25,12 @@ class Fighter
     std::vector<Card>hand;
     bool heroteam;
     public:
-    Fighter(std::string,int,bool , int  , bool);
+    Fighter(std::string , int , int ,bool , int  , bool );
+
+    vector<AttackCardInfo> getAttackCardIndexes(Battle* battle, Fighter* enemy);
+    vector<AttackCardInfo> getCardIndexes(Battle* battle, Fighter* enemy);
+    
+
 
     std::string getName() const;
 
@@ -51,6 +64,7 @@ class Fighter
     Card removerandomcard();
     void setdeck(const std::vector<Card>& );
     void sethealth(int);
+    int getMaxealth() const;
 };
 
 #endif

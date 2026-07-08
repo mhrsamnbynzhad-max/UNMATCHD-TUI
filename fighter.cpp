@@ -1,15 +1,20 @@
 #include "fighter.h"
 #include "card.h"
+#include "battle.h"
 #include<iostream>
 #include<algorithm>
 #include<random>
 #include<cstdlib>
+#include<ctime>
+
+
 
 using namespace std;
-Fighter::Fighter(string name,int health,bool ranged , int  movement , bool heroteam)
+Fighter::Fighter(string name,int health, int Maxhealth ,bool ranged , int  movement , bool heroteam )
 {
     this->name = name;
     this->health =  health;
+    this->Maxhealth =  Maxhealth;
     this->ranged = ranged;
     this->movement = movement;
     this->heroteam = heroteam;
@@ -25,6 +30,11 @@ int Fighter::getHealth() const
 {
     return health;
 }
+int Fighter:: getMaxealth() const
+{
+    return Maxhealth;
+}
+
 int Fighter::getmovement() const
 {
     return movement;
@@ -57,6 +67,8 @@ void Fighter::setPosition(Zone* zone)
 void Fighter :: heal (int amount )
 {
     health += amount;
+    if(health> Maxhealth)
+    health = Maxhealth;
                     
 }
     void Fighter :: addcard(Card card)
@@ -121,7 +133,13 @@ void Fighter :: heal (int amount )
         {
             index.push_back(i);
         }
-        std::shuffle (index.begin() , index.end(), std:: default_random_engine{});
+        
+        for ( int i = index.size()-1 ; i > 0 ; i--)
+        {
+           int j = rand()%(i+1);
+           swap(index[i] ,index[j]);
+        }
+        
         
         vector<Card>rand;
          for(int i = 0 ; i < count ; i++)
@@ -170,9 +188,33 @@ void  Fighter :: sethealth(int h)
 }
 
 
+vector<AttackCardInfo> Fighter::getAttackCardIndexes(Battle* battle, Fighter* opponent)
+{
+    
+    vector<AttackCardInfo> result;
 
+    for(int i = 0; i < hand.size(); i++)
+    {
+        Card& c = hand[i];
 
+        bool usable = true;
 
+        if(c.getcardType() == SCHEME)
+        {
+             usable = true ;
+        }
+        else if(c.getcardType() == ATTACK || c.getcardType() == VERSATILE )
+        {
 
-  
+            if(this->getName() == "Dracula" || this->getName() == "Sister")
+            {
+                if(!battle->areadjacent(*this, *opponent))
+                    usable = false;
+    
+            }
+        }
+        result.push_back({i, usable});
+    }
 
+    return result;
+}

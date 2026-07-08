@@ -24,8 +24,8 @@ public:
 
     void drawCard();
     void maneuver(Battle& battle);
-    void attack(Player& enemy, Battle& battle);
-    void playScheme(Player& enemy, Battle& battle);
+    void attack(Player& enemy, Battle& battle , int);
+    void playScheme(Player& , Battle& , int );
 };
 
 #endif

@@ -11,7 +11,7 @@ using namespace std;
         for(int i=0 ; i<3 ; i++)
         {
             sisters.push_back(
-                Fighter("Sister",1,false,2 , false)
+                Fighter("Sister", 1 , 1, false , 2 , false)
             );
         }
         player1.chooseHero(&sherlock , &dracula);
@@ -28,12 +28,11 @@ using namespace std;
 
         setuppositions();
         dracula.setdeck(CardFactory::createDraculaDeck());
-         dracula.gethand().clear();
-         dracula.addtohand({Card:: createFromInfo(Card::draculaCardDB[8])});
-
+    
         sherlock.setdeck(CardFactory::createSherlockDeck());
-        
-      
+
+        player1.drawCard();
+        player2.drawCard();
     }
 
      ZoneCheckResult  Battle:: canEnterzone(Fighter* mover , Fighter* occupant ,int moveleft )
@@ -83,7 +82,7 @@ using namespace std;
                     watson.setPosition(map.getZone(choice));
             } 
 
-            dracula.setPosition(map.getZone(2));
+            dracula.setPosition(map.getZone(1));
             showplacementzone(dracula);
           for(int i = 0 ; i < 3 ; i++)
           {
@@ -156,8 +155,10 @@ void Battle::draculaability(Fighter* target)
       
     }
 
+    
 
-    void Battle :: combat(Fighter* attracker,Fighter* defender )
+
+    void Battle :: combat(Fighter* attracker,Fighter* defender, int cardindex)
     {
 
         if(attracker->handsize() == 0)
@@ -171,21 +172,8 @@ void Battle::draculaability(Fighter* target)
             return;
         }
 
-        int attackindex = -1;
-        for(int i = 0 ; i<attracker->handsize() ; i++)
-        {
-            if(attracker->gethand()[i].getcardType() == ATTACK)
-            {
-                attackindex = i ;
-                break;
-            }
-        }
-        if(attackindex == -1)
-        {
-            cout<<attracker->getName()<<"Has no attack card\n";
-            return;
-        }
-        Card attackcard = attracker->playcard(attackindex);
+        Card  attackcard = attracker->playcard(cardindex);
+        this->lastAttackCard = attackcard;
         Card defendcard ;
 
         bool isdefended = false;
@@ -196,30 +184,93 @@ void Battle::draculaability(Fighter* target)
          if(choose == 1 && defender->handsize()>0)
          {
             isdefended = true;
-            defendcard = (*defender).playcard(0);
+            vector<int> defenseIndexes;
+
+            for(int i = 0; i < defender->handsize(); i++)
+            {
+               Cardtype type = defender->gethand()[i].getcardType();
+
+                if(type == DEFENSE || type == VERSATILE)
+                {
+                    defenseIndexes.push_back(i);
+                }
+            }
+
+            if(defenseIndexes.empty())
+            {
+                cout << defender->getName() << " has no defense cards.\n";
+                isdefended = false;
+                defendcard = Card(); // NO_CARD
+            }
+            else
+            {
+                cout << "Choose a defense card:\n";
+                for(int i = 0; i < defenseIndexes.size(); i++)
+                {
+                    int idx = defenseIndexes[i];
+
+                    cout << i + 1 << ") "
+                        << defender->gethand()[idx].getName()
+                        << " (DEF " << defender->gethand()[idx].getValue() << ")\n";
+                }
+
+                int choice;
+                cin >> choice;
+                choice--;
+
+                if(choice < 0 || choice >= defenseIndexes.size())
+                {
+                    cout << "Invalid choice.\n";
+                    isdefended = false;
+                    defendcard = Card();
+                }
+                else
+                {
+                    int realIndex = defenseIndexes[choice];
+                    defendcard = defender->playcard(realIndex);
+                    isdefended = true;
+                }
+                        
+            }
+            
          }
          else
          {
             isdefended = false;
             defendcard;
          }
-         applycardeffect(attackcard ,attracker ,defender);
-         int attackValue = attackcard.getValue();
-
-         int defederValue = isdefended ? defendcard.getValue() : 0;
-
-         int damage = attackValue - defederValue;
-
-            cout<<"Attacker played :"<<attackcard.getName()<<endl;
-            cout<<"Defender played :"<<defendcard.getName()<<endl;
-
-            damage =  attackValue - defendcard.getValue();
-            if(damage >0 )
+         if(isdefended)
+         {
+            if(!this->getCancel())
             {
-                defender->takeDamage(damage);
-
-                cout<<"Damage"<<damage<<endl;
+                applycardeffect(defendcard , defender ,attracker); //DEfend Effect
             }
+            else
+            {
+               
+               cout<<"Opponent card's effect is cancelled\n";
+            }
+
+         }
+         
+         int defederValue = isdefended ? defendcard.getValue() : 0;
+         lastFinaldefend = defederValue;
+         int attackValue = attackcard.getValue();
+         
+         int damage = attackValue - defederValue;
+         
+         cout<<"Attacker played :"<<attackcard.getName()<<endl;
+         cout<<"Defender played :"<<defendcard.getName()<<endl;
+         
+         damage =  attackValue - defendcard.getValue();
+         if(damage >= 0 )
+         {
+             defender->takeDamage(damage);
+             
+             cout<<"Damage ( "<<damage<<" )" <<endl;
+            }
+            applycardeffect(attackcard ,attracker ,defender);// Attack Effect
+            this->setCancel(false);
     }
 
 
@@ -303,8 +354,6 @@ void Battle::draculaability(Fighter* target)
 
     bool  Battle ::  movefighter(Fighter& fighter ,int destinationid , int Maxmove)
     {
-
-        showPossiblemoves(fighter);
       Zone* destination = map.getZone(destinationid);
 
       if(destination == fighter.getPosition())
@@ -382,42 +431,3 @@ void Battle::draculaability(Fighter* target)
          cout<<endl;
     }
     
-    void Battle::startGame()
-{
-    std::queue<Player*> turnQueue;
-    turnQueue.push(&player1);
-    turnQueue.push(&player2);
-
-    while(true)
-    {
-        Player* current = turnQueue.front();
-        turnQueue.pop();
-
-        cout << "\nTurn : " << current->getName() << endl;
-        cout << "1) Draw\n2) Maneuver\n3) Attack\n4) Scheme\n";
-
-        int choice;
-        cin >> choice;
-
-        Player* enemy = (current == &player1 ? &player2 : &player1);
-
-        try
-        {
-            switch(choice)
-            {
-                case 1: current->drawCard(); break;
-                case 2: current->maneuver(*this); break;
-                case 3: current->attack(*enemy, *this); break;
-                case 4: current->playScheme(*enemy, *this); break;
-                default: throw invalid_argument("Invalid input...");
-            }
-        }
-        catch(const exception& e)
-        {
-            cout << "Error: " << e.what() << endl;
-        }
-
-        turnQueue.push(current);
-    }
-}
-

@@ -48,4 +48,42 @@ public:
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
   
 };
+class ExploitEffect : public CardEffect
+{
+public:
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+  
+};
+class LookIntoMyEyesEffect : public CardEffect
+{
+public:
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+  
+};
+
+class  HuntEyesEffect : public CardEffect
+{
+public:
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+  
+};
+class  SeductivecallEffect : public CardEffect
+{
+public:
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+  
+};
+
+class   SurvivalInstinctEffect : public CardEffect
+{
+public:
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+  
+};
+class   FeintEffect : public CardEffect
+{
+public:
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+  
+};
 #endif

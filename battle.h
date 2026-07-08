@@ -32,24 +32,23 @@ private:
 
     bool canreach(Zone*  , Zone*  , int  , Fighter&);
 
+    Card lastAttackCard;
+    
+    int lastFinaldefend= 0;
+
+    bool cancelDEfendEffect = false;
+
 public:
 
     Battle();
-    void startGame();
+    Player& getplayer1(){return player1;}
+    Player& getplayer2(){return player2;}
     void setuppositions();
-
     void draculaability(Fighter* target);
-
     void printfighters();
-
-   
-    void combat(Fighter*,Fighter*  );
-
+    void combat(Fighter*,Fighter* , int);
     void applycardeffect(Card& , Fighter* ,Fighter* );
-
-
     bool areadjacent(Fighter& ,Fighter&  );
-
     bool movefighter(Fighter& ,int  , int );
     void showPossiblemoves(Fighter&);
     Fighter* getfighterat(Zone* );
@@ -57,9 +56,13 @@ public:
     std::vector<Fighter>& getsisters();
     Map& getMap();
     ZoneCheckResult canEnterzone(Fighter* , Fighter* ,int );
-  
-
-   
+    const Card& gelastattackcard()const{return lastAttackCard; }
+    Fighter& getDracual(){return dracula;}
+    Fighter& getSherlock(){return sherlock;}
+    Fighter& getWatson(){return watson;}
+    int getlastdefend()const{return lastFinaldefend;}
+    void setCancel(int v){ cancelDEfendEffect = v;}
+    bool getCancel()const{return cancelDEfendEffect ;}
     
 };
 

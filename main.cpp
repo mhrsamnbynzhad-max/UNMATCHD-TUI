@@ -1,13 +1,16 @@
-#include "map.h"
 #include "battle.h"
+#include "Gamecontroller.h"
+#include <cstdlib>
+#include <ctime>
+
 
 
 int main()
 {
-    Map map;
-
+   srand(time(nullptr));
    Battle battle;
-   battle.startGame();
-   battle.printfighters();
-    return 0;
+   
+   GameController game (battle ,battle.getplayer1() ,battle.getplayer2());
+   game.run();
+   return 0;
 }

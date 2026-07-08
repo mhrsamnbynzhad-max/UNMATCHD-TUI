@@ -1,6 +1,6 @@
 #include "sherlock.h"
 
-Sherlock::Sherlock()  :Fighter("Sherlock",16,true,2 , true)
+Sherlock::Sherlock()  :Fighter("Sherlock", 16 , 16 ,true,2 , true)
 {
     
 }

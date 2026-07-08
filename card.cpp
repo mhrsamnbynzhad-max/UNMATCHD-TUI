@@ -12,7 +12,7 @@ vector<Cardinfo> Card::draculaCardDB = {
     { AMBUSH, "Ambush", "Any", ATTACK, DURING_COMBAT, "Discard random enemy card", 2, 3, 2 },
     { FEINT, "Feint", "Any", VERSATILE, BEFOR_COMBAT, "Cancel opponent effect", 2, 2, 3 },
     { MANEUVER, "Maneuver", "Any", VERSATILE, AFTER_COMBAT, "Move 3 spaces", 3, 1, 3 },
-    { EXPLOIT, "Exploit", "Any", VERSATILE, AFTER_COMBAT, "Draw card", 4, 1, 3 },
+    { EXPLOIT, "Exploit", "Any", ATTACK, AFTER_COMBAT, "Draw card", 4, 1, 3 },
     { SURVIVAL_INSTINCT, "Survival Instinct", "Sister", ATTACK, AFTER_COMBAT, "Move Dracula near enemy", 3, 3, 3 },
     { SEDUCTIVE_CALL, "Seductive Call", "Sister", SCHEME, IMMEDIATE, "Move fighter and deal damage", 0, 2, 3 }
 };
@@ -55,9 +55,25 @@ Card Card::createFromInfo(const Cardinfo& info)
      case BEAST_FORM:
         c.effectroles = new MonesterFormEffect(); 
         break;
-     case MANEUVER:
-        c.effectroles = new  ManeuverEffect (); 
+    
+     case EXPLOIT:
+        c.effectroles = new  ExploitEffect (); 
         break;
+
+     case HUNT:
+        c.effectroles = new  HuntEyesEffect (); 
+        break;
+
+    case SEDUCTIVE_CALL:
+        c.effectroles = new  SeductivecallEffect (); 
+        break;
+     case SURVIVAL_INSTINCT:
+        c.effectroles = new SurvivalInstinctEffect (); 
+        break;
+     case FEINT:
+        c.effectroles = new FeintEffect (); 
+        break;
+
      default:
         break;
      }
