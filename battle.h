@@ -37,6 +37,11 @@ private:
     int lastFinaldefend= 0;
 
     bool cancelDEfendEffect = false;
+    int finalAttackValue = 0;
+    int finalDefendValue = 0;
+
+    bool ignoreAttackValue = false;
+    bool ignoreDefendValue = false;
 
 public:
 
@@ -63,6 +68,18 @@ public:
     int getlastdefend()const{return lastFinaldefend;}
     void setCancel(int v){ cancelDEfendEffect = v;}
     bool getCancel()const{return cancelDEfendEffect ;}
+    void setFinalAttackValue(int v){ finalAttackValue = v; }
+    void setFinalDefendValue(int v){ finalDefendValue = v; }
+
+    int getFinalAttackValue() const { return finalAttackValue; }
+    int getFinalDefendValue() const { return finalDefendValue; }
+
+    void setIgnoreAttack(bool v){ ignoreAttackValue = v; }
+    void setIgnoreDefend(bool v){ ignoreDefendValue = v; }
+
+    bool getIgnoreAttack() const { return ignoreAttackValue; }
+    bool getIgnoreDefend() const { return ignoreDefendValue; }
+    vector<Zone*> getReachableZone( Fighter& , int);
     
 };
 

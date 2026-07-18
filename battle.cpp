@@ -82,7 +82,7 @@ using namespace std;
                     watson.setPosition(map.getZone(choice));
             } 
 
-            dracula.setPosition(map.getZone(1));
+            dracula.setPosition(map.getZone(19));
             showplacementzone(dracula);
           for(int i = 0 ; i < 3 ; i++)
           {
@@ -101,29 +101,29 @@ using namespace std;
         }
         
         
- vector<Fighter>& Battle:: getsisters()
- {
-   return sisters;
-  }
- Map& Battle::  getMap()
- {
-    return map;
- }
-void Battle::draculaability(Fighter* target)
-{
-    if(target == nullptr)
+    vector<Fighter>& Battle:: getsisters()
     {
-        return;
+    return sisters;
     }
-    
-    target->takeDamage(1);
-    
-    cout << "Dracula damaged "
-         << target->getName()
-         << " for 1 damage\n";
+    Map& Battle::  getMap()
+    {
+        return map;
+    }
+    void Battle::draculaability(Fighter* target)
+    {
+        if(target == nullptr)
+        {
+            return;
+        }
+        
+        target->takeDamage(1);
+        
+        cout << "Dracula damaged "
+            << target->getName()
+            << " for 1 damage\n";
 
-    cout << "Dracula draws a card\n";
-}
+        cout << "Dracula draws a card\n";
+    }
 
     void Battle:: printfighters()
     {
@@ -160,6 +160,11 @@ void Battle::draculaability(Fighter* target)
 
     void Battle :: combat(Fighter* attracker,Fighter* defender, int cardindex)
     {
+        ignoreAttackValue = false;
+        ignoreDefendValue = false;
+
+        finalAttackValue = 0;
+        finalDefendValue = 0;
 
         if(attracker->handsize() == 0)
         {
@@ -239,12 +244,14 @@ void Battle::draculaability(Fighter* target)
             isdefended = false;
             defendcard;
          }
-         if(isdefended)
-         {
-            if(!this->getCancel())
+        if(isdefended &&
+            defendcard.getTiming() == BEFOR_COMBAT)
             {
-                applycardeffect(defendcard , defender ,attracker); //DEfend Effect
-            }
+                if(!this->getCancel())
+                {
+                    applycardeffect(defendcard , defender ,attracker);
+                }
+
             else
             {
                
@@ -253,24 +260,58 @@ void Battle::draculaability(Fighter* target)
 
          }
          
-         int defederValue = isdefended ? defendcard.getValue() : 0;
-         lastFinaldefend = defederValue;
-         int attackValue = attackcard.getValue();
-         
-         int damage = attackValue - defederValue;
+    finalAttackValue = attackcard.getValue();
+    finalDefendValue = isdefended ? defendcard.getValue() : 0;
+
+    if(ignoreAttackValue)
+    {
+        finalAttackValue = 0;
+    }
+
+    if(ignoreDefendValue)
+    {
+        finalDefendValue = 0;
+    }
+    if(attackcard.getTiming() == BEFOR_COMBAT)
+    {
+        applycardeffect(attackcard ,attracker ,defender);
+    }
+    if(isdefended &&
+        defendcard.getTiming() == DURING_COMBAT)
+        {
+            applycardeffect(defendcard , defender ,attracker);
+        }
+
+        if(attackcard.getTiming() == DURING_COMBAT)
+        {
+            applycardeffect(attackcard ,attracker ,defender);
+        }
+    lastFinaldefend = finalDefendValue;
+
+    int damage = finalAttackValue - finalDefendValue;
          
          cout<<"Attacker played :"<<attackcard.getName()<<endl;
          cout<<"Defender played :"<<defendcard.getName()<<endl;
-         
-         damage =  attackValue - defendcard.getValue();
-         if(damage >= 0 )
-         {
-             defender->takeDamage(damage);
-             
-             cout<<"Damage ( "<<damage<<" )" <<endl;
-            }
-            applycardeffect(attackcard ,attracker ,defender);// Attack Effect
-            this->setCancel(false);
+            
+    if(damage >= 0 )
+        {
+            defender->takeDamage(damage);
+
+            cout<<"Damage ( "<<damage<<" )" <<endl;
+        }
+
+        if(isdefended &&
+        defendcard.getTiming() == AFTER_COMBAT)
+        {
+            applycardeffect(defendcard , defender ,attracker);
+        }
+
+        if(attackcard.getTiming() == AFTER_COMBAT)
+        {
+            applycardeffect(attackcard ,attracker ,defender);
+        }
+
+    this->setCancel(false);
     }
 
 
@@ -351,7 +392,28 @@ void Battle::draculaability(Fighter* target)
          
     }
 
+    vector<Zone*> Battle :: getReachableZone ( Fighter&  fighter, int maxMove)
+    {
+        vector<Zone*> result;
 
+    for(int i = 1; i <= 32; i++)
+    {
+        Zone* z = map.getZone(i);
+
+        if(z == fighter.getPosition())
+            continue;
+
+        if(canreach(fighter.getPosition(), z, maxMove, fighter))
+        {
+            if(getfighterat(z) == nullptr)
+                result.push_back(z);
+        }
+    }
+
+    return result;
+
+    }
+    
     bool  Battle ::  movefighter(Fighter& fighter ,int destinationid , int Maxmove)
     {
       Zone* destination = map.getZone(destinationid);

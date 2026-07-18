@@ -27,11 +27,8 @@ class Fighter
     public:
     Fighter(std::string , int , int ,bool , int  , bool );
 
-    vector<AttackCardInfo> getAttackCardIndexes(Battle* battle, Fighter* enemy);
-    vector<AttackCardInfo> getCardIndexes(Battle* battle, Fighter* enemy);
-    
-
-
+    vector<AttackCardInfo> getPlayableCardIndexes(Battle* , Fighter*  , Fighter*);
+   
     std::string getName() const;
 
     int getHealth() const;
@@ -65,6 +62,7 @@ class Fighter
     void setdeck(const std::vector<Card>& );
     void sethealth(int);
     int getMaxealth() const;
+    int drawBoostMovement();
 };
 
 #endif

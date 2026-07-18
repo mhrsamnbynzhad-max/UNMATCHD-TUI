@@ -1,5 +1,6 @@
 #include "GameController.h"
 #include <iostream>
+#include <string>
 using namespace std;
 
 GameController::GameController(Battle& b, Player& p1, Player& p2)
@@ -19,18 +20,19 @@ void GameController::run()
         turnQueue.pop();
         
         cout << "\nTurn : " << current->getName() << endl;
-        cout << "Choose action:\n";
         
         Player* enemy = (current == &player1 ? &player2 : &player1);
-
+        
         int action = 0;
         while (action<2)
         {
-           
-        try
-        {
-          vector<AttackCardInfo> cards = current->getHero()->getAttackCardIndexes(&battle, enemy->getHero());
-
+            
+            try
+            {
+              
+             vector<AttackCardInfo> cards = current->getHero()->getPlayableCardIndexes(&battle, enemy->getHero(), current->getHero());
+                
+            cout << "Choose action:( or M for Maneuver)\n";
             for(int i = 0; i < cards.size(); i++)
             {
                 Card& c = current->getHero()->gethand()[cards[i].index];
@@ -43,10 +45,15 @@ void GameController::run()
 
                 cout<<"\n";
             }
-            
-            
-            int choice;
-            cin >> choice;
+            string input;
+            cin>>input;
+            if( input == "M" || input == "m")
+            {
+                current->maneuver(battle);
+                action++;
+                continue;
+            }
+            int choice = stoi(input);
             choice--;
 
             AttackCardInfo selected = cards[choice];
@@ -60,6 +67,10 @@ void GameController::run()
 
             Card& chosenCard = current->getHero()->gethand()[selected.index];
 
+            Fighter* attacker = nullptr;
+
+            current->chooseAttackerIfNeeded(battle,chosenCard,attacker);
+
 
             if(chosenCard.getcardType() == SCHEME)
             {
@@ -68,7 +79,7 @@ void GameController::run()
             else if(chosenCard.getcardType() == ATTACK ||
                     chosenCard.getcardType() == VERSATILE)
             {
-                current->attack(*enemy,battle, cards[choice].index);
+                current->attack(*enemy,battle, attacker, cards[choice].index);
             }
 
            action++;

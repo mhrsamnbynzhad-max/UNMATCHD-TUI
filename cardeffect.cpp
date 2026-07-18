@@ -497,3 +497,339 @@ void SeductivecallEffect :: apply(Fighter* attacker, Fighter* defender, Battle* 
     cout<<"Opponent card's effect is cancelled\n";
     battle->setCancel(true);
  }
+
+
+
+// ---------------- Counter Attack ----------------
+
+void CounterAttackEffect::apply(Fighter* attacker,
+                                Fighter* defender,
+                                Battle* battle,
+                                Card& card)
+{
+    if(!attacker || !defender)
+        return;
+
+
+    if(battle->areadjacent(*attacker,*defender))
+    {
+        defender->takeDamage(2);
+
+        cout<<"Counter Attack: "
+            <<defender->getName()
+            <<" takes 2 damage.\n";
+    }
+    else
+    {
+        cout<<"Counter Attack failed: fighters are not adjacent.\n";
+    }
+}
+
+
+
+// ---------------- Fixed Point ----------------
+
+void FixedPointEffect::apply(Fighter* attacker,
+                             Fighter* defender,
+                             Battle* battle,
+                             Card& card)
+{
+    if(!attacker)
+        return;
+
+
+    attacker->heal(3);
+
+    cout<<"Fixed Point: "
+        <<attacker->getName()
+        <<" healed 3 HP.\n";
+}
+
+
+
+// ---------------- Service ----------------
+
+void ServiceEffect::apply(Fighter* attacker,
+                          Fighter* defender,
+                          Battle* battle,
+                          Card& card)
+{
+
+    battle->getSherlock().heal(2);
+
+
+    cout<<"Service: Sherlock healed 2 HP.\n";
+}
+
+
+
+// ---------------- Study Method ----------------
+
+void StudyMethodEffect::apply(Fighter* attacker,
+                              Fighter* defender,
+                              Battle* battle,
+                              Card& card)
+{
+    if(!defender)
+        return;
+
+
+    cout<<"Study Method: "
+        <<defender->getName()
+        <<" hand:\n";
+
+
+    vector<Card>& hand = defender->gethand();
+
+
+    for(int i=0;i<hand.size();i++)
+    {
+        cout<<i+1<<") "
+            <<hand[i].getName()
+            <<" Boost: "
+            <<hand[i].getBoost()
+            <<endl;
+    }
+
+}
+
+
+
+// ---------------- Elementary ----------------
+
+void ElementaryEffect::apply(Fighter* attacker,
+                             Fighter* defender,
+                             Battle* battle,
+                             Card& card)
+{
+
+    int guess;
+
+    cout<<"Elementary Prediction\n";
+    cout<<"Guess attack value: ";
+    cin>>guess;
+
+
+
+    int realAttack =
+        battle->getFinalAttackValue();
+
+
+
+    if(guess == realAttack)
+    {
+        card.setValue(card.getValue()+2);
+
+        cout<<"Correct prediction +2 defense\n";
+    }
+    else
+    {
+        cout<<"Wrong prediction\n";
+    }
+
+}
+
+
+
+// ---------------- Impossible ----------------
+
+void ImpossibleEffect::apply(Fighter* attacker,
+                             Fighter* defender,
+                             Battle* battle,
+                             Card& card)
+{
+
+    if(!defender || defender->handsize()==0)
+    {
+        cout<<"Enemy has no cards\n";
+        return;
+    }
+
+
+    Card removed =
+        defender->remove_ranodmcard();
+
+
+    cout<<"Impossible removed "
+        <<removed.getName()
+        <<endl;
+
+}
+
+
+
+// ---------------- Master Of Disguise ----------------
+
+void MasterOfDisguiseEffect::apply(Fighter* attacker,
+                                   Fighter* defender,
+                                   Battle* battle,
+                                   Card& card)
+{
+
+    Zone* sherlock =
+        battle->getSherlock().getPosition();
+
+
+    Zone* watson =
+        battle->getWatson().getPosition();
+
+
+
+    battle->getSherlock()
+          .setPosition(watson);
+
+
+    battle->getWatson()
+          .setPosition(sherlock);
+
+
+
+    cout<<"Master Of Disguise: Sherlock and Watson swapped.\n";
+
+}
+
+
+
+// ---------------- Game On ----------------
+
+void GameOnEffect::apply(Fighter* attacker,
+                         Fighter* defender,
+                         Battle* battle,
+                         Card& card)
+{
+
+    int zone;
+
+
+    cout<<"Choose Sherlock destination: ";
+    cin>>zone;
+
+
+
+    if(battle->movefighter(
+        battle->getSherlock(),
+        zone,
+        2))
+    {
+        cout<<"Sherlock moved.\n";
+    }
+    else
+    {
+        cout<<"Invalid movement.\n";
+    }
+
+}
+
+
+
+// ---------------- Confirm Suspicion ----------------
+
+void ConfirmSuspicionEffect::apply(Fighter* attacker,
+                                   Fighter* defender,
+                                   Battle* battle,
+                                   Card& card)
+{
+
+    if(!defender)
+        return;
+
+
+    cout<<"Confirm Suspicion activated.\n";
+
+
+    if(defender->handsize()>0)
+    {
+        cout<<"Enemy has "
+            <<defender->handsize()
+            <<" cards.\n";
+    }
+
+}
+
+
+
+// ---------------- Strategic Deduction ----------------
+
+void StrategicDeductionEffect::apply(Fighter* attacker,
+                                     Fighter* defender,
+                                     Battle* battle,
+                                     Card& card)
+{
+
+    int boost =
+        card.getBoost();
+
+
+    card.setValue(
+        card.getValue()+boost
+    );
+
+
+    cout<<"Strategic Deduction: +"
+        <<boost
+        <<" attack.\n";
+
+}
+
+
+
+// ---------------- Learning Never Ends ----------------
+
+void LearningNeverEndsEffect::apply(Fighter* attacker,
+                                    Fighter* defender,
+                                    Battle* battle,
+                                    Card& card)
+{
+
+    vector<Card> cards =
+        attacker->getrandomcard(2);
+
+
+    attacker->addtohand(cards);
+
+
+    cout<<"Learning Never Ends: drew 2 cards.\n";
+
+}
+
+
+
+// ---------------- Deception ----------------
+
+void DeceptionEffect::apply(Fighter* attacker,
+                            Fighter* defender,
+                            Battle* battle,
+                            Card& card)
+{
+
+    battle->setCancel(true);
+
+
+    cout<<"Deception: opponent effect cancelled.\n";
+
+}
+
+
+
+// ---------------- Sidearm ----------------
+
+void SidearmEffect::apply(Fighter* attacker,
+                          Fighter* defender,
+                          Battle* battle,
+                          Card& card)
+{
+
+    if(!defender)
+        return;
+
+
+    defender->takeDamage(
+        card.getValue()
+    );
+
+
+    cout<<"Sidearm deals "
+        <<card.getValue()
+        <<" damage.\n";
+
+}

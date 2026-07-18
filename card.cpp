@@ -1,6 +1,6 @@
 #include "card.h"
 #include "cardeffect.h"
-
+#include"cardfactory.h"
 
 vector<Cardinfo> Card::draculaCardDB = {
     { BEAST_FORM, "Beast Form", "Dracula", ATTACK, DURING_COMBAT, "Discard cards +1 attack", 6, 4, 2 },
@@ -37,47 +37,139 @@ Card Card::createFromInfo(const Cardinfo& info)
 {
      Card c(info.name, info.title, info.owner,info.type, info.timing, info.effect,info.value, info.boost);
 
+    switch (info.name)
+{
+    // -------- Dracula --------
 
-     switch (info.name)
-     {
-     case BLOOD_THIRST:
-        c.effectroles = new BloodThirstEffect(); 
+    case BLOOD_THIRST:
+        c.effectroles = new BloodThirstEffect();
         break;
 
     case AMBUSH:
-        c.effectroles = new AmbushEffect(); 
+        c.effectroles = new AmbushEffect();
         break;
 
     case FEAST:
-        c.effectroles = new FeastEffect(); 
+        c.effectroles = new FeastEffect();
         break;
 
-     case BEAST_FORM:
-        c.effectroles = new MonesterFormEffect(); 
-        break;
-    
-     case EXPLOIT:
-        c.effectroles = new  ExploitEffect (); 
+    case BEAST_FORM:
+        c.effectroles = new MonesterFormEffect();
         break;
 
-     case HUNT:
-        c.effectroles = new  HuntEyesEffect (); 
+    case EXPLOIT:
+        c.effectroles = new ExploitEffect();
+        break;
+
+    case HUNT:
+        c.effectroles = new HuntEyesEffect();
         break;
 
     case SEDUCTIVE_CALL:
-        c.effectroles = new  SeductivecallEffect (); 
-        break;
-     case SURVIVAL_INSTINCT:
-        c.effectroles = new SurvivalInstinctEffect (); 
-        break;
-     case FEINT:
-        c.effectroles = new FeintEffect (); 
+        c.effectroles = new SeductivecallEffect();
         break;
 
-     default:
+    case SURVIVAL_INSTINCT:
+        c.effectroles = new SurvivalInstinctEffect();
         break;
-     }
 
+
+    case FEINT:
+        c.effectroles = new FeintEffect();
+        break;
+
+
+    case LOOK_INTO_MY_EYES:
+        c.effectroles = new LookIntoMyEyesEffect();
+        break;
+
+
+    case MANEUVER:
+        c.effectroles = new ManeuverEffect();
+        break;
+
+
+    // -------- Sherlock / Watson --------
+
+
+    case COUNTER_ATTACK:
+        c.effectroles = new CounterAttackEffect();
+        break;
+
+
+    case FIXED_POINT:
+        c.effectroles = new FixedPointEffect();
+        break;
+
+
+    case SERVICE:
+        c.effectroles = new ServiceEffect();
+        break;
+
+
+    case STUDY_METHOD:
+        c.effectroles = new StudyMethodEffect();
+        break;
+
+
+    case ELEMENTARY:
+        c.effectroles = new ElementaryEffect();
+        break;
+
+
+    case IMPOSSIBLE:
+        c.effectroles = new ImpossibleEffect();
+        break;
+
+
+    case MASTER_OF_DISGUISE:
+        c.effectroles = new MasterOfDisguiseEffect();
+        break;
+
+
+    case GAME_ON:
+        c.effectroles = new GameOnEffect();
+        break;
+
+
+    case CONFIRM_SUSPICION:
+        c.effectroles = new ConfirmSuspicionEffect();
+        break;
+
+
+    case STRATEGIC_DEDUCTION:
+        c.effectroles = new StrategicDeductionEffect();
+        break;
+
+
+    case LEARNING_NEVER_ENDS:
+        c.effectroles = new LearningNeverEndsEffect();
+        break;
+
+
+    case DECEPTION:
+        c.effectroles = new DeceptionEffect();
+        break;
+
+
+    case SIDEARM:
+        c.effectroles = new SidearmEffect();
+        break;
+
+
+
+    // فعلا نداریم
+    /*
+    case MIST_FORM:
+        c.effectroles = new MistFormEffect();
+        break;
+    */
+
+
+    default:
+        c.effectroles = nullptr;
+        break;
+}
     
      return c;
 }
@@ -92,6 +184,7 @@ Card::Card(Cardname cn,string n, string f, Cardtype c,CardTime ti , string e, in
     timing = ti;
     value = v;
     boost = b;
+    effectroles = nullptr;
    
 }
 
@@ -143,3 +236,8 @@ int Card::  getBoost()const
   {
      boost += amount ;
   }
+
+  CardTime Card::getTiming() const
+    {
+        return timing;
+    }

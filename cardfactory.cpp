@@ -1,6 +1,7 @@
 #include "cardfactory.h"
 #include "cardeffect.h"
 #include "card.h"
+#include <iostream>
 
 using namespace std;
 
@@ -16,9 +17,21 @@ std::vector<Card> CardFactory::createDraculaDeck() {
         }
     }
 
+
+    // TEST
+    for(Card& c : deck)
+    {
+        if(c.getEffect() == nullptr)
+        {
+            cout << "NO EFFECT: "
+                 << c.getName()
+                 << endl;
+        }
+    }
+
+
     return deck;
 }
-
 std::vector<Card> CardFactory::createSherlockDeck() {
     std::vector<Card> deck;
 
@@ -30,5 +43,28 @@ std::vector<Card> CardFactory::createSherlockDeck() {
         }
     }
 
+
+    // TEST
+    for(Card& c : deck)
+    {
+        if(c.getEffect() == nullptr)
+        {
+            cout << "NO EFFECT: "
+                 << c.getName()
+                 << endl;
+        }
+    }
+
+
     return deck;
+}
+
+void MistFormEffect::apply(Fighter* attacker,
+                           Fighter* defender,
+                           Battle* battle,
+                           Card& card)
+{
+    cout<<"Mist Form activated\n";
+
+    // فعلاً تست
 }

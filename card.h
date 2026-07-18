@@ -64,6 +64,7 @@ public:
     void setBoost( int );
     void increaseBoost(int);
     CardEffect* getEffect()const;
+    CardTime getTiming() const;
     
 };
 #endif

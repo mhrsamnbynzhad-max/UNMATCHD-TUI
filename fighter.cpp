@@ -188,7 +188,7 @@ void  Fighter :: sethealth(int h)
 }
 
 
-vector<AttackCardInfo> Fighter::getAttackCardIndexes(Battle* battle, Fighter* opponent)
+vector<AttackCardInfo> Fighter::getPlayableCardIndexes(Battle* battle, Fighter* opponent , Fighter* actingfighter)
 {
     
     vector<AttackCardInfo> result;
@@ -196,25 +196,56 @@ vector<AttackCardInfo> Fighter::getAttackCardIndexes(Battle* battle, Fighter* op
     for(int i = 0; i < hand.size(); i++)
     {
         Card& c = hand[i];
-
+       
         bool usable = true;
+
+        string owner = c.getfighterType();
+
+        if( owner != "Any" && owner != actingfighter->getName())
+        {
+            result.push_back({i,false});
+            continue;
+        } 
 
         if(c.getcardType() == SCHEME)
         {
              usable = true ;
         }
+        else if(c.getcardType()  == DEFENSE)
+        {
+            usable = false;
+        }
+
         else if(c.getcardType() == ATTACK || c.getcardType() == VERSATILE )
         {
 
-            if(this->getName() == "Dracula" || this->getName() == "Sister")
+            if(actingfighter->getName() == "Dracula" || actingfighter->getName() == "Sister")
             {
-                if(!battle->areadjacent(*this, *opponent))
+                if(!battle->areadjacent(*actingfighter, *opponent))
                     usable = false;
     
             }
         }
+
         result.push_back({i, usable});
     }
 
     return result;
 }
+
+int Fighter:: drawBoostMovement()
+{
+   vector<Card> cards = getrandomcard(1);
+   if(cards.empty())
+   return 0 ;
+
+   addtohand(cards);
+
+   Card& drawn = hand.back();
+
+   cout<<"Boost Card : " <<drawn.getName() <<" (Boost = "<< drawn.getBoost()<<"\n";
+
+   return drawn.getBoost();
+}
+
+
