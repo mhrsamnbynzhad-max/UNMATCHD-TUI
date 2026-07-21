@@ -7,7 +7,7 @@ class CardEffect;
 using namespace std;
 enum Cardtype {ATTACK, DEFENSE , VERSATILE , SCHEME};
 enum Cardname {BEAST_FORM, FEAST , MIST_FORM ,DECEPTION, HUNT , BLOOD_THIRST , LOOK_INTO_MY_EYES , AMBUSH , FEINT , MANEUVER , EXPLOIT , SURVIVAL_INSTINCT , SEDUCTIVE_CALL ,GAME_ON,MASTER_OF_DISGUISE,IMPOSSIBLE,ELEMENTARY,STUDY_METHOD,SERVICE,FIXED_POINT,SIDEARM,COUNTER_ATTACK,STRATEGIC_DEDUCTION,LEARNING_NEVER_ENDS, CONFIRM_SUSPICION};
-enum CardTime {DURING_COMBAT , AFTER_COMBAT , IMMEDIATE , NONE};
+enum CardTime {BEFOR_COMBAT, DURING_COMBAT , AFTER_COMBAT , IMMEDIATE , NONE};
 
 struct Cardinfo {
     Cardname name;
@@ -45,8 +45,7 @@ private:
 
     
     
-public:   
-    
+public:    
     static vector<Cardinfo> draculaCardDB;
     static vector<Cardinfo> sherlockCardDB;
     static Card createFromInfo(const Cardinfo& );
@@ -66,7 +65,6 @@ public:
     void increaseBoost(int);
     CardEffect* getEffect()const;
     CardTime getTiming() const;
-    int getPriority()const;
     
 };
 #endif

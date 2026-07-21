@@ -132,6 +132,10 @@ void AmbushEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle,
 
   void  ManeuverEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) 
   {
+    //dibug
+    battle->getsisters()[0].setPosition(battle->getMap().getZone(13));
+    battle->getsisters()[1].setPosition(battle->getMap().getZone(11));
+    battle->getsisters()[2].setPosition(battle->getMap().getZone(10));
     if(attacker->getName() != "Dracula")
     {
         cout<<"Only Dracula can move 3 palces. \n";
@@ -148,10 +152,18 @@ void AmbushEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle,
        cout<<"Current Zone : "<<current->getId()<<"\n";
 
        vector<Zone*> connectedzone = current->getNei();
-
+//dibug
        cout<<"Available connected zones : \n";
        vector<Zone*> validmoves;
-      
+       cout<<"sisterposition";
+       for(auto& s : battle->getsisters())
+        cout<<s.getPosition()->getId()<<"   ";
+        cout<<endl;
+     
+        cout<<"check fighter at zone 13";
+        auto f = battle->getfighterat(battle->getMap().getZone(13));
+        if(f)cout<<f->getName()<<endl;
+        else cout<<"NULL"<<endl;
        for(Zone* z : connectedzone)
        {
             Fighter* Novalid = battle->getfighterat(z);

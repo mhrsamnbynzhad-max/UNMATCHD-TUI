@@ -11,27 +11,17 @@ GameController::GameController(Battle& b, Player& p1, Player& p2)
 
 void GameController::run()
 {
+    
     std::queue<Player*> turnQueue;
     turnQueue.push(&player1);
     turnQueue.push(&player2);
 
+
     while (true)
     {
-        if(!battle.getSherlock().isalive())
-        {
-                cout << "\nGame Over!\n";
-                cout << battle.getDracual().getName() << " wins!\n";
-                break;
-        }
-
-        if(!battle.getDracual().isalive())
-        {
-                cout << "\nGame Over!\n";
-                cout << battle.getSherlock().getName() << " wins!\n";
-                break;
-        }
         Player* current = turnQueue.front();
         turnQueue.pop();
+        battle.startTurn(*current);
                 
         cout << "\nTurn : " << current->getName() << endl;
 

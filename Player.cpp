@@ -67,6 +67,9 @@ void Player::drawCard()
 
         hero->addtohand(cards);
   
+
+    cout << name << " DRAW 5 CARDs...\n";
+
     
 }
 
@@ -75,49 +78,9 @@ void Player::maneuver(Battle& battle)
     if(hero == nullptr)
         throw logic_error("The player HAS NOT SELECTED a fighter yet..!");
 
-        Card drawn = hero->drawBoostMovement();
-
-        cout << "\nA card was drawn and added to your hand.\n";
-
-        vector<Card>& hand = hero->gethand();
-
-        for(int i=0;i<hand.size();i++)
-        {
-            cout
-                << i+1
-                << ") "
-                << hand[i].getName()
-                << " (Boost = "
-                << hand[i].getBoost()
-                << ")\n";
-        }
-
-   cout << "Choose a card to use its Boost (0 = No Boost): ";
-
-        int choice;
-        cin >> choice;
-
-        int boost = 0;
-
-        if(choice != 0)
-        {
-            choice--;
-
-            if(choice < 0 || choice >= hand.size())
-                throw runtime_error("Invalid card.");
-
-            boost = hand[choice].getBoost();
-
-            cout << "Using "<< hand[choice].getName()<< " (Boost = "<< boost<< ")\n";
-        }
-        else
-        {
-            cout << "No Boost selected.\n";
-        }
-
-        int movemax = hero->getmovement() + boost;
-
-        cout << "Maximum movement = "<< movemax << endl;
+    int boost = hero->drawBoostMovement();
+    int movemax = hero->getmovement() + boost;
+    cout << "Maximum movement = "<< hero->getmovement() + boost <<endl;
     
     vector<Zone*> moves = battle.getReachableZone(*hero, movemax);
 
@@ -127,13 +90,13 @@ void Player::maneuver(Battle& battle)
         cout << z->getId() << " ";
         cout << endl;
         
-    
-    cout << "Enter a destination : ";
+    cout<<"deck card after maneuver.."<<hero->getdecksize()<<endl;
+    cout << "Enter a destination....";
     int dest;
     cin >> dest;
 
-    if(!battle.movefighter(*hero, dest, movemax))
-        throw runtime_error("Invalid move");
+    if(!battle.movefighter(*hero, dest, hero->getmovement()+boost))
+        throw runtime_error("Invalid move ....");
 
     cout << hero->getName() << " Move completed.\n";
 }

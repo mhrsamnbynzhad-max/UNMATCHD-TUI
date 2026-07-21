@@ -4,117 +4,164 @@
 
 using namespace std;
 
-   bool  Battle :: canreach(Zone* current , Zone* target , int movesleft  , Fighter& mover)
+bool Battle::canreach(
+    Zone* current,
+    Zone* target,
+    int movesleft,
+    Fighter& mover)
+{
+        if(current == nullptr || target == nullptr)
     {
-        if(current == target)
+        return false;
+    }
+    if(current == target)
+    {
+        return true;
+    }
+
+    if(movesleft <= 0)
+    {
+        return false;
+    }
+
+    for(Zone* next : current->getNei())
+    {
+        Fighter* occupant = getfighterat(next);
+
+        if(occupant != nullptr)
         {
-            return true ;
+            bool ally =
+                occupant->isheroteam() ==
+                mover.isheroteam();
+
+            if(!ally)
+            {
+                continue;
+            }
         }
-         if(movesleft<= 0)
+
+        if(canreach(
+            next,
+            target,
+            movesleft - 1,
+            mover))
         {
-            return false ;
+            return true;
         }
+    }
 
-        for(Zone* next : current->getNei())
+    if(map.issecretzone(current->getId()))
+    {
+        const vector<int>& secret =
+            map.getsecretZones();
+
+        for(int i = 0; i < secret.size(); i++)
         {
-               Fighter* occupant  = getfighterat(next);
-              if(occupant != nullptr)
-              {
-                bool ally = occupant->isheroteam() == mover.isheroteam();
+            if(secret[i] ==
+               current->getId())
+            {
+                continue;
+            }
 
-                if(!ally)
-                {
-                    continue;
-                }
-              }
-
-            if(canreach(next ,target , movesleft -1 , mover))
+            if(canreach(
+                map.getZone(secret[i]),
+                target,
+                movesleft - 1,
+                mover))
             {
                 return true;
             }
         }
-
-        if(map.issecretzone(current->getId()))
-        {
-            const vector<int>& secret = map.getsecretZones();
-            for(int  i = 0 ; i <secret.size() ; i++)
-            {
-                    if(secret[i] == current->getId())
-                    {
-                         continue;
-                    }
-                    if(canreach(map.getZone(secret[i]), target ,movesleft-1 , mover))
-                    {
-                        return true;
-                    }
-                
-            }
-        }
-        return false;
-         
     }
 
+    return false;
+}
 
-    vector<Zone*> Battle :: getReachableZone ( Fighter&  fighter, int maxMove)
-    {
-        vector<Zone*> result;
+vector<Zone*> Battle::getReachableZone(
+    Fighter& fighter,
+    int maxMove)
+{
+    vector<Zone*> result;
 
     for(int i = 1; i <= 32; i++)
     {
         Zone* z = map.getZone(i);
 
         if(z == fighter.getPosition())
+        {
             continue;
+        }
 
-        if(canreach(fighter.getPosition(), z, maxMove, fighter))
+        if(canreach(
+            fighter.getPosition(),
+            z,
+            maxMove,
+            fighter))
         {
             if(getfighterat(z) == nullptr)
+            {
                 result.push_back(z);
+            }
         }
     }
 
     return result;
+}
 
-    }
+bool Battle::movefighter(
+    Fighter& fighter,
+    int destinationid,
+    int Maxmove)
+{
+    Zone* destination =
+        map.getZone(destinationid);
 
- 
-    bool  Battle ::  movefighter(Fighter& fighter ,int destinationid , int Maxmove)
+    if(destination ==
+       fighter.getPosition())
     {
-      Zone* destination = map.getZone(destinationid);
-
-      if(destination == fighter.getPosition())
-      {
-        return true ;
-      }
-      
-      if(destination == nullptr)
-      {
-        return false ;
-      }  
-
-      if(!canreach(fighter.getPosition(), destination , Maxmove , fighter))
-      {
-        return false;
-      }
-        Fighter* occupant  = getfighterat(destination);
-        if(occupant != nullptr)
-        {
-            cout<<"Can't stop there"<<endl;
-            return false ;
-        }
-        fighter.setPosition(destination);
         return true;
-      
     }
-  
-       void Battle :: showPossiblemoves(Fighter&  fight)
+
+    if(destination == nullptr)
     {
-        Zone* now = fight.getPosition();
-        cout<<"Possible Moves : \n";
-        for(Zone* n : now->getNei())
-        {
-            cout<<n->getId()<<" ";
-        }
-        cout<<endl;
+        return false;
     }
-  
+
+    if(!canreach(
+        fighter.getPosition(),
+        destination,
+        Maxmove,
+        fighter))
+    {
+        return false;
+    }
+
+    Fighter* occupant =
+        getfighterat(destination);
+
+    if(occupant != nullptr)
+    {
+        cout << "Can't stop there\n";
+        return false;
+    }
+
+    fighter.setPosition(destination);
+
+    return true;
+}
+
+void Battle::showPossiblemoves(
+    Fighter& fight)
+{
+    Zone* now =
+        fight.getPosition();
+
+    cout << "Possible Moves:\n";
+
+    for(Zone* n : now->getNei())
+    {
+        cout << n->getId() << " ";
+    }
+
+    cout << endl;
+}
