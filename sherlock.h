@@ -8,6 +8,8 @@ class Sherlock : public Fighter
 public:
 
     Sherlock();
+
+    void specialAbility(Fighter* target);
 };
 
 #endif
