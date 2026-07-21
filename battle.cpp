@@ -37,5 +37,4 @@ using namespace std;
         player2.drawCard();
     }
 
-
    

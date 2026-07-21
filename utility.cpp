@@ -104,3 +104,15 @@ void Battle::printfighters()
         << watson.getPosition()->getId()
         << endl;
 }
+
+
+
+ZoneCheckResult Battle::canEnterzone(
+    Fighter* mover,
+    Fighter* occupant,
+    int movesleft)
+{
+    ZoneCheckResult result;
+    result.allow = true;
+    return result;
+}
