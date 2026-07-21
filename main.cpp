@@ -2,6 +2,7 @@
 #include "Gamecontroller.h"
 #include <cstdlib>
 #include <ctime>
+#include "StatusPanel.h"
 
 
 

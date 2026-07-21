@@ -1,6 +1,7 @@
 #include "GameController.h"
 #include <iostream>
 #include <string>
+#include "StatusPanel.h"
 using namespace std;
 
 GameController::GameController(Battle& b, Player& p1, Player& p2)
@@ -18,9 +19,11 @@ void GameController::run()
     {
         Player* current = turnQueue.front();
         turnQueue.pop();
-        
+                
         cout << "\nTurn : " << current->getName() << endl;
-        
+
+        StatusPanel::show(battle);
+
         Player* enemy = (current == &player1 ? &player2 : &player1);
         
         int action = 0;
@@ -50,6 +53,9 @@ void GameController::run()
             if( input == "M" || input == "m")
             {
                 current->maneuver(battle);
+
+                StatusPanel::show(battle);
+
                 action++;
                 continue;
             }
@@ -74,12 +80,16 @@ void GameController::run()
 
             if(chosenCard.getcardType() == SCHEME)
             {
-                 current->playScheme(*enemy,battle, selected.index);
+                current->playScheme(*enemy,battle, selected.index);
+
+                StatusPanel::show(battle);
             }
             else if(chosenCard.getcardType() == ATTACK ||
                     chosenCard.getcardType() == VERSATILE)
             {
                 current->attack(*enemy,battle, attacker, cards[choice].index);
+
+                StatusPanel::show(battle);
             }
 
            action++;
@@ -90,13 +100,16 @@ void GameController::run()
         }
     }
 
-    cout<<"Turn end? (1)\n";
-    int end;
-    cin>>end;
-    while (end != 1)
-    {
-    cout<<"Confirm end turn :\n";  
-    }
+        cout<<"Turn end? (1)\n";
+
+        int end;
+        cin>>end;
+
+        while(end != 1)
+        {
+            cout<<"Confirm end turn (1): ";
+            cin>>end;
+        }
 
         turnQueue.push(current);
     }
