@@ -17,6 +17,19 @@ void GameController::run()
 
     while (true)
     {
+        if(!battle.getSherlock().isalive())
+        {
+                cout << "\nGame Over!\n";
+                cout << battle.getDracual().getName() << " wins!\n";
+                break;
+        }
+
+        if(!battle.getDracual().isalive())
+        {
+                cout << "\nGame Over!\n";
+                cout << battle.getSherlock().getName() << " wins!\n";
+                break;
+        }
         Player* current = turnQueue.front();
         turnQueue.pop();
                 

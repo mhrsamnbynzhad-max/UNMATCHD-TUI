@@ -10,7 +10,7 @@ vector<Cardinfo> Card::draculaCardDB = {
     { BLOOD_THIRST, "Blood Thirst", "Dracula", ATTACK, DURING_COMBAT, "Attack increases by sisters", 2, 3, 2 },
     { LOOK_INTO_MY_EYES, "Look Into My Eyes", "Dracula", DEFENSE, DURING_COMBAT, "Add opponent boost", 1, 2, 3 },
     { AMBUSH, "Ambush", "Any", ATTACK, DURING_COMBAT, "Discard random enemy card", 2, 3, 2 },
-    { FEINT, "Feint", "Any", VERSATILE, BEFOR_COMBAT, "Cancel opponent effect", 2, 2, 3 },
+    { FEINT, "Feint", "Any", VERSATILE, DURING_COMBAT, "Cancel opponent effect", 2, 2, 3 },
     { MANEUVER, "Maneuver", "Any", VERSATILE, AFTER_COMBAT, "Move 3 spaces", 3, 1, 3 },
     { EXPLOIT, "Exploit", "Any", ATTACK, AFTER_COMBAT, "Draw card", 4, 1, 3 },
     { SURVIVAL_INSTINCT, "Survival Instinct", "Sister", ATTACK, AFTER_COMBAT, "Move Dracula near enemy", 3, 3, 3 },
@@ -30,11 +30,38 @@ vector<Cardinfo> Card::sherlockCardDB = {
     { MASTER_OF_DISGUISE,"Master Of Disguise","Sherlock",SCHEME,IMMEDIATE,"Swap Positions",0,2,2 },
     { GAME_ON,"The Game Is Afoot","Sherlock",ATTACK,AFTER_COMBAT,"Move Holmes",5,2,2},//THE GAME IS ON
     { CONFIRM_SUSPICION,"Suspected Confirmed","Sherlock",SCHEME,IMMEDIATE,"Guess Card Value",0,1,3 },
-    {DECEPTION,"Deception","Any",SCHEME,BEFOR_COMBAT,"Cancel all effects on your opponent's card",2,1,3}
+    {DECEPTION,"Deception","Any",SCHEME,DURING_COMBAT,"Cancel all effects on your opponent's card",2,1,3}
 };
 
 Card Card::createFromInfo(const Cardinfo& info)
 {
+        static BloodThirstEffect bloodThirstEffect;
+    static AmbushEffect ambushEffect;
+    static FeastEffect feastEffect;
+    static MonesterFormEffect beastFormEffect;
+    static ExploitEffect exploitEffect;
+    static HuntEyesEffect huntEyesEffect;
+    static SeductivecallEffect seductivecallEffect;
+    static SurvivalInstinctEffect survivalInstinctEffect;
+    static FeintEffect feintEffect;
+    static LookIntoMyEyesEffect lookIntoMyEyesEffect;
+    static ManeuverEffect maneuverEffect;
+
+    static CounterAttackEffect counterAttackEffect;
+    static FixedPointEffect fixedPointEffect;
+    static ServiceEffect serviceEffect;
+    static StudyMethodEffect studyMethodEffect;
+    static ElementaryEffect elementaryEffect;
+    static ImpossibleEffect impossibleEffect;
+    static MasterOfDisguiseEffect masterOfDisguiseEffect;
+    static GameOnEffect gameOnEffect;
+    static ConfirmSuspicionEffect confirmSuspicionEffect;
+    static StrategicDeductionEffect strategicDeductionEffect;
+    static LearningNeverEndsEffect learningNeverEndsEffect;
+    static DeceptionEffect deceptionEffect;
+    static SidearmEffect sidearmEffect;
+    static MistFormEffect mistFormEffect;
+
      Card c(info.name, info.title, info.owner,info.type, info.timing, info.effect,info.value, info.boost);
 
     switch (info.name)
@@ -42,50 +69,50 @@ Card Card::createFromInfo(const Cardinfo& info)
     // -------- Dracula --------
 
     case BLOOD_THIRST:
-        c.effectroles = new BloodThirstEffect();
+        c.effectroles =  &bloodThirstEffect;
         break;
 
     case AMBUSH:
-        c.effectroles = new AmbushEffect();
+        c.effectroles = &ambushEffect;
         break;
 
     case FEAST:
-        c.effectroles = new FeastEffect();
+        c.effectroles = &feastEffect;
         break;
 
     case BEAST_FORM:
-        c.effectroles = new MonesterFormEffect();
+        c.effectroles = &beastFormEffect;
         break;
 
     case EXPLOIT:
-        c.effectroles = new ExploitEffect();
+        c.effectroles = &exploitEffect;
         break;
 
     case HUNT:
-        c.effectroles = new HuntEyesEffect();
+        c.effectroles = &huntEyesEffect;
         break;
 
     case SEDUCTIVE_CALL:
-        c.effectroles = new SeductivecallEffect();
+        c.effectroles = &seductivecallEffect;
         break;
 
     case SURVIVAL_INSTINCT:
-        c.effectroles = new SurvivalInstinctEffect();
+        c.effectroles = &survivalInstinctEffect;
         break;
 
 
     case FEINT:
-        c.effectroles = new FeintEffect();
+        c.effectroles = &feintEffect;
         break;
 
 
     case LOOK_INTO_MY_EYES:
-        c.effectroles = new LookIntoMyEyesEffect();
+        c.effectroles = &lookIntoMyEyesEffect;
         break;
 
 
     case MANEUVER:
-        c.effectroles = new ManeuverEffect();
+        c.effectroles = &maneuverEffect;
         break;
 
 
@@ -93,67 +120,67 @@ Card Card::createFromInfo(const Cardinfo& info)
 
 
     case COUNTER_ATTACK:
-        c.effectroles = new CounterAttackEffect();
+        c.effectroles = &counterAttackEffect;
         break;
 
 
     case FIXED_POINT:
-        c.effectroles = new FixedPointEffect();
+        c.effectroles = &fixedPointEffect;
         break;
 
 
     case SERVICE:
-        c.effectroles = new ServiceEffect();
+        c.effectroles = &serviceEffect;
         break;
 
 
     case STUDY_METHOD:
-        c.effectroles = new StudyMethodEffect();
+        c.effectroles = &studyMethodEffect;
         break;
 
 
     case ELEMENTARY:
-        c.effectroles = new ElementaryEffect();
+        c.effectroles = &elementaryEffect;
         break;
 
 
     case IMPOSSIBLE:
-        c.effectroles = new ImpossibleEffect();
+        c.effectroles = &impossibleEffect;
         break;
 
 
     case MASTER_OF_DISGUISE:
-        c.effectroles = new MasterOfDisguiseEffect();
+        c.effectroles = &masterOfDisguiseEffect;
         break;
 
 
     case GAME_ON:
-        c.effectroles = new GameOnEffect();
+        c.effectroles = &gameOnEffect;
         break;
 
 
     case CONFIRM_SUSPICION:
-        c.effectroles = new ConfirmSuspicionEffect();
+        c.effectroles = &confirmSuspicionEffect;
         break;
 
 
     case STRATEGIC_DEDUCTION:
-        c.effectroles = new StrategicDeductionEffect();
+        c.effectroles = &strategicDeductionEffect;
         break;
 
 
     case LEARNING_NEVER_ENDS:
-        c.effectroles = new LearningNeverEndsEffect();
+        c.effectroles = &learningNeverEndsEffect;
         break;
 
 
     case DECEPTION:
-        c.effectroles = new DeceptionEffect();
+        c.effectroles = &deceptionEffect;
         break;
 
 
     case SIDEARM:
-        c.effectroles = new SidearmEffect();
+        c.effectroles = &sidearmEffect;
         break;
 
 
@@ -241,3 +268,27 @@ int Card::  getBoost()const
     {
         return timing;
     }
+
+     int  Card::  getPriority()const
+     {
+          switch ((timing))
+          {
+          case IMMEDIATE:
+           return 0 ;
+            break;
+
+            case DURING_COMBAT:
+           return 1 ;
+            break;
+          
+            case AFTER_COMBAT:
+           return 2 ;
+            break;
+
+          default:
+          return 3;
+
+            break;
+          }
+     }
+

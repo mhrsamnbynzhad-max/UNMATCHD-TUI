@@ -2,9 +2,11 @@
 #include "cardfactory.h"
 #include "cardeffect.h"
 #include <iostream>
+#include <algorithm>
 #include <queue>
 #include <queue>
 #include <set>
+
 
 using namespace std;
 
@@ -37,4 +39,43 @@ using namespace std;
         player2.drawCard();
     }
 
-   
+  ExecuteOrder Battle::getexecuteCardeffect(Card& attackCard,Card& defendCard,Fighter* attacker,Fighter* defender,bool defended)
+{
+    ExecuteOrder order;
+
+    if(!defended)
+    {
+        order.acard = &attackCard;
+        order.aowner = attacker;
+        order.atarget = defender;
+
+        order.bcard = nullptr;
+        order.bowner = nullptr;
+        order.btarget = nullptr;
+
+        return order;
+    }
+
+    if(attackCard.getPriority() < defendCard.getPriority())
+    {
+        order.acard = &attackCard;
+        order.aowner = attacker;
+        order.atarget = defender;
+
+        order.bcard = &defendCard;
+        order.bowner = defender;
+        order.btarget = attacker;
+    }
+    else
+    {
+        order.acard = &defendCard;
+        order.aowner = defender;
+        order.atarget = attacker;
+
+        order.bcard = &attackCard;
+        order.bowner = attacker;
+        order.btarget = defender;
+    }
+
+    return order;
+}

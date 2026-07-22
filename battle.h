@@ -16,6 +16,17 @@ struct ZoneCheckResult
    bool allow ;
    std :: string  blocker = "";
 };
+struct ExecuteOrder
+    {
+        Card* acard;
+        Fighter* aowner;
+        Fighter* atarget;
+
+         Card* bcard;
+        Fighter* bowner;
+        Fighter* btarget;
+        
+    };
 class Battle
 {
 private:
@@ -42,6 +53,8 @@ private:
 
     bool ignoreAttackValue = false;
     bool ignoreDefendValue = false;
+
+    ExecuteOrder getexecuteCardeffect( Card& , Card& , Fighter* , Fighter*, bool);
 
 public:
 
@@ -80,6 +93,8 @@ public:
     bool getIgnoreAttack() const { return ignoreAttackValue; }
     bool getIgnoreDefend() const { return ignoreDefendValue; }
     vector<Zone*> getReachableZone( Fighter& , int);
+   
+
     
 };
 

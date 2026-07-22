@@ -62,7 +62,7 @@ class Fighter
     void setdeck(const std::vector<Card>& );
     void sethealth(int);
     int getMaxealth() const;
-    int drawBoostMovement();
+    Card drawBoostMovement();
 };
 
 #endif

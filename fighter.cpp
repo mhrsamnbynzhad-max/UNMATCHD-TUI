@@ -134,6 +134,15 @@ void Fighter :: heal (int amount )
             index.push_back(i);
         }
         
+        if(count > deck.size())
+        {
+            count = deck.size();
+        }
+        if(deck.empty())
+        {
+            return {};
+        }
+        
         for ( int i = index.size()-1 ; i > 0 ; i--)
         {
            int j = rand()%(i+1);
@@ -152,8 +161,6 @@ void Fighter :: heal (int amount )
          for(int  i = 0 ; i < count ; i ++)
          deck.erase(deck.begin() + index[i]);
          
-         cout<<"++++++++++"<<deck.size()<<endl;
-
          return rand;
     }
 
@@ -233,19 +240,16 @@ vector<AttackCardInfo> Fighter::getPlayableCardIndexes(Battle* battle, Fighter* 
     return result;
 }
 
-int Fighter:: drawBoostMovement()
+
+
+Card Fighter::drawBoostMovement()
 {
-   vector<Card> cards = getrandomcard(1);
-   if(cards.empty())
-   return 0 ;
+    vector<Card> cards = getrandomcard(1);
 
-   addtohand(cards);
+    if(cards.empty())
+        return Card();
 
-   Card& drawn = hand.back();
+    addtohand(cards);
 
-   cout<<"Boost Card : " <<drawn.getName() <<" (Boost = "<< drawn.getBoost()<<"\n";
-
-   return drawn.getBoost();
+    return hand.back();
 }
-
-
