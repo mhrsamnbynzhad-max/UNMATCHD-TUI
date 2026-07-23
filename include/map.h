@@ -16,6 +16,7 @@ private:
 public:
 
     Map();
+    ~Map();
     Zone* getZone(int );
     const vector<int >&  getsecretZones()const;
     vector<Zone*> getplacementZone(Zone*);

@@ -18,10 +18,13 @@ private:
 public:
 
     Zone(int  , char );
+    Zone(int ,std::vector<char>);
+    
 
     int getId() const;
+    const std::vector<char>& getColors() const;
 
-    char getColor() const;
+    bool hasColor(char) const;
 
     void addneighbor(Zone* ); //Add Neighbors...
 

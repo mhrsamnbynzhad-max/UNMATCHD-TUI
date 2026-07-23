@@ -9,29 +9,36 @@ using namespace std;
 
 void BloodThirstEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
   {
-                Zone* enemyZone = defender->getPosition();          // Place of defender
-                char color = enemyZone->getColor();                 // Color of defender place
+       Zone* enemyZone = defender->getPosition();
 
-                vector<Zone*> sameColorZones = battle->getMap().getZonebycolor(color);   // All places that is the same color 
+    int counter = 0;
 
-                int counter = 0;
+    for(const Fighter& sis : battle->getsisters())
+    {
+        if(!sis.isalive())
+            continue;
 
-                for (const Fighter& sis : battle->getsisters())                 
-                {
-                    Zone* sisPos = sis.getPosition();               // Sister's place
+        Zone* sisZone = sis.getPosition();
 
-                    for (Zone* zone : sameColorZones)               // Check the places that share the same color as the defender's place 
-                    {
-                        if (sisPos->getId() == zone->getId())       // If a sister is found on any of the same-colored places, increase the counter
-                        {
-                            counter++;
-                            if (counter == 3) break;                // The maximum allowed value for the counter is 3 .
-                        }
-                    }
-                    if (counter == 3) break;
-                }
+        bool sameColor = false;
 
-               card.setValue(card.getValue()+ counter);                       // Increases attack 
+        for(char enemyColor : enemyZone->getColors())
+        {
+            if(sisZone->hasColor(enemyColor))
+            {
+                sameColor = true;
+                break;
+            }
+        }
+
+        if(sameColor)
+            counter++;
+    }
+
+    card.setValue(card.getValue() + counter);
+
+    cout << "Blood Thirst: +" << counter
+         << " attack.\n";
  }
        
 void AmbushEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
@@ -86,10 +93,7 @@ void AmbushEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle,
 
 }
 
-void MistFormEffect::apply(Fighter* attacker,
-                           Fighter* defender,
-                           Battle* battle,
-                           Card& card)
+void MistFormEffect::apply(Fighter* attacker,  Fighter* defender, Battle* battle, Card& card)
 {
     cout << "\nMist Form activated!\n";
 

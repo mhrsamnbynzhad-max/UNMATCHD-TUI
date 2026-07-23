@@ -3,38 +3,42 @@
 using namespace std;
 Map::Map()
 {
+
     zones[1]  = new Zone(1,'P');//perpule Zone
-    zones[2]  = new Zone(2,'R');
     zones[3]  = new Zone(3,'P');
-    zones[4]  = new Zone(4,'G');//Green Zone
+    zones[17] = new Zone(17,'P');
+    zones[4] = new Zone(4, {'P','G'});//Green Zone
+    zones[25] = new Zone(25, {'P','X'});
+
+    
+    zones[2]  = new Zone(2,{'R','B'});
+    zones[16] = new Zone(16,'B');
+    
     zones[5]  = new Zone(5,'G');
     zones[6]  = new Zone(6,'G');
     zones[7]  = new Zone(7,'G');
 
-    zones[8]  = new Zone(8,'D'); // Dark blue Zone
-    zones[9]  = new Zone(9,'D');
+    zones[8]  = new Zone(8,{'D','d'}); // Dark blue Zone
+    zones[9]  = new Zone(9,{'D','X'});
 
-    zones[10] = new Zone(10,'B');
-    zones[11] = new Zone(11,'L');
-    zones[12] = new Zone(12,'B');
+    zones[10] = new Zone(10,'D');
+    zones[11] = new Zone(11,'D');
+    zones[12] = new Zone(12,{'B','L'});
     zones[13] = new Zone(13,'L');
-    zones[14] = new Zone(14,'B');
-    zones[15] = new Zone(15,'B');
+    zones[14] = new Zone(14,'L');
+    zones[15] = new Zone(15,'L');
 
-    zones[16] = new Zone(16,'B');
 
-    zones[17] = new Zone(17,'P');
 
     zones[18] = new Zone(18,'R');// Brown Zone
     zones[19] = new Zone(19,'R');
     zones[20] = new Zone(20,'R');
 
-    zones[21] = new Zone(21,'G');
+    zones[21] = new Zone(21, {'G','Y','R'});
 
     zones[22] = new Zone(22,'Y');//Yellow Zone
     zones[23] = new Zone(23,'Y');
     zones[24] = new Zone(24,'Y');
-    zones[25] = new Zone(25,'P');
 
     zones[26] = new Zone(26,'X');//Gray Zone
     zones[27] = new Zone(27,'X');
@@ -126,6 +130,13 @@ void Map::connect(int a , int b)
     zones[a]->addneighbor(zones[b]);
     zones[b]->addneighbor(zones[a]);
 }
+Map::~Map()
+{
+    for(auto& pair : zones)
+    {
+        delete pair.second;
+    }
+}
 
 void Map::printallzones()
 {
@@ -174,12 +185,13 @@ void Map::printallzones()
     {
            return zones[id];
     }
+   
     vector<Zone*> Map :: getZonebycolor(char color)
     {
         vector<Zone*>result;
         for(auto& pair : zones)
         {
-            if(pair.second->getColor() == color )
+            if(pair.second->hasColor(color))
             {
                 result.push_back(pair.second);
             }
@@ -187,20 +199,24 @@ void Map::printallzones()
        return result;
     }
 
-    vector<Zone*> Map :: getplacementZone(Zone* heroplace)
+vector<Zone*> Map::getplacementZone(Zone* heroplace)
+{
+    vector<Zone*> result;
+
+
+    for(auto& pair : zones)
     {
-        vector<Zone*> result;
-        char color = heroplace->getColor();
-
-        for(auto& pair : zones )
+        for(char color : heroplace->getColors())
         {
-            if(pair.second->getColor() == color)
+            if(pair.second->hasColor(color))
             {
-
-              result.push_back(pair.second);
+                result.push_back(pair.second);
+                break;
             }
         }
-
-        return result;
     }
+
+
+    return result;
+}
  
