@@ -42,6 +42,7 @@ void GameController::run()
         Player* enemy = (current == &player1 ? &player2 : &player1);
         
         int action = 0;
+
         while (action<2)
         {
             
@@ -108,6 +109,11 @@ void GameController::run()
             }
 
            action++;
+           if(battle.hasExtraAction())
+           {
+              action = 1;
+              battle.resetExtraAction();
+           }
         }
         catch(const exception& e)
         {

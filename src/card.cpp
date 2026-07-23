@@ -46,6 +46,7 @@ Card Card::createFromInfo(const Cardinfo& info)
     static FeintEffect feintEffect;
     static LookIntoMyEyesEffect lookIntoMyEyesEffect;
     static ManeuverEffect maneuverEffect;
+    static MistFormEffect misformEffect;
 
     static CounterAttackEffect counterAttackEffect;
     static FixedPointEffect fixedPointEffect;
@@ -113,6 +114,10 @@ Card Card::createFromInfo(const Cardinfo& info)
 
     case MANEUVER:
         c.effectroles = &maneuverEffect;
+        break;
+
+     case MIST_FORM:
+        c.effectroles = &misformEffect;
         break;
 
 

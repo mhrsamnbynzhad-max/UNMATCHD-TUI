@@ -58,6 +58,8 @@ private:
 
     ExecuteOrder getexecuteCardeffect( Card& , Card& , Fighter* , Fighter*, bool);
 
+    bool extraAction = false;
+
 public:
 
     Battle();
@@ -102,6 +104,12 @@ public:
 
     void useDraculaAbility();
     void useSherlockAbility();
+
+    void giveExtraAction(){ extraAction = true;}
+
+    bool hasExtraAction(){    return extraAction;}
+
+    void resetExtraAction(){    extraAction = false;}
 
 
    
