@@ -34,19 +34,19 @@ vector<Cardinfo> Card::sherlockCardDB = {
 };
 
 vector<Cardinfo> Card::invisiblemanCardDB = {
-    { CODED_NOTES,"Coded Notes","InvisibleMan",DEFENSE,AFTER_COMBAT,"Draw 3 Cards , also choice 2 cards",3, 2 , 2},
-    { CONFOUND,"Confound","InvisibleMan",VERSATILE,AFTER_COMBAT,"",3,2,2},
-    { COVERT_PREPARATION,"Covert Prepation","InvisibleMan",VERSATILE,AFTER_COMBAT,"Draw a cards, replace a fog",2,1 , 3},
-    { DREAMING_OF_REVENGE,"Dreaming Of Revenge","InvisibleMan",VERSATILE,AFTER_COMBAT,"None",3,1 , 2},
-    { EMERGE_FROM_MIST,"Emerge From Mist","InvisibleMan",ATTACK,DURING_COMBAT,"",3,2 ,2 },
-    {IMPOSSIBLE_TO_SEE,"Impossible To See","InvisibleMan",VERSATILE,IMMEDIATE,"",2,2, 2 },
-    { INTO_THIN_AIR,"Into Thin Air","InvisibleMan",DEFENSE,AFTER_COMBAT,"",4,1, 2},
-    { LURKING,"Lurking","InvisibleMan",DEFENSE,AFTER_COMBAT,"",2,2 , 2},
-    { REIGN_OF_TERROR,"Reign Of Terror","InvisibleMan",SCHEME,NONE,"",0,1 ,2 },
-    { ROLLING_FOG,"Rolling Fog","InvisibleMan",SCHEME,NONE,"",0,1,2 },
-    { SLIP_AWAY,"Slip Away","InvisibleMan",ATTACK,AFTER_COMBAT,"",3,2,3},
-    { STEP_LIGHTLY,"Step Lightly","InvisibleMan",SCHEME,NONE,"",0,1,2 },
-    {VANISH,"Vanish","InvisibleMan",SCHEME,NONE,"",0,3,2}
+    { CODED_NOTES,"Coded Notes","InvisibleMan",DEFENSE,AFTER_COMBAT,"Draw cards, then put any 2 cards from your hand on top of your deck.",3, 2 , 2},
+    { CONFOUND,"Confound","InvisibleMan",VERSATILE,AFTER_COMBAT,"Opponent may discard 1 card; otherwise, move any Fog token",3,2,2},
+    { COVERT_PREPARATION,"Covert Prepation","InvisibleMan",VERSATILE,AFTER_COMBAT,"Draw 1. Move Fog tokens up to 2 spaces (one by you, one by opponent)",2,1 , 3},
+    { DREAMING_OF_REVENGE,"Dreaming Of Revenge","InvisibleMan",VERSATILE,AFTER_COMBAT,"If on Fog, enemies on Fog take 1 damage.",3,1 , 2},
+    { EMERGE_FROM_MIST,"Emerge From Mist","InvisibleMan",ATTACK,DURING_COMBAT,"Value 5 if the Invisible Man started this turn on a Fog space.",3,2 ,2 },
+    {IMPOSSIBLE_TO_SEE,"Impossible To See","InvisibleMan",VERSATILE,IMMEDIATE,"Opponents attack/defense becomes 0 and cant be modified.",2,2, 2 },
+    { INTO_THIN_AIR,"Into Thin Air","InvisibleMan",DEFENSE,AFTER_COMBAT,"Move Invisible Man 1 space, then move a Fog token 3 spaces",4,1, 2},
+    { LURKING,"Lurking","InvisibleMan",DEFENSE,AFTER_COMBAT,"Draw 1. Move Invisible Man to Fog or move a Fog token 3 spaces.",2,2 , 2},
+    { REIGN_OF_TERROR,"Reign Of Terror","InvisibleMan",SCHEME,NONE,"If on Fog, all enemies take 2 damage",0,1 ,2 },
+    { ROLLING_FOG,"Rolling Fog","InvisibleMan",SCHEME,NONE,"Move 1 Fog token to another space and gain 1 action",0,1,2 },
+    { SLIP_AWAY,"Slip Away","InvisibleMan",ATTACK,AFTER_COMBAT,"Move 1 Fog token to an empty space, then place the Invisible Man there",3,2,3},
+    { STEP_LIGHTLY,"Step Lightly","InvisibleMan",SCHEME,NONE,"Deal 1 (or 3 with Fog) damage, then opponent moves a Fog token 2 spaces.",0,1,2 },
+    {VANISH,"Vanish","InvisibleMan",SCHEME,NONE,"Heal 1. Remove Invisible Man; place him anywhere next tur",0,3,2}
 };
 Card Card::createFromInfo(const Cardinfo& info)
 {
