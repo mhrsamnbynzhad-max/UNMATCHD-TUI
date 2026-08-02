@@ -22,7 +22,7 @@ struct ExecuteOrder
         Fighter* aowner;
         Fighter* atarget;
 
-         Card* bcard;
+        Card* bcard;
         Fighter* bowner;
         Fighter* btarget;
         
@@ -43,7 +43,7 @@ private:
 
     bool canreach(Zone*  , Zone*  , int  , Fighter&);
 
-     bool sherlockAbilityActive = false;
+    bool sherlockAbilityActive = false;
 
     Card lastAttackCard;
     
@@ -59,6 +59,9 @@ private:
     ExecuteOrder getexecuteCardeffect( Card& , Card& , Fighter* , Fighter*, bool);
 
     bool extraAction = false;
+    
+    bool playerfirst = true;
+
 
 public:
 
@@ -104,12 +107,20 @@ public:
 
     void useDraculaAbility();
     void useSherlockAbility();
+    void setSherlockability(bool value){ sherlockAbilityActive = value ;}
 
     void giveExtraAction(){ extraAction = true;}
 
     bool hasExtraAction(){    return extraAction;}
 
     void resetExtraAction(){    extraAction = false;}
+
+      bool getplayerfirst () const
+      {
+        return playerfirst ;
+      }
+
+  
 
 
    

@@ -1,7 +1,7 @@
 CMakeFiles/game.dir/src/fighter.cpp.obj: \
- C:\Users\Asus\Desktop\yy\src\fighter.cpp \
- C:/Users/Asus/Desktop/yy/include/fighter.h \
- C:/Users/Asus/Desktop/yy/include/zone.h \
+ C:\Users\Asus\Desktop\helloworld\src\fighter.cpp \
+ C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+ C:/Users/Asus/Desktop/helloworld/include/zone.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/vector \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/requires_hosted.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -64,7 +64,7 @@ CMakeFiles/game.dir/src/fighter.cpp.obj: \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/uses_allocator.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/uses_allocator_args.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/tuple \
- C:/Users/Asus/Desktop/yy/include/card.h \
+ C:/Users/Asus/Desktop/helloworld/include/card.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/string \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stringfwd.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/char_traits.h \
@@ -108,31 +108,17 @@ CMakeFiles/game.dir/src/fighter.cpp.obj: \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/cerrno \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/charconv.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/basic_string.tcc \
- C:/Users/Asus/Desktop/yy/include/card.h \
- C:/Users/Asus/Desktop/yy/include/battle.h \
- C:/Users/Asus/Desktop/yy/include/Player.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/stdexcept \
+ C:/Users/Asus/Desktop/helloworld/include/card.h \
+ C:/Users/Asus/Desktop/helloworld/include/handling.h \
+ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/iostream \
+ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ostream \
+ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/ostream.h \
+ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ios \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/exception \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception_ptr.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cxxabi_init_exception.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/typeinfo \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/nested_exception.h \
- C:/Users/Asus/Desktop/yy/include/fighter.h \
- C:/Users/Asus/Desktop/yy/include/dracula.h \
- C:/Users/Asus/Desktop/yy/include/watson.h \
- C:/Users/Asus/Desktop/yy/include/sherlock.h \
- C:/Users/Asus/Desktop/yy/include/map.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/map \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_tree.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/aligned_buffer.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/node_handle.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_map.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_multimap.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/erase_if.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/iostream \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ostream \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/ostream.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ios \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/ios_base.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/atomicity.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/gthr.h \
@@ -156,6 +142,7 @@ CMakeFiles/game.dir/src/fighter.cpp.obj: \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/locale_classes.tcc \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/system_error \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/error_constants.h \
+ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/stdexcept \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/streambuf \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/streambuf.tcc \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/basic_ios.h \
@@ -170,6 +157,20 @@ CMakeFiles/game.dir/src/fighter.cpp.obj: \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/ostream.tcc \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/istream \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/istream.tcc \
+ C:/Users/Asus/Desktop/helloworld/include/battle.h \
+ C:/Users/Asus/Desktop/helloworld/include/Player.h \
+ C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+ C:/Users/Asus/Desktop/helloworld/include/dracula.h \
+ C:/Users/Asus/Desktop/helloworld/include/watson.h \
+ C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
+ C:/Users/Asus/Desktop/helloworld/include/map.h \
+ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/map \
+ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_tree.h \
+ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/aligned_buffer.h \
+ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/node_handle.h \
+ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_map.h \
+ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_multimap.h \
+ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/erase_if.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/algorithm \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_algo.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/algorithmfwd.h \

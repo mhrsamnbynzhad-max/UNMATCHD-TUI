@@ -5,29 +5,31 @@
 #include <algorithm>
 #include <queue>
 #include <set>
+#include "handling.h"
+#include "fighter.h"
 
 
 using namespace std;
-
     Battle::Battle():  sherlock(),  watson(),  dracula() , player1("Player 1") , player2("Player 2")
     {
         for(int i=0 ; i<3 ; i++)
         {
             sisters.push_back(
-                Fighter("Sister", 1 , 1, false , 2 , false)
+                Fighter("Sister", 1 , 1, false , 2 , DRACULA)
             );
         }
         int age1, age2;
-        cout << player1.getName() << " age: ";
-        cin >> age1;
-        cout << player2.getName() << " age: ";
-        cin >> age2;
+        age1 = readInt(player1.getName()+" age: " , 1 , 100);
+        age2 = readInt(player2.getName()+" age: ", 1 , 100);
+        
 
         setuppositions();
+
         if(age1 < age2)
         {
             cout << player1.getName()
-                << " is younger and chooses first.\n";
+                << " is younger and chooses first.\n\n";
+                playerfirst = true;
             player1.chooseHero(&sherlock, &dracula);
             chooseSidekickPosition(player1);
 
@@ -36,12 +38,16 @@ using namespace std;
             else
                 player2.setHero(&sherlock);
 
+
+            cout<<"\n"<<player2.getName()<<" automatically gets " <<player2.getHero()->getName()<<"\n";
+
                 chooseSidekickPosition(player2);
         }
         else if(age2 < age1)
         {
             cout << player2.getName()
                 << " is younger and chooses first.\n";
+                playerfirst = false;
 
             player2.chooseHero(&sherlock, &dracula);
                 chooseSidekickPosition(player2);
@@ -51,12 +57,17 @@ using namespace std;
             else
                 player1.setHero(&sherlock);
 
-            chooseSidekickPosition(player1);
+
+               cout<<"\n"<<player1.getName()<<" automatically gets " <<player1.getHero()->getName()<<"\n";
+
+
+               chooseSidekickPosition(player1);
 
         }
         else
         {
             cout << "Same age. Player 1 chooses first.\n";
+            playerfirst = true;
             player1.chooseHero(&sherlock, &dracula);
             chooseSidekickPosition(player1);
 
@@ -65,11 +76,13 @@ using namespace std;
             else
                 player2.setHero(&sherlock);
 
+
+            cout<<"\n"<<player2.getName()<<" automatically gets " <<player2.getHero()->getName()<<"\n";
+
+
                 chooseSidekickPosition(player2);
 
         }
-
-       cout<<"Player 2 atuomatically gets "<<player2.getHero()->getName()<<"!\n";
 
         dracula.setdeck(CardFactory::createDraculaDeck());
     
@@ -81,98 +94,13 @@ using namespace std;
 
       void Battle::startTurn(Player& player)
         {
-        sherlockAbilityActive = false;
-
+           sherlockAbilityActive = false;
+ 
         Fighter* hero = player.getHero();
-
-        if(hero == &dracula)
-        {
-            useDraculaAbility();
-        }
-        else if(hero == &sherlock)
-        {
-            useSherlockAbility();
-        }
+        
+        hero->specialAbillity(this);
     }
 
-void Battle::useSherlockAbility()
-{
-    int choice;
-
-    cout << "Use Sherlock Ability? ( 1 (Yes)/ 2 (No): ";
-    cin >> choice;
-
-    if(choice == 1)
-    {
-        sherlockAbilityActive = true;
-
-        cout << "Sherlock ability activated.\n";
-    }
-}
-
-void Battle::useDraculaAbility()
-{
-    int choice;
-
-    cout << "Use Dracula Ability? ( 1(Yes) / 0 (No) ): ";
-    cin >> choice;
-
-    if(choice != 1 )
-        return;
-
-    Zone* currentZone = dracula.getPosition();
-
-    vector<Fighter*> targets;
-
-    for(Zone* neighbor : currentZone->getNei())
-    {
-        if(sherlock.isalive() &&
-           sherlock.getPosition() == neighbor)
-        {
-            targets.push_back(&sherlock);
-        }
-
-        if(watson.isalive() &&
-           watson.getPosition() == neighbor)
-        {
-            targets.push_back(&watson);
-        }
-
-        for(Fighter& sister : sisters)
-        {
-            if(sister.isalive() &&
-            sister.getPosition() == neighbor)
-            {
-                targets.push_back(&sister);
-            }
-        }
-    }
-
-    if(targets.empty())
-    {
-        cout << "No valid targets.\n";
-        return;
-    }
-
-    cout << "Choose target:\n";
-
-    for(size_t i = 0; i < targets.size(); i++)
-    {
-        cout << i + 1
-             << ". "
-             << targets[i]->getName()
-             << endl;
-    }
-
-    int target;
-    cin >> target;
-
-    if(target >= 1 &&
-       target <= targets.size())
-    {
-        targets[target - 1]->takeDamage(1);
-    }
-}
 
   ExecuteOrder Battle::getexecuteCardeffect(Card& attackCard,Card& defendCard,Fighter* attacker,Fighter* defender,bool defended)
 {

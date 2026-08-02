@@ -1,5 +1,6 @@
-CMakeFiles/game.dir/src/map.cpp.obj: C:\Users\Asus\Desktop\yy\src\map.cpp \
- C:/Users/Asus/Desktop/yy/include/map.h \
+CMakeFiles/game.dir/src/map.cpp.obj: \
+ C:\Users\Asus\Desktop\helloworld\src\map.cpp \
+ C:/Users/Asus/Desktop/helloworld/include/map.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/map \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/requires_hosted.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -61,7 +62,7 @@ CMakeFiles/game.dir/src/map.cpp.obj: C:\Users\Asus\Desktop\yy\src\map.cpp \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/vadefs.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/uses_allocator_args.h \
- C:/Users/Asus/Desktop/yy/include/zone.h \
+ C:/Users/Asus/Desktop/helloworld/include/zone.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/vector \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_uninitialized.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_vector.h \

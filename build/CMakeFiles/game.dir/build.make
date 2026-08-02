@@ -52,10 +52,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Asus\Desktop\yy
+CMAKE_SOURCE_DIR = C:\Users\Asus\Desktop\helloworld
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Asus\Desktop\yy\build
+CMAKE_BINARY_DIR = C:\Users\Asus\Desktop\helloworld\build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/game.dir/depend.make
@@ -73,288 +73,303 @@ CMakeFiles/game.dir/codegen:
 
 CMakeFiles/game.dir/src/Gamecontroller.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/Gamecontroller.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/Gamecontroller.cpp.obj: C:/Users/Asus/Desktop/yy/src/Gamecontroller.cpp
+CMakeFiles/game.dir/src/Gamecontroller.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/Gamecontroller.cpp
 CMakeFiles/game.dir/src/Gamecontroller.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/game.dir/src/Gamecontroller.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/Gamecontroller.cpp.obj -MF CMakeFiles\game.dir\src\Gamecontroller.cpp.obj.d -o CMakeFiles\game.dir\src\Gamecontroller.cpp.obj -c C:\Users\Asus\Desktop\yy\src\Gamecontroller.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/game.dir/src/Gamecontroller.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/Gamecontroller.cpp.obj -MF CMakeFiles\game.dir\src\Gamecontroller.cpp.obj.d -o CMakeFiles\game.dir\src\Gamecontroller.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\Gamecontroller.cpp
 
 CMakeFiles/game.dir/src/Gamecontroller.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/Gamecontroller.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\Gamecontroller.cpp > CMakeFiles\game.dir\src\Gamecontroller.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\Gamecontroller.cpp > CMakeFiles\game.dir\src\Gamecontroller.cpp.i
 
 CMakeFiles/game.dir/src/Gamecontroller.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/Gamecontroller.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\Gamecontroller.cpp -o CMakeFiles\game.dir\src\Gamecontroller.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\Gamecontroller.cpp -o CMakeFiles\game.dir\src\Gamecontroller.cpp.s
 
 CMakeFiles/game.dir/src/Player.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/Player.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/Player.cpp.obj: C:/Users/Asus/Desktop/yy/src/Player.cpp
+CMakeFiles/game.dir/src/Player.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/Player.cpp
 CMakeFiles/game.dir/src/Player.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/game.dir/src/Player.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/Player.cpp.obj -MF CMakeFiles\game.dir\src\Player.cpp.obj.d -o CMakeFiles\game.dir\src\Player.cpp.obj -c C:\Users\Asus\Desktop\yy\src\Player.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/game.dir/src/Player.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/Player.cpp.obj -MF CMakeFiles\game.dir\src\Player.cpp.obj.d -o CMakeFiles\game.dir\src\Player.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\Player.cpp
 
 CMakeFiles/game.dir/src/Player.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/Player.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\Player.cpp > CMakeFiles\game.dir\src\Player.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\Player.cpp > CMakeFiles\game.dir\src\Player.cpp.i
 
 CMakeFiles/game.dir/src/Player.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/Player.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\Player.cpp -o CMakeFiles\game.dir\src\Player.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\Player.cpp -o CMakeFiles\game.dir\src\Player.cpp.s
 
 CMakeFiles/game.dir/src/StatusPanel.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/StatusPanel.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/StatusPanel.cpp.obj: C:/Users/Asus/Desktop/yy/src/StatusPanel.cpp
+CMakeFiles/game.dir/src/StatusPanel.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/StatusPanel.cpp
 CMakeFiles/game.dir/src/StatusPanel.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/game.dir/src/StatusPanel.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/StatusPanel.cpp.obj -MF CMakeFiles\game.dir\src\StatusPanel.cpp.obj.d -o CMakeFiles\game.dir\src\StatusPanel.cpp.obj -c C:\Users\Asus\Desktop\yy\src\StatusPanel.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/game.dir/src/StatusPanel.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/StatusPanel.cpp.obj -MF CMakeFiles\game.dir\src\StatusPanel.cpp.obj.d -o CMakeFiles\game.dir\src\StatusPanel.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\StatusPanel.cpp
 
 CMakeFiles/game.dir/src/StatusPanel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/StatusPanel.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\StatusPanel.cpp > CMakeFiles\game.dir\src\StatusPanel.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\StatusPanel.cpp > CMakeFiles\game.dir\src\StatusPanel.cpp.i
 
 CMakeFiles/game.dir/src/StatusPanel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/StatusPanel.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\StatusPanel.cpp -o CMakeFiles\game.dir\src\StatusPanel.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\StatusPanel.cpp -o CMakeFiles\game.dir\src\StatusPanel.cpp.s
 
 CMakeFiles/game.dir/src/battle.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/battle.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/battle.cpp.obj: C:/Users/Asus/Desktop/yy/src/battle.cpp
+CMakeFiles/game.dir/src/battle.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/battle.cpp
 CMakeFiles/game.dir/src/battle.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/game.dir/src/battle.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/battle.cpp.obj -MF CMakeFiles\game.dir\src\battle.cpp.obj.d -o CMakeFiles\game.dir\src\battle.cpp.obj -c C:\Users\Asus\Desktop\yy\src\battle.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/game.dir/src/battle.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/battle.cpp.obj -MF CMakeFiles\game.dir\src\battle.cpp.obj.d -o CMakeFiles\game.dir\src\battle.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\battle.cpp
 
 CMakeFiles/game.dir/src/battle.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/battle.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\battle.cpp > CMakeFiles\game.dir\src\battle.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\battle.cpp > CMakeFiles\game.dir\src\battle.cpp.i
 
 CMakeFiles/game.dir/src/battle.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/battle.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\battle.cpp -o CMakeFiles\game.dir\src\battle.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\battle.cpp -o CMakeFiles\game.dir\src\battle.cpp.s
 
 CMakeFiles/game.dir/src/card.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/card.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/card.cpp.obj: C:/Users/Asus/Desktop/yy/src/card.cpp
+CMakeFiles/game.dir/src/card.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/card.cpp
 CMakeFiles/game.dir/src/card.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/game.dir/src/card.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/card.cpp.obj -MF CMakeFiles\game.dir\src\card.cpp.obj.d -o CMakeFiles\game.dir\src\card.cpp.obj -c C:\Users\Asus\Desktop\yy\src\card.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/game.dir/src/card.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/card.cpp.obj -MF CMakeFiles\game.dir\src\card.cpp.obj.d -o CMakeFiles\game.dir\src\card.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\card.cpp
 
 CMakeFiles/game.dir/src/card.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/card.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\card.cpp > CMakeFiles\game.dir\src\card.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\card.cpp > CMakeFiles\game.dir\src\card.cpp.i
 
 CMakeFiles/game.dir/src/card.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/card.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\card.cpp -o CMakeFiles\game.dir\src\card.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\card.cpp -o CMakeFiles\game.dir\src\card.cpp.s
 
 CMakeFiles/game.dir/src/cardeffect.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/cardeffect.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/cardeffect.cpp.obj: C:/Users/Asus/Desktop/yy/src/cardeffect.cpp
+CMakeFiles/game.dir/src/cardeffect.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/cardeffect.cpp
 CMakeFiles/game.dir/src/cardeffect.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/game.dir/src/cardeffect.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/cardeffect.cpp.obj -MF CMakeFiles\game.dir\src\cardeffect.cpp.obj.d -o CMakeFiles\game.dir\src\cardeffect.cpp.obj -c C:\Users\Asus\Desktop\yy\src\cardeffect.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/game.dir/src/cardeffect.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/cardeffect.cpp.obj -MF CMakeFiles\game.dir\src\cardeffect.cpp.obj.d -o CMakeFiles\game.dir\src\cardeffect.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\cardeffect.cpp
 
 CMakeFiles/game.dir/src/cardeffect.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/cardeffect.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\cardeffect.cpp > CMakeFiles\game.dir\src\cardeffect.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\cardeffect.cpp > CMakeFiles\game.dir\src\cardeffect.cpp.i
 
 CMakeFiles/game.dir/src/cardeffect.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/cardeffect.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\cardeffect.cpp -o CMakeFiles\game.dir\src\cardeffect.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\cardeffect.cpp -o CMakeFiles\game.dir\src\cardeffect.cpp.s
 
 CMakeFiles/game.dir/src/cardfactory.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/cardfactory.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/cardfactory.cpp.obj: C:/Users/Asus/Desktop/yy/src/cardfactory.cpp
+CMakeFiles/game.dir/src/cardfactory.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/cardfactory.cpp
 CMakeFiles/game.dir/src/cardfactory.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/game.dir/src/cardfactory.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/cardfactory.cpp.obj -MF CMakeFiles\game.dir\src\cardfactory.cpp.obj.d -o CMakeFiles\game.dir\src\cardfactory.cpp.obj -c C:\Users\Asus\Desktop\yy\src\cardfactory.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/game.dir/src/cardfactory.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/cardfactory.cpp.obj -MF CMakeFiles\game.dir\src\cardfactory.cpp.obj.d -o CMakeFiles\game.dir\src\cardfactory.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\cardfactory.cpp
 
 CMakeFiles/game.dir/src/cardfactory.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/cardfactory.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\cardfactory.cpp > CMakeFiles\game.dir\src\cardfactory.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\cardfactory.cpp > CMakeFiles\game.dir\src\cardfactory.cpp.i
 
 CMakeFiles/game.dir/src/cardfactory.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/cardfactory.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\cardfactory.cpp -o CMakeFiles\game.dir\src\cardfactory.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\cardfactory.cpp -o CMakeFiles\game.dir\src\cardfactory.cpp.s
 
 CMakeFiles/game.dir/src/combat.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/combat.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/combat.cpp.obj: C:/Users/Asus/Desktop/yy/src/combat.cpp
+CMakeFiles/game.dir/src/combat.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/combat.cpp
 CMakeFiles/game.dir/src/combat.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/game.dir/src/combat.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/combat.cpp.obj -MF CMakeFiles\game.dir\src\combat.cpp.obj.d -o CMakeFiles\game.dir\src\combat.cpp.obj -c C:\Users\Asus\Desktop\yy\src\combat.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/game.dir/src/combat.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/combat.cpp.obj -MF CMakeFiles\game.dir\src\combat.cpp.obj.d -o CMakeFiles\game.dir\src\combat.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\combat.cpp
 
 CMakeFiles/game.dir/src/combat.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/combat.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\combat.cpp > CMakeFiles\game.dir\src\combat.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\combat.cpp > CMakeFiles\game.dir\src\combat.cpp.i
 
 CMakeFiles/game.dir/src/combat.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/combat.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\combat.cpp -o CMakeFiles\game.dir\src\combat.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\combat.cpp -o CMakeFiles\game.dir\src\combat.cpp.s
 
 CMakeFiles/game.dir/src/dracula.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/dracula.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/dracula.cpp.obj: C:/Users/Asus/Desktop/yy/src/dracula.cpp
+CMakeFiles/game.dir/src/dracula.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/dracula.cpp
 CMakeFiles/game.dir/src/dracula.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/game.dir/src/dracula.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/dracula.cpp.obj -MF CMakeFiles\game.dir\src\dracula.cpp.obj.d -o CMakeFiles\game.dir\src\dracula.cpp.obj -c C:\Users\Asus\Desktop\yy\src\dracula.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/game.dir/src/dracula.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/dracula.cpp.obj -MF CMakeFiles\game.dir\src\dracula.cpp.obj.d -o CMakeFiles\game.dir\src\dracula.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\dracula.cpp
 
 CMakeFiles/game.dir/src/dracula.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/dracula.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\dracula.cpp > CMakeFiles\game.dir\src\dracula.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\dracula.cpp > CMakeFiles\game.dir\src\dracula.cpp.i
 
 CMakeFiles/game.dir/src/dracula.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/dracula.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\dracula.cpp -o CMakeFiles\game.dir\src\dracula.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\dracula.cpp -o CMakeFiles\game.dir\src\dracula.cpp.s
 
 CMakeFiles/game.dir/src/fighter.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/fighter.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/fighter.cpp.obj: C:/Users/Asus/Desktop/yy/src/fighter.cpp
+CMakeFiles/game.dir/src/fighter.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/fighter.cpp
 CMakeFiles/game.dir/src/fighter.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/game.dir/src/fighter.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/fighter.cpp.obj -MF CMakeFiles\game.dir\src\fighter.cpp.obj.d -o CMakeFiles\game.dir\src\fighter.cpp.obj -c C:\Users\Asus\Desktop\yy\src\fighter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/game.dir/src/fighter.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/fighter.cpp.obj -MF CMakeFiles\game.dir\src\fighter.cpp.obj.d -o CMakeFiles\game.dir\src\fighter.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\fighter.cpp
 
 CMakeFiles/game.dir/src/fighter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/fighter.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\fighter.cpp > CMakeFiles\game.dir\src\fighter.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\fighter.cpp > CMakeFiles\game.dir\src\fighter.cpp.i
 
 CMakeFiles/game.dir/src/fighter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/fighter.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\fighter.cpp -o CMakeFiles\game.dir\src\fighter.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\fighter.cpp -o CMakeFiles\game.dir\src\fighter.cpp.s
+
+CMakeFiles/game.dir/src/handling.cpp.obj: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/src/handling.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
+CMakeFiles/game.dir/src/handling.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/handling.cpp
+CMakeFiles/game.dir/src/handling.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/game.dir/src/handling.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/handling.cpp.obj -MF CMakeFiles\game.dir\src\handling.cpp.obj.d -o CMakeFiles\game.dir\src\handling.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\handling.cpp
+
+CMakeFiles/game.dir/src/handling.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/handling.cpp.i"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\handling.cpp > CMakeFiles\game.dir\src\handling.cpp.i
+
+CMakeFiles/game.dir/src/handling.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/handling.cpp.s"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\handling.cpp -o CMakeFiles\game.dir\src\handling.cpp.s
 
 CMakeFiles/game.dir/src/handpanel.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/handpanel.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/handpanel.cpp.obj: C:/Users/Asus/Desktop/yy/src/handpanel.cpp
+CMakeFiles/game.dir/src/handpanel.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/handpanel.cpp
 CMakeFiles/game.dir/src/handpanel.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/game.dir/src/handpanel.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/handpanel.cpp.obj -MF CMakeFiles\game.dir\src\handpanel.cpp.obj.d -o CMakeFiles\game.dir\src\handpanel.cpp.obj -c C:\Users\Asus\Desktop\yy\src\handpanel.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/game.dir/src/handpanel.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/handpanel.cpp.obj -MF CMakeFiles\game.dir\src\handpanel.cpp.obj.d -o CMakeFiles\game.dir\src\handpanel.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\handpanel.cpp
 
 CMakeFiles/game.dir/src/handpanel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/handpanel.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\handpanel.cpp > CMakeFiles\game.dir\src\handpanel.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\handpanel.cpp > CMakeFiles\game.dir\src\handpanel.cpp.i
 
 CMakeFiles/game.dir/src/handpanel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/handpanel.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\handpanel.cpp -o CMakeFiles\game.dir\src\handpanel.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\handpanel.cpp -o CMakeFiles\game.dir\src\handpanel.cpp.s
 
 CMakeFiles/game.dir/src/main.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/main.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/main.cpp.obj: C:/Users/Asus/Desktop/yy/src/main.cpp
+CMakeFiles/game.dir/src/main.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/main.cpp
 CMakeFiles/game.dir/src/main.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/game.dir/src/main.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/main.cpp.obj -MF CMakeFiles\game.dir\src\main.cpp.obj.d -o CMakeFiles\game.dir\src\main.cpp.obj -c C:\Users\Asus\Desktop\yy\src\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/game.dir/src/main.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/main.cpp.obj -MF CMakeFiles\game.dir\src\main.cpp.obj.d -o CMakeFiles\game.dir\src\main.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\main.cpp
 
 CMakeFiles/game.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/main.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\main.cpp > CMakeFiles\game.dir\src\main.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\main.cpp > CMakeFiles\game.dir\src\main.cpp.i
 
 CMakeFiles/game.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/main.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\main.cpp -o CMakeFiles\game.dir\src\main.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\main.cpp -o CMakeFiles\game.dir\src\main.cpp.s
 
 CMakeFiles/game.dir/src/map.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/map.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/map.cpp.obj: C:/Users/Asus/Desktop/yy/src/map.cpp
+CMakeFiles/game.dir/src/map.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/map.cpp
 CMakeFiles/game.dir/src/map.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/game.dir/src/map.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/map.cpp.obj -MF CMakeFiles\game.dir\src\map.cpp.obj.d -o CMakeFiles\game.dir\src\map.cpp.obj -c C:\Users\Asus\Desktop\yy\src\map.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/game.dir/src/map.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/map.cpp.obj -MF CMakeFiles\game.dir\src\map.cpp.obj.d -o CMakeFiles\game.dir\src\map.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\map.cpp
 
 CMakeFiles/game.dir/src/map.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/map.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\map.cpp > CMakeFiles\game.dir\src\map.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\map.cpp > CMakeFiles\game.dir\src\map.cpp.i
 
 CMakeFiles/game.dir/src/map.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/map.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\map.cpp -o CMakeFiles\game.dir\src\map.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\map.cpp -o CMakeFiles\game.dir\src\map.cpp.s
 
 CMakeFiles/game.dir/src/movement.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/movement.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/movement.cpp.obj: C:/Users/Asus/Desktop/yy/src/movement.cpp
+CMakeFiles/game.dir/src/movement.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/movement.cpp
 CMakeFiles/game.dir/src/movement.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/game.dir/src/movement.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/movement.cpp.obj -MF CMakeFiles\game.dir\src\movement.cpp.obj.d -o CMakeFiles\game.dir\src\movement.cpp.obj -c C:\Users\Asus\Desktop\yy\src\movement.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/game.dir/src/movement.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/movement.cpp.obj -MF CMakeFiles\game.dir\src\movement.cpp.obj.d -o CMakeFiles\game.dir\src\movement.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\movement.cpp
 
 CMakeFiles/game.dir/src/movement.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/movement.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\movement.cpp > CMakeFiles\game.dir\src\movement.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\movement.cpp > CMakeFiles\game.dir\src\movement.cpp.i
 
 CMakeFiles/game.dir/src/movement.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/movement.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\movement.cpp -o CMakeFiles\game.dir\src\movement.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\movement.cpp -o CMakeFiles\game.dir\src\movement.cpp.s
 
 CMakeFiles/game.dir/src/setup.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/setup.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/setup.cpp.obj: C:/Users/Asus/Desktop/yy/src/setup.cpp
+CMakeFiles/game.dir/src/setup.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/setup.cpp
 CMakeFiles/game.dir/src/setup.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/game.dir/src/setup.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/setup.cpp.obj -MF CMakeFiles\game.dir\src\setup.cpp.obj.d -o CMakeFiles\game.dir\src\setup.cpp.obj -c C:\Users\Asus\Desktop\yy\src\setup.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/game.dir/src/setup.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/setup.cpp.obj -MF CMakeFiles\game.dir\src\setup.cpp.obj.d -o CMakeFiles\game.dir\src\setup.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\setup.cpp
 
 CMakeFiles/game.dir/src/setup.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/setup.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\setup.cpp > CMakeFiles\game.dir\src\setup.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\setup.cpp > CMakeFiles\game.dir\src\setup.cpp.i
 
 CMakeFiles/game.dir/src/setup.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/setup.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\setup.cpp -o CMakeFiles\game.dir\src\setup.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\setup.cpp -o CMakeFiles\game.dir\src\setup.cpp.s
 
 CMakeFiles/game.dir/src/sherlock.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/sherlock.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/sherlock.cpp.obj: C:/Users/Asus/Desktop/yy/src/sherlock.cpp
+CMakeFiles/game.dir/src/sherlock.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/sherlock.cpp
 CMakeFiles/game.dir/src/sherlock.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/game.dir/src/sherlock.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/sherlock.cpp.obj -MF CMakeFiles\game.dir\src\sherlock.cpp.obj.d -o CMakeFiles\game.dir\src\sherlock.cpp.obj -c C:\Users\Asus\Desktop\yy\src\sherlock.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/game.dir/src/sherlock.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/sherlock.cpp.obj -MF CMakeFiles\game.dir\src\sherlock.cpp.obj.d -o CMakeFiles\game.dir\src\sherlock.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\sherlock.cpp
 
 CMakeFiles/game.dir/src/sherlock.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/sherlock.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\sherlock.cpp > CMakeFiles\game.dir\src\sherlock.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\sherlock.cpp > CMakeFiles\game.dir\src\sherlock.cpp.i
 
 CMakeFiles/game.dir/src/sherlock.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/sherlock.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\sherlock.cpp -o CMakeFiles\game.dir\src\sherlock.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\sherlock.cpp -o CMakeFiles\game.dir\src\sherlock.cpp.s
 
 CMakeFiles/game.dir/src/utility.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/utility.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/utility.cpp.obj: C:/Users/Asus/Desktop/yy/src/utility.cpp
+CMakeFiles/game.dir/src/utility.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/utility.cpp
 CMakeFiles/game.dir/src/utility.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/game.dir/src/utility.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/utility.cpp.obj -MF CMakeFiles\game.dir\src\utility.cpp.obj.d -o CMakeFiles\game.dir\src\utility.cpp.obj -c C:\Users\Asus\Desktop\yy\src\utility.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/game.dir/src/utility.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/utility.cpp.obj -MF CMakeFiles\game.dir\src\utility.cpp.obj.d -o CMakeFiles\game.dir\src\utility.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\utility.cpp
 
 CMakeFiles/game.dir/src/utility.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/utility.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\utility.cpp > CMakeFiles\game.dir\src\utility.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\utility.cpp > CMakeFiles\game.dir\src\utility.cpp.i
 
 CMakeFiles/game.dir/src/utility.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/utility.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\utility.cpp -o CMakeFiles\game.dir\src\utility.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\utility.cpp -o CMakeFiles\game.dir\src\utility.cpp.s
 
 CMakeFiles/game.dir/src/watson.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/watson.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/watson.cpp.obj: C:/Users/Asus/Desktop/yy/src/watson.cpp
+CMakeFiles/game.dir/src/watson.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/watson.cpp
 CMakeFiles/game.dir/src/watson.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/game.dir/src/watson.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/watson.cpp.obj -MF CMakeFiles\game.dir\src\watson.cpp.obj.d -o CMakeFiles\game.dir\src\watson.cpp.obj -c C:\Users\Asus\Desktop\yy\src\watson.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/game.dir/src/watson.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/watson.cpp.obj -MF CMakeFiles\game.dir\src\watson.cpp.obj.d -o CMakeFiles\game.dir\src\watson.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\watson.cpp
 
 CMakeFiles/game.dir/src/watson.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/watson.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\watson.cpp > CMakeFiles\game.dir\src\watson.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\watson.cpp > CMakeFiles\game.dir\src\watson.cpp.i
 
 CMakeFiles/game.dir/src/watson.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/watson.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\watson.cpp -o CMakeFiles\game.dir\src\watson.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\watson.cpp -o CMakeFiles\game.dir\src\watson.cpp.s
 
 CMakeFiles/game.dir/src/zone.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/zone.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
-CMakeFiles/game.dir/src/zone.cpp.obj: C:/Users/Asus/Desktop/yy/src/zone.cpp
+CMakeFiles/game.dir/src/zone.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/zone.cpp
 CMakeFiles/game.dir/src/zone.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/game.dir/src/zone.cpp.obj"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/zone.cpp.obj -MF CMakeFiles\game.dir\src\zone.cpp.obj.d -o CMakeFiles\game.dir\src\zone.cpp.obj -c C:\Users\Asus\Desktop\yy\src\zone.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/game.dir/src/zone.cpp.obj"
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/zone.cpp.obj -MF CMakeFiles\game.dir\src\zone.cpp.obj.d -o CMakeFiles\game.dir\src\zone.cpp.obj -c C:\Users\Asus\Desktop\helloworld\src\zone.cpp
 
 CMakeFiles/game.dir/src/zone.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/zone.cpp.i"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\yy\src\zone.cpp > CMakeFiles\game.dir\src\zone.cpp.i
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Asus\Desktop\helloworld\src\zone.cpp > CMakeFiles\game.dir\src\zone.cpp.i
 
 CMakeFiles/game.dir/src/zone.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/zone.cpp.s"
-	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\yy\src\zone.cpp -o CMakeFiles\game.dir\src\zone.cpp.s
+	C:\Users\Asus\scoop\apps\mingw\current\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Asus\Desktop\helloworld\src\zone.cpp -o CMakeFiles\game.dir\src\zone.cpp.s
 
 # Object files for target game
 game_OBJECTS = \
@@ -368,6 +383,7 @@ game_OBJECTS = \
 "CMakeFiles/game.dir/src/combat.cpp.obj" \
 "CMakeFiles/game.dir/src/dracula.cpp.obj" \
 "CMakeFiles/game.dir/src/fighter.cpp.obj" \
+"CMakeFiles/game.dir/src/handling.cpp.obj" \
 "CMakeFiles/game.dir/src/handpanel.cpp.obj" \
 "CMakeFiles/game.dir/src/main.cpp.obj" \
 "CMakeFiles/game.dir/src/map.cpp.obj" \
@@ -391,6 +407,7 @@ game.exe: CMakeFiles/game.dir/src/cardfactory.cpp.obj
 game.exe: CMakeFiles/game.dir/src/combat.cpp.obj
 game.exe: CMakeFiles/game.dir/src/dracula.cpp.obj
 game.exe: CMakeFiles/game.dir/src/fighter.cpp.obj
+game.exe: CMakeFiles/game.dir/src/handling.cpp.obj
 game.exe: CMakeFiles/game.dir/src/handpanel.cpp.obj
 game.exe: CMakeFiles/game.dir/src/main.cpp.obj
 game.exe: CMakeFiles/game.dir/src/map.cpp.obj
@@ -404,7 +421,7 @@ game.exe: CMakeFiles/game.dir/build.make
 game.exe: CMakeFiles/game.dir/linkLibs.rsp
 game.exe: CMakeFiles/game.dir/objects1.rsp
 game.exe: CMakeFiles/game.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Asus\Desktop\yy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX executable game.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Asus\Desktop\helloworld\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Linking CXX executable game.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\game.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -416,6 +433,6 @@ CMakeFiles/game.dir/clean:
 .PHONY : CMakeFiles/game.dir/clean
 
 CMakeFiles/game.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Asus\Desktop\yy C:\Users\Asus\Desktop\yy C:\Users\Asus\Desktop\yy\build C:\Users\Asus\Desktop\yy\build C:\Users\Asus\Desktop\yy\build\CMakeFiles\game.dir\DependInfo.cmake "--color=$(COLOR)" game
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Asus\Desktop\helloworld C:\Users\Asus\Desktop\helloworld C:\Users\Asus\Desktop\helloworld\build C:\Users\Asus\Desktop\helloworld\build C:\Users\Asus\Desktop\helloworld\build\CMakeFiles\game.dir\DependInfo.cmake "--color=$(COLOR)" game
 .PHONY : CMakeFiles/game.dir/depend
 

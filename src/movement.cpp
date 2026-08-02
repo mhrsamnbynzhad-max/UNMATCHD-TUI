@@ -20,7 +20,7 @@ using namespace std;
                Fighter* occupant  = getfighterat(next);
               if(occupant != nullptr)
               {
-                bool ally = occupant->isheroteam() == mover.isheroteam();
+                bool ally = occupant->getteam() == mover.getteam();
 
                 if(!ally)
                 {
@@ -58,6 +58,8 @@ using namespace std;
     vector<Zone*> Battle :: getReachableZone ( Fighter&  fighter, int maxMove)
     {
         vector<Zone*> result;
+
+        result.push_back(fighter.getPosition());
 
     for(int i = 1; i <= 32; i++)
     {

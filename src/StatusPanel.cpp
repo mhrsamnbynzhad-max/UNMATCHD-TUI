@@ -55,12 +55,14 @@ void StatusPanel::show(Battle& battle)
         sherlock.getMaxealth()
     );
 
-    cout
-        << " | Hand: "
-        << sherlock.handsize()
-        << " | Zone: "
-        << sherlock.getPosition()->getId()
-        << "\n";
+    cout<< " | Hand: "<< sherlock.handsize()<< " | Zone: ";
+
+        if(sherlock.getPosition())
+        cout<< sherlock.getPosition()->getId();
+        else
+        cout<<"-";
+
+         cout<<"\n";
 
     cout << "Watson   | HP: ";
 
@@ -69,12 +71,13 @@ void StatusPanel::show(Battle& battle)
         watson.getMaxealth()
     );
 
-    cout
-        << " | Hand: "
-        << watson.handsize()
-        << " | Zone: "
-        << watson.getPosition()->getId()
-        << "\n";
+    cout << " | Hand: "<< watson.handsize()<< " | Zone: ";
+        if(watson.getPosition())
+        cout<< watson.getPosition()->getId();
+        else
+        cout<<"-";
+
+         cout<<"\n";
 
     cout
         << RED
@@ -88,12 +91,13 @@ void StatusPanel::show(Battle& battle)
         dracula.getMaxealth()
     );
 
-    cout
-        << " | Hand: "
-        << dracula.handsize()
-        << " | Zone: "
-        << dracula.getPosition()->getId()
-        << "\n";
+    cout<< " | Hand: "<< dracula.handsize()<< " | Zone: ";
+        if(dracula.getPosition())
+        cout<< dracula.getPosition()->getId();
+        else
+        cout<<"-";
+
+         cout<<"\n";
 
     vector<Fighter>& sisters =
         battle.getsisters();
@@ -110,10 +114,14 @@ void StatusPanel::show(Battle& battle)
             sisters[i].getMaxealth()
         );
 
-        cout
-            << " | Zone: "
-            << sisters[i].getPosition()->getId()
-            << "\n";
+        cout << " | Zone: ";
+        
+        if(sisters[i].getPosition())
+        cout<< sisters[i].getPosition()->getId();
+        else
+        cout<<"-";
+
+         cout<<"\n";
     }
 
     cout

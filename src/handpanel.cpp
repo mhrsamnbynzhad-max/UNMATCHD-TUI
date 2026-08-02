@@ -32,7 +32,7 @@ void HandPanel::show(Fighter& fighter)
 
     cout << BOLD;
 
-    if(fighter.isheroteam())
+    if(fighter.getteam())
         cout << BLUE;
     else
         cout << RED;

@@ -19,6 +19,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/game.dir/src/dracula.cpp.obj.d"
   "CMakeFiles/game.dir/src/fighter.cpp.obj"
   "CMakeFiles/game.dir/src/fighter.cpp.obj.d"
+  "CMakeFiles/game.dir/src/handling.cpp.obj"
+  "CMakeFiles/game.dir/src/handling.cpp.obj.d"
   "CMakeFiles/game.dir/src/handpanel.cpp.obj"
   "CMakeFiles/game.dir/src/handpanel.cpp.obj.d"
   "CMakeFiles/game.dir/src/main.cpp.obj"

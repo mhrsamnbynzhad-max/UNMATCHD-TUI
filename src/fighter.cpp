@@ -1,6 +1,8 @@
 #include "fighter.h"
 #include "card.h"
+#include "handling.h"
 #include "battle.h"
+
 #include<iostream>
 #include<algorithm>
 #include<random>
@@ -10,14 +12,14 @@
 
 
 using namespace std;
-Fighter::Fighter(string name,int health, int Maxhealth ,bool ranged , int  movement , bool heroteam )
+Fighter::Fighter(string name,int health, int Maxhealth ,bool ranged , int  movement , Team team )
 {
     this->name = name;
     this->health =  health;
     this->Maxhealth =  Maxhealth;
     this->ranged = ranged;
     this->movement = movement;
-    this->heroteam = heroteam;
+    this->team = team ;
     position = nullptr;
 }
 
@@ -25,6 +27,11 @@ string Fighter::getName() const
 {
     return name;
 }
+Team  Fighter:: getteam ()const
+{
+    return team;
+}
+
 
 int Fighter::getHealth() const
 {
@@ -98,6 +105,11 @@ void Fighter :: heal (int amount )
 
     Card Fighter :: playcard(int index)
     {
+        if(!validIndex(index,hand.size()))
+        {
+            cout<<"Invalid card index";
+            return Card();
+        }
         Card selected = hand[index];
         hand.erase(hand.begin()+index);
         return selected;
@@ -106,6 +118,11 @@ void Fighter :: heal (int amount )
 
     Card  Fighter :: remove_ranodmcard()
     {
+        if(hand.empty())
+        {
+            cout<<" Hand is empty\n";
+            return Card();
+        }
         int index = rand()% hand.size();
         Card temp = hand[index];
 
@@ -119,11 +136,6 @@ void Fighter :: heal (int amount )
     {
         return ranged != other->ranged;
 
-    }
-
-    bool Fighter :: isheroteam() const
-    {
-        return heroteam;
     }
 
     vector<Card>  Fighter :: getrandomcard(int count )
@@ -252,4 +264,10 @@ Card Fighter::drawBoostMovement()
     addtohand(cards);
 
     return hand.back();
+}
+
+
+ void  Fighter:: specialAbillity(Battle* battle)
+{
+
 }

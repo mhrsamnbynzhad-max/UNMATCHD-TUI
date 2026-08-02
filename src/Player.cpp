@@ -1,5 +1,6 @@
 #include "player.h"
 #include "battle.h"
+#include "handling.h"
 #include <iostream>
 
 
@@ -25,20 +26,11 @@ void Player::chooseHero(Fighter* sherlock, Fighter* dracula)
 
     while (true)
     {
-        cout << "\n" << name << " Choose your FIGHTER:\n";
+
         cout << "1) Sherlock\n";
         cout << "2) Dracula\n";
-        cout << "Enter choice: ";
 
-        cin >> choice;
-
-        if (!cin)
-        {
-            cin.clear();
-            cin.ignore(10000, '\n');
-            cout << "Invalid input! Try again.\n";
-            continue;
-        }
+        choice = readInt( "\n" + name +" Choose your FIGHTER:" , 1 ,2 );
 
         if (choice == 1)
         {
@@ -83,28 +75,18 @@ void Player::maneuver(Battle& battle)
 
         for(int i=0;i<hand.size();i++)
         {
-            cout
-                << i+1
-                << ") "
-                << hand[i].getName()
-                << " (Boost = "
-                << hand[i].getBoost()
-                << ")\n";
+            cout << i+1 << ") " << hand[i].getName() << " (Boost = " << hand[i].getBoost() << ")\n";
         }
 
-   cout << "Choose a card to use its Boost (0 = No Boost): ";
-
-        int choice;
-        cin >> choice;
-
         int boost = 0;
+        int choice;
+        choice = readInt("Choose a card to use its Boost (0 = No Boost): " , 0 , hand.size()) ;
 
         if(choice != 0)
         {
             choice--;
-
-            if(choice < 0 || choice >= hand.size())
-                throw runtime_error("Invalid card.");
+            if(choice != -1 && !validIndex(choice , hand.size()))
+            throw runtime_error("Invaliv card");
 
             boost = hand[choice].getBoost();
 
@@ -142,15 +124,12 @@ void Player::maneuver(Battle& battle)
 
         while(movedCount < movable.size())
         {
-            cout<<"\nChoose fighter to move ( 0 end):\n";
-
             for(int i=0;i<movable.size();i++)
             {
                 if(moved[i])
                     continue;
 
-                cout<<i+1<<") "
-                    <<movable[i]->getName();
+                cout<<i+1<<") "<<movable[i]->getName();
 
                 if(movable[i]->getName()=="Sister")
                     cout<<" "<<i;
@@ -159,15 +138,12 @@ void Player::maneuver(Battle& battle)
             }
 
             int choice;
-            cin>>choice;
+            choice = readInt("\nChoose fighter to move ( 0 end):" , 0 , movable.size());
 
             if(choice==0)
                 break;
 
             choice--;
-
-            if(choice<0 || choice>=movable.size())
-                continue;
 
             if(moved[choice])
             {
@@ -177,20 +153,21 @@ void Player::maneuver(Battle& battle)
 
             Fighter* selected = movable[choice];
 
-            vector<Zone*> moves =
-                battle.getReachableZone(*selected,movemax);
+            vector<Zone*> moves = battle.getReachableZone(*selected,movemax);
 
             cout<<"Possible destinations:\n";
 
+            vector<int>validids;
             for(auto z:moves)
-                cout<<z->getId()<<" ";
+            {
+              cout<<z->getId()<<" ";
+              validids.push_back(z->getId());
+            }
 
             cout<<endl;
 
-            cout<<"Destination: ";
-
             int dest;
-            cin>>dest;
+            dest = readchoice ("Destination: " , validids);
 
             if(battle.movefighter(*selected,dest,movemax))
             {
@@ -234,12 +211,11 @@ void Player::attack(Player& enemy, Battle& battle,Fighter* attacker , int cardin
 
     if(hero->getName() == "Sherlock")
     {
-            cout<<"Attack with:\n";
             cout<<"1) Sherlock\n";
             cout<<"2) Watson\n";
 
             int ch;
-            cin>>ch;
+            ch = readInt("Attack with: ", 1 ,2);
 
             if(ch==2)
                 return &battle.getWatson();
@@ -249,14 +225,14 @@ void Player::attack(Player& enemy, Battle& battle,Fighter* attacker , int cardin
 
         if(hero->getName()=="Dracula")
         {
-            cout<<"Attack with:\n";
+            
             cout<<"1) Dracula\n";
             cout<<"2) Sister 1\n";
             cout<<"3) Sister 2\n";
             cout<<"4) Sister 3\n";
 
             int ch;
-            cin>>ch;
+            ch = readInt("Attack with:\n" , 1 , 4);
 
             if(ch>=2 && ch<=4)
                 return &battle.getsisters()[ch-2];

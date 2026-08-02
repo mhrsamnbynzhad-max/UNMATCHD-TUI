@@ -9,7 +9,10 @@ public:
 
     Dracula();
 
-    void specialAbility(Fighter* target);
+    void specialabilityattack(Fighter* target);
+
+    void specialAbillity(Battle* battle)override;
+
 };
 
 #endif

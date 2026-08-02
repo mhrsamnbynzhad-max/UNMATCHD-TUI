@@ -1,5 +1,6 @@
 #include "battle.h"
 #include "cardeffect.h"
+#include "handling.h"
 #include <iostream>
 
 using namespace std;
@@ -23,9 +24,10 @@ using namespace std;
         Card defendcard ;
 
         bool isdefended = false;
-        cout<<defender->getName()<<"  Do yo want to defend? (yes(1) or no (0))\n";
+
         int choose;
-        cin>>choose;
+        choose = readInt(defender->getName()+"  Do yo want to defend? (yes(1) or no (0)) :" , 0 ,1);
+        
 
          if(choose == 1 && defender->handsize()>0)
          {
@@ -50,18 +52,16 @@ using namespace std;
             }
             else
             {
-                cout << "Choose a defense card:\n";
+
                 for(int i = 0; i < defenseIndexes.size(); i++)
                 {
                     int idx = defenseIndexes[i];
 
-                    cout << i + 1 << ") "
-                        << defender->gethand()[idx].getName()
-                        << " (DEF " << defender->gethand()[idx].getValue() << ")\n";
+                    cout << i + 1 << ") "<< defender->gethand()[idx].getName()<< " (DEF " << defender->gethand()[idx].getValue() << ")\n";
                 }
 
                 int choice;
-                cin >> choice;
+                choice = readInt("Choose a defense card: " , 1 ,defenseIndexes.size());
                 choice--;
 
                 if(choice < 0 || choice >= defenseIndexes.size())

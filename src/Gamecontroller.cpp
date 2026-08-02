@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "handpanel.h"
+#include "handling.h"
 #include "StatusPanel.h"
 using namespace std;
 
@@ -12,8 +13,16 @@ GameController::GameController(Battle& b, Player& p1, Player& p2) : battle(b), p
 void GameController::run()
 {
     std::queue<Player*> turnQueue;
-    turnQueue.push(&player1);
-    turnQueue.push(&player2);
+    if(battle.getplayerfirst())
+    {
+        turnQueue.push(&player1);
+        turnQueue.push(&player2);
+    }
+    else
+    {
+        turnQueue.push(&player2);  
+        turnQueue.push(&player1);
+    }
 
     while (true)
     {
@@ -51,7 +60,6 @@ void GameController::run()
               
              vector<AttackCardInfo> cards = current->getHero()->getPlayableCardIndexes(&battle, enemy->getHero(), current->getHero());
                 
-            cout << "Choose action:( or M for Maneuver)\n";
             for(int i = 0; i < cards.size(); i++)
             {
                 Card& c = current->getHero()->gethand()[cards[i].index];
@@ -64,9 +72,10 @@ void GameController::run()
 
                 cout<<"\n";
             }
-            string input;
-            cin>>input;
-            if( input == "M" || input == "m")
+            int input;
+            input = readInt( "Choose action:( or (0) for Maneuver)" , 0 , cards.size());
+            
+            if( input == 0 )
             {
                 current->maneuver(battle);
 
@@ -75,10 +84,10 @@ void GameController::run()
                 action++;
                 continue;
             }
-            int choice = stoi(input);
-            choice--;
 
-            AttackCardInfo selected = cards[choice];
+            input -- ;
+
+            AttackCardInfo selected = cards[input];
 
             if(!selected.usable)
             {
@@ -103,7 +112,7 @@ void GameController::run()
             else if(chosenCard.getcardType() == ATTACK ||
                     chosenCard.getcardType() == VERSATILE)
             {
-                current->attack(*enemy,battle, attacker, cards[choice].index);
+                current->attack(*enemy,battle, attacker, cards[input].index);
 
                 StatusPanel::show(battle);
             }
@@ -121,16 +130,9 @@ void GameController::run()
         }
     }
 
-        cout<<"Turn end? (1)\n";
 
         int end;
-        cin>>end;
-
-        while(end != 1)
-        {
-            cout<<"Confirm end turn (1): ";
-            cin>>end;
-        }
+        end = readInt("Confirm end turn (1): " , 1 ,1);
 
         turnQueue.push(current);
     }

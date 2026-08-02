@@ -1,4 +1,5 @@
 #include "battle.h"
+#include "handling.h"
 #include <iostream>
 
 using namespace std;
@@ -6,14 +7,15 @@ using namespace std;
    void Battle:: setuppositions()
     {
         sherlock.setPosition(map.getZone(18));
-        dracula.setPosition(map.getZone(1));
+        dracula.setPosition(map.getZone(19));
+        cout<<dracula.getPosition()->getId()<<endl;
          
-        }
+    }
 
         void Battle::chooseSidekickPosition(Player& player)
         {
             cout<<"\n-----------------------------------------------\n";
-            cout<<player.getName()<<" Choose your sidekick's position.\n";
+
             if(player.getHero()->getName() == "Sherlock")
             {
                 showplacementzone(sherlock);
@@ -22,10 +24,10 @@ using namespace std;
 
                 do
                 {
-                    cin >> choice;
+                     choice = readInt(player.getName() + " Choose your sidekick's position." , 1 , 32);
 
                     if(getfighterat(map.getZone(choice)))
-                        cout << "occupied!\n";
+                    cout << "occupied!\n";
 
                 } while(getfighterat(map.getZone(choice)));
 
@@ -41,8 +43,8 @@ using namespace std;
 
                     do
                     {
-                        cin >> choice;
 
+                       choice = readInt(player.getName() + " Choose your sidekick's position." , 1 , 32);
                         if(getfighterat(map.getZone(choice)))
                             cout << "occupied!\n";
 

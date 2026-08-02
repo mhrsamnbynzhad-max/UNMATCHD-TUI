@@ -38,7 +38,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Program Files/CMake/share/cmake-4.4/Modules/Platform/Windows-windres.cmake"
   "C:/Program Files/CMake/share/cmake-4.4/Modules/Platform/Windows.cmake"
   "C:/Program Files/CMake/share/cmake-4.4/Modules/Platform/WindowsPaths.cmake"
-  "C:/Users/Asus/Desktop/yy/CMakeLists.txt"
+  "C:/Users/Asus/Desktop/helloworld/CMakeLists.txt"
   "CMakeFiles/4.4.0-rc1/CMakeCCompiler.cmake"
   "CMakeFiles/4.4.0-rc1/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.4.0-rc1/CMakeRCCompiler.cmake"

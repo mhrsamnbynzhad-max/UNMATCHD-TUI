@@ -8,6 +8,9 @@ class Sherlock : public Fighter
 public:
 
     Sherlock();
+
+    void specialAbillity(Battle* battle)override;
+
 };
 
 #endif

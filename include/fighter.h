@@ -7,6 +7,11 @@
 
 class Battle;
 
+enum Team
+{
+    SHERLOCK, DRACULA,INVISIBLE
+};
+
 struct AttackCardInfo
 {
     int index;
@@ -23,9 +28,10 @@ class Fighter
     Zone* position;
     std::vector<Card>deck;
     std::vector<Card>hand;
-    bool heroteam;
+    Team team ;
+    
     public:
-    Fighter(std::string , int , int ,bool , int  , bool );
+    Fighter(std::string , int , int ,bool , int  , Team);
 
     vector<AttackCardInfo> getPlayableCardIndexes(Battle* , Fighter*  , Fighter*);
    
@@ -54,7 +60,6 @@ class Fighter
 
     bool isenemy (Fighter* );
 
-    bool isheroteam() const;
     vector<Card> getrandomcard(int);
     void addtohand(const std:: vector<Card>&);
     int getdecksize()const;
@@ -63,6 +68,9 @@ class Fighter
     void sethealth(int);
     int getMaxealth() const;
     Card drawBoostMovement();
+    Team getteam ()const;
+    virtual void specialAbillity(Battle*);
+    
 };
 
 #endif
