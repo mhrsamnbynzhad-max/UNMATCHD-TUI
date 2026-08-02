@@ -30,9 +30,24 @@ vector<Cardinfo> Card::sherlockCardDB = {
     { MASTER_OF_DISGUISE,"Master Of Disguise","Sherlock",SCHEME,IMMEDIATE,"Swap Positions",0,2,2 },
     { GAME_ON,"The Game Is Afoot","Sherlock",ATTACK,AFTER_COMBAT,"Move Holmes",5,2,2},//THE GAME IS ON
     { CONFIRM_SUSPICION,"Suspected Confirmed","Sherlock",SCHEME,IMMEDIATE,"Guess Card Value",0,1,3 },
-    {DECEPTION,"Deception","Any",SCHEME,DURING_COMBAT,"Cancel all effects on your opponent's card",2,1,3}
+    {DECEPTION,"Deception","Any",SCHEME,DURING_COMBAT,"Cancel all effects on your opponent's card",0,1,3}
 };
 
+vector<Cardinfo> Card::invisiblemanCardDB = {
+    { CODED_NOTES,"Coded Notes","InvisibleMan",DEFENSE,AFTER_COMBAT,"Draw 3 Cards , also choice 2 cards",3, 2 , 2},
+    { CONFOUND,"Confound","InvisibleMan",VERSATILE,AFTER_COMBAT,"",3,2,2},
+    { COVERT_PREPARATION,"Covert Prepation","InvisibleMan",VERSATILE,AFTER_COMBAT,"Draw a cards, replace a fog",2,1 , 3},
+    { DREAMING_OF_REVENGE,"Dreaming Of Revenge","InvisibleMan",VERSATILE,AFTER_COMBAT,"None",3,1 , 2},
+    { EMERGE_FROM_MIST,"Emerge From Mist","InvisibleMan",ATTACK,DURING_COMBAT,"",3,2 ,2 },
+    {IMPOSSIBLE_TO_SEE,"Impossible To See","InvisibleMan",VERSATILE,IMMEDIATE,"",2,2, 2 },
+    { INTO_THIN_AIR,"Into Thin Air","InvisibleMan",DEFENSE,AFTER_COMBAT,"",4,1, 2},
+    { LURKING,"Lurking","InvisibleMan",DEFENSE,AFTER_COMBAT,"",2,2 , 2},
+    { REIGN_OF_TERROR,"Reign Of Terror","InvisibleMan",SCHEME,NONE,"",0,1 ,2 },
+    { ROLLING_FOG,"Rolling Fog","InvisibleMan",SCHEME,NONE,"",0,1,2 },
+    { SLIP_AWAY,"Slip Away","InvisibleMan",ATTACK,AFTER_COMBAT,"",3,2,3},
+    { STEP_LIGHTLY,"Step Lightly","InvisibleMan",SCHEME,NONE,"",0,1,2 },
+    {VANISH,"Vanish","InvisibleMan",SCHEME,NONE,"",0,3,2}
+};
 Card Card::createFromInfo(const Cardinfo& info)
 {
     static BloodThirstEffect bloodThirstEffect;
