@@ -37,19 +37,30 @@ using namespace std;
         if(map.issecretzone(current->getId()))
         {
             const vector<int>& secret = map.getsecretZones();
-            for(int  i = 0 ; i <secret.size() ; i++)
+
+            for(int i = 0; i < secret.size(); i++)
             {
-                    if(secret[i] == current->getId())
-                    {
-                         continue;
-                    }
-                    if(canreach(map.getZone(secret[i]), target ,movesleft-1 , mover))
-                    {
-                        return true;
-                    }
-                
+                if(secret[i] == current->getId())
+                    continue;
+
+                Zone* next = map.getZone(secret[i]);
+
+                Fighter* occ = getfighterat(next);
+
+                if(occ)
+                {
+                    bool ally = occ->getteam() == mover.getteam();
+
+                    if(!ally)
+                        continue; 
+                }
+
+                if(canreach(next, target, movesleft - 1, mover))
+                    return true;
             }
         }
+
+
         return false;
          
     }

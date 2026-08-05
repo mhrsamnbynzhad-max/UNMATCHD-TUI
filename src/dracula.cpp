@@ -47,7 +47,7 @@ void Dracula:: specialAbillity(Battle* battle)
         {
             targets.push_back(&watson);
         }
-        vector<Fighter>& sisters = battle->getsisters();
+        vector<Sisters>& sisters = battle->getsisters();
 
         for(Fighter& sister : sisters)
         {

@@ -10,13 +10,11 @@
 
 
 using namespace std;
-    Battle::Battle():  sherlock(),  watson(),  dracula() , player1("Player 1") , player2("Player 2")
+    Battle::Battle():  sherlock(),  watson(),  dracula() ,sisters(), player1("Player 1") , player2("Player 2")
     {
-        for(int i=0 ; i<3 ; i++)
+        for(int i = 0 ; i <3 ; i ++)
         {
-            sisters.push_back(
-                Fighter("Sister", 1 , 1, false , 2 , DRACULA)
-            );
+          sisters.emplace_back();
         }
         int age1, age2;
         age1 = readInt(player1.getName()+" age: " , 1 , 100);

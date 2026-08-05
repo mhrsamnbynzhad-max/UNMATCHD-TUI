@@ -25,9 +25,9 @@ public:
     void drawCard();
     void maneuver(Battle& battle);
     void attack(Player& , Battle& , Fighter*, int);
-    void playScheme(Player& , Battle& , int );
-    Fighter* chooseAttacker( Battle&);
-    bool chooseAttackerIfNeeded (Battle& , Card& , Fighter*&);
+    void playScheme(Player& , Battle& ,Fighter*, int );
+    Fighter* chooseAttacker( Battle& , Card& , Fighter*);
+    bool chooseAttackerIfNeeded (Battle& , Card& , Fighter*& ,Fighter* );
 };
 
 #endif

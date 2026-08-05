@@ -118,6 +118,7 @@ CMakeFiles/game.dir/src/utility.cpp.obj: \
  C:/Users/Asus/Desktop/helloworld/include/card.h \
  C:/Users/Asus/Desktop/helloworld/include/dracula.h \
  C:/Users/Asus/Desktop/helloworld/include/watson.h \
+ C:/Users/Asus/Desktop/helloworld/include/sisters.h \
  C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
  C:/Users/Asus/Desktop/helloworld/include/map.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/map \

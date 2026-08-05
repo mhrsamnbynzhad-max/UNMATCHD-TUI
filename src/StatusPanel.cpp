@@ -99,8 +99,7 @@ void StatusPanel::show(Battle& battle)
 
          cout<<"\n";
 
-    vector<Fighter>& sisters =
-        battle.getsisters();
+    vector<Sisters>& sisters = battle.getsisters();
 
     for(size_t i = 0; i < sisters.size(); i++)
     {

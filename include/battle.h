@@ -5,6 +5,7 @@
 #include "fighter.h"
 #include "dracula.h"
 #include "watson.h"
+#include "sisters.h"
 #include "sherlock.h"
 #include "map.h"
 #include <vector>
@@ -35,7 +36,7 @@ private:
     Watson watson;
     Dracula dracula;
 
-    std::vector<Fighter> sisters;
+    std::vector<Sisters> sisters;
 
     Map map;
     Player player1;
@@ -62,6 +63,8 @@ private:
     
     bool playerfirst = true;
 
+    bool gameover = false;
+
 
 public:
 
@@ -71,14 +74,14 @@ public:
     void setuppositions();
     void draculaability(Fighter* target);
     void printfighters();
-    void combat(Fighter*,Fighter* , int);
+    void combat(Fighter*,Fighter* , Fighter*,int);
     void applycardeffect(Card& , Fighter* ,Fighter* );
     bool areadjacent(Fighter& ,Fighter&  );
     bool movefighter(Fighter& ,int  , int );
     void showPossiblemoves(Fighter&);
     Fighter* getfighterat(Zone* );
     void showplacementzone(Fighter& );
-    std::vector<Fighter>& getsisters();
+    std::vector<Sisters>& getsisters();
     Map& getMap();
     ZoneCheckResult canEnterzone(Fighter* , Fighter* ,int );
     void chooseSidekickPosition(Player& );
@@ -115,16 +118,8 @@ public:
 
     void resetExtraAction(){    extraAction = false;}
 
-      bool getplayerfirst () const
-      {
-        return playerfirst ;
-      }
-
-  
-
-
-   
-
+    bool getplayerfirst () const {return playerfirst ;}
+    bool isgameover()const {return gameover; }
     
 };
 

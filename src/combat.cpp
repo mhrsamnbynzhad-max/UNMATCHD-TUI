@@ -5,10 +5,10 @@
 
 using namespace std;
 
-    void Battle :: combat(Fighter* attracker,Fighter* defender, int cardindex)
-    {
+    void Battle :: combat(Fighter* attracker,Fighter* defender,Fighter* cardOwner, int cardindex)
+    { 
 
-        if(attracker->handsize() == 0)
+        if(cardOwner->handsize() == 0)
         {
             cout<<"Atracker has no cards";
             return;
@@ -16,10 +16,13 @@ using namespace std;
          if(defender->handsize() == 0)
         {
             cout<<"Defender has no cards";
+
+            defender->takeDamage(finalAttackValue);
+            
             return;
         }
 
-        Card  attackcard = attracker->playcard(cardindex);
+        Card  attackcard = cardOwner->playcard(cardindex);
         this->lastAttackCard = attackcard;
         Card defendcard ;
 
@@ -117,6 +120,19 @@ using namespace std;
          if(damage > 0 )
          {
              defender->takeDamage(damage);
+            if(!defender->isalive())
+            {
+              cout<<defender->getName() <<" died\n";
+              if(defender == &dracula || defender == &sherlock)
+              {
+                gameover = true;
+
+                cout<< "GAME OVER\n";
+
+                return;
+
+              }
+            }
              
              cout<<"Damage taken ( "<<damage<<" )" <<endl;
              cout<<"Attacker won the combat!" <<endl;

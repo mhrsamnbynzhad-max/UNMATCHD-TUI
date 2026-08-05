@@ -51,6 +51,10 @@ void Fighter::takeDamage(int damage)
     health-=damage;
     if(health<0)
     health = 0;
+    if( health == 0)
+    {
+        position = nullptr;
+    }
 }
 
 bool Fighter::isRanged() const
@@ -181,6 +185,12 @@ void Fighter :: heal (int amount )
     {
            for(const auto& c : cards)
            hand.push_back(c);
+
+           while (hand.size()>7)
+           {
+              hand.erase(hand.begin());
+           }
+           
     }
 
     int  Fighter :: getdecksize()const
@@ -235,14 +245,98 @@ vector<AttackCardInfo> Fighter::getPlayableCardIndexes(Battle* battle, Fighter* 
             usable = false;
         }
 
-        else if(c.getcardType() == ATTACK || c.getcardType() == VERSATILE )
+       else if(c.getcardType() == ATTACK || c.getcardType() == VERSATILE)
         {
-
-            if(actingfighter->getName() == "Dracula" || actingfighter->getName() == "Sister")
+            if(owner == "Dracula")
             {
-                if(!battle->areadjacent(*actingfighter, *opponent))
-                    usable = false;
-    
+                usable = battle->areadjacent( battle->getDracual(), *opponent);
+            }
+            else if(owner == "Sister")
+            {
+                usable = false;
+
+                for(auto& s : battle->getsisters())
+                {
+                    if(s.isalive() &&battle->areadjacent(s, *opponent))
+                    {
+                        usable = true;
+                        break;
+                    }
+                }
+            }
+            else if(owner == "Sherlock")
+            {
+                usable = false;
+
+                vector<Zone*> zones =battle->getMap().getplacementZone( battle->getSherlock().getPosition());
+
+                for(auto z : zones)
+                {
+                    if(z == opponent->getPosition())
+                    {
+                        usable = true;
+                        break;
+                    }
+                }
+            }
+            else if(owner == "Watson")
+            {
+                usable = false;
+
+                vector<Zone*> zones = battle->getMap().getplacementZone(battle->getWatson().getPosition());
+
+                for(auto z : zones)
+                {
+                    if(z == opponent->getPosition())
+                    {
+                        usable = true;
+                        break;
+                    }
+                }
+            }
+            else if(owner == "Any")
+            {
+                usable = false;
+
+                if(battle->areadjacent( battle->getDracual(),*opponent))
+                {
+                    usable = true;
+                }
+
+                for(auto& s : battle->getsisters())
+                {
+                    if(s.isalive() && battle->areadjacent(s, *opponent))
+                    {
+                        usable = true;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                if(actingfighter->isRanged())
+                {
+                    vector<Zone*> zones = battle->getMap().getplacementZone(actingfighter->getPosition());
+
+                    bool found = false;
+
+                    for(auto z : zones)
+                    {
+                        if(z == opponent->getPosition())
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if(!found)
+                        usable = false;
+                }
+                else
+                {
+                    if(!battle->areadjacent(*actingfighter, *opponent))
+                        usable = false;
+                }
             }
         }
 

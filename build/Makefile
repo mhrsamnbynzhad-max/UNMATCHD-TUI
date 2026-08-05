@@ -423,6 +423,30 @@ src/handpanel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/handpanel.cpp.s
 .PHONY : src/handpanel.cpp.s
 
+src/invisible.obj: src/invisible.cpp.obj
+.PHONY : src/invisible.obj
+
+# target to build an object file
+src/invisible.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/invisible.cpp.obj
+.PHONY : src/invisible.cpp.obj
+
+src/invisible.i: src/invisible.cpp.i
+.PHONY : src/invisible.i
+
+# target to preprocess a source file
+src/invisible.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/invisible.cpp.i
+.PHONY : src/invisible.cpp.i
+
+src/invisible.s: src/invisible.cpp.s
+.PHONY : src/invisible.s
+
+# target to generate assembly for a file
+src/invisible.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/invisible.cpp.s
+.PHONY : src/invisible.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -543,6 +567,30 @@ src/sherlock.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/sherlock.cpp.s
 .PHONY : src/sherlock.cpp.s
 
+src/sisters.obj: src/sisters.cpp.obj
+.PHONY : src/sisters.obj
+
+# target to build an object file
+src/sisters.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/sisters.cpp.obj
+.PHONY : src/sisters.cpp.obj
+
+src/sisters.i: src/sisters.cpp.i
+.PHONY : src/sisters.i
+
+# target to preprocess a source file
+src/sisters.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/sisters.cpp.i
+.PHONY : src/sisters.cpp.i
+
+src/sisters.s: src/sisters.cpp.s
+.PHONY : src/sisters.s
+
+# target to generate assembly for a file
+src/sisters.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/sisters.cpp.s
+.PHONY : src/sisters.cpp.s
+
 src/utility.obj: src/utility.cpp.obj
 .PHONY : src/utility.obj
 
@@ -661,6 +709,9 @@ help:
 	@echo ... src/handpanel.obj
 	@echo ... src/handpanel.i
 	@echo ... src/handpanel.s
+	@echo ... src/invisible.obj
+	@echo ... src/invisible.i
+	@echo ... src/invisible.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
@@ -676,6 +727,9 @@ help:
 	@echo ... src/sherlock.obj
 	@echo ... src/sherlock.i
 	@echo ... src/sherlock.s
+	@echo ... src/sisters.obj
+	@echo ... src/sisters.i
+	@echo ... src/sisters.s
 	@echo ... src/utility.obj
 	@echo ... src/utility.i
 	@echo ... src/utility.s

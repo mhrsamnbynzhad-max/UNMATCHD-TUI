@@ -3,7 +3,7 @@
 
 using namespace std;
 
-vector<Fighter>& Battle::getsisters()
+vector<Sisters>& Battle::getsisters()
 {
     return sisters;
 }
@@ -32,18 +32,18 @@ bool Battle :: areadjacent(Fighter& a ,Fighter& b )
 
   Fighter* Battle::  getfighterat(Zone* zone)
    {
-          if(dracula.getPosition() == zone)
+          if(dracula.isalive() &&     dracula.getPosition() == zone)
        return& dracula ;
 
-        if(sherlock.getPosition() == zone)
+        if(sherlock.isalive() &&  sherlock.getPosition() == zone)
        return &sherlock ;
 
-        if(watson.getPosition() == zone)
+        if(watson.isalive() && watson.getPosition() == zone)
        return &watson ;
 
        for (int i = 0 ; i < sisters.size() ; i ++)
        {
-           if(sisters[i].getPosition() == zone)
+           if(sisters[i].isalive() && sisters[i].getPosition() == zone)
            {
                return &sisters[i];
            }

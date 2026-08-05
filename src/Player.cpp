@@ -112,10 +112,14 @@ void Player::maneuver(Battle& battle)
         {
             movable.push_back(hero);
 
-            vector<Fighter>& sisters = battle.getsisters();
+            vector<Sisters>& sisters = battle.getsisters();
 
             for(auto& s : sisters)
+            {
+                if(s.isalive())
                 movable.push_back(&s);
+            }
+
         }
 
         vector<bool> moved(movable.size(),false);
@@ -183,20 +187,25 @@ void Player::maneuver(Battle& battle)
 
 void Player::attack(Player& enemy, Battle& battle,Fighter* attacker , int cardindex)
 {
+    if(attacker == nullptr || !attacker->isalive())
+    {
+        cout<<"This fighter can't attack\n";
+        return;
+    }
     if(hero == nullptr || enemy.getHero() == nullptr)
         throw logic_error("No fighter selected ..");
 
-    cout << attacker->getName() << "ATTACKS... " 
+    cout << attacker->getName() << " ATTACKS... " 
          << enemy.getHero()->getName() << endl;
 
-    battle.combat(attacker, enemy.getHero() , cardindex);
+    battle.combat(attacker, enemy.getHero() , hero , cardindex);
 }
 
-   void Player::playScheme(Player& enemy, Battle& battle, int cardindex)
+   void Player::playScheme(Player& enemy, Battle& battle,Fighter* attacker , int cardindex)
     {
         Card schemecard = hero->playcard(cardindex);
 
-        battle.applycardeffect(schemecard,hero,enemy.getHero());
+        battle.applycardeffect(schemecard,attacker,enemy.getHero());
 
         cout << "Card execution Scheme\n";
     }
@@ -205,54 +214,174 @@ void Player::attack(Player& enemy, Battle& battle,Fighter* attacker , int cardin
               hero = h ;
     }
 
-    Fighter* Player:: chooseAttacker( Battle& battle )
+    Fighter* Player:: chooseAttacker( Battle& battle ,  Card& attackCard , Fighter* opponent )
     {
+        string owner  = attackCard.getowner();
+
          Fighter* hero = getHero();
 
-    if(hero->getName() == "Sherlock")
-    {
-            cout<<"1) Sherlock\n";
-            cout<<"2) Watson\n";
-
-            int ch;
-            ch = readInt("Attack with: ", 1 ,2);
-
-            if(ch==2)
-                return &battle.getWatson();
-
-            return hero;
-        }
-
-        if(hero->getName()=="Dracula")
+         if(owner=="Dracula")
         {
-            
-            cout<<"1) Dracula\n";
-            cout<<"2) Sister 1\n";
-            cout<<"3) Sister 2\n";
-            cout<<"4) Sister 3\n";
-
-            int ch;
-            ch = readInt("Attack with:\n" , 1 , 4);
-
-            if(ch>=2 && ch<=4)
-                return &battle.getsisters()[ch-2];
-
-            return hero;
+            return &battle.getDracual();
         }
 
+        
+         if(owner=="Sherlock")
+        {
+            return &battle.getSherlock();
+        }
+
+         if(owner=="Watson")
+        {
+            return &battle.getWatson();
+        }
+
+
+        if(owner=="Sister")
+        {
+            vector<Fighter*> choices;
+
+            for(auto& s : battle.getsisters())
+            {
+                if(s.isalive() && battle.areadjacent(s,*opponent))
+                {
+                    choices.push_back(&s);
+                }
+            }
+
+            if(choices.empty())
+                return nullptr;
+
+           for(int i = 0; i < (int)choices.size(); i++)
+            {
+                cout << i + 1 << ") Sister ";
+                    for(int j = 0; j < (int)battle.getsisters().size(); j++)
+                    {
+                        if(choices[i] == &battle.getsisters()[j])
+                        {
+                            cout << j + 1;
+                            break;
+                        }
+                    }
+
+                cout << endl;
+            }
+        }
+
+        
+            if(owner == "Any" && attackCard.getcardType() == SCHEME)
+                {
+                    cout << "Choose who will use this Scheme:\n";
+                    cout << "1) Sherlock\n";
+                    if(battle.getWatson().isalive())
+                    cout << "2) Watson\n";
+
+                    int max = battle.getWatson().isalive() ? 2 :1;
+                    int ch = readInt("Choice: ",1,max);
+
+                    if(ch == 1)
+                        return &battle.getSherlock();
+
+                    return &battle.getWatson();
+                }
+
+      if(owner == "Any")
+        {
+            vector<Fighter*> choices;
+
+            if(hero->getName() == "Sherlock")
+            {
+                vector<Zone*> zones =battle.getMap().getplacementZone(hero->getPosition());
+
+                for(auto z : zones)
+                {
+                    if(z == opponent->getPosition())
+                    {
+                        choices.push_back(hero);
+                        break;
+                    }
+                }
+
+                Fighter& watson = battle.getWatson();
+
+                if(watson.isalive())
+                {
+                    vector<Zone*> wzones =  battle.getMap().getplacementZone(watson.getPosition());
+
+                    for(auto z : wzones)
+                    {
+                        if(z == opponent->getPosition())
+                        {
+                            choices.push_back(&watson);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if(hero->getName() == "Dracula")
+            {
+                if(battle.areadjacent(battle.getDracual(), *opponent))
+                    choices.push_back(&battle.getDracual());
+
+                for(auto& s : battle.getsisters())
+                {
+                    if(s.isalive() &&
+                    battle.areadjacent(s, *opponent))
+                    {
+                        choices.push_back(&s);
+                    }
+                }
+            }
+
+            for(int i = 0; i < (int)choices.size(); i++)
+            {
+                cout << i + 1 << ") "
+                    << choices[i]->getName();
+
+                if(choices[i]->getName() == "Sister")
+                {
+                    for(int j = 0; j < (int)battle.getsisters().size(); j++)
+                    {
+                        if(choices[i] == &battle.getsisters()[j])
+                        {
+                            cout << " " << j + 1;
+                            break;
+                        }
+                    }
+                }
+
+                cout << endl;
+            }
+
+            int ch = readInt("Attack with: ", 1, choices.size());
+
+            return choices[ch - 1];
+
+        }
         return hero;
     }
 
-    bool Player::chooseAttackerIfNeeded(Battle& battle,Card& card,Fighter*& attacker)
+    bool Player::chooseAttackerIfNeeded(Battle& battle,Card& card,Fighter*& attacker , Fighter* opponent)
 {
     if(card.getcardType()==SCHEME)
     {
-        attacker = nullptr;
+        if(card.getowner() == "Any")
+        {
+          attacker = chooseAttacker(battle , card ,opponent);
+             
+        }
+        else
+        {
+
+            attacker = getHero();
+        }
         return true;
     }
 
-    attacker = chooseAttacker(battle);
+    attacker = chooseAttacker(battle , card ,opponent);
 
     return true;
 }
+
 

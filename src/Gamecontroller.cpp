@@ -26,19 +26,11 @@ void GameController::run()
 
     while (true)
     {
-        if(!battle.getSherlock().isalive())
-        {
-                cout << "\nGame Over!\n";
-                cout << battle.getDracual().getName() << " wins!\n";
-                break;
-        }
 
-        if(!battle.getDracual().isalive())
-        {
-                cout << "\nGame Over!\n";
-                cout << battle.getSherlock().getName() << " wins!\n";
-                break;
-        }
+        if(battle.isgameover())
+        break;
+
+
         Player* current = turnQueue.front();
         turnQueue.pop();
         battle.startTurn(*current);
@@ -100,22 +92,24 @@ void GameController::run()
 
             Fighter* attacker = nullptr;
 
-            current->chooseAttackerIfNeeded(battle,chosenCard,attacker);
+            current->chooseAttackerIfNeeded(battle,chosenCard, attacker, enemy->getHero());
 
 
             if(chosenCard.getcardType() == SCHEME)
             {
-                current->playScheme(*enemy,battle, selected.index);
+                current->playScheme(*enemy,battle,attacker ,selected.index);
 
                 StatusPanel::show(battle);
             }
-            else if(chosenCard.getcardType() == ATTACK ||
-                    chosenCard.getcardType() == VERSATILE)
+            else if(chosenCard.getcardType() == ATTACK ||chosenCard.getcardType() == VERSATILE)
             {
                 current->attack(*enemy,battle, attacker, cards[input].index);
 
                 StatusPanel::show(battle);
             }
+             if(battle.isgameover())
+             break;
+
 
            action++;
            if(battle.hasExtraAction())
@@ -129,6 +123,9 @@ void GameController::run()
             cout << "Error: " << e.what() << endl;
         }
     }
+
+        if(battle.isgameover())
+        return ;
 
 
         int end;

@@ -14,7 +14,7 @@ void BloodThirstEffect :: apply(Fighter* attacker, Fighter* defender, Battle* ba
 
     int counter = 0;
 
-    for(const Fighter& sis : battle->getsisters())
+    for(const Sisters& sis : battle->getsisters())
     {
         if(!sis.isalive())
             continue;
@@ -64,7 +64,7 @@ void AmbushEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle,
         attacker->heal(2);
         cout<<"Feast: Dracula healed +2 HP. \n";
 
-        vector<Fighter>& sisters = battle->getsisters();
+        vector<Sisters>& sisters = battle->getsisters();
 
         vector<int> deadindexes;
 
