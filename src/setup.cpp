@@ -8,6 +8,7 @@ using namespace std;
     {
         sherlock.setPosition(map.getZone(1));
         dracula.setPosition(map.getZone(2));
+        invisibleman.setPosition(map.getZone(4));
         cout<<dracula.getPosition()->getId()<<endl;
          
     }
@@ -88,3 +89,46 @@ using namespace std;
 
             cout << "Dracula draws a card\n";
         }
+
+void Battle::chooseFogPosition(Player& player)
+{
+    Fighter* hero = player.getHero();
+
+    Zone* heroZone = hero->getPosition();
+
+     vector<Zone*> zones = getMap().getplacementZone(player.getHero()->getPosition());
+
+     vector<int>validids;
+
+    cout << "\nChoose positions for Fog Tokens\n";
+
+    for(int i=0;i<3;i++)
+    {
+        cout << "\nAvailable Zones:\n";
+
+
+        for(Zone* z : zones)
+        {
+            bool used=false;
+
+            for(FogToken& fog : fogtoken)
+            {
+                if(fog.getPosition()==z)
+                {
+                    used=true;
+                    break;
+                }
+            }
+
+            if(!used)
+            {
+                cout<<z->getId()<<" ";
+                validids.push_back(z->getId());
+            }
+        }
+
+        cout<<endl;
+        int choice =readchoice("Choose zone for Fog "+to_string(i+1)+": ",validids);
+        fogtoken[i].setPosition(map.getZone(choice));
+    }
+}

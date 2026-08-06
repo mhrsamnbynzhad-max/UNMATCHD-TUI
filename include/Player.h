@@ -6,6 +6,7 @@
 #include "fighter.h"
 
 class Battle;
+class Fighter;
 
 class Player
 {
@@ -16,8 +17,7 @@ private:
 public:
     Player(const std::string& n);
 
-    void chooseHero(Fighter* sherlock, Fighter* dracula);
-
+    void chooseHero(const vector<Fighter*>& heroes);
     Fighter* getHero() const;
     void setHero(Fighter* );
     std::string getName() const;

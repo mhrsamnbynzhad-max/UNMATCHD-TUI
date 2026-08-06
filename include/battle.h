@@ -7,6 +7,8 @@
 #include "watson.h"
 #include "sisters.h"
 #include "sherlock.h"
+#include "invisible.h"
+#include "fogtoken.h"
 #include "map.h"
 #include <vector>
 
@@ -35,8 +37,10 @@ private:
     Sherlock sherlock;
     Watson watson;
     Dracula dracula;
+    InvisibleMan invisibleman;
 
     std::vector<Sisters> sisters;
+    std::vector<FogToken> fogtoken;
 
     Map map;
     Player player1;
@@ -45,6 +49,7 @@ private:
     bool canreach(Zone*  , Zone*  , int  , Fighter&);
 
     bool sherlockAbilityActive = false;
+    bool invisibleAbilityActive = false;
 
     Card lastAttackCard;
     
@@ -82,9 +87,12 @@ public:
     Fighter* getfighterat(Zone* );
     void showplacementzone(Fighter& );
     std::vector<Sisters>& getsisters();
+    std::vector<FogToken>& getfogtoken(){return fogtoken;};
     Map& getMap();
     ZoneCheckResult canEnterzone(Fighter* , Fighter* ,int );
     void chooseSidekickPosition(Player& );
+    void chooseHeroes(Player& , Player& );
+
 
     const Card& gelastattackcard()const{return lastAttackCard; }
     Fighter& getDracual(){return dracula;}
@@ -106,10 +114,7 @@ public:
     bool getIgnoreDefend() const { return ignoreDefendValue; }
     vector<Zone*> getReachableZone( Fighter& , int);
 
-     void startTurn(Player& player);
-
-    void useDraculaAbility();
-    void useSherlockAbility();
+    void startTurn(Player& player);
     void setSherlockability(bool value){ sherlockAbilityActive = value ;}
 
     void giveExtraAction(){ extraAction = true;}
@@ -120,6 +125,11 @@ public:
 
     bool getplayerfirst () const {return playerfirst ;}
     bool isgameover()const {return gameover; }
+    void chooseFogPosition(Player& );
+    void setinvisibleability(bool value){ invisibleAbilityActive = value;}
+    bool getinvisibleactive()const{ return invisibleAbilityActive ;}
+    bool moveFogToken(int , int );
+
     
 };
 

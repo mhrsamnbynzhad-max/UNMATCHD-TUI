@@ -2,6 +2,7 @@
 #define dracula_h
 
 #include "fighter.h"
+#include "Player.h"
 
 class Dracula : public Fighter
 {
@@ -12,7 +13,8 @@ public:
     void specialabilityattack(Fighter* target);
 
     void specialAbillity(Battle* battle)override;
-
+    
+    void setupUnits(Battle* , Player& ) override;
 };
 
 #endif

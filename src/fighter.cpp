@@ -2,6 +2,7 @@
 #include "card.h"
 #include "handling.h"
 #include "battle.h"
+#include "player.h"
 
 #include<iostream>
 #include<algorithm>
@@ -184,26 +185,12 @@ void Fighter :: heal (int amount )
     void Fighter :: addtohand(const std:: vector<Card>& cards)
     {
            for(const auto& c : cards)
-           hand.push_back(c);
-
-           while (hand.size()>7)
-           {
-              hand.erase(hand.begin());
-           }
-           
+           hand.push_back(c);     
     }
 
     int  Fighter :: getdecksize()const
     {
         return deck.size();
-    }
-    
-    Card Fighter :: removerandomcard()
-    {
-              int index = rand()% hand.size();
-              Card temp = hand[index];
-              hand.erase(hand.begin()+index);
-              return temp;
     }
 
     void  Fighter :: setdeck(const vector<Card>& d)
@@ -365,3 +352,10 @@ Card Fighter::drawBoostMovement()
 {
 
 }
+
+void Fighter::setupUnits(Battle* battle, Player& player)
+{
+
+}
+
+

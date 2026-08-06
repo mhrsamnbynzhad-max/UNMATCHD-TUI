@@ -20,35 +20,18 @@ Fighter* Player::getHero() const
     return hero;
 }
 
-void Player::chooseHero(Fighter* sherlock, Fighter* dracula)
+void Player::chooseHero(const vector<Fighter*>& heroes)
 {
-    int choice;
+    cout << "\nChoose Hero\n";
 
-    while (true)
+    for(int i = 0; i < heroes.size(); i++)
     {
-
-        cout << "1) Sherlock\n";
-        cout << "2) Dracula\n";
-
-        choice = readInt( "\n" + name +" Choose your FIGHTER:" , 1 ,2 );
-
-        if (choice == 1)
-        {
-            hero = sherlock;
-            break;
-        }
-        else if (choice == 2)
-        {
-            hero = dracula;
-            break;
-        }
-        else
-        {
-            cout << "Invalid selection, must be 1 or 2.\n";
-        }
+        cout << i + 1 << ") "<< heroes[i]->getName()<< endl;
     }
 
-    cout << name << " selected " << hero->getName() << "!\n";
+    int choice = readInt("Choice: ",1,heroes.size());
+
+    hero = heroes[choice-1];
 }
 void Player::drawCard()
 {
@@ -364,24 +347,10 @@ void Player::attack(Player& enemy, Battle& battle,Fighter* attacker , int cardin
 
     bool Player::chooseAttackerIfNeeded(Battle& battle,Card& card,Fighter*& attacker , Fighter* opponent)
 {
-    if(card.getcardType()==SCHEME)
-    {
-        if(card.getowner() == "Any")
-        {
-          attacker = chooseAttacker(battle , card ,opponent);
-             
-        }
-        else
-        {
-
-            attacker = getHero();
-        }
-        return true;
-    }
-
+   
     attacker = chooseAttacker(battle , card ,opponent);
 
-    return true;
+    return attacker != nullptr;
 }
 
 

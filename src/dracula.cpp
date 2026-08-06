@@ -78,3 +78,10 @@ void Dracula:: specialAbillity(Battle* battle)
         targets[target - 1]->takeDamage(1);
     }
 }
+
+void Dracula::setupUnits(Battle* battle, Player& player)
+{
+    battle->chooseSidekickPosition(player);
+}
+
+

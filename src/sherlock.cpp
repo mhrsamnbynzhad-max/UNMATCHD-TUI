@@ -1,5 +1,6 @@
 #include "sherlock.h"
 #include "handling.h"
+#include "player.h"
 #include "battle.h"
 #include<iostream>
 
@@ -20,4 +21,9 @@ void Sherlock:: specialAbillity(Battle* battle)
 
         cout << "Sherlock ability activated.\n";
     }
+}
+
+void Sherlock::setupUnits(Battle* battle, Player& player)
+{
+    battle->chooseSidekickPosition(player);
 }

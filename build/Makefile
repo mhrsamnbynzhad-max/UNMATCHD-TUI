@@ -375,6 +375,30 @@ src/fighter.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/fighter.cpp.s
 .PHONY : src/fighter.cpp.s
 
+src/fogtoken.obj: src/fogtoken.cpp.obj
+.PHONY : src/fogtoken.obj
+
+# target to build an object file
+src/fogtoken.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/fogtoken.cpp.obj
+.PHONY : src/fogtoken.cpp.obj
+
+src/fogtoken.i: src/fogtoken.cpp.i
+.PHONY : src/fogtoken.i
+
+# target to preprocess a source file
+src/fogtoken.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/fogtoken.cpp.i
+.PHONY : src/fogtoken.cpp.i
+
+src/fogtoken.s: src/fogtoken.cpp.s
+.PHONY : src/fogtoken.s
+
+# target to generate assembly for a file
+src/fogtoken.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/fogtoken.cpp.s
+.PHONY : src/fogtoken.cpp.s
+
 src/handling.obj: src/handling.cpp.obj
 .PHONY : src/handling.obj
 
@@ -703,6 +727,9 @@ help:
 	@echo ... src/fighter.obj
 	@echo ... src/fighter.i
 	@echo ... src/fighter.s
+	@echo ... src/fogtoken.obj
+	@echo ... src/fogtoken.i
+	@echo ... src/fogtoken.s
 	@echo ... src/handling.obj
 	@echo ... src/handling.i
 	@echo ... src/handling.s

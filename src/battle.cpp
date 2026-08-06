@@ -5,17 +5,25 @@
 #include <algorithm>
 #include <queue>
 #include <set>
+#include <cstdlib>
+#include <ctime>
 #include "handling.h"
 #include "fighter.h"
 
 
 using namespace std;
-    Battle::Battle():  sherlock(),  watson(),  dracula() ,sisters(), player1("Player 1") , player2("Player 2")
+    Battle::Battle():  sherlock(),  watson(),  dracula() ,sisters(),invisibleman(),fogtoken() ,player1("Player 1") , player2("Player 2")
     {
+        srand(time(0));
         for(int i = 0 ; i <3 ; i ++)
         {
           sisters.emplace_back();
         }
+        for(int i = 0 ; i <3 ; i ++)
+        {
+          fogtoken.push_back(FogToken());
+        }
+
         int age1, age2;
         age1 = readInt(player1.getName()+" age: " , 1 , 100);
         age2 = readInt(player2.getName()+" age: ", 1 , 100);
@@ -23,63 +31,39 @@ using namespace std;
 
         setuppositions();
 
+        vector<Fighter*> heroes ={ &sherlock, &dracula, &invisibleman};
         if(age1 < age2)
         {
-            cout << player1.getName()
-                << " is younger and chooses first.\n\n";
+            cout << player1.getName()<< " is younger and chooses first.\n\n";
                 playerfirst = true;
-            player1.chooseHero(&sherlock, &dracula);
-            chooseSidekickPosition(player1);
-
-            if(player1.getHero() == &sherlock)
-                player2.setHero(&dracula);
-            else
-                player2.setHero(&sherlock);
-
-
-            cout<<"\n"<<player2.getName()<<" automatically gets " <<player2.getHero()->getName()<<"\n";
-
-                chooseSidekickPosition(player2);
+                chooseHeroes(player1, player2); 
         }
         else if(age2 < age1)
         {
-            cout << player2.getName()
-                << " is younger and chooses first.\n";
-                playerfirst = false;
-
-            player2.chooseHero(&sherlock, &dracula);
-                chooseSidekickPosition(player2);
-
-            if(player2.getHero() == &sherlock)
-                player1.setHero(&dracula);
-            else
-                player1.setHero(&sherlock);
-
-
-               cout<<"\n"<<player1.getName()<<" automatically gets " <<player1.getHero()->getName()<<"\n";
-
-
-               chooseSidekickPosition(player1);
+            cout << player2.getName() << " is younger and chooses first.\n";
+            playerfirst = false;
+            chooseHeroes(player2, player1);
 
         }
         else
         {
+            playerfirst = rand()%2;
+            if(playerfirst)
+            {
             cout << "Same age. Player 1 chooses first.\n";
-            playerfirst = true;
-            player1.chooseHero(&sherlock, &dracula);
-            chooseSidekickPosition(player1);
 
-            if(player1.getHero() == &sherlock)
-                player2.setHero(&dracula);
+                chooseHeroes(player1, player2);
+            }
             else
-                player2.setHero(&sherlock);
+            {
+            cout << "Same age. Player 2 chooses first.\n";
+
+                chooseHeroes(player2, player1);
+                
+            }
 
 
-            cout<<"\n"<<player2.getName()<<" automatically gets " <<player2.getHero()->getName()<<"\n";
-
-
-                chooseSidekickPosition(player2);
-
+    
         }
 
         dracula.setdeck(CardFactory::createDraculaDeck());
@@ -90,8 +74,24 @@ using namespace std;
         player2.drawCard();
     }
 
-      void Battle::startTurn(Player& player)
-        {
+    void Battle::chooseHeroes(Player& first, Player& second)
+    {
+         vector<Fighter*> heroes ={  &sherlock, &dracula, &invisibleman};
+
+    first.chooseHero(heroes);
+
+    heroes.erase(remove(heroes.begin(), heroes.end(), first.getHero()),  heroes.end());
+
+    first.getHero()->setupUnits(this, first);
+
+    second.chooseHero(heroes);
+
+    second.getHero()->setupUnits(this, second);
+    }
+
+
+    void Battle::startTurn(Player& player)
+    {
            sherlockAbilityActive = false;
  
         Fighter* hero = player.getHero();

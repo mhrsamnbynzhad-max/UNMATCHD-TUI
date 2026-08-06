@@ -109,13 +109,15 @@ using namespace std;
             
          int attackValue = attackcard.getValue();
          int defederValue = isdefended ? defendcard.getValue() : 0;
-         lastFinaldefend = defederValue;
-         int damage = attackValue - defederValue;
-         
+         if(invisibleAbilityActive && defendcard.getcardType() == DEFENSE || defendcard.getcardType() == VERSATILE)
+         {
+             lastFinaldefend = defederValue++;
+         }
+
          cout<<"Attacker played :"<<attackcard.getName()<<endl;
          cout<<"Defender played :"<<defendcard.getName()<<endl;
          
-         damage =  attackValue - defendcard.getValue();
+        int damage =  attackValue - lastFinaldefend;
 
          if(damage > 0 )
          {

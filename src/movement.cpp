@@ -33,7 +33,39 @@ using namespace std;
                 return true;
             }
         }
+         // Fog token movement (Invisible Man)
+        if(mover.getteam() == INVISIBLE)
+        {
+            bool onFog = false;
 
+            for(FogToken& fog : fogtoken)
+            {
+                if(fog.getPosition() == current)
+                {
+                    onFog = true;
+                    break;
+                }
+            }
+
+            if(onFog)
+            {
+                for(FogToken& fog : fogtoken)
+                {
+                    Zone* next = fog.getPosition();
+
+                    if(next == current)
+                        continue;
+
+                    Fighter* occupant = getfighterat(next);
+
+                    if(occupant != nullptr && occupant->getteam() != mover.getteam())
+                        continue;
+
+                    if(canreach(next, target, movesleft - 1, mover))
+                        return true;
+                }
+            }
+        }
         if(map.issecretzone(current->getId()))
         {
             const vector<int>& secret = map.getsecretZones();
@@ -130,4 +162,31 @@ using namespace std;
         }
         cout<<endl;
     }
-  
+
+    bool Battle::moveFogToken(int fogIndex, int destinationId)
+{
+    if(fogIndex < 0 || fogIndex >= fogtoken.size())
+        return false;
+
+
+    Zone* destination = map.getZone(destinationId);
+
+    if(destination == nullptr)
+        return false;
+
+
+    for(int i = 0; i < fogtoken.size(); i++)
+    {
+        if(i != fogIndex && fogtoken[i].getPosition() == destination)
+        {
+            cout << "There is already a Fog Token here\n";
+            return false;
+        }
+    }
+
+
+    fogtoken[fogIndex].setPosition(destination);
+
+    return true;
+}
+

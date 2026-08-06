@@ -9,8 +9,10 @@ CMakeFiles/game.dir/src/Gamecontroller.cpp.obj: C:/Users/Asus/Desktop/helloworld
   C:/Users/Asus/Desktop/helloworld/include/card.h \
   C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
   C:/Users/Asus/Desktop/helloworld/include/handling.h \
   C:/Users/Asus/Desktop/helloworld/include/handpanel.h \
+  C:/Users/Asus/Desktop/helloworld/include/invisible.h \
   C:/Users/Asus/Desktop/helloworld/include/map.h \
   C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
@@ -189,7 +191,9 @@ CMakeFiles/game.dir/src/Player.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/Pla
   C:/Users/Asus/Desktop/helloworld/include/card.h \
   C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
   C:/Users/Asus/Desktop/helloworld/include/handling.h \
+  C:/Users/Asus/Desktop/helloworld/include/invisible.h \
   C:/Users/Asus/Desktop/helloworld/include/map.h \
   C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
@@ -363,7 +367,10 @@ CMakeFiles/game.dir/src/StatusPanel.cpp.obj: C:/Users/Asus/Desktop/helloworld/sr
   C:/Users/Asus/Desktop/helloworld/include/card.h \
   C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
+  C:/Users/Asus/Desktop/helloworld/include/invisible.h \
   C:/Users/Asus/Desktop/helloworld/include/map.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
   C:/Users/Asus/Desktop/helloworld/include/sisters.h \
   C:/Users/Asus/Desktop/helloworld/include/watson.h \
@@ -536,8 +543,11 @@ CMakeFiles/game.dir/src/battle.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/bat
   C:/Users/Asus/Desktop/helloworld/include/cardfactory.h \
   C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
   C:/Users/Asus/Desktop/helloworld/include/handling.h \
+  C:/Users/Asus/Desktop/helloworld/include/invisible.h \
   C:/Users/Asus/Desktop/helloworld/include/map.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
   C:/Users/Asus/Desktop/helloworld/include/sisters.h \
   C:/Users/Asus/Desktop/helloworld/include/watson.h \
@@ -627,6 +637,7 @@ CMakeFiles/game.dir/src/battle.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/bat
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/cstddef \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/cstdio \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/cstdlib \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ctime \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/cwchar \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/cwctype \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/debug/assertions.h \
@@ -723,6 +734,7 @@ CMakeFiles/game.dir/src/card.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/card.
   C:/Users/Asus/Desktop/helloworld/include/cardeffect.h \
   C:/Users/Asus/Desktop/helloworld/include/cardfactory.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/zone.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/backward/binders.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bit \
@@ -735,8 +747,10 @@ CMakeFiles/game.dir/src/card.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/card.
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/concept_check.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cxxabi_forced.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cxxabi_init_exception.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception_defines.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception_ptr.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/functexcept.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/functional_hash.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/hash_bytes.h \
@@ -745,6 +759,7 @@ CMakeFiles/game.dir/src/card.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/card.
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/memory_resource.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/memoryfwd.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/move.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/nested_exception.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/new_allocator.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/ostream_insert.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/postypes.h \
@@ -781,6 +796,7 @@ CMakeFiles/game.dir/src/card.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/card.
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/cwchar \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/exception \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/alloc_traits.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/numeric_traits.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/string_conversions.h \
@@ -789,11 +805,13 @@ CMakeFiles/game.dir/src/card.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/card.
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/iosfwd \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/new \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/stdlib.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/string \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/string_view \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/tuple \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/type_traits \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/typeinfo \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/vector \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -837,8 +855,11 @@ CMakeFiles/game.dir/src/cardeffect.cpp.obj: C:/Users/Asus/Desktop/helloworld/src
   C:/Users/Asus/Desktop/helloworld/include/cardeffect.h \
   C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
   C:/Users/Asus/Desktop/helloworld/include/handling.h \
+  C:/Users/Asus/Desktop/helloworld/include/invisible.h \
   C:/Users/Asus/Desktop/helloworld/include/map.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
   C:/Users/Asus/Desktop/helloworld/include/sisters.h \
   C:/Users/Asus/Desktop/helloworld/include/watson.h \
@@ -1008,6 +1029,7 @@ CMakeFiles/game.dir/src/cardfactory.cpp.obj: C:/Users/Asus/Desktop/helloworld/sr
   C:/Users/Asus/Desktop/helloworld/include/cardeffect.h \
   C:/Users/Asus/Desktop/helloworld/include/cardfactory.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/zone.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/backward/binders.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bit \
@@ -1169,8 +1191,11 @@ CMakeFiles/game.dir/src/combat.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/com
   C:/Users/Asus/Desktop/helloworld/include/cardeffect.h \
   C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
   C:/Users/Asus/Desktop/helloworld/include/handling.h \
+  C:/Users/Asus/Desktop/helloworld/include/invisible.h \
   C:/Users/Asus/Desktop/helloworld/include/map.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
   C:/Users/Asus/Desktop/helloworld/include/sisters.h \
   C:/Users/Asus/Desktop/helloworld/include/watson.h \
@@ -1341,8 +1366,11 @@ CMakeFiles/game.dir/src/dracula.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/dr
   C:/Users/Asus/Desktop/helloworld/include/card.h \
   C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
   C:/Users/Asus/Desktop/helloworld/include/handling.h \
+  C:/Users/Asus/Desktop/helloworld/include/invisible.h \
   C:/Users/Asus/Desktop/helloworld/include/map.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
   C:/Users/Asus/Desktop/helloworld/include/sisters.h \
   C:/Users/Asus/Desktop/helloworld/include/watson.h \
@@ -1513,8 +1541,11 @@ CMakeFiles/game.dir/src/fighter.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/fi
   C:/Users/Asus/Desktop/helloworld/include/card.h \
   C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
   C:/Users/Asus/Desktop/helloworld/include/handling.h \
+  C:/Users/Asus/Desktop/helloworld/include/invisible.h \
   C:/Users/Asus/Desktop/helloworld/include/map.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
   C:/Users/Asus/Desktop/helloworld/include/sisters.h \
   C:/Users/Asus/Desktop/helloworld/include/watson.h \
@@ -1719,6 +1750,72 @@ CMakeFiles/game.dir/src/fighter.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/fi
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/wchar.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/wctype.h
 
+CMakeFiles/game.dir/src/fogtoken.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/fogtoken.cpp \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
+  C:/Users/Asus/Desktop/helloworld/include/zone.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/backward/binders.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bit \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/alloc_traits.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/allocator.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/concept_check.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cpp_type_traits.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception_defines.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/functexcept.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/functional_hash.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/hash_bytes.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/invoke.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/memory_resource.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/memoryfwd.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/move.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/new_allocator.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/predefined_ops.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/ptr_traits.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/range_access.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/refwrap.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/requires_hosted.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_algobase.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_bvector.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_construct.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_function.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_iterator.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_iterator_base_funcs.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_pair.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_uninitialized.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_vector.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/uses_allocator.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/uses_allocator_args.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/utility.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/vector.tcc \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/version.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/concepts \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/cstddef \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/debug/assertions.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/alloc_traits.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/numeric_traits.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/type_traits.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/initializer_list \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/new \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/tuple \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/type_traits \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/vector \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/cpu_defines.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stddef.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/_mingw.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/_mingw_mac.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/_mingw_secapi.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/corecrt.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/crtdefs.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/stddef.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/vadefs.h
+
 CMakeFiles/game.dir/src/handling.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/handling.cpp \
   C:/Users/Asus/Desktop/helloworld/include/handling.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/backward/binders.h \
@@ -1879,6 +1976,7 @@ CMakeFiles/game.dir/src/handpanel.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/
   C:/Users/Asus/Desktop/helloworld/include/card.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
   C:/Users/Asus/Desktop/helloworld/include/handpanel.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/zone.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/backward/binders.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bit \
@@ -2034,9 +2132,18 @@ CMakeFiles/game.dir/src/handpanel.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/wctype.h
 
 CMakeFiles/game.dir/src/invisible.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/invisible.cpp \
+  C:/Users/Asus/Desktop/helloworld/include/Player.h \
+  C:/Users/Asus/Desktop/helloworld/include/battle.h \
   C:/Users/Asus/Desktop/helloworld/include/card.h \
+  C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
   C:/Users/Asus/Desktop/helloworld/include/invisible.h \
+  C:/Users/Asus/Desktop/helloworld/include/map.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
+  C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
+  C:/Users/Asus/Desktop/helloworld/include/sisters.h \
+  C:/Users/Asus/Desktop/helloworld/include/watson.h \
   C:/Users/Asus/Desktop/helloworld/include/zone.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/backward/binders.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bit \
@@ -2049,8 +2156,11 @@ CMakeFiles/game.dir/src/invisible.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/concept_check.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cxxabi_forced.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/erase_if.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception_defines.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception_ptr.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/functexcept.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/functional_hash.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/hash_bytes.h \
@@ -2059,7 +2169,9 @@ CMakeFiles/game.dir/src/invisible.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/memory_resource.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/memoryfwd.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/move.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/nested_exception.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/new_allocator.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/node_handle.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/ostream_insert.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/postypes.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/predefined_ops.h \
@@ -2075,7 +2187,10 @@ CMakeFiles/game.dir/src/invisible.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_iterator.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_map.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_multimap.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_pair.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_tree.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_uninitialized.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_vector.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/string_view.tcc \
@@ -2095,19 +2210,24 @@ CMakeFiles/game.dir/src/invisible.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/cwchar \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/exception \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/aligned_buffer.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/alloc_traits.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/numeric_traits.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/string_conversions.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/initializer_list \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/iosfwd \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/map \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/new \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/stdlib.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/string \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/string_view \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/tuple \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/type_traits \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/typeinfo \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/vector \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -2152,6 +2272,8 @@ CMakeFiles/game.dir/src/main.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/main.
   C:/Users/Asus/Desktop/helloworld/include/card.h \
   C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
+  C:/Users/Asus/Desktop/helloworld/include/invisible.h \
   C:/Users/Asus/Desktop/helloworld/include/map.h \
   C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
@@ -2459,7 +2581,10 @@ CMakeFiles/game.dir/src/movement.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/m
   C:/Users/Asus/Desktop/helloworld/include/card.h \
   C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
+  C:/Users/Asus/Desktop/helloworld/include/invisible.h \
   C:/Users/Asus/Desktop/helloworld/include/map.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
   C:/Users/Asus/Desktop/helloworld/include/sisters.h \
   C:/Users/Asus/Desktop/helloworld/include/watson.h \
@@ -2630,8 +2755,11 @@ CMakeFiles/game.dir/src/setup.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/setu
   C:/Users/Asus/Desktop/helloworld/include/card.h \
   C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
   C:/Users/Asus/Desktop/helloworld/include/handling.h \
+  C:/Users/Asus/Desktop/helloworld/include/invisible.h \
   C:/Users/Asus/Desktop/helloworld/include/map.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
   C:/Users/Asus/Desktop/helloworld/include/sisters.h \
   C:/Users/Asus/Desktop/helloworld/include/watson.h \
@@ -2802,8 +2930,11 @@ CMakeFiles/game.dir/src/sherlock.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/s
   C:/Users/Asus/Desktop/helloworld/include/card.h \
   C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
   C:/Users/Asus/Desktop/helloworld/include/handling.h \
+  C:/Users/Asus/Desktop/helloworld/include/invisible.h \
   C:/Users/Asus/Desktop/helloworld/include/map.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
   C:/Users/Asus/Desktop/helloworld/include/sisters.h \
   C:/Users/Asus/Desktop/helloworld/include/watson.h \
@@ -2971,6 +3102,7 @@ CMakeFiles/game.dir/src/sherlock.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/s
 CMakeFiles/game.dir/src/sisters.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/sisters.cpp \
   C:/Users/Asus/Desktop/helloworld/include/card.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sisters.h \
   C:/Users/Asus/Desktop/helloworld/include/zone.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/backward/binders.h \
@@ -2984,8 +3116,10 @@ CMakeFiles/game.dir/src/sisters.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/si
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/concept_check.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cxxabi_forced.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cxxabi_init_exception.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception_defines.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception_ptr.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/functexcept.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/functional_hash.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/hash_bytes.h \
@@ -2994,6 +3128,7 @@ CMakeFiles/game.dir/src/sisters.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/si
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/memory_resource.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/memoryfwd.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/move.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/nested_exception.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/new_allocator.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/ostream_insert.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/postypes.h \
@@ -3030,6 +3165,7 @@ CMakeFiles/game.dir/src/sisters.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/si
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/cwchar \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/exception \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/alloc_traits.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/numeric_traits.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/string_conversions.h \
@@ -3038,11 +3174,13 @@ CMakeFiles/game.dir/src/sisters.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/si
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/iosfwd \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/new \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/stdlib.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/string \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/string_view \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/tuple \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/type_traits \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/typeinfo \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/vector \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -3085,7 +3223,10 @@ CMakeFiles/game.dir/src/utility.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/ut
   C:/Users/Asus/Desktop/helloworld/include/card.h \
   C:/Users/Asus/Desktop/helloworld/include/dracula.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
+  C:/Users/Asus/Desktop/helloworld/include/invisible.h \
   C:/Users/Asus/Desktop/helloworld/include/map.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
   C:/Users/Asus/Desktop/helloworld/include/sisters.h \
   C:/Users/Asus/Desktop/helloworld/include/watson.h \
@@ -3253,6 +3394,7 @@ CMakeFiles/game.dir/src/utility.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/ut
 CMakeFiles/game.dir/src/watson.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/watson.cpp \
   C:/Users/Asus/Desktop/helloworld/include/card.h \
   C:/Users/Asus/Desktop/helloworld/include/fighter.h \
+  C:/Users/Asus/Desktop/helloworld/include/player.h \
   C:/Users/Asus/Desktop/helloworld/include/watson.h \
   C:/Users/Asus/Desktop/helloworld/include/zone.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/backward/binders.h \
@@ -3266,8 +3408,10 @@ CMakeFiles/game.dir/src/watson.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/wat
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/concept_check.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cxxabi_forced.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cxxabi_init_exception.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception_defines.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception_ptr.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/functexcept.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/functional_hash.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/hash_bytes.h \
@@ -3276,6 +3420,7 @@ CMakeFiles/game.dir/src/watson.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/wat
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/memory_resource.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/memoryfwd.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/move.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/nested_exception.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/new_allocator.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/ostream_insert.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/postypes.h \
@@ -3312,6 +3457,7 @@ CMakeFiles/game.dir/src/watson.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/wat
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/cwchar \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/exception \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/alloc_traits.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/numeric_traits.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/string_conversions.h \
@@ -3320,11 +3466,13 @@ CMakeFiles/game.dir/src/watson.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/wat
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/iosfwd \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/new \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/stdlib.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/string \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/string_view \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/tuple \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/type_traits \
+  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/typeinfo \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/vector \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
   C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -3429,6 +3577,8 @@ CMakeFiles/game.dir/src/zone.cpp.obj: C:/Users/Asus/Desktop/helloworld/src/zone.
 
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/localefwd.h:
 
+C:/Users/Asus/Desktop/helloworld/include/fogtoken.h:
+
 C:/Users/Asus/Desktop/helloworld/include/Player.h:
 
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/glue_numeric_defs.h:
@@ -3440,10 +3590,6 @@ C:/Users/Asus/Desktop/helloworld/include/dracula.h:
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/backward/binders.h:
 
 C:/Users/Asus/Desktop/helloworld/include/GameController.h:
-
-C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/signal.h:
-
-C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_algobase.h:
 
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/corecrt_wstdlib.h:
 
@@ -3461,15 +3607,11 @@ C:/Users/Asus/Desktop/helloworld/include/card.h:
 
 C:/Users/Asus/Desktop/helloworld/include/fighter.h:
 
-C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stddef.h:
-
-C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/stdexcept:
-
-C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_bvector.h:
-
 C:/Users/Asus/Desktop/helloworld/include/handling.h:
 
 C:/Users/Asus/Desktop/helloworld/include/handpanel.h:
+
+C:/Users/Asus/Desktop/helloworld/include/invisible.h:
 
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/erase_if.h:
 
@@ -3598,6 +3740,16 @@ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/range_access.h:
 
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/std_abs.h:
+
+C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/signal.h:
+
+C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_algobase.h:
+
+C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stddef.h:
+
+C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/stdexcept:
+
+C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_bvector.h:
 
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_construct.h:
 
@@ -3853,6 +4005,8 @@ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.
 
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/uniform_int_dist.h:
 
+C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ctime:
+
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/execution_defs.h:
 
 C:/Users/Asus/Desktop/helloworld/src/card.cpp:
@@ -3876,8 +4030,6 @@ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/cmath:
 
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/cstdint:
-
-C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ctime:
 
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/limits:
 
@@ -3911,7 +4063,7 @@ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/mat
 
 C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/x86_64-w64-mingw32/include/stdint.h:
 
-C:/Users/Asus/Desktop/helloworld/include/invisible.h:
+C:/Users/Asus/Desktop/helloworld/src/fogtoken.cpp:
 
 C:/Users/Asus/Desktop/helloworld/src/main.cpp:
 

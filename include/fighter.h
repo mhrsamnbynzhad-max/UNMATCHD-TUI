@@ -2,10 +2,12 @@
 #define FIGHTER_H
 #include "zone.h"
 #include "card.h"
+#include "player.h"
 #include <string>
 #include <vector>
 
 class Battle;
+class Player;
 
 enum Team
 {
@@ -34,6 +36,8 @@ class Fighter
     Fighter(std::string , int , int ,bool , int  , Team);
 
     vector<AttackCardInfo> getPlayableCardIndexes(Battle* , Fighter*  , Fighter*);
+
+    virtual void setupUnits(Battle* , Player& );
    
     std::string getName() const;
 
@@ -63,7 +67,6 @@ class Fighter
     vector<Card> getrandomcard(int);
     void addtohand(const std:: vector<Card>&);
     int getdecksize()const;
-    Card removerandomcard();
     void setdeck(const std::vector<Card>& );
     void sethealth(int);
     int getMaxealth() const;

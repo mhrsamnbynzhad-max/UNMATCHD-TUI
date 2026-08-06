@@ -18,6 +18,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/Asus/Desktop/helloworld/src/combat.cpp" "CMakeFiles/game.dir/src/combat.cpp.obj" "gcc" "CMakeFiles/game.dir/src/combat.cpp.obj.d"
   "C:/Users/Asus/Desktop/helloworld/src/dracula.cpp" "CMakeFiles/game.dir/src/dracula.cpp.obj" "gcc" "CMakeFiles/game.dir/src/dracula.cpp.obj.d"
   "C:/Users/Asus/Desktop/helloworld/src/fighter.cpp" "CMakeFiles/game.dir/src/fighter.cpp.obj" "gcc" "CMakeFiles/game.dir/src/fighter.cpp.obj.d"
+  "C:/Users/Asus/Desktop/helloworld/src/fogtoken.cpp" "CMakeFiles/game.dir/src/fogtoken.cpp.obj" "gcc" "CMakeFiles/game.dir/src/fogtoken.cpp.obj.d"
   "C:/Users/Asus/Desktop/helloworld/src/handling.cpp" "CMakeFiles/game.dir/src/handling.cpp.obj" "gcc" "CMakeFiles/game.dir/src/handling.cpp.obj.d"
   "C:/Users/Asus/Desktop/helloworld/src/handpanel.cpp" "CMakeFiles/game.dir/src/handpanel.cpp.obj" "gcc" "CMakeFiles/game.dir/src/handpanel.cpp.obj.d"
   "C:/Users/Asus/Desktop/helloworld/src/invisible.cpp" "CMakeFiles/game.dir/src/invisible.cpp.obj" "gcc" "CMakeFiles/game.dir/src/invisible.cpp.obj.d"

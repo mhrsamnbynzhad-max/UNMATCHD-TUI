@@ -131,6 +131,13 @@ void GameController::run()
         int end;
         end = readInt("Confirm end turn (1): " , 1 ,1);
 
+        vector<Card>& hand = current->getHero()->gethand();
+
+        while(hand.size()>7)
+        {
+            hand.pop_back();
+        }
+
         turnQueue.push(current);
     }
 }
