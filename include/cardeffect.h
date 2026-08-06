@@ -199,28 +199,37 @@ public:
 class DeceptionEffect : public CardEffect
 {
 public:
-    void apply(Fighter* attacker,
-               Fighter* defender,
-               Battle* battle,
-               Card& card) override;
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
 };
 
 
 class SidearmEffect : public CardEffect
 {
 public:
-    void apply(Fighter* attacker,
-               Fighter* defender,
-               Battle* battle,
-               Card& card) override;
+    void apply(Fighter* attacker, Fighter* defender,  Battle* battle,   Card& card) override;
 };
 class MistFormEffect : public CardEffect
 {
 public:
 
-    void apply(Fighter* attacker,
-               Fighter* defender,
-               Battle* battle,
-               Card& card) override;
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+};
+
+class CodedNotesEffect : public CardEffect
+{
+public:
+    void apply(Fighter* attacker,Fighter* defender,  Battle* battle,  Card& card) override;
+};
+
+class ConfoundEffect : public CardEffect
+{
+public:
+    void apply(Fighter* attacker,  Fighter* defender,Battle* battle, Card& card) override;
+};
+
+class CovertPreparationEffect : public CardEffect
+{
+public:
+    void apply(Fighter* attacker,  Fighter* defender,Battle* battle, Card& card) override;
 };
 #endif

@@ -1,4 +1,3 @@
-#include  <iostream>
 #include "card.h"
 #include "cardeffect.h"
 #include "fighter.h"
@@ -6,6 +5,8 @@
 #include "handling.h"
 #include "zone.h"
 
+#include  <iostream>
+#include  <algorithm>
 using namespace std;
 
 void BloodThirstEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
@@ -1022,4 +1023,373 @@ void SidearmEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, 
 
     defender->takeDamage(card.getValue() );
     cout<<"Sidearm deals "<<card.getValue()<<" damage.\n";
+}
+
+void CodedNotesEffect::apply(Fighter* attacker,  Fighter* defender,  Battle* battle,  Card& card)
+{
+    if(attacker == nullptr)
+        return;
+
+    cout << "\n===== CODED NOTES =====\n";
+
+    // ---------- Draw 3 ----------
+    for(int i = 0; i < 3; i++)
+    {
+        Card c = attacker->drawTopCard();
+
+        if(c.getName() == "")
+            break;
+
+        attacker->gethand().push_back(c);
+
+        cout << "Draw : "<< c.getName()<< endl;
+    }
+
+    vector<Card>& hand = attacker->gethand();
+
+    if(hand.size() < 2)
+        return;
+
+    cout << "\nCurrent Hand\n";
+
+    for(int i = 0; i < hand.size(); i++)
+    {
+        cout << i + 1<< ") "<< hand[i].getName()<< endl;
+    }
+
+    int first =
+    readInt("Choose first card : ", 1, hand.size());
+
+    Card firstCard = hand[first-1];
+
+    hand.erase(hand.begin() + (first-1));
+
+    cout << "\nRemaining Hand\n";
+
+    for(int i = 0; i < hand.size(); i++)
+    {
+        cout << i + 1 << ") " << hand[i].getName() << endl;
+    }
+
+    int second = readInt("Choose second card : ", 1, hand.size());
+
+    Card secondCard = hand[second-1];
+
+    hand.erase(hand.begin() + (second-1));
+
+    cout << "\nWhich card should be on TOP of deck?\n";
+    cout << "1) "<< firstCard.getName()<< endl;
+
+    cout << "2) " << secondCard.getName() << endl;
+
+    int order = readInt("Choice : ",1,2);
+
+    if(order == 1)
+    {
+        attacker->putCardOnTop(secondCard);
+        attacker->putCardOnTop(firstCard);
+    }
+    else
+    {
+        attacker->putCardOnTop(firstCard);
+        attacker->putCardOnTop(secondCard);
+    }
+
+    cout << "\nCards returned to top of deck.\n";
+}
+
+void ConfoundEffect::apply(Fighter* attacker, Fighter* defender,   Battle* battle,   Card& card)
+{
+    if(attacker == nullptr || defender == nullptr)
+        return;
+
+    cout << "\n===== CONFOUND =====\n";
+
+    // ---------- Opponent may discard ----------
+    cout << defender->getName()
+         << ", discard one card?\n";
+
+    cout << "0) No\n";
+
+    vector<Card>& hand = defender->gethand();
+
+    for(int i = 0; i < hand.size(); i++)
+    {
+        cout << i + 1  << ") "  << hand[i].getName()  << endl;
+    }
+
+    int choice =
+    readInt("Choice : ", 0, hand.size());
+
+    if(choice != 0)
+    {
+        cout << hand[choice-1].getName() << " discarded.\n";
+
+        hand.erase(hand.begin() + (choice-1));
+
+        return;
+    }
+
+    // ---------- Move Fog ----------
+    vector<FogToken>& fogs = battle->getfogtoken();
+
+    vector<bool> moved(fogs.size(), false);
+
+    while(true)
+    {
+        cout << "\nChoose a Fog Token to move\n";
+        cout << "0) Finish\n";
+
+        bool anyLeft = false;
+
+        for(int i = 0; i < fogs.size(); i++)
+        {
+            if(moved[i])
+                continue;
+
+            anyLeft = true;
+
+            cout << i + 1 << ") Fog "<< i + 1<< " (Zone " << fogs[i].getPosition()->getId() << ")\n";
+        }
+
+        if(!anyLeft)
+            break;
+
+        int fogChoice =readInt("Choice : ",   0,fogs.size());
+
+        if(fogChoice == 0)
+            break;
+
+        fogChoice--;
+
+        if(moved[fogChoice])
+        {
+            cout << "This Fog Token has already been moved.\n";
+            continue;
+        }
+
+        FogToken& fog = fogs[fogChoice];
+
+        vector<int> validZones;
+
+        for(int id = 1; id <= 32; id++)
+        {
+            Zone* z = battle->getMap().getZone(id);
+
+            bool occupiedByFog = false;
+
+            for(int j = 0; j < fogs.size(); j++)
+            {
+                if(j == fogChoice)
+                    continue;
+
+                if(fogs[j].getPosition() == z)
+                {
+                    occupiedByFog = true;
+                    break;
+                }
+            }
+
+            if(!occupiedByFog)
+                validZones.push_back(id);
+        }
+
+        int zoneId = readchoice("Destination Zone : ", validZones);
+
+        fog.setPosition( battle->getMap().getZone(zoneId) );
+
+        moved[fogChoice] = true;
+
+        cout << "Fog moved to Zone "<< zoneId<< endl;
+    }
+    }
+
+  void CovertPreparationEffect::apply(Fighter* attacker,
+                                    Fighter* defender,
+                                    Battle* battle,
+                                    Card& card)
+{
+    if(attacker == nullptr || battle == nullptr)
+        return;
+
+
+    cout << "\n===== COVERT PREPARATION =====\n";
+
+
+    // ---------------- Draw 1 Card ----------------
+
+    Card c = attacker->drawTopCard();
+
+    if(c.getName() != "")
+    {
+        attacker->gethand().push_back(c);
+
+        cout << "Draw : "
+             << c.getName()
+             << endl;
+    }
+
+
+    // ---------------- Find Main Fighter ----------------
+
+    Fighter* mainFighter = nullptr;
+    Fighter* enemy = nullptr;
+
+
+    if(attacker->getName() == "Dracula")
+    {
+        mainFighter = &battle->getDracual();
+        enemy = &battle->getSherlock();
+    }
+    else if(attacker->getName() == "Sherlock")
+    {
+        mainFighter = &battle->getSherlock();
+        enemy = &battle->getDracual();
+    }
+
+
+    if(mainFighter == nullptr)
+        return;
+
+
+
+    // ---------------- Move One Fog ----------------
+
+    vector<FogToken>& fogs = battle->getfogtoken();
+
+
+    cout << "\nChoose Fog Token\n";
+
+    for(int i = 0; i < fogs.size(); i++)
+    {
+        cout << i+1  << ") Fog "  << i+1  << " Zone "  << fogs[i].getPosition()->getId()  << endl;
+    }
+
+    int fogChoice = readInt("Choose : ", 1, fogs.size());
+
+    FogToken& selectedFog = fogs[fogChoice-1];
+
+    int move = readInt("Move Fog (0-2): ", 0,  2);
+
+
+
+    while(move > 0)
+    {
+        vector<Zone*> neighbors = selectedFog.getPosition()->getNei();
+
+        vector<int> ids;
+
+        for(Zone* z : neighbors)
+        {
+            bool hasFog = false;
+
+            for(auto& f : fogs)
+            {
+                if(f.getPosition() == z)
+                {
+                    hasFog = true;
+                    break;
+                }
+            }
+
+
+            if(!hasFog)
+            {
+                ids.push_back(z->getId());
+            }
+        }
+
+
+        if(ids.empty())
+            break;
+
+
+        int choice = readchoice("Move Fog to : ", ids);
+
+
+        selectedFog.setPosition(battle->getMap().getZone(choice) );
+
+
+        move--;
+    }
+
+
+
+    // ---------------- Check Enemy Distance ----------------
+
+    vector<FogToken*> otherFogs;
+
+    for(int i = 0; i < fogs.size(); i++)
+    {
+        if(i != fogChoice-1)
+            otherFogs.push_back(&fogs[i]);
+    }
+
+
+    bool nearFog = false;
+
+    for(auto fog : otherFogs)
+    {
+        vector<Zone*> reachable =
+        battle->getReachableZone(*enemy,2);
+
+
+        for(Zone* z : reachable)
+        {
+            if(z == fog->getPosition())
+            {
+                nearFog = true;
+                break;
+            }
+        }
+
+        if(nearFog)
+            break;
+    }
+
+
+
+    if(nearFog)
+    {
+        cout<<"Enemy is already near a Fog.\n";
+        return;
+    }
+
+    // ---------------- Move Enemy ----------------
+
+    cout<<"Enemy is moved near Fog.\n";
+
+    FogToken* targetFog = otherFogs[0];
+
+    vector<Zone*> possible;
+
+    vector<Zone*> around = battle->getMap().getplacementZone(targetFog->getPosition());
+
+
+    for(Zone* z : around)
+    {
+        vector<Zone*> dist =battle->getReachableZoneFromZone(targetFog->getPosition(),2);
+
+        for(Zone* x : dist)
+        {
+            if(x == z &&
+               battle->getfighterat(z)==nullptr)
+            {
+                possible.push_back(z);
+            }
+        }
+    }
+
+
+
+    if(!possible.empty())
+    {
+        enemy->setPosition(possible[0]);
+
+        cout<<enemy->getName()
+            <<" moved near Fog Zone "
+            <<targetFog->getPosition()->getId()
+            <<endl;
+    }
+
 }

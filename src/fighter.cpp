@@ -337,12 +337,12 @@ vector<AttackCardInfo> Fighter::getPlayableCardIndexes(Battle* battle, Fighter* 
 
 Card Fighter::drawBoostMovement()
 {
-    vector<Card> cards = getrandomcard(1);
+    Card card = drawTopCard();
 
-    if(cards.empty())
+    if(card.getName() == "")
         return Card();
 
-    addtohand(cards);
+    addtohand({card});
 
     return hand.back();
 }
@@ -350,12 +350,25 @@ Card Fighter::drawBoostMovement()
 
  void  Fighter:: specialAbillity(Battle* battle)
 {
-
 }
 
 void Fighter::setupUnits(Battle* battle, Player& player)
 {
+}
 
+Card Fighter::drawTopCard()
+{
+    if(deck.empty())
+        return Card();
+
+    Card c = deck.back();
+    deck.pop_back();
+    return c;
+}
+
+void Fighter::putCardOnTop(const Card& card)
+{
+    deck.push_back(card);
 }
 
 

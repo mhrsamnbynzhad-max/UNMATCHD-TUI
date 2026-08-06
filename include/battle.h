@@ -129,6 +129,7 @@ public:
     void setinvisibleability(bool value){ invisibleAbilityActive = value;}
     bool getinvisibleactive()const{ return invisibleAbilityActive ;}
     bool moveFogToken(int , int );
+    vector<Zone*> getReachableZoneFromZone(Zone* ,int );
 
     
 };

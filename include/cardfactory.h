@@ -12,6 +12,7 @@ class CardFactory {
 public:
     static std::vector<Card> createDraculaDeck();
     static std::vector<Card> createSherlockDeck();
+    static std::vector<Card> createInvisibleDeck();
 };
 
 

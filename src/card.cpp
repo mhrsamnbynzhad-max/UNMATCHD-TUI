@@ -78,6 +78,10 @@ Card Card::createFromInfo(const Cardinfo& info)
     static SidearmEffect sidearmEffect;
     static MistFormEffect mistFormEffect;
 
+    static CodedNotesEffect codedNotesEffect;
+    static ConfoundEffect confoundEffect;
+    static CovertPreparationEffect covertPreparationEffect;
+
      Card c(info.name, info.title, info.owner,info.type, info.timing, info.effect,info.value, info.boost);
 
     switch (info.name)
@@ -203,14 +207,17 @@ Card Card::createFromInfo(const Cardinfo& info)
         c.effectroles = &sidearmEffect;
         break;
 
+    case CODED_NOTES:
+    c.effectroles = &codedNotesEffect;
+    break;
 
+    case CONFOUND:
+    c.effectroles = &confoundEffect;
+    break;
 
-    // فعلا نداریم
-    /*
-    case MIST_FORM:
-        c.effectroles = new MistFormEffect();
-        break;
-    */
+    case COVERT_PREPARATION:
+    c.effectroles = &covertPreparationEffect;
+    break;
 
 
     default:

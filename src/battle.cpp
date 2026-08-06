@@ -70,6 +70,8 @@ using namespace std;
     
         sherlock.setdeck(CardFactory::createSherlockDeck());
 
+        invisibleman.setdeck(CardFactory::createInvisibleDeck());
+
         player1.drawCard();
         player2.drawCard();
     }

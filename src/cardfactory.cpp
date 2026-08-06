@@ -37,3 +37,17 @@ std::vector<Card> CardFactory::createSherlockDeck() {
     return deck;
 }
 
+std::vector<Card> CardFactory::createInvisibleDeck() {
+    std::vector<Card> deck;
+
+    for(const Cardinfo& info : Card::invisiblemanCardDB)
+    {
+        for(int i = 0; i < info.count; i++)
+        {
+            deck.push_back(Card::createFromInfo(info));
+        }
+    }
+
+
+    return deck;
+}

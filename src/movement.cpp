@@ -1,6 +1,10 @@
 #include "battle.h"
 #include <vector>
 #include<iostream>
+#include <cstdlib>
+#include <queue>
+#include <set>
+
 
 using namespace std;
 
@@ -190,3 +194,45 @@ using namespace std;
     return true;
 }
 
+vector<Zone*> Battle::getReachableZoneFromZone(Zone* start,int maxMove)
+{
+    vector<Zone*> result;
+
+    queue<pair<Zone*,int>> q;
+
+    set<Zone*> visited;
+
+
+    q.push({start,0});
+    visited.insert(start);
+
+
+    while(!q.empty())
+    {
+        Zone* current = q.front().first;
+        int dist = q.front().second;
+
+        q.pop();
+
+
+        if(dist == maxMove)
+            continue;
+
+
+        for(Zone* next : current->getNei())
+        {
+            if(visited.count(next))
+                continue;
+
+
+            visited.insert(next);
+
+            result.push_back(next);
+
+            q.push({next,dist+1});
+        }
+    }
+
+
+    return result;
+}

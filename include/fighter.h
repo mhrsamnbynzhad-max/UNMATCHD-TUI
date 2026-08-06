@@ -73,6 +73,8 @@ class Fighter
     Card drawBoostMovement();
     Team getteam ()const;
     virtual void specialAbillity(Battle*);
+    void putCardOnTop(const Card& card);
+    Card drawTopCard();
     
 };
 

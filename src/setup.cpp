@@ -7,8 +7,8 @@ using namespace std;
    void Battle:: setuppositions()
     {
         sherlock.setPosition(map.getZone(1));
-        dracula.setPosition(map.getZone(2));
-        invisibleman.setPosition(map.getZone(4));
+        dracula.setPosition(map.getZone(18));
+        invisibleman.setPosition(map.getZone(19));
         cout<<dracula.getPosition()->getId()<<endl;
          
     }
