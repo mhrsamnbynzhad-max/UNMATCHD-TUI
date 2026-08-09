@@ -1,3 +1,3 @@
-C:/Users/Asus/Desktop/helloworld/build/CMakeFiles/game.dir
-C:/Users/Asus/Desktop/helloworld/build/CMakeFiles/edit_cache.dir
-C:/Users/Asus/Desktop/helloworld/build/CMakeFiles/rebuild_cache.dir
+C:/Users/Asus/Desktop/oknotbeok/build/CMakeFiles/game.dir
+C:/Users/Asus/Desktop/oknotbeok/build/CMakeFiles/edit_cache.dir
+C:/Users/Asus/Desktop/oknotbeok/build/CMakeFiles/rebuild_cache.dir

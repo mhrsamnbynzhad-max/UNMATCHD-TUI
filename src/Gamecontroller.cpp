@@ -34,6 +34,10 @@ void GameController::run()
         Player* current = turnQueue.front();
         turnQueue.pop();
         battle.startTurn(*current);
+        if(current->getHero()->getName() == "InvisibleMan")
+         {
+                battle.checkInvisibleFogAtTurnStart();
+         }
                 
         cout << "\nTurn : " << current->getName() << endl;
 
@@ -41,88 +45,150 @@ void GameController::run()
         HandPanel :: show(*current->getHero());
 
         Player* enemy = (current == &player1 ? &player2 : &player1);
-        
+
         int action = 0;
 
-        while (action<2)
+        if (current->getHero()->getName() == "InvisibleMan" && current->getHero()->getPosition() == nullptr)
         {
-            
+            cout << "\n--- Invisible Man must reappear on the board! ---\n";
+            vector<int> validIds;
+
+            for (int id = 1; id <= 32; id++)
+            {
+                Zone* z = battle.getMap().getZone(id);
+                if (z == nullptr) continue;
+
+                Fighter* occ = battle.getfighterat(z);
+                if (occ != nullptr && occ->getteam() != current->getHero()->getteam())
+                {
+                    continue; 
+                }
+
+                validIds.push_back(id);
+                cout << id << " ";
+            }
+            cout << "\n";
+
+            if (validIds.empty())
+            {
+                cout << "No valid zones! (This shouldn't happen usually).\n";
+            } 
+            else
+            {
+                int destId = 0;
+                bool isValid = false;
+                while (!isValid)
+                {
+                    destId = readInt("Choose zone ID to reappear: ", 1, 32);
+                    for (int id : validIds) {
+                        if (id == destId) {
+                            isValid = true;
+                            break;
+                        }
+                    }
+                    if (!isValid) cout << "Invalid zone. Try again.\n";
+                }
+
+                Zone* target = battle.getMap().getZone(destId);
+                current->getHero()->setPosition(target);
+                cout << "Invisible Man reappears at Zone " << target->getId() << "!\n";
+            }
+        }
+
+        while (action < 2 && !battle.isgameover())
+        {
             try
             {
-              
-             vector<AttackCardInfo> cards = current->getHero()->getPlayableCardIndexes(&battle, enemy->getHero(), current->getHero());
+                vector<AttackCardInfo> cards = current->getHero()->getPlayableCardIndexes(&battle, enemy->getHero(), current->getHero());
                 
-            for(int i = 0; i < cards.size(); i++)
-            {
-                Card& c = current->getHero()->gethand()[cards[i].index];
+                for(int i = 0; i < cards.size(); i++)
+                {
+                    Card& c = current->getHero()->gethand()[cards[i].index];
+                    cout << i+1 << ") " << c.getName();
+                    if(!cards[i].usable)
+                        cout << " [unusable]";
+                    cout << "\n";
+                }
+                
+                int input = readInt("Choose action:( or (0) for Maneuver)", 0, cards.size());
+                
+                if(input == 0)
+                {
+                    current->maneuver(battle);
+                    StatusPanel::show(battle);
+                    action++; 
+                    continue;
+                }
 
-            cout << i+1 << ") "
-                << c.getName();
+                input--;
 
-            if(!cards[i].usable)
-                cout<<" [unusable]";
+                AttackCardInfo selected = cards[input];
 
-                cout<<"\n";
-            }
-            int input;
-            input = readInt( "Choose action:( or (0) for Maneuver)" , 0 , cards.size());
-            
-            if( input == 0 )
-            {
-                current->maneuver(battle);
+                if(!selected.usable)
+                {
+                    cout << "This card is unusable\n";
+                    continue;
+                }
 
+                Card& chosenCard = current->getHero()->gethand()[selected.index];
+
+                Fighter* attacker = nullptr;
+
+                if (!current->chooseAttackerIfNeeded(battle, chosenCard, attacker, enemy->getHero()) || attacker == nullptr) {
+                    cout << "No valid fighter to play this card! Action cancelled.\n";
+                    continue; 
+                }
+
+                if(chosenCard.getcardType() == SCHEME)
+               {
+                if (attacker == nullptr)
+                {
+                    attacker = current->getHero();
+                }
+
+                current->playScheme(*enemy, battle, attacker, selected.index);
                 StatusPanel::show(battle);
-
-                action++;
-                continue;
+                if (current->getHero()->getName() == "InvisibleMan" && current->getHero()->getPosition() == nullptr)
+                {
+                    cout << "Invisible Man has vanished! The turn ends immediately.\n";
+                    action = 2; // مقدار اکشن را پر می‌کنیم تا حلقه while شکسته شود و نوبت به حریف برسد
+                    break;
+                }
+                action++; 
+                continue; 
             }
 
-            input -- ;
+             
+                else if(chosenCard.getcardType() == ATTACK || chosenCard.getcardType() == VERSATILE)
+                {
+                    current->attack(*enemy, battle, attacker, selected.index);
+                    StatusPanel::show(battle);
+                }
 
-            AttackCardInfo selected = cards[input];
+                if (!player1.getHero()->isalive() || !player2.getHero()->isalive())
+                {
+                    battle.setGameOver(true);
+                    cout << "\n*** GAME OVER! A main hero has been defeated! *\n";
+                    break; 
+                }
+                
+                if(battle.isgameover())
+                    break;
 
-            if(!selected.usable)
+                action++; 
+                if(battle.hasExtraAction())
+                {
+                   action = 0; 
+                   battle.resetExtraAction();
+                }
+            }
+            catch(const exception& e)
             {
-                cout<<"This card is unusable\n";
-                continue;
+                cout << "Error: " << e.what() << endl;
             }
-
-
-            Card& chosenCard = current->getHero()->gethand()[selected.index];
-
-            Fighter* attacker = nullptr;
-
-            current->chooseAttackerIfNeeded(battle,chosenCard, attacker, enemy->getHero());
-
-
-            if(chosenCard.getcardType() == SCHEME)
-            {
-                current->playScheme(*enemy,battle,attacker ,selected.index);
-
-                StatusPanel::show(battle);
-            }
-            else if(chosenCard.getcardType() == ATTACK ||chosenCard.getcardType() == VERSATILE)
-            {
-                current->attack(*enemy,battle, attacker, cards[input].index);
-
-                StatusPanel::show(battle);
-            }
-             if(battle.isgameover())
-             break;
-
-
-           action++;
-           if(battle.hasExtraAction())
-           {
-              action = 1;
-              battle.resetExtraAction();
-           }
         }
-        catch(const exception& e)
-        {
-            cout << "Error: " << e.what() << endl;
-        }
-    }
+        
+       
 
         if(battle.isgameover())
         return ;

@@ -11,29 +11,16 @@
 #include "fogtoken.h"
 #include "map.h"
 #include <vector>
+#include "GameTypes.h"
 
+// Forward declarations
+class CombatManager;
+class BoardManager;
 class Card;
-class CardEffect;
-struct ZoneCheckResult
-{
-   bool allow ;
-   std :: string  blocker = "";
-};
-struct ExecuteOrder
-    {
-        Card* acard;
-        Fighter* aowner;
-        Fighter* atarget;
 
-        Card* bcard;
-        Fighter* bowner;
-        Fighter* btarget;
-        
-    };
 class Battle
 {
 private:
-
     Sherlock sherlock;
     Watson watson;
     Dracula dracula;
@@ -46,92 +33,66 @@ private:
     Player player1;
     Player player2;
 
-    bool canreach(Zone*  , Zone*  , int  , Fighter&);
+    // پوینتر به مدیرها
+    CombatManager* combatManager;
+    BoardManager* boardManager;
 
     bool sherlockAbilityActive = false;
     bool invisibleAbilityActive = false;
-
-    Card lastAttackCard;
-    
-    int lastFinaldefend= 0;
-
-    bool cancelDEfendEffect = false;
-    int finalAttackValue = 0;
-    int finalDefendValue = 0;
-
-    bool ignoreAttackValue = false;
-    bool ignoreDefendValue = false;
-
-    ExecuteOrder getexecuteCardeffect( Card& , Card& , Fighter* , Fighter*, bool);
-
     bool extraAction = false;
-    
     bool playerfirst = true;
-
     bool gameover = false;
-
+    bool invisibleStartedOnFog = false;
 
 public:
-
     Battle();
-    Player& getplayer1(){return player1;}
-    Player& getplayer2(){return player2;}
-    void setuppositions();
-    void draculaability(Fighter* target);
-    void printfighters();
-    void combat(Fighter*,Fighter* , Fighter*,int);
-    void applycardeffect(Card& , Fighter* ,Fighter* );
-    bool areadjacent(Fighter& ,Fighter&  );
-    bool movefighter(Fighter& ,int  , int );
-    void showPossiblemoves(Fighter&);
-    Fighter* getfighterat(Zone* );
-    void showplacementzone(Fighter& );
+    ~Battle();
+
+    // ==========================================
+    // دسترسی مستقیم به منیجرها
+    // ==========================================
+    CombatManager* getCombat() { return combatManager; }
+    BoardManager* getBoard() { return boardManager; }
+
+    // ==========================================
+    // دسترسی به اطلاعات بازی (Getters / Setters)
+    // ==========================================
+    Player& getplayer1() { return player1; }
+    Player& getplayer2() { return player2; }
+    Map& getMap() { return map; }
+    std::vector<FogToken>& getfogtoken() { return fogtoken; }
     std::vector<Sisters>& getsisters();
-    std::vector<FogToken>& getfogtoken(){return fogtoken;};
-    Map& getMap();
-    ZoneCheckResult canEnterzone(Fighter* , Fighter* ,int );
-    void chooseSidekickPosition(Player& );
-    void chooseHeroes(Player& , Player& );
 
+    Fighter& getDracual() { return dracula; }
+    Fighter& getSherlock() { return sherlock; }
+    Fighter& getWatson() { return watson; }
+    InvisibleMan& getInvisibleMan() { return invisibleman; }
 
-    const Card& gelastattackcard()const{return lastAttackCard; }
-    Fighter& getDracual(){return dracula;}
-    Fighter& getSherlock(){return sherlock;}
-    Fighter& getWatson(){return watson;}
-    int getlastdefend()const{return lastFinaldefend;}
-    void setCancel(int v){ cancelDEfendEffect = v;}
-    bool getCancel()const{return cancelDEfendEffect ;}
-    void setFinalAttackValue(int v){ finalAttackValue = v; }
-    void setFinalDefendValue(int v){ finalDefendValue = v; }
+    Fighter* getfighterat(Zone* zone);
+    Player* getPlayerOfFighter(Fighter* fighter);
+    std::vector<Fighter*> getAllFighters();
+    std::vector<Fighter*> getFighters();
 
-    int getFinalAttackValue() const { return finalAttackValue; }
-    int getFinalDefendValue() const { return finalDefendValue; }
-
-    void setIgnoreAttack(bool v){ ignoreAttackValue = v; }
-    void setIgnoreDefend(bool v){ ignoreDefendValue = v; }
-
-    bool getIgnoreAttack() const { return ignoreAttackValue; }
-    bool getIgnoreDefend() const { return ignoreDefendValue; }
-    vector<Zone*> getReachableZone( Fighter& , int);
-
+    void setuppositions();
+    void chooseHeroes(Player&, Player&);
+    void chooseSidekickPosition(Player&);
+    void chooseFogPosition(Player&);
     void startTurn(Player& player);
-    void setSherlockability(bool value){ sherlockAbilityActive = value ;}
+    void printfighters();
+    void draculaability(Fighter* target);
+    void checkInvisibleFogAtTurnStart();
 
-    void giveExtraAction(){ extraAction = true;}
-
-    bool hasExtraAction(){    return extraAction;}
-
-    void resetExtraAction(){    extraAction = false;}
-
-    bool getplayerfirst () const {return playerfirst ;}
-    bool isgameover()const {return gameover; }
-    void chooseFogPosition(Player& );
-    void setinvisibleability(bool value){ invisibleAbilityActive = value;}
-    bool getinvisibleactive()const{ return invisibleAbilityActive ;}
-    bool moveFogToken(int , int );
-    vector<Zone*> getReachableZoneFromZone(Zone* ,int );
-
+    void setGameOver(bool val) { gameover = val; }
+    bool isgameover() const { return gameover; }
+    bool getplayerfirst() const { return playerfirst; }
     
+    void giveExtraAction() { extraAction = true; }
+    bool hasExtraAction() { return extraAction; }
+    void resetExtraAction() { extraAction = false; }
+    void setSherlockability(bool value) { sherlockAbilityActive = value; }
+    void setinvisibleability(bool value) { invisibleAbilityActive = value; }
+    bool getinvisibleactive() const { return invisibleAbilityActive; }
+    bool startedTurnOnFog() const { return invisibleStartedOnFog; }
 };
 
 #endif

@@ -122,6 +122,7 @@ Map::Map()
 
     connect(4,27);
     secretZones.push_back(15);
+    secretZones.push_back(5);
     secretZones.push_back(23);
     secretZones.push_back(32);
 }

@@ -6,7 +6,8 @@
 using namespace std;
 
 
-std::vector<Card> CardFactory::createDraculaDeck() {
+std::vector<Card> CardFactory::createDraculaDeck()
+ {
     std::vector<Card> deck;
 
     for(const Cardinfo& info : Card::draculaCardDB)
@@ -20,7 +21,8 @@ std::vector<Card> CardFactory::createDraculaDeck() {
 
     return deck;
 }
-std::vector<Card> CardFactory::createSherlockDeck() {
+std::vector<Card> CardFactory::createSherlockDeck()
+ {
     std::vector<Card> deck;
 
     for(const Cardinfo& info : Card::sherlockCardDB)

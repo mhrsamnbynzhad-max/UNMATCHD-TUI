@@ -232,4 +232,85 @@ class CovertPreparationEffect : public CardEffect
 public:
     void apply(Fighter* attacker,  Fighter* defender,Battle* battle, Card& card) override;
 };
+
+class DreamingOfRevengeEffect : public CardEffect
+{
+public:
+
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+
+};
+
+class EmergefrommistEffect : public CardEffect
+{
+public:
+
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+
+};
+
+class ImpossibletoseeEffect : public CardEffect
+{
+public:
+
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+
+};
+
+class IntoThinAirEffect : public CardEffect
+{
+public:
+
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+
+};
+
+class LurkingEffect : public CardEffect
+{
+public:
+
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+
+};
+
+class ReignOfTerrorEffect : public CardEffect
+{
+public:
+
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+
+};
+
+class RollingFogEffect : public CardEffect
+{
+public:
+
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+
+};
+
+class SlipAwayEffect : public CardEffect
+{
+public:
+
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+
+};
+
+class SteplightlyEffect : public CardEffect
+{
+public:
+
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+
+};
+
+class VanishEffect : public CardEffect
+{
+public:
+
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) override;
+
+};
+
 #endif

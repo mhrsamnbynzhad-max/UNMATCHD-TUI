@@ -1,7 +1,7 @@
 CMakeFiles/game.dir/src/battle.cpp.obj: \
- C:\Users\Asus\Desktop\helloworld\src\battle.cpp \
- C:/Users/Asus/Desktop/helloworld/include/battle.h \
- C:/Users/Asus/Desktop/helloworld/include/Player.h \
+ C:\Users\Asus\Desktop\oknotbeok\src\battle.cpp \
+ C:/Users/Asus/Desktop/oknotbeok/include/battle.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/Player.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/string \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/requires_hosted.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -108,22 +108,22 @@ CMakeFiles/game.dir/src/battle.cpp.obj: \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cxxabi_init_exception.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/typeinfo \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/nested_exception.h \
- C:/Users/Asus/Desktop/helloworld/include/fighter.h \
- C:/Users/Asus/Desktop/helloworld/include/zone.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/fighter.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/zone.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/vector \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_uninitialized.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_vector.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_bvector.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/vector.tcc \
- C:/Users/Asus/Desktop/helloworld/include/card.h \
- C:/Users/Asus/Desktop/helloworld/include/player.h \
- C:/Users/Asus/Desktop/helloworld/include/dracula.h \
- C:/Users/Asus/Desktop/helloworld/include/watson.h \
- C:/Users/Asus/Desktop/helloworld/include/sisters.h \
- C:/Users/Asus/Desktop/helloworld/include/sherlock.h \
- C:/Users/Asus/Desktop/helloworld/include/invisible.h \
- C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
- C:/Users/Asus/Desktop/helloworld/include/map.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/card.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/player.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/dracula.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/watson.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/sisters.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/sherlock.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/invisible.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/fogtoken.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/map.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/map \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_tree.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ext/aligned_buffer.h \
@@ -131,9 +131,12 @@ CMakeFiles/game.dir/src/battle.cpp.obj: \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_map.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_multimap.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/erase_if.h \
- C:/Users/Asus/Desktop/helloworld/include/cardfactory.h \
- C:/Users/Asus/Desktop/helloworld/include/cardeffect.h \
- C:/Users/Asus/Desktop/helloworld/include/cardeffect.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/GameTypes.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/CombatManager.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/BoardManager.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/cardfactory.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/cardeffect.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/handling.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/iostream \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ostream \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/ostream.h \
@@ -175,6 +178,7 @@ CMakeFiles/game.dir/src/battle.cpp.obj: \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/ostream.tcc \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/istream \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/istream.tcc \
+ C:/Users/Asus/Desktop/oknotbeok/include/Map.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/algorithm \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_algo.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/algorithmfwd.h \
@@ -183,14 +187,4 @@ CMakeFiles/game.dir/src/battle.cpp.obj: \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_tempbuf.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/glue_algorithm_defs.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/execution_defs.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/queue \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/deque \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_deque.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/deque.tcc \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_queue.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/set \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_set.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_multiset.h \
- C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ctime \
- C:/Users/Asus/Desktop/helloworld/include/handling.h \
- C:/Users/Asus/Desktop/helloworld/include/fighter.h
+ C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ctime

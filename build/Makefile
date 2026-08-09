@@ -56,10 +56,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Asus\Desktop\helloworld
+CMAKE_SOURCE_DIR = C:\Users\Asus\Desktop\oknotbeok
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Asus\Desktop\helloworld\build
+CMAKE_BINARY_DIR = C:\Users\Asus\Desktop\oknotbeok\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,16 +86,16 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\helloworld\build\CMakeFiles C:\Users\Asus\Desktop\helloworld\build\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\oknotbeok\build\CMakeFiles C:\Users\Asus\Desktop\oknotbeok\build\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\helloworld\build\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\oknotbeok\build\CMakeFiles 0
 .PHONY : all
 
 # The main codegen target
 codegen: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\helloworld\build\CMakeFiles C:\Users\Asus\Desktop\helloworld\build\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\oknotbeok\build\CMakeFiles C:\Users\Asus\Desktop\oknotbeok\build\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 codegen
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\helloworld\build\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\oknotbeok\build\CMakeFiles 0
 .PHONY : codegen
 
 # The main clean target
@@ -231,6 +231,30 @@ src/battle.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/battle.cpp.s
 .PHONY : src/battle.cpp.s
 
+src/boardmanager.obj: src/boardmanager.cpp.obj
+.PHONY : src/boardmanager.obj
+
+# target to build an object file
+src/boardmanager.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/boardmanager.cpp.obj
+.PHONY : src/boardmanager.cpp.obj
+
+src/boardmanager.i: src/boardmanager.cpp.i
+.PHONY : src/boardmanager.i
+
+# target to preprocess a source file
+src/boardmanager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/boardmanager.cpp.i
+.PHONY : src/boardmanager.cpp.i
+
+src/boardmanager.s: src/boardmanager.cpp.s
+.PHONY : src/boardmanager.s
+
+# target to generate assembly for a file
+src/boardmanager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/boardmanager.cpp.s
+.PHONY : src/boardmanager.cpp.s
+
 src/card.obj: src/card.cpp.obj
 .PHONY : src/card.obj
 
@@ -303,29 +327,29 @@ src/cardfactory.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/cardfactory.cpp.s
 .PHONY : src/cardfactory.cpp.s
 
-src/combat.obj: src/combat.cpp.obj
-.PHONY : src/combat.obj
+src/combatmanager.obj: src/combatmanager.cpp.obj
+.PHONY : src/combatmanager.obj
 
 # target to build an object file
-src/combat.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/combat.cpp.obj
-.PHONY : src/combat.cpp.obj
+src/combatmanager.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/combatmanager.cpp.obj
+.PHONY : src/combatmanager.cpp.obj
 
-src/combat.i: src/combat.cpp.i
-.PHONY : src/combat.i
+src/combatmanager.i: src/combatmanager.cpp.i
+.PHONY : src/combatmanager.i
 
 # target to preprocess a source file
-src/combat.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/combat.cpp.i
-.PHONY : src/combat.cpp.i
+src/combatmanager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/combatmanager.cpp.i
+.PHONY : src/combatmanager.cpp.i
 
-src/combat.s: src/combat.cpp.s
-.PHONY : src/combat.s
+src/combatmanager.s: src/combatmanager.cpp.s
+.PHONY : src/combatmanager.s
 
 # target to generate assembly for a file
-src/combat.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/combat.cpp.s
-.PHONY : src/combat.cpp.s
+src/combatmanager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/combatmanager.cpp.s
+.PHONY : src/combatmanager.cpp.s
 
 src/dracula.obj: src/dracula.cpp.obj
 .PHONY : src/dracula.obj
@@ -519,54 +543,6 @@ src/map.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/map.cpp.s
 .PHONY : src/map.cpp.s
 
-src/movement.obj: src/movement.cpp.obj
-.PHONY : src/movement.obj
-
-# target to build an object file
-src/movement.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/movement.cpp.obj
-.PHONY : src/movement.cpp.obj
-
-src/movement.i: src/movement.cpp.i
-.PHONY : src/movement.i
-
-# target to preprocess a source file
-src/movement.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/movement.cpp.i
-.PHONY : src/movement.cpp.i
-
-src/movement.s: src/movement.cpp.s
-.PHONY : src/movement.s
-
-# target to generate assembly for a file
-src/movement.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/movement.cpp.s
-.PHONY : src/movement.cpp.s
-
-src/setup.obj: src/setup.cpp.obj
-.PHONY : src/setup.obj
-
-# target to build an object file
-src/setup.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/setup.cpp.obj
-.PHONY : src/setup.cpp.obj
-
-src/setup.i: src/setup.cpp.i
-.PHONY : src/setup.i
-
-# target to preprocess a source file
-src/setup.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/setup.cpp.i
-.PHONY : src/setup.cpp.i
-
-src/setup.s: src/setup.cpp.s
-.PHONY : src/setup.s
-
-# target to generate assembly for a file
-src/setup.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/setup.cpp.s
-.PHONY : src/setup.cpp.s
-
 src/sherlock.obj: src/sherlock.cpp.obj
 .PHONY : src/sherlock.obj
 
@@ -614,30 +590,6 @@ src/sisters.s: src/sisters.cpp.s
 src/sisters.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/sisters.cpp.s
 .PHONY : src/sisters.cpp.s
-
-src/utility.obj: src/utility.cpp.obj
-.PHONY : src/utility.obj
-
-# target to build an object file
-src/utility.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/utility.cpp.obj
-.PHONY : src/utility.cpp.obj
-
-src/utility.i: src/utility.cpp.i
-.PHONY : src/utility.i
-
-# target to preprocess a source file
-src/utility.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/utility.cpp.i
-.PHONY : src/utility.cpp.i
-
-src/utility.s: src/utility.cpp.s
-.PHONY : src/utility.s
-
-# target to generate assembly for a file
-src/utility.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/utility.cpp.s
-.PHONY : src/utility.cpp.s
 
 src/watson.obj: src/watson.cpp.obj
 .PHONY : src/watson.obj
@@ -709,6 +661,9 @@ help:
 	@echo ... src/battle.obj
 	@echo ... src/battle.i
 	@echo ... src/battle.s
+	@echo ... src/boardmanager.obj
+	@echo ... src/boardmanager.i
+	@echo ... src/boardmanager.s
 	@echo ... src/card.obj
 	@echo ... src/card.i
 	@echo ... src/card.s
@@ -718,9 +673,9 @@ help:
 	@echo ... src/cardfactory.obj
 	@echo ... src/cardfactory.i
 	@echo ... src/cardfactory.s
-	@echo ... src/combat.obj
-	@echo ... src/combat.i
-	@echo ... src/combat.s
+	@echo ... src/combatmanager.obj
+	@echo ... src/combatmanager.i
+	@echo ... src/combatmanager.s
 	@echo ... src/dracula.obj
 	@echo ... src/dracula.i
 	@echo ... src/dracula.s
@@ -745,21 +700,12 @@ help:
 	@echo ... src/map.obj
 	@echo ... src/map.i
 	@echo ... src/map.s
-	@echo ... src/movement.obj
-	@echo ... src/movement.i
-	@echo ... src/movement.s
-	@echo ... src/setup.obj
-	@echo ... src/setup.i
-	@echo ... src/setup.s
 	@echo ... src/sherlock.obj
 	@echo ... src/sherlock.i
 	@echo ... src/sherlock.s
 	@echo ... src/sisters.obj
 	@echo ... src/sisters.i
 	@echo ... src/sisters.s
-	@echo ... src/utility.obj
-	@echo ... src/utility.i
-	@echo ... src/utility.s
 	@echo ... src/watson.obj
 	@echo ... src/watson.i
 	@echo ... src/watson.s

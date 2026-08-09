@@ -1,7 +1,7 @@
 CMakeFiles/game.dir/src/fogtoken.cpp.obj: \
- C:\Users\Asus\Desktop\helloworld\src\fogtoken.cpp \
- C:/Users/Asus/Desktop/helloworld/include/fogtoken.h \
- C:/Users/Asus/Desktop/helloworld/include/zone.h \
+ C:\Users\Asus\Desktop\oknotbeok\src\fogtoken.cpp \
+ C:/Users/Asus/Desktop/oknotbeok/include/fogtoken.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/zone.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/vector \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/requires_hosted.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \

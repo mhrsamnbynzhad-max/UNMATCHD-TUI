@@ -1,5 +1,8 @@
 #include "invisible.h"
 #include "battle.h"
+#include <iostream>
+using namespace std;
+
 
 InvisibleMan :: InvisibleMan() : Fighter("InvisibleMan", 15 , 15 , false , 2 , INVISIBLE)
 {
@@ -7,6 +10,14 @@ InvisibleMan :: InvisibleMan() : Fighter("InvisibleMan", 15 , 15 , false , 2 , I
 
 void InvisibleMan::setupUnits(Battle* battle, Player& player)
 {
+    cout<<"Invisible setup start\n";
+
+    cout<<"Position: ";
+    if(getPosition()==nullptr)
+        cout<<"NULL\n";
+    else
+        cout<<getPosition()->getId()<<endl;
+
     battle->chooseFogPosition(player);
 }
 

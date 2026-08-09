@@ -46,6 +46,7 @@ private:
     int boost;
 
     CardEffect* effectroles = nullptr;
+    bool valueLocked = false;
 
     
     
@@ -64,8 +65,11 @@ public:
     string getfighterType() const;
     Cardtype getcardType() const;
     int getValue() const;
-    Cardname getcardname() const;
     void setValue(int);
+     void lockValue();
+     bool isValueLocked() const;
+     void forceValue(int );
+    Cardname getcardname() const;
     int getBoost()const;
     void setBoost( int );
     void increaseBoost(int);

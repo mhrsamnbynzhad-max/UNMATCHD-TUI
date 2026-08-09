@@ -1,7 +1,7 @@
 CMakeFiles/game.dir/src/cardfactory.cpp.obj: \
- C:\Users\Asus\Desktop\helloworld\src\cardfactory.cpp \
- C:/Users/Asus/Desktop/helloworld/include/cardfactory.h \
- C:/Users/Asus/Desktop/helloworld/include/card.h \
+ C:\Users\Asus\Desktop\oknotbeok\src\cardfactory.cpp \
+ C:/Users/Asus/Desktop/oknotbeok/include/cardfactory.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/card.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/string \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/requires_hosted.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -107,18 +107,18 @@ CMakeFiles/game.dir/src/cardfactory.cpp.obj: \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_vector.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_bvector.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/vector.tcc \
- C:/Users/Asus/Desktop/helloworld/include/cardeffect.h \
- C:/Users/Asus/Desktop/helloworld/include/fighter.h \
- C:/Users/Asus/Desktop/helloworld/include/zone.h \
- C:/Users/Asus/Desktop/helloworld/include/player.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/cardeffect.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/fighter.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/zone.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/player.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/stdexcept \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/exception \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/exception_ptr.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/cxxabi_init_exception.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/typeinfo \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/nested_exception.h \
- C:/Users/Asus/Desktop/helloworld/include/cardeffect.h \
- C:/Users/Asus/Desktop/helloworld/include/card.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/cardeffect.h \
+ C:/Users/Asus/Desktop/oknotbeok/include/card.h \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/iostream \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ostream \
  C:/Users/Asus/scoop/apps/mingw/15.2.0-rt_v13-rev0/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/ostream.h \

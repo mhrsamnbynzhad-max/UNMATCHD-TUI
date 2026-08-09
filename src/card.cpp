@@ -81,6 +81,17 @@ Card Card::createFromInfo(const Cardinfo& info)
     static CodedNotesEffect codedNotesEffect;
     static ConfoundEffect confoundEffect;
     static CovertPreparationEffect covertPreparationEffect;
+    static DreamingOfRevengeEffect dreamingOfRevengeEffect;
+    static EmergefrommistEffect emergefromemistEffect;
+    static ImpossibletoseeEffect impossibletoseeEffect;
+    static IntoThinAirEffect  IntoThinAirEffect;
+    static LurkingEffect lurkingEffect;
+    static ReignOfTerrorEffect reignofterrorEffect;
+    static RollingFogEffect rollingfogEffect;
+    static SlipAwayEffect slipawayEffect;
+    static SteplightlyEffect steplightlyEffect;
+    static VanishEffect vanishEffect;
+
 
      Card c(info.name, info.title, info.owner,info.type, info.timing, info.effect,info.value, info.boost);
 
@@ -219,6 +230,46 @@ Card Card::createFromInfo(const Cardinfo& info)
     c.effectroles = &covertPreparationEffect;
     break;
 
+    case DREAMING_OF_REVENGE:
+    c.effectroles = &dreamingOfRevengeEffect;
+    break;
+
+    case EMERGE_FROM_MIST:
+    c.effectroles = &emergefromemistEffect;
+    break;
+
+     case IMPOSSIBLE_TO_SEE:
+    c.effectroles = &impossibletoseeEffect;
+    break;
+
+     case INTO_THIN_AIR:
+    c.effectroles = &IntoThinAirEffect;
+    break;
+
+      case LURKING:
+    c.effectroles = &lurkingEffect;
+    break;
+
+      case REIGN_OF_TERROR:
+    c.effectroles = &reignofterrorEffect;
+    break;
+
+       case ROLLING_FOG:
+    c.effectroles = &rollingfogEffect;
+    break;
+
+       case SLIP_AWAY:
+    c.effectroles = &slipawayEffect;
+    break;
+
+     case STEP_LIGHTLY:
+    c.effectroles = &steplightlyEffect;
+    break;
+
+     case VANISH:
+    c.effectroles = &vanishEffect;
+    break;
+    
 
     default:
         c.effectroles = nullptr;
@@ -270,8 +321,24 @@ int Card::getValue() const
 
  void Card:: setValue(int v)
  {
-     value = v ;
+        if(!valueLocked)
+        value = v ;
  }
+
+ void Card:: lockValue()
+{
+    valueLocked = true;
+}
+
+bool Card:: isValueLocked() const
+{
+    return valueLocked;
+}
+
+void Card:: forceValue(int v)
+{
+    value = v;
+}
 
 CardEffect* Card:: getEffect()const
  {
@@ -326,6 +393,8 @@ int Card::  getBoost()const
         case ATTACK: return "ATTACK";
         case DEFENSE: return "DEFENSE";
         case SCHEME: return "SCHEME";
+        case VERSATILE: return "VERSATILE";
+
         default: return "-";
         }
     }

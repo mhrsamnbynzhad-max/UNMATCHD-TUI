@@ -1,144 +1,262 @@
 #include "battle.h"
+#include "CombatManager.h"
+#include "BoardManager.h"
 #include "cardfactory.h"
-#include "cardeffect.h"
+#include "handling.h"
+#include "Map.h"
 #include <iostream>
 #include <algorithm>
-#include <queue>
-#include <set>
 #include <cstdlib>
 #include <ctime>
-#include "handling.h"
-#include "fighter.h"
-
 
 using namespace std;
-    Battle::Battle():  sherlock(),  watson(),  dracula() ,sisters(),invisibleman(),fogtoken() ,player1("Player 1") , player2("Player 2")
-    {
-        srand(time(0));
-        for(int i = 0 ; i <3 ; i ++)
-        {
-          sisters.emplace_back();
-        }
-        for(int i = 0 ; i <3 ; i ++)
-        {
-          fogtoken.push_back(FogToken());
-        }
 
-        int age1, age2;
-        age1 = readInt(player1.getName()+" age: " , 1 , 100);
-        age2 = readInt(player2.getName()+" age: ", 1 , 100);
-        
-
-        setuppositions();
-
-        vector<Fighter*> heroes ={ &sherlock, &dracula, &invisibleman};
-        if(age1 < age2)
-        {
-            cout << player1.getName()<< " is younger and chooses first.\n\n";
-                playerfirst = true;
-                chooseHeroes(player1, player2); 
-        }
-        else if(age2 < age1)
-        {
-            cout << player2.getName() << " is younger and chooses first.\n";
-            playerfirst = false;
-            chooseHeroes(player2, player1);
-
-        }
-        else
-        {
-            playerfirst = rand()%2;
-            if(playerfirst)
-            {
-            cout << "Same age. Player 1 chooses first.\n";
-
-                chooseHeroes(player1, player2);
-            }
-            else
-            {
-            cout << "Same age. Player 2 chooses first.\n";
-
-                chooseHeroes(player2, player1);
-                
-            }
-
-
-    
-        }
-
-        dracula.setdeck(CardFactory::createDraculaDeck());
-    
-        sherlock.setdeck(CardFactory::createSherlockDeck());
-
-        invisibleman.setdeck(CardFactory::createInvisibleDeck());
-
-        player1.drawCard();
-        player2.drawCard();
-    }
-
-    void Battle::chooseHeroes(Player& first, Player& second)
-    {
-         vector<Fighter*> heroes ={  &sherlock, &dracula, &invisibleman};
-
-    first.chooseHero(heroes);
-
-    heroes.erase(remove(heroes.begin(), heroes.end(), first.getHero()),  heroes.end());
-
-    first.getHero()->setupUnits(this, first);
-
-    second.chooseHero(heroes);
-
-    second.getHero()->setupUnits(this, second);
-    }
-
-
-    void Battle::startTurn(Player& player)
-    {
-           sherlockAbilityActive = false;
- 
-        Fighter* hero = player.getHero();
-        
-        hero->specialAbillity(this);
-    }
-
-
-  ExecuteOrder Battle::getexecuteCardeffect(Card& attackCard,Card& defendCard,Fighter* attacker,Fighter* defender,bool defended)
+Battle::Battle() 
+    : sherlock(), watson(), dracula(), sisters(), invisibleman(), fogtoken(), 
+      player1("Player 1"), player2("Player 2")
 {
-    ExecuteOrder order;
+    combatManager = new CombatManager(this);
+    boardManager = new BoardManager(this);
 
-    if(!defended)
+    srand(time(0));
+    for(int i = 0; i < 3; i++)
     {
-        order.acard = &attackCard;
-        order.aowner = attacker;
-        order.atarget = defender;
-
-        order.bcard = nullptr;
-        order.bowner = nullptr;
-        order.btarget = nullptr;
-
-        return order;
+        sisters.emplace_back();
+        fogtoken.push_back(FogToken());
     }
 
-    if(attackCard.getPriority() < defendCard.getPriority())
-    {
-        order.acard = &attackCard;
-        order.aowner = attacker;
-        order.atarget = defender;
+    int age1 = readInt(player1.getName() + " age: ", 1, 100);
+    int age2 = readInt(player2.getName() + " age: ", 1, 100);
 
-        order.bcard = &defendCard;
-        order.bowner = defender;
-        order.btarget = attacker;
+    if(age1 < age2)
+    {
+        cout << player1.getName() << " is younger and chooses first.\n\n";
+        playerfirst = true;
+        chooseHeroes(player1, player2); 
+    }
+    else if(age2 < age1)
+    {
+        cout << player2.getName() << " is younger and chooses first.\n";
+        playerfirst = false;
+        chooseHeroes(player2, player1);
     }
     else
     {
-        order.acard = &defendCard;
-        order.aowner = defender;
-        order.atarget = attacker;
-
-        order.bcard = &attackCard;
-        order.bowner = attacker;
-        order.btarget = defender;
+        playerfirst = rand() % 2;
+        if(playerfirst)
+        {
+            cout << "Same age. Player 1 chooses first.\n";
+            chooseHeroes(player1, player2);
+        }
+        else
+        {
+            cout << "Same age. Player 2 chooses first.\n";
+            chooseHeroes(player2, player1);
+        }
     }
 
-    return order;
+    dracula.setdeck(CardFactory::createDraculaDeck());
+    sherlock.setdeck(CardFactory::createSherlockDeck());
+    invisibleman.setdeck(CardFactory::createInvisibleDeck());
+
+    player1.drawCard();
+    player2.drawCard();
+}
+
+Battle::~Battle()
+{
+    delete combatManager;
+    delete boardManager;
+}
+
+Player* Battle::getPlayerOfFighter(Fighter* fighter)
+{
+    if (fighter == nullptr) return nullptr;
+
+    if (player1.getHero() != nullptr && player1.getHero()->getteam() == fighter->getteam())
+        return &player1;
+    if (player2.getHero() != nullptr && player2.getHero()->getteam() == fighter->getteam())
+        return &player2;
+
+    return nullptr;
+}
+
+void Battle::chooseHeroes(Player& first, Player& second) 
+{
+    vector<Fighter*> heroes = { &sherlock, &dracula, &invisibleman };
+
+    first.chooseHero(heroes);
+    heroes.erase(remove(heroes.begin(), heroes.end(), first.getHero()), heroes.end());
+
+    second.chooseHero(heroes);
+    heroes.erase(remove(heroes.begin(), heroes.end(), second.getHero()), heroes.end());
+
+    for (Fighter* unchosen : heroes) 
+    {
+        unchosen->setPosition(nullptr);
+        unchosen->sethealth(0);
+    }
+
+    setuppositions();
+    first.getHero()->setupUnits(this, first);
+    second.getHero()->setupUnits(this, second);
+}
+
+void Battle::startTurn(Player& player)
+{
+    sherlockAbilityActive = false;
+    Fighter* hero = player.getHero();
+
+    if (hero != nullptr && hero->isalive())
+    {
+        hero->specialAbillity(this);
+    }
+
+    if (hero == &invisibleman)
+    {
+        checkInvisibleFogAtTurnStart();
+    }
+}
+
+vector<Fighter*> Battle::getAllFighters() 
+{
+    vector<Fighter*> result;
+    if (player1.getHero() && player1.getHero()->isalive()) result.push_back(player1.getHero());
+    if (player2.getHero() && player2.getHero()->isalive()) result.push_back(player2.getHero());
+    if (watson.isalive() && getPlayerOfFighter(&watson) != nullptr) result.push_back(&watson);
+        
+    for (Sisters& s : sisters) {
+        if (s.isalive() && getPlayerOfFighter(&s) != nullptr) result.push_back(&s);
+    }
+    return result;
+}
+
+vector<Fighter*> Battle::getFighters()
+{
+    return getAllFighters();
+}
+
+void Battle::setuppositions() 
+{
+    Fighter* h1 = player1.getHero();
+    Fighter* h2 = player2.getHero();
+    if (h1 == nullptr || h2 == nullptr) return;
+
+    if (rand() % 2 == 0)
+     {
+        h1->setPosition(map.getZone(1));
+        h2->setPosition(map.getZone(2));
+    } else
+     {
+        h1->setPosition(map.getZone(2));
+        h2->setPosition(map.getZone(1));
+    }
+}
+
+void Battle::chooseSidekickPosition(Player& player)
+{
+    cout << "\n-----------------------------------------------\n";
+    if(player.getHero()->getName() == "Sherlock")
+    {
+        boardManager->showplacementzone(sherlock);
+        int choice;
+        do {
+            choice = readInt(player.getName() + " Choose your sidekick's position.", 1, 32);
+            if(getfighterat(map.getZone(choice))) cout << "occupied!\n";
+        } while(getfighterat(map.getZone(choice)));
+        watson.setPosition(map.getZone(choice));
+    }
+    else
+    {
+        boardManager->showplacementzone(dracula);
+        for(int i = 0; i < 3; i++)
+        {
+            int choice;
+            do {
+                choice = readInt(player.getName() + " Choose your sidekick's position.", 1, 32);
+                if(getfighterat(map.getZone(choice))) cout << "occupied!\n";
+            } while(getfighterat(map.getZone(choice)));
+            sisters[i].setPosition(map.getZone(choice));
+        }
+    }
+}
+
+void Battle::draculaability(Fighter* target)
+{
+    if(target == nullptr) return;
+    target->takeDamage(1);
+    cout << "Dracula damaged " << target->getName() << " for 1 damage\n";
+    cout << "Dracula draws a card\n";
+}
+
+void Battle::chooseFogPosition(Player& player)
+{
+    Fighter* hero = player.getHero();
+    vector<Zone*> zones = map.getplacementZone(hero->getPosition());
+    vector<int> validids;
+
+    cout << "\nChoose positions for Fog Tokens\n";
+    for(int i = 0; i < 3; i++)
+    {
+        validids.clear();
+        cout << "\nAvailable Zones:\n";
+        for(Zone* z : zones)
+        {
+            bool used = false;
+            for(FogToken& fog : fogtoken)
+            {
+                if(fog.getPosition() == z) { used = true; break; }
+            }
+            if(!used)
+            {
+                cout << z->getId() << " ";
+                validids.push_back(z->getId());
+            }
+        }
+        cout << endl;
+        int choice = readchoice("Choose zone for Fog " + to_string(i + 1) + ": ", validids);
+        fogtoken[i].setPosition(map.getZone(choice));
+    }
+}
+
+vector<Sisters>& Battle::getsisters() { return sisters; }
+
+Fighter* Battle::getfighterat(Zone* zone)
+{
+    if (zone == nullptr) return nullptr;
+    if (dracula.isalive() && dracula.getPosition() == zone && getPlayerOfFighter(&dracula) != nullptr) return &dracula;
+    if (invisibleman.isalive() && invisibleman.getPosition() == zone && getPlayerOfFighter(&invisibleman) != nullptr) return &invisibleman;
+    if (sherlock.isalive() && sherlock.getPosition() == zone && getPlayerOfFighter(&sherlock) != nullptr) return &sherlock;
+    if (watson.isalive() && watson.getPosition() == zone && getPlayerOfFighter(&watson) != nullptr) return &watson;
+
+    for (size_t i = 0; i < sisters.size(); i++)
+    {
+        if (sisters[i].isalive() && sisters[i].getPosition() == zone && getPlayerOfFighter(&sisters[i]) != nullptr)
+            return &sisters[i];
+    }
+    return nullptr; 
+}
+
+void Battle::printfighters()
+{
+    cout << "\n----------------BASKERVILLE------------------\n\n";
+    cout << "RED TEAM\n";
+    cout << "DRACULA HP : " << dracula.getHealth() << " / PLACE : " << dracula.getPosition()->getId() << endl;
+    for(int i = 0; i < sisters.size(); i++)
+    {
+        cout << "SISTER (" << i + 1 << ") HP : " << sisters[i].getHealth() << " / PLACE : " << sisters[i].getPosition()->getId() << endl;
+    }
+    cout << "\nBLUE TEAM\n";
+    cout << "SHERLOCK HP : " << sherlock.getHealth() << " / PLACE : " << sherlock.getPosition()->getId() << endl;
+    cout << "WATSON HP : " << watson.getHealth() << " / PLACE : " << watson.getPosition()->getId() << endl;
+}
+
+void Battle::checkInvisibleFogAtTurnStart()
+{
+    invisibleStartedOnFog = false;
+    Zone* pos = invisibleman.getPosition();
+    for(FogToken& fog : fogtoken)
+    {
+        if(fog.getPosition() == pos) { invisibleStartedOnFog = true; break; }
+    }
 }
