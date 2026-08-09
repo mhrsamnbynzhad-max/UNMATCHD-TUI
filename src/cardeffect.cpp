@@ -1867,7 +1867,7 @@ void SteplightlyEffect::apply(Fighter* attacker, Fighter* defender, Battle* batt
             }
             else
             {
-                cout << "Invisible Man is NOT on a Fog Token. Damage to deal is " << damageToDeal << ".\n";
+                cout << "Invisible Man iis NOT on a Fog Token. Damage to deal is " << damageToDeal << ".\n";
             }
 
             // اعمال آسیب به حریف پیدا شده
