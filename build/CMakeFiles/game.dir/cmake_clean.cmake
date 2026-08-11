@@ -23,6 +23,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/game.dir/src/fighter.cpp.obj.d"
   "CMakeFiles/game.dir/src/fogtoken.cpp.obj"
   "CMakeFiles/game.dir/src/fogtoken.cpp.obj.d"
+  "CMakeFiles/game.dir/src/graphic.cpp.obj"
+  "CMakeFiles/game.dir/src/graphic.cpp.obj.d"
   "CMakeFiles/game.dir/src/handling.cpp.obj"
   "CMakeFiles/game.dir/src/handling.cpp.obj.d"
   "CMakeFiles/game.dir/src/handpanel.cpp.obj"

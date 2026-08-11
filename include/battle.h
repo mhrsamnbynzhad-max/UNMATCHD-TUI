@@ -33,7 +33,6 @@ private:
     Player player1;
     Player player2;
 
-    // پوینتر به مدیرها
     CombatManager* combatManager;
     BoardManager* boardManager;
 
@@ -44,19 +43,18 @@ private:
     bool gameover = false;
     bool invisibleStartedOnFog = false;
 
+    std::vector<Fighter*> availableHeroes;
+    int sidekickIndex = 0;
+
 public:
     Battle();
     ~Battle();
 
-    // ==========================================
-    // دسترسی مستقیم به منیجرها
-    // ==========================================
+
     CombatManager* getCombat() { return combatManager; }
     BoardManager* getBoard() { return boardManager; }
 
-    // ==========================================
-    // دسترسی به اطلاعات بازی (Getters / Setters)
-    // ==========================================
+  
     Player& getplayer1() { return player1; }
     Player& getplayer2() { return player2; }
     Map& getMap() { return map; }
@@ -93,6 +91,15 @@ public:
     void setinvisibleability(bool value) { invisibleAbilityActive = value; }
     bool getinvisibleactive() const { return invisibleAbilityActive; }
     bool startedTurnOnFog() const { return invisibleStartedOnFog; }
+    void setAges(int , int );         
+    Player& getFirstChooser();
+    Player& getSecondChooser();
+    std::vector<Fighter*>& getAvailableHeroes();
+    void assignHero(Player& , Fighter* );
+    void finalizeSetup(); 
+    std::vector<int> getSidekickValidZones(Player& player);
+    bool placeSidekickAt(Player& player, int zoneId); 
+    void beginUnitSetup(); 
 };
 
 #endif

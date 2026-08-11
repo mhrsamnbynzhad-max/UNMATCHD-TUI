@@ -126,19 +126,27 @@ void BoardManager::showPossiblemoves(Fighter& fight)
     cout << endl;
 }
 
-void BoardManager::showplacementzone(Fighter& hero)
-{
+vector<int> BoardManager::getPlacementZoneIds(Fighter& hero) {
     vector<Zone*> zones = battle->getMap().getplacementZone(hero.getPosition());
-    cout << "\nAvailable zones: ";
-    for(size_t i = 0; i < zones.size(); i++)
-    {
-        if(battle->getfighterat(zones[i]) == nullptr)
-        {
-            cout << zones[i]->getId() << " ";    
+    vector<int> ids;
+    for(Zone* z : zones) {
+        if(battle->getfighterat(z) == nullptr) {
+            ids.push_back(z->getId());
         }
+    }
+    return ids;
+}
+  void BoardManager::showplacementzone(Fighter& hero)
+{
+    vector<int> ids = getPlacementZoneIds(hero);
+    cout << "\nAvailable zones: ";
+    for(int id : ids)
+    {
+        cout << id << " ";
     }
     cout << endl;
 }
+
 
 ZoneCheckResult BoardManager::canEnterzone(Fighter* mover, Fighter* occupant, int moveleft)
 {

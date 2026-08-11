@@ -56,10 +56,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Asus\Desktop\oknotbeok
+CMAKE_SOURCE_DIR = C:\Users\Asus\Desktop\unmatchedd
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Asus\Desktop\oknotbeok\build
+CMAKE_BINARY_DIR = C:\Users\Asus\Desktop\unmatchedd\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,17 +86,10 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\oknotbeok\build\CMakeFiles C:\Users\Asus\Desktop\oknotbeok\build\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\unmatchedd\build\CMakeFiles C:\Users\Asus\Desktop\unmatchedd\build\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\oknotbeok\build\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\unmatchedd\build\CMakeFiles 0
 .PHONY : all
-
-# The main codegen target
-codegen: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\oknotbeok\build\CMakeFiles C:\Users\Asus\Desktop\oknotbeok\build\\CMakeFiles\progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 codegen
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Asus\Desktop\oknotbeok\build\CMakeFiles 0
-.PHONY : codegen
 
 # The main clean target
 clean:
@@ -423,6 +416,30 @@ src/fogtoken.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/fogtoken.cpp.s
 .PHONY : src/fogtoken.cpp.s
 
+src/graphic.obj: src/graphic.cpp.obj
+.PHONY : src/graphic.obj
+
+# target to build an object file
+src/graphic.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/graphic.cpp.obj
+.PHONY : src/graphic.cpp.obj
+
+src/graphic.i: src/graphic.cpp.i
+.PHONY : src/graphic.i
+
+# target to preprocess a source file
+src/graphic.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/graphic.cpp.i
+.PHONY : src/graphic.cpp.i
+
+src/graphic.s: src/graphic.cpp.s
+.PHONY : src/graphic.s
+
+# target to generate assembly for a file
+src/graphic.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/graphic.cpp.s
+.PHONY : src/graphic.cpp.s
+
 src/handling.obj: src/handling.cpp.obj
 .PHONY : src/handling.obj
 
@@ -645,7 +662,6 @@ help:
 	@echo ... all (the default if no target is provided)
 	@echo ... clean
 	@echo ... depend
-	@echo ... codegen
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... game
@@ -685,6 +701,9 @@ help:
 	@echo ... src/fogtoken.obj
 	@echo ... src/fogtoken.i
 	@echo ... src/fogtoken.s
+	@echo ... src/graphic.obj
+	@echo ... src/graphic.i
+	@echo ... src/graphic.s
 	@echo ... src/handling.obj
 	@echo ... src/handling.i
 	@echo ... src/handling.s

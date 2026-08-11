@@ -24,6 +24,7 @@ public:
     std::vector<Zone*> getReachableZone(Fighter& fighter, int maxMove);
     std::vector<Zone*> getReachableZoneFromZone(Zone* start, int maxMove);
     bool moveFogToken(int fogIndex, int destinationId);
+    std::vector<int> getPlacementZoneIds(Fighter& hero);
 };
 
 #endif

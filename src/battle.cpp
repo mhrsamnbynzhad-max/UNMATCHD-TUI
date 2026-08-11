@@ -24,43 +24,8 @@ Battle::Battle()
         sisters.emplace_back();
         fogtoken.push_back(FogToken());
     }
+     availableHeroes = { &sherlock, &dracula, &invisibleman };
 
-    int age1 = readInt(player1.getName() + " age: ", 1, 100);
-    int age2 = readInt(player2.getName() + " age: ", 1, 100);
-
-    if(age1 < age2)
-    {
-        cout << player1.getName() << " is younger and chooses first.\n\n";
-        playerfirst = true;
-        chooseHeroes(player1, player2); 
-    }
-    else if(age2 < age1)
-    {
-        cout << player2.getName() << " is younger and chooses first.\n";
-        playerfirst = false;
-        chooseHeroes(player2, player1);
-    }
-    else
-    {
-        playerfirst = rand() % 2;
-        if(playerfirst)
-        {
-            cout << "Same age. Player 1 chooses first.\n";
-            chooseHeroes(player1, player2);
-        }
-        else
-        {
-            cout << "Same age. Player 2 chooses first.\n";
-            chooseHeroes(player2, player1);
-        }
-    }
-
-    dracula.setdeck(CardFactory::createDraculaDeck());
-    sherlock.setdeck(CardFactory::createSherlockDeck());
-    invisibleman.setdeck(CardFactory::createInvisibleDeck());
-
-    player1.drawCard();
-    player2.drawCard();
 }
 
 Battle::~Battle()
@@ -68,6 +33,69 @@ Battle::~Battle()
     delete combatManager;
     delete boardManager;
 }
+
+  void Battle::setAges(int age1, int age2)
+{
+    if(age1 < age2) playerfirst = true;
+    else if(age2 < age1) playerfirst = false;
+    else playerfirst = rand() % 2;
+}
+
+Player& Battle::getFirstChooser()  { return playerfirst ? player1 : player2; }
+Player& Battle::getSecondChooser() { return playerfirst ? player2 : player1; }
+
+std::vector<Fighter*>& Battle::getAvailableHeroes() { return availableHeroes; }
+
+void Battle::assignHero(Player& player, Fighter* hero)
+{
+    player.setHero(hero); 
+    availableHeroes.erase(remove(availableHeroes.begin(), availableHeroes.end(), hero), availableHeroes.end());
+}
+
+void Battle::beginUnitSetup()
+{
+    for (Fighter* unchosen : availableHeroes) 
+    {
+        unchosen->setPosition(nullptr);
+        unchosen->sethealth(0);
+    }
+    setuppositions();
+}
+
+vector<int> Battle::getSidekickValidZones(Player& player) {
+    Fighter* hero = player.getHero();
+    if (hero->getName() == "Sherlock") return boardManager->getPlacementZoneIds(sherlock);
+    if (hero->getName() == "Dracula")  return boardManager->getPlacementZoneIds(dracula);
+    return {}; 
+}
+
+bool Battle::placeSidekickAt(Player& player, int zoneId) {
+    Fighter* hero = player.getHero();
+    Zone* zone = map.getZone(zoneId);
+    if (zone == nullptr || getfighterat(zone) != nullptr) return false;
+
+    if (hero->getName() == "Sherlock") {
+        watson.setPosition(zone);
+        return true;
+    } else if (hero->getName() == "Dracula") {
+        sisters[sidekickIndex].setPosition(zone);
+        sidekickIndex++;
+        if (sidekickIndex >= 3) { sidekickIndex = 0; return true; }
+        return false;
+    }
+    return true;
+}
+
+void Battle::finalizeSetup()
+{
+    dracula.setdeck(CardFactory::createDraculaDeck());
+    sherlock.setdeck(CardFactory::createSherlockDeck());
+    invisibleman.setdeck(CardFactory::createInvisibleDeck());
+    player1.drawCard();
+    player2.drawCard();
+}
+
+
 
 Player* Battle::getPlayerOfFighter(Fighter* fighter)
 {

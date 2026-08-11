@@ -462,7 +462,7 @@ void SeductivecallEffect::apply(Fighter* attacker, Fighter* defender, Battle* ba
 
     if(sisterCount > 0)
     {
-        int totalDamage = sisterCount * 1; // هر خواهر 1 دمیج
+        int totalDamage = sisterCount * 1; 
         cout << "Found " << sisterCount << " Sister(s) nearby! " << selected->getName() << " takes " << totalDamage << " damage.\n";
         selected->takeDamage(totalDamage);
     }
@@ -1817,7 +1817,6 @@ void SlipAwayEffect::apply(Fighter* attacker,
 
 void SteplightlyEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
 {
-    // ۱. پیدا کردن خانه فعلی مرد نامرئی
     Fighter* invisibleMan = nullptr;
     if (attacker != nullptr && attacker->getName() == "InvisibleMan")
     {
@@ -1830,7 +1829,6 @@ void SteplightlyEffect::apply(Fighter* attacker, Fighter* defender, Battle* batt
     cout << "\n--- Step Lightly Effect ---\n";
     cout << "Invisible Man is at Zone " << currentZone->getId() << ".\n";
 
-    // ۲. بررسی تمام خانه‌های متصل (همسایه) برای پیدا کردن مبارزان حریف
     vector<Zone*> neighbors = currentZone->getNei();
     bool enemyFound = false;
 
@@ -1840,13 +1838,11 @@ void SteplightlyEffect::apply(Fighter* attacker, Fighter* defender, Battle* batt
     {
         Fighter* occupant = battle->getfighterat(z);
 
-        // اگر مبارزی در این خانه بود و دشمن بود
         if (occupant != nullptr && occupant->isalive() && occupant->getteam() != invisibleMan->getteam())
         {
             enemyFound = true;
             cout << "\nFound Enemy: " << occupant->getName() << " in Zone " << z->getId() << "!\n";
 
-            // ۳. حالا بررسی می‌کنیم آیا مرد نامرئی روی توکن مه قرار دارد یا خیر
             bool isOnFog = false;
             vector<FogToken>& fogs = battle->getfogtoken();
             
@@ -1858,7 +1854,6 @@ void SteplightlyEffect::apply(Fighter* attacker, Fighter* defender, Battle* batt
                     break;
                 }
             }
-            // ۴. تعیین مقدار آسیب بر اساس وجود توکن مه
             int damageToDeal = isOnFog ? 3 : 1;
             
             if (isOnFog)
@@ -1870,7 +1865,6 @@ void SteplightlyEffect::apply(Fighter* attacker, Fighter* defender, Battle* batt
                 cout << "Invisible Man is NOT on a Fog Token. Damage to deal is " << damageToDeal << ".\n";
             }
 
-            // اعمال آسیب به حریف پیدا شده
             occupant->takeDamage(damageToDeal);
             cout << occupant->getName() << " takes " << damageToDeal << " damage.\n";
         }

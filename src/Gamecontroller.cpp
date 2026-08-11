@@ -151,7 +151,7 @@ void GameController::run()
                 if (current->getHero()->getName() == "InvisibleMan" && current->getHero()->getPosition() == nullptr)
                 {
                     cout << "Invisible Man has vanished! The turn ends immediately.\n";
-                    action = 2; // مقدار اکشن را پر می‌کنیم تا حلقه while شکسته شود و نوبت به حریف برسد
+                    action = 2; 
                     break;
                 }
                 action++; 
