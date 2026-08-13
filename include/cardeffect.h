@@ -242,12 +242,11 @@ public:
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
 };
 
-class CovertPreparationEffect : public CardEffect
-{
-public:                                                                  
-  
-
-    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
+class CovertPreparationEffect : public CardEffect {
+public:
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice = -1) override;
+    bool needsGUIInput() const override;
+    std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
 };
 
 class DreamingOfRevengeEffect : public CardEffect
@@ -275,16 +274,19 @@ public:
 
 class IntoThinAirEffect : public CardEffect
 {
-public:   
+public:
+    bool needsGUIInput() const override;
+    std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
-
+  
 };
-
 class LurkingEffect : public CardEffect
 {
-public:  
+public:
+    bool needsGUIInput() const override;
+    std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
-
+  
 };
 
 class ReignOfTerrorEffect : public CardEffect
@@ -296,11 +298,12 @@ public:
 
 class RollingFogEffect : public CardEffect
 {
-public:  
+public:
+    bool needsGUIInput() const override;
+    std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
-
+  
 };
-
 class SlipAwayEffect : public CardEffect
 {
 public:     

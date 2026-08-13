@@ -63,14 +63,13 @@ void AmbushEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle,
         int opponentBoost = remove.getBoost();
         card.setValue(card.getValue() +  opponentBoost);
 
-        cout<<"Ambush : opponent discarded "<<remove.getName()<<" and + " <<opponentBoost <<" attack added . \n";
 
 }
 
  void FeastEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
 {
         attacker->heal(2);
-        cout<<"Feast: Dracula healed +2 HP. \n";
+       // cout<<"Feast: Dracula healed +2 HP. \n";
 
            vector<Sisters>& sisters = battle->getsisters();
            vector<int> deadindexes;
@@ -892,55 +891,22 @@ void SidearmEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, 
     cout<<"Sidearm deals "<<card.getValue()<<" damage.\n";
 }
 
-void movetoken ( Battle* battle , int v)
+void movetoken(Battle* battle, int v, int guiChoice, FogToken* selectedFog)
 {
-     vector<FogToken>& fogs = battle->getfogtoken();
+    if (battle == nullptr || selectedFog == nullptr) return;
 
-    cout<<"\nChoose Fog token:\n";
-
-    for(int i=0;i<fogs.size();i++)
-    {
-        cout<<i+1<<") Fog "<<i+1  <<" Zone " <<fogs[i].getPosition()->getId() <<endl;
+    if (guiChoice != -1) {
+        if (guiChoice != 0) {
+            Zone* targetZone = battle->getMap().getZone(guiChoice);
+            if (targetZone != nullptr) {
+                selectedFog->setPosition(targetZone);
+                std::cout << "Fog Token moved to Zone " << guiChoice << std::endl;
+            }
+        } else {
+            std::cout << "Fog Token was not moved.\n";
+        }
     }
-    int fogchoice = readInt("Fog : ",1,fogs.size());
-    FogToken& selectedFog = fogs[fogchoice-1];
-
-    // 3) move fog 0-3 spaces
-
-    vector<Zone*> reachable = battle->getBoard()->getReachableZoneFromZone(selectedFog.getPosition(), v);
-    
-     vector<Zone*> temp;
-
-        for(Zone* z : reachable)
-        {
-            if(battle->getfighterat(z)==nullptr)
-                temp.push_back(z);
-        }
-
-        reachable = temp;
-
-
-        vector<int> ids;
-        ids.push_back(0);
-
-        cout<<"0) Don't move Fog\n";
-
-        for(Zone* z : reachable)
-        {
-            cout<<z->getId()<<" ";ids.push_back(z->getId());
-        }
-        cout<<endl;
-
-
-        int destination = readchoice("Move Fog: ", ids);
-
-        if(destination != 0)
-        {
-            selectedFog.setPosition( battle->getMap().getZone(destination) );
-        }
-
 }
-
 void CodedNotesEffect::apply(Fighter* attacker,  Fighter* defender,  Battle* battle,  Card& card , int guiChoice)
 {
     if(attacker == nullptr)
@@ -1120,121 +1086,110 @@ void ConfoundEffect::apply(Fighter* attacker, Fighter* defender,   Battle* battl
     }
     }
 
- void CovertPreparationEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
-{
-    if(attacker == nullptr)
-        return;
+  bool CovertPreparationEffect::needsGUIInput() const {
+    return true; // فعال کردن ورودی گرافیکی برای این کارت
+}
 
-    // 1) Draw one card
+std::vector<int> CovertPreparationEffect::getValidZones(Fighter* attacker, Battle* battle) const {
+    std::vector<int> validIds;
+    if (battle == nullptr) return validIds;
+
+    // می‌توانید بر اساس مرحله‌ی انتخاب (مثلا انتخاب مقصد مه یا زون دشمن) لیست زون‌های معتبر را برگردانید
+    vector<FogToken>& fogs = battle->getfogtoken();
+    for (const auto& fog : fogs) {
+        if (fog.getPosition() != nullptr) {
+            validIds.push_back(fog.getPosition()->getId());
+        }
+    }
+    return validIds;
+}
+
+void CovertPreparationEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice)
+{
+    if (attacker == nullptr || battle == nullptr) return;
+
+    // 1) کشیدن یک کارت (این بخش بدون تغییر و اتوماتیک انجام می‌شود)
     Card c = attacker->drawTopCard();
-    if(c.getName() != "")
+    if (c.getName() != "")
     {
         attacker->gethand().push_back(c);
-        cout<<"Drew card : "<<c.getName()<<endl;
+        cout << "Drew card : " << c.getName() << endl;
     }
 
-    // 2) choose one fog
     vector<FogToken>& fogs = battle->getfogtoken();
+    if (fogs.empty()) return;
 
-    cout<<"\nChoose Fog token:\n";
+    // انتخاب پیش‌فرض یا بر اساس guiChoice ورودی‌داده‌شده از گرافیک
+    int fogChoiceIndex = 0; 
+    FogToken& selectedFog = fogs[fogChoiceIndex];
 
-    for(int i=0;i<fogs.size();i++)
-    {
-        cout<<i+1<<") Fog "<<i+1 <<" Zone " <<fogs[i].getPosition()->getId() <<endl;
-    }
-    int choice = readInt("Fog : ",1,fogs.size());
-    FogToken& selectedFog = fogs[choice-1];
-
-    // 3) move fog 0-2 spaces
-    cout<<"0) Don't move\n";
-
+    // 3) جابجایی مه (اگر guiChoice داده شده باشد می‌توان از آن استفاده کرد)
     vector<Zone*> reachable = battle->getBoard()->getReachableZoneFromZone(selectedFog.getPosition(), 2);
-
-    for(int i=0;i<reachable.size();i++)
-    {
-        cout<<i+1<<") Zone "
-            <<reachable[i]->getId()
-            <<endl;
-    }
-    int move =readInt("Move fog : ",  0, reachable.size());
-
-    if(move != 0)
-    {
-        selectedFog.setPosition(
-            reachable[move-1]
-        );
+    if (guiChoice != -1) {
+        Zone* targetZone = battle->getMap().getZone(guiChoice);
+        if (targetZone != nullptr) {
+            selectedFog.setPosition(targetZone);
+        }
     }
 
     Fighter* enemy = defender;
-    vector<FogToken*> otherFogs;
+    if (!enemy) return;
 
-    for(int i=0;i<fogs.size();i++)
+    vector<FogToken*> otherFogs;
+    for (size_t i = 0; i < fogs.size(); i++)
     {
-        if(i != choice-1)
+        if (i != (size_t)fogChoiceIndex)
             otherFogs.push_back(&fogs[i]);
     }
 
+    if (otherFogs.empty()) return;
+
     bool close = false;
-
-
-    for(FogToken* fog : otherFogs)
+    for (FogToken* fog : otherFogs)
     {
-        vector<Zone*> zones =battle->getBoard()->getReachableZoneFromZone(    fog->getPosition(),    2);
-        for(Zone* z : zones)
+        vector<Zone*> zones = battle->getBoard()->getReachableZoneFromZone(fog->getPosition(), 2);
+        for (Zone* z : zones)
         {
-            if(z == enemy->getPosition())
+            if (z == enemy->getPosition())
             {
                 close = true;
                 break;
             }
         }
-
-
-        if(close)
-            break;
+        if (close) break;
     }
 
-    // already close -> nothing
-
-    if(close)
+    if (close)
     {
-        cout<<"Enemy is already near a fog.\n";
+        cout << "Enemy is already near a fog.\n";
         return;
     }
 
-    // 5) move enemy near closest fog
-  cout<<"Enemy is moved near Fog.\n";
-
-
+    // 5) جابجایی دشمن نزدیک به نزدیک‌ترین مه
+    cout << "Enemy is moved near Fog.\n";
     FogToken* targetFog = otherFogs[0];
 
     vector<Zone*> possible;
     vector<Zone*> around = battle->getMap().getplacementZone(targetFog->getPosition());
 
-
-    for(Zone* z : around)
+    for (Zone* z : around)
     {
-        vector<Zone*> dist =battle->getBoard()->getReachableZoneFromZone(targetFog->getPosition(),2);
-        for(Zone* x : dist)
+        vector<Zone*> dist = battle->getBoard()->getReachableZoneFromZone(targetFog->getPosition(), 2);
+        for (Zone* x : dist)
         {
-            if(x == z &&
-               battle->getfighterat(z)==nullptr)
+            if (x == z && battle->getfighterat(z) == nullptr)
             {
                 possible.push_back(z);
             }
         }
     }
 
-
-
-    if(!possible.empty())
+    if (!possible.empty())
     {
         enemy->setPosition(possible[0]);
-        cout<<enemy->getName() <<" moved near Fog Zone " <<targetFog->getPosition()->getId() <<endl;
+        cout << enemy->getName() << " moved near Fog Zone " << targetFog->getPosition()->getId() << endl;
     }
-
 }
-
 void DreamingOfRevengeEffect::apply(Fighter* attacker,  Fighter* defender,  Battle* battle,  Card& card , int guiChoice)
 {
     if(attacker == nullptr || battle == nullptr)
@@ -1340,75 +1295,93 @@ void EmergefrommistEffect::apply(Fighter* attacker, Fighter* defender, Battle* b
 }
 
 
-void IntoThinAirEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
-{
-    if(attacker == nullptr)
-        return;
-
-    cout << "\n--- Disappear In Air ---\n";
-
-    vector<Zone*> neighbors = attacker->getPosition()->getNei();
-    vector<int> validMove;
-    validMove.push_back(0);
-
-    cout << "Nearby zones:\n";
-    cout << "0) Stay here\n";
-
-    for(Zone* z : neighbors)
-    {
-        if(battle->getfighterat(z)==nullptr)
-        {
-            cout << z->getId() << endl;
-            validMove.push_back(z->getId());
-        }
-    }
-    int choice = readchoice( "Move InvisibleMan: ", validMove );
-
-    if(choice != 0)
-    {
-        attacker->setPosition( battle->getMap().getZone(choice) );
-        cout<<"InvisibleMan moved to "<<choice<<endl;
-    }
-    
-    movetoken(battle , 3);
-
+bool IntoThinAirEffect::needsGUIInput() const {
+    return true;
 }
 
-void LurkingEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
-{
-    if(attacker == nullptr)
-        return;
+std::vector<int> IntoThinAirEffect::getValidZones(Fighter* attacker, Battle* battle) const {
+    std::vector<int> validIds;
+    if (attacker == nullptr || battle == nullptr) return validIds;
 
-    cout << "\n--- Lurking ---\n";
+    validIds.push_back(0);
+    Zone* currentPos = attacker->getPosition();
+    if (currentPos != nullptr) {
+        for (Zone* z : currentPos->getNei()) {
+            if (z != nullptr && battle->getfighterat(z) == nullptr) {
+                validIds.push_back(z->getId());
+            }
+        }
+    }
+    return validIds;
+}
+
+void IntoThinAirEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice)
+{
+    if (attacker == nullptr || battle == nullptr) return;
+
+    if (guiChoice != -1) {
+        if (guiChoice != 0) {
+            Zone* targetZone = battle->getMap().getZone(guiChoice);
+            if (targetZone != nullptr && battle->getfighterat(targetZone) == nullptr) {
+                attacker->setPosition(targetZone);
+                std::cout << "InvisibleMan moved to " << guiChoice << std::endl;
+            }
+        } else {
+            std::cout << "InvisibleMan stayed here.\n";
+        }
+        
+        auto& fogs = battle->getfogtoken();
+        if (!fogs.empty()) {
+            movetoken(battle, 3, guiChoice, &fogs[0]);
+        }
+    }
+}
+
+bool LurkingEffect::needsGUIInput() const {
+    return true;
+}
+
+std::vector<int> LurkingEffect::getValidZones(Fighter* attacker, Battle* battle) const {
+    std::vector<int> validIds;
+    if (attacker == nullptr || battle == nullptr) return validIds;
+
+    auto& fogs = battle->getfogtoken();
+    
+    for (const auto& fog : fogs) {
+        if (fog.getPosition() != nullptr) {
+            validIds.push_back(fog.getPosition()->getId());
+        }
+    }
+    
+    return validIds;
+}
+
+void LurkingEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice)
+{
+    if (attacker == nullptr || battle == nullptr) return;
+
     attacker->addtohand(attacker->getrandomcard(1));
 
-    cout << "1) Move Invisible Man to a Fog Token\n";
-    cout << "2) Move a Fog Token up to 3 spaces\n";
-
-    int choice = readInt("Choose: ",1,2);
-
-    vector<FogToken>& fogs = battle->getfogtoken();
-
-    if(choice == 1)
-    {
-        vector<int> ids;
+    auto& fogs = battle->getfogtoken();
+    if (fogs.empty()) return;
 
 
-        cout<<"Fog token positions:\n";
-
-        for(int i=0;i<fogs.size();i++)
-        {
-            cout<<i+1<<") Fog "<<i+1  <<" Zone "<<fogs[i].getPosition()->getId() <<endl;
-            ids.push_back(i);
+    if (guiChoice != -1) {
+      
+        FogToken* targetFog = nullptr;
+        for (auto& fog : fogs) {
+            if (fog.getPosition() != nullptr && fog.getPosition()->getId() == guiChoice) {
+                targetFog = &fog;
+                break;
+            }
         }
-        int selected = readchoice("Choose fog: ",ids);
 
-        attacker->setPosition( fogs[selected].getPosition());
-    }
-
-    else if(choice == 2)
-    {
-       movetoken(battle , 3);
+        if (targetFog != nullptr) {
+            attacker->setPosition(targetFog->getPosition());
+            std::cout << "Invisible Man moved to Fog Token at Zone " << guiChoice << std::endl;
+        } else {
+            movetoken(battle, 3, guiChoice, &fogs[0]);
+        }
     }
 }
 
@@ -1460,89 +1433,81 @@ void ReignOfTerrorEffect::apply(Fighter* attacker, Fighter* defender, Battle* ba
     }
 }
 
-void RollingFogEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
+  bool RollingFogEffect::needsGUIInput() const {
+    return true;
+}
+
+std::vector<int> RollingFogEffect::getValidZones(Fighter* attacker, Battle* battle) const {
+    std::vector<int> validIds;
+    if (battle == nullptr) return validIds;
+
+    auto& fogs = battle->getfogtoken();
+
+
+    validIds.push_back(0);
+    for (const auto& fog : fogs) {
+        if (fog.getPosition() != nullptr) {
+            validIds.push_back(fog.getPosition()->getId());
+        }
+    }
+
+    return validIds;
+}
+
+void RollingFogEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice)
 {
-     vector<FogToken>& fogs = battle->getfogtoken();
+    if (battle == nullptr) return;
 
-    vector<bool> moved(fogs.size(), false);
+    auto& fogs = battle->getfogtoken();
+    if (fogs.empty()) return;
 
-    while(true)
-    {
-        cout << "\nChoose a Fog Token to move\n";
-        cout << "0) Finish\n";
-
-        bool anyLeft = false;
-
-        for(int i = 0; i < fogs.size(); i++)
-        {
-            if(moved[i])
-                continue;
-
-            anyLeft = true;
-
-            cout << i + 1 << ") Fog "<< i + 1<< " (Zone " << fogs[i].getPosition()->getId() << ")\n";
-            
+    if (guiChoice != -1) {
+        if (guiChoice == 0) {
+            battle->giveExtraAction();
+            std::cout << "Extra action gained!\n";
+            return;
         }
 
-        if(!anyLeft)
-            break;
-
-        int fogChoice =readInt("Choice : ",   0,fogs.size());
-
-        if(fogChoice == 0)
-            break;
-
-        fogChoice--;
-
-        if(moved[fogChoice])
-        {
-            cout << "This Fog Token has already been moved.\n";
-            continue;
+        FogToken* selectedFog = nullptr;
+        for (auto& fog : fogs) {
+            if (fog.getPosition() != nullptr && fog.getPosition()->getId() == guiChoice) {
+                selectedFog = &fog;
+                break;
+            }
         }
 
-        FogToken& fog = fogs[fogChoice];
+        if (selectedFog != nullptr) {
+           
+            std::vector<int> validZones;
+            for (int id = 1; id <= 32; id++) {
+                Zone* z = battle->getMap().getZone(id);
+                if (z == nullptr) continue;
 
-        vector<int> validZones;
-
-        for(int id = 1; id <= 32; id++)
-        {
-            Zone* z = battle->getMap().getZone(id);
-
-            bool occupiedByFog = false;
-
-            for(int j = 0; j < fogs.size(); j++)
-            {
-                if(j == fogChoice)
-                    continue;
-
-                if(fogs[j].getPosition() == z)
-                {
-                    occupiedByFog = true;
-                    break;
+                bool occupiedByOtherFog = false;
+                for (const auto& otherFog : fogs) {
+                    if (&otherFog != selectedFog && otherFog.getPosition() == z) {
+                        occupiedByOtherFog = true;
+                        break;
+                    }
+                }
+                if (!occupiedByOtherFog) {
+                    validZones.push_back(id);
                 }
             }
 
-            if(!occupiedByFog)
-                validZones.push_back(id);
+            Zone* targetZone = battle->getMap().getZone(guiChoice);
+            if (targetZone != nullptr) {
+                selectedFog->setPosition(targetZone);
+                std::cout << "Fog moved to Zone " << guiChoice << std::endl;
+            }
         }
-
-        int zoneId = readchoice("Destination Zone : ", validZones);
-
-        fog.setPosition( battle->getMap().getZone(zoneId) );
-
-        moved[fogChoice] = true;
-
-        cout << "Fog moved to Zone "<< zoneId<< endl;
     }
-    battle->giveExtraAction();
-    cout << "Extra action gained!\n";
 }
-
 
 void SlipAwayEffect::apply(Fighter* attacker,
                            Fighter* defender,
                            Battle* battle,
-                           Card& card  , int guiChoice)
+                           Card& card, int guichoice) 
 {
     Fighter* invisibleMan = nullptr;
 
@@ -1665,6 +1630,7 @@ void SlipAwayEffect::apply(Fighter* attacker,
          << targetZone->getId()
          << " along with the Fog Token!\n";
 }
+
 
 
 void SteplightlyEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
