@@ -66,34 +66,81 @@ vector<int> Battle::getSidekickValidZones(Player& player) {
     Fighter* hero = player.getHero();
     if (hero->getName() == "Sherlock") return boardManager->getPlacementZoneIds(sherlock);
     if (hero->getName() == "Dracula")  return boardManager->getPlacementZoneIds(dracula);
-    return {}; 
+    if (hero->getName() == "InvisibleMan") {
+        vector<Zone*> zones = map.getplacementZone(hero->getPosition());
+        vector<int> ids;
+        for(Zone* z : zones) {
+            bool used = false;
+            for(FogToken& fog : fogtoken) {
+                if(fog.getPosition() == z) { used = true; break; }
+            }
+            if(!used) ids.push_back(z->getId());
+        }
+        return ids;
+    }
+    return {};
 }
 
 bool Battle::placeSidekickAt(Player& player, int zoneId) {
     Fighter* hero = player.getHero();
     Zone* zone = map.getZone(zoneId);
-    if (zone == nullptr || getfighterat(zone) != nullptr) return false;
+    if (zone == nullptr) return false;
 
     if (hero->getName() == "Sherlock") {
+        if (getfighterat(zone) != nullptr) return false;
         watson.setPosition(zone);
         return true;
     } else if (hero->getName() == "Dracula") {
+        if (getfighterat(zone) != nullptr) return false;
         sisters[sidekickIndex].setPosition(zone);
         sidekickIndex++;
         if (sidekickIndex >= 3) { sidekickIndex = 0; return true; }
+        return false;
+    } else if (hero->getName() == "InvisibleMan") {
+        for(FogToken& fog : fogtoken) {
+            if(fog.getPosition() == zone) return false; // این خونه از قبل فوگ داره
+        }
+        fogtoken[fogIndex].setPosition(zone);
+        fogIndex++;
+        if (fogIndex >= 3) { fogIndex = 0; return true; }
         return false;
     }
     return true;
 }
 
-void Battle::finalizeSetup()
-{
-    dracula.setdeck(CardFactory::createDraculaDeck());
-    sherlock.setdeck(CardFactory::createSherlockDeck());
-    invisibleman.setdeck(CardFactory::createInvisibleDeck());
-    player1.drawCard();
-    player2.drawCard();
-}
+    void Battle::finalizeSetup()
+    {
+        dracula.setdeck(CardFactory::createDraculaDeck());
+        sherlock.setdeck(CardFactory::createSherlockDeck());
+        invisibleman.setdeck(CardFactory::createInvisibleDeck());
+        player1.drawCard();
+        player2.drawCard();
+    }
+
+    void Battle::startGame()
+    {
+        if (playerfirst) { turnQueue.push(&player1); turnQueue.push(&player2); }
+        else { turnQueue.push(&player2); turnQueue.push(&player1); }
+        actionsThisTurn = 0;
+        startTurn(*turnQueue.front());
+    }
+
+    Player& Battle::getCurrentPlayer() { return *turnQueue.front(); }
+
+    Player& Battle::getOtherPlayer(Player& p) { return (&p == &player1) ? player2 : player1; }
+
+    void Battle::endTurnAndAdvance()
+    {
+        Player* current = turnQueue.front();
+        turnQueue.pop();
+
+        vector<Card>& hand = current->getHero()->gethand();
+        while (hand.size() > 7) hand.pop_back();
+
+        turnQueue.push(current);
+        actionsThisTurn = 0;
+        startTurn(*turnQueue.front());
+    }
 
 
 
@@ -130,12 +177,12 @@ void Battle::chooseHeroes(Player& first, Player& second)
     second.getHero()->setupUnits(this, second);
 }
 
-void Battle::startTurn(Player& player)
+ void Battle::startTurn(Player& player)
 {
     sherlockAbilityActive = false;
     Fighter* hero = player.getHero();
 
-    if (hero != nullptr && hero->isalive())
+    if (hero != nullptr && hero->isalive() && hero->getName() != "Dracula")
     {
         hero->specialAbillity(this);
     }

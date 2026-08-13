@@ -9,9 +9,11 @@
 
 #include  <iostream>
 #include  <algorithm>
+#include <queue>
+#include <set>
 using namespace std;
 
-void BloodThirstEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+void BloodThirstEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
   {
        Zone* enemyZone = defender->getPosition();
 
@@ -48,7 +50,7 @@ void BloodThirstEffect :: apply(Fighter* attacker, Fighter* defender, Battle* ba
          << " attack.\n";
  }
        
-void AmbushEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+void AmbushEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
 {
         if(!defender || defender->handsize() == 0)
         {
@@ -65,7 +67,7 @@ void AmbushEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle,
 
 }
 
- void FeastEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+ void FeastEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
 {
         attacker->heal(2);
         cout<<"Feast: Dracula healed +2 HP. \n";
@@ -98,7 +100,7 @@ void AmbushEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle,
 
 }
 
-void MistFormEffect::apply(Fighter* attacker,  Fighter* defender, Battle* battle, Card& card)
+void MistFormEffect::apply(Fighter* attacker,  Fighter* defender, Battle* battle, Card& card, int guiChoice)
 {
     cout << "\nMist Form activated!\n";
 
@@ -150,7 +152,7 @@ void MistFormEffect::apply(Fighter* attacker,  Fighter* defender, Battle* battle
         return;
     }
 }
- void MonesterFormEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) 
+ void MonesterFormEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice) 
  {
     cout<<"hand size beformonesform "<<attacker->gethand().size()<<endl;
     int basattack = card.getValue();
@@ -194,122 +196,70 @@ void MistFormEffect::apply(Fighter* attacker,  Fighter* defender, Battle* battle
               card.setValue(lastattack);  
  }
 
-  void ManeuverEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
-{
-    Fighter* dracula = nullptr;
-    Fighter* enemy = nullptr;
+   bool ManeuverEffect::needsGUIInput() const {
+    return true;
+}
+void ManeuverEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice) {
+    if (guiChoice == -1 || attacker == nullptr) return; 
 
-    if (attacker != nullptr && attacker->getName() == "Dracula")
-    {
-        dracula = attacker;
-        enemy = defender;
-    }
-    else if (defender != nullptr && defender->getName() == "Dracula")
-    {
-        dracula = defender;
-        enemy = attacker;
-    }
-    else
-    {
-        cout << "Only Dracula can move 3 places.\n";
-        return;
-    }
-
-    Zone* current = dracula->getPosition();
-    int moves = 0;
-
-    while (moves < 3)
-    {
-        cout << "\n----- Dracula Movement (" << moves << "/3) -----\n";
-        cout << "Current Zone: " << current->getId() << "\n";
-
-        vector<Zone*> connectedzone = current->getNei();
-        vector<Zone*> validmoves;
-
-        cout << "Available connected zones:\n";
-
-        for (Zone* z : connectedzone)
-        {
-            Fighter* occupant = battle->getfighterat(z);
-
-            if (occupant == nullptr)
-            {
-                validmoves.push_back(z);
-                cout << "Zone " << z->getId() << " (OK - Empty)\n";
-            }
-            else if (occupant->getteam() == dracula->getteam())
-            {
-                validmoves.push_back(z);
-                cout << "Zone " << z->getId() << " Passable (" << occupant->getName() << " - Teammate)\n";
-            }
-            else
-            {
-                cout << "Zone " << z->getId() << " Blocked by Enemy (" << occupant->getName() << ")\n";
-            }
-        }
-
-        if (validmoves.empty())
-        {
-            cout << "No valid moves available. Movement ends.\n";
+    std::vector<int> validZones = getValidZones(attacker, battle);
+    bool isValid = false;
+    for (int id : validZones) {
+        if (id == guiChoice) {
+            isValid = true;
             break;
         }
+    }
 
-        vector<int> validids;
-        for (Zone* z : validmoves)
-        {
-            validids.push_back(z->getId());
-        }
+    if (!isValid) return;  
 
-        int choice = readchoice("Enter zone ID to move Dracula:\n", validids);
-        Zone* selected = nullptr;
-
-        for (Zone* z : validmoves)
-        {
-            if (z->getId() == choice)
-            {
-                selected = z;
-                break;
-            }
-        }
-
-        if (selected == nullptr)
-        {
-            cout << "Invalid zone. Try again.\n";
-            continue;
-        }
-
-        dracula->setPosition(selected);
-        current = selected;
-        moves++;
-        cout << "Dracula moved to zone " << current->getId() << "\n";
-
-        if (moves >= 3)
-        {
-            Fighter* occupant = battle->getfighterat(current);
-            if (occupant != nullptr && occupant != dracula && occupant->getteam() == dracula->getteam())
-            {
-                cout << "Warning: Cannot end movement on a teammate's zone!\n";
-            }
-            cout << "Maximum movement reached (3).\n";
-            break;
-        }
-
-        Fighter* occupant = battle->getfighterat(current);
-        if (occupant != nullptr && occupant != dracula && occupant->getteam() == dracula->getteam())
-        {
-            cout << "You are on a teammate's zone (" << occupant->getName() << "). You MUST keep moving!\n";
-            continue;
-        }
-        int ok = readInt("Do you want to continue moving? Yes (1) / No (0):\n", 0, 1);
-        if (ok == 0)
-        {
-            cout << "Movement stopped by player.\n";
-            break;
-        }
+    Zone* selectedZone = battle->getMap().getZone(guiChoice);
+    if (selectedZone != nullptr) {
+        attacker->setPosition(selectedZone);
     }
 }
 
-  void  ExploitEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) 
+
+
+std::vector<int> ManeuverEffect::getValidZones(Fighter* attacker, Battle* battle) const {
+    std::vector<int> validIds;
+    if (attacker == nullptr || battle == nullptr) return validIds;
+
+    Zone* startZone = attacker->getPosition();
+    if (startZone == nullptr) return validIds;
+
+    std::set<Zone*> visited;
+    std::queue<std::pair<Zone*, int>> q;
+
+    q.push({startZone, 0});
+    visited.insert(startZone);
+
+    while (!q.empty()) {
+        auto [currentZone, steps] = q.front();
+        q.pop();
+
+        if (steps >= 3) continue;
+
+        for (Zone* neighbor : currentZone->getNei()) {
+            if (neighbor == nullptr) continue;
+            if (visited.count(neighbor)) continue; 
+
+            Fighter* occupant = battle->getfighterat(neighbor);
+
+            bool canPassOrStop = (occupant == nullptr || occupant->getteam() == attacker->getteam());
+
+            if (canPassOrStop) {
+                visited.insert(neighbor);
+                q.push({neighbor, steps + 1});
+                
+                validIds.push_back(neighbor->getId());
+            }
+        }
+    }
+
+    return validIds;
+}
+  void  ExploitEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice) 
   {
     auto cards = attacker->getrandomcard(1);
     if(!cards.empty())
@@ -319,7 +269,7 @@ void MistFormEffect::apply(Fighter* attacker,  Fighter* defender, Battle* battle
     }
   }
 
-  void LookIntoMyEyesEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+  void LookIntoMyEyesEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card,int guuichoice  )
   {
     int oppBoost = battle->getCombat()->gelastattackcard().getBoost();
 
@@ -328,7 +278,7 @@ void MistFormEffect::apply(Fighter* attacker,  Fighter* defender, Battle* battle
     cout<<" opponent  boost ("<<oppBoost<<" 0 added to this defense.\n";
   }
 
-void HuntEyesEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card) 
+void HuntEyesEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card ,int guuichoice = -1) 
 {
   Zone* attackerzone = attacker->getPosition();
   vector<Zone*> connected = attackerzone->getNei();
@@ -366,200 +316,129 @@ void HuntEyesEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battl
  
 }
 
-void SeductivecallEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+
+bool SeductiveCallEffect::needsGUIInput() const 
 {
-     vector<Fighter*> fighters;
-    
-    for(Fighter* f : battle->getFighters())
-    {
-        if(f != nullptr && f->isalive() && f->getPosition() != nullptr)
-        {
-            fighters.push_back(f);
-        }
-    }
-    
-    if (fighters.empty())
-    {
-        cout << "No fighters available on the board to move.\n";
-        return;
-    }
-    cout << "\n--- Seductive Call: Choose a fighter to move (up to 2 spaces) ---\n";
-    for (int i = 0; i < fighters.size(); i++)
-    {
-        cout << i + 1 << ") " << fighters[i]->getName() << " (Zone " << fighters[i]->getPosition()->getId() << ")\n";
-    }
-
-    int choose = readInt("Choose fighter number: ", 1, fighters.size());
-    choose--;
-   
-    Fighter* selected = fighters[choose];
-
-    vector<Zone*> reachableZones = battle->getBoard()->getReachableZone(*selected, 2);
-    vector<Zone*> validZones;
-
-    cout << "Available destination zones (distance <= 2 & empty):\n";
-    for(Zone* z : reachableZones)
-    {
-        Fighter* occ = battle->getfighterat(z);
-        if(occ == nullptr || occ == selected)
-        {
-            cout << z->getId() << "  ";
-            validZones.push_back(z);
-        }
-    }
-    cout << "\n";
-
-    if(validZones.empty())
-    {
-        cout << "No valid destination zones available for movement.\n";
-        return;
-    }
-
-    vector<int> validids;
-    for(Zone* z : validZones)
-    {
-        validids.push_back(z->getId());
-    }
-
-    int destId = readchoice("Enter destination zone ID: \n", validids);
-    
-    Zone* targetZone = nullptr;
-    for(Zone* z : validZones)
-    {
-        if(z->getId() == destId)
-        {
-            targetZone = z;
-            break;
-        }
-    }
-
-    if(targetZone == nullptr)
-    {
-        cout << "Invalid destination.\n";
-        return;
-    }
-
-    selected->setPosition(targetZone);
-    cout << fighters[choose]->getName() << " moved to Zone " << targetZone->getId() << "\n";
-
-    if(selected->getName() == "Sister")
-    {
-        cout << "The selected fighter is a Sister. No damage dealt.\n";
-        return;
-    }
-
-    vector<Zone*> connectedToTarget = targetZone->getNei();
-    int sisterCount = 0;
-
-    for(Zone* z : connectedToTarget)
-    {
-        Fighter* occ = battle->getfighterat(z);
-        if(occ != nullptr && occ->getName() == "Sister")
-        {
-            sisterCount++;
-        }
-    }
-
-    if(sisterCount > 0)
-    {
-        int totalDamage = sisterCount * 1; 
-        cout << "Found " << sisterCount << " Sister(s) nearby! " << selected->getName() << " takes " << totalDamage << " damage.\n";
-        selected->takeDamage(totalDamage);
-    }
-    else
-    {
-        cout << "No Sister found in adjacent zones. No damage taken.\n";
-    }
+    return true; 
 }
 
- void  SurvivalInstinctEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
- {
-     // 1) Calculate combat result
-    int finalAttack = card.getValue();
-    int finalDefense = battle->getCombat()->getlastdefend();
+std::vector<int> SeductiveCallEffect::getValidZones(Fighter* attacker, Battle* battle) const
+{
+    std::vector<int> validIds;
+    if (battle == nullptr) return validIds;
 
-    cout << "Final Attack = " << finalAttack << " | Final Defense = " << finalDefense << endl;
+    if (selectedCard == nullptr) {
+        for (Fighter* f : battle->getFighters()) {
+            if (f != nullptr && f != attacker && f->isalive() && f->getPosition() != nullptr) 
+            {
+                validIds.push_back(f->getPosition()->getId());
+            }
+        }
+    } else {
+        vector<Zone*> reachableZones = battle->getBoard()->getReachableZone(*selectedCard, 2);
+        for (Zone* z : reachableZones) {
+            Fighter* occ = battle->getfighterat(z);
+            if (occ == nullptr || occ == selectedCard) {
+                validIds.push_back(z->getId());
+            }
+        }
+    }
+    return validIds;
+}
 
-    if(finalAttack <= finalDefense)
-    {
-        cout << "The Sister did not win the combat. Nothing happens.\n";
-        return;
+void SeductiveCallEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice) {
+    if (guiChoice == -1) return;
+
+    if (selectedCard == nullptr) {
+        Zone* clickedZone = battle->getMap().getZone(guiChoice);
+        if (clickedZone != nullptr) {
+            selectedCard = battle->getfighterat(clickedZone);
+        }
+        return; 
     }
 
-    cout << "The Sister won the combat! Dracula may be placed next to the enemy fighter.\n";
+    Zone* targetZone = battle->getMap().getZone(guiChoice);
+    if (targetZone == nullptr) return;
 
-    // 2) Choose opponent target (Sherlock or Watson)
-        vector<Fighter*> opponent;
-        for(Fighter* f : battle->getFighters())
-        {
-            if(f->getteam() != attacker->getteam())
-            {
-                opponent.push_back(f);
+    selectedCard->setPosition(targetZone);
+
+    if (selectedCard->getName() != "Sister") {
+        vector<Zone*> connectedToTarget = targetZone->getNei();
+        int sisterCount = 0;
+
+        for (Zone* z : connectedToTarget) {
+            Fighter* occ = battle->getfighterat(z);
+            if (occ != nullptr && occ->getName() == "Sister") {
+                sisterCount++;
             }
         }
 
-    for(int i = 0; i < opponent.size(); i++)
-    {
-        cout << i+1 << ") " << opponent[i]->getName()<< " (Zone " << opponent[i]->getPosition()->getId() << ")\n";
-    }
-
-    int choice;
-    choice = readInt( "Dracula wants to move next to which opponent?\n", 1 , opponent.size());
-    choice--;
-
-    Fighter* targetopponent= opponent[choice];
-    Zone* opponentZone = targetopponent->getPosition();
-
-    // 3) Find adjacent zones to the opponent
-    vector<Zone*> neighbors = opponentZone->getNei();
-    vector<Zone*> emptyZones;
-
-    cout << "Adjacent zones to the enemy:\n";
-    for(Zone* z : neighbors)
-    {
-        Fighter* occ = battle->getfighterat(z);
-        cout << "Zone " << z->getId();
-
-        if(occ == nullptr)
-        {
-            cout << " (Empty)\n";
-            emptyZones.push_back(z);
-        }
-        else
-        {
-            cout << " (Occupied by " << occ->getName() << ")\n";
+        if (sisterCount > 0) {
+            int totalDamage = sisterCount * 1;
+            selectedCard->takeDamage(totalDamage);
         }
     }
 
+    selectedCard = nullptr;
+}
 
-    if(emptyZones.empty())
-    {
-        cout << "There are no empty adjacent zones. Dracula cannot be moved.\n";
-        return;
+
+bool SurvivalInstinctEffect::needsGUIInput() const {
+    return true; 
+}
+
+std::vector<int> SurvivalInstinctEffect::getValidZones(Fighter* attacker, Battle* battle) const {
+    std::vector<int> validIds;
+    if (battle == nullptr) return validIds;
+
+    if (selectedOpponent == nullptr) {
+        for (Fighter* f : battle->getFighters()) {
+            if (f != nullptr && f->getteam() != attacker->getteam() && f->getPosition() != nullptr) {
+                validIds.push_back(f->getPosition()->getId());
+            }
+        }
+    } 
+    else {
+        Zone* opponentZone = selectedOpponent->getPosition();
+        if (opponentZone != nullptr) {
+            for (Zone* z : opponentZone->getNei()) {
+                if (z != nullptr && battle->getfighterat(z) == nullptr) {
+                    validIds.push_back(z->getId());
+                }
+            }
+        }
+    }
+    return validIds;
+}
+
+void SurvivalInstinctEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice) {
+    if (guiChoice == -1) return;
+
+    int finalAttack = card.getValue();
+    int finalDefense = battle->getCombat()->getlastdefend();
+    if (finalAttack <= finalDefense) {
+        return; 
     }
 
-    // 4) Choose empty zone for Dracula
-    for(int i = 0; i < emptyZones.size(); i++)
-    {
-        cout << i+1 << ") Zone " << emptyZones[i]->getId() << endl;
+    if (selectedOpponent == nullptr) {
+        Zone* clickedZone = battle->getMap().getZone(guiChoice);
+        if (clickedZone != nullptr) {
+            selectedOpponent = battle->getfighterat(clickedZone);
+        }
+        return; 
     }
 
-    int destChoice;
-    destChoice = readInt("Dracula can move to these empty zones:\n" , 0 , emptyZones.size());
-    destChoice--;
-    
-    Zone* finalZone = emptyZones[destChoice];
+    Zone* finalZone = battle->getMap().getZone(guiChoice);
+    if (finalZone == nullptr) return;
 
-    // 5) Move Dracula
-    Fighter& dracula = *attacker;
-    dracula.setPosition(finalZone);
+ 
+    attacker->setPosition(finalZone); 
 
-    cout << "Dracula moved to Zone " << finalZone->getId() << ".\n";
- }
+    selectedOpponent = nullptr;
+}
 
- void FeintEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+ void FeintEffect :: apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card,int guuichoice )
  {
-    cout<<"Opponent card's effect is cancelled\n";
     battle->getCombat()->setCancel(true);
  }
 
@@ -567,7 +446,7 @@ void SeductivecallEffect::apply(Fighter* attacker, Fighter* defender, Battle* ba
 
 // ---------------- Counter Attack ----------------
 
-void CounterAttackEffect::apply(Fighter* attacker,    Fighter* defender,   Battle* battle,   Card& card)
+void CounterAttackEffect::apply(Fighter* attacker,    Fighter* defender,   Battle* battle,   Card& card,int guuichoice )
 {
     if(!attacker || !defender)
         return;
@@ -576,21 +455,14 @@ void CounterAttackEffect::apply(Fighter* attacker,    Fighter* defender,   Battl
     if(battle->getBoard()->areadjacent(*attacker,*defender))
     {
         defender->takeDamage(2);
-
-        cout<<"Counter Attack: "
-            <<defender->getName()
-            <<" takes 2 damage.\n";
     }
-    else
-    {
-        cout<<"Counter Attack failed: fighters are not adjacent.\n";
-    }
+  
 }
 
 
 
 // ---------------- Fixed Point ----------------
-void FixedPointEffect::apply(Fighter* attacker,  Fighter* defender,  Battle* battle,  Card& card)
+void FixedPointEffect::apply(Fighter* attacker,  Fighter* defender,  Battle* battle,  Card& card,int guuichoice )
 {
     if(attacker == nullptr)
         return;
@@ -625,75 +497,82 @@ void FixedPointEffect::apply(Fighter* attacker,  Fighter* defender,  Battle* bat
 
 // ---------------- Service ----------------
 
-void ServiceEffect::apply(Fighter* attacker,Fighter* defender,Battle* battle,Card& card)
-{
+   bool ServiceEffect::needsGUIInput() const {
+    return true;
+}
+std::vector<int> ServiceEffect::getValidZones(Fighter* attacker, Battle* battle) const {
+    std::vector<int> validIds;
+    if (attacker == nullptr || battle == nullptr) return validIds;
 
-    Fighter* sherlock = attacker;
     Fighter* watson = nullptr;
-    for(Fighter* f : battle->getFighters())
-    {
-        if(f->getName()=="Watson")
-        {
-            watson=f;
+    for (Fighter* f : battle->getFighters()) {
+        if (f != nullptr && f->getName() == "Watson") {
+            watson = f;
             break;
         }
     }
 
-    if(watson == nullptr)
-        return;
-        
-    Zone* sherlockzone  = sherlock->getPosition();
+    if (watson == nullptr) return validIds;
 
-    vector<Zone*> ok;
-    for(Zone*z : sherlockzone->getNei())
-    {
-        if(battle->getfighterat(z) == nullptr)
-        ok.push_back(z);
-    }
-    if(!ok.empty())
-    {
-        cout<<"Choose a zone adjacent to Sherlock\n";
-    
-         battle->getSherlock().heal(2);
+    Zone* sherlockzone = attacker->getPosition();
+    if (sherlockzone == nullptr) return validIds;
 
-    for(int i = 0; i < ok.size(); i++)
-            cout << i + 1 << ") Zone " << ok[i]->getId() << endl;
-
-        int choice;
-        choice = readInt("Choose a zone adjacent to Sherlock\n" , 1 , ok.size());
-        choice--;
-        
-        if(choice >= 0 && choice < ok.size())
-        {
-            watson->setPosition(ok[choice]);
-            
-         cout << "Watson moved to Zone "<< ok[choice]->getId() << endl;
+    for (Zone* z : sherlockzone->getNei()) {
+        if (z != nullptr && battle->getfighterat(z) == nullptr) {
+            validIds.push_back(z->getId());
         }
     }
-    else
-    {
-        cout << "No empty adjacent zone for Watson.\n";
-    }
-    
-    sherlock->heal(1);
-    cout<<"Service: Sherlock healed 1 HP.\n";
 
-      vector<Card> cards = attacker->getrandomcard(1);
+    return validIds;
+}
 
-        if(!cards.empty())
-        {
-            attacker->addtohand(cards);
-            cout << "Drew 1 card.\n";
+void ServiceEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice) {
+    if (attacker == nullptr || battle == nullptr) return;
+
+    Fighter* watson = nullptr;
+    for (Fighter* f : battle->getFighters()) {
+        if (f != nullptr && f->getName() == "Watson") {
+            watson = f;
+            break;
         }
-
     }
 
+    if (watson == nullptr) return;
 
+    std::vector<int> validZones = getValidZones(attacker, battle);
 
+    if (!validZones.empty()) {
+        battle->getSherlock().heal(2);
+
+        if (guiChoice != -1) {
+            bool isValid = false;
+            for (int id : validZones) {
+                if (id == guiChoice) {
+                    isValid = true;
+                    break;
+                }
+            }
+
+            if (isValid) {
+                Zone* targetZone = battle->getMap().getZone(guiChoice);
+                if (targetZone != nullptr) {
+                    watson->setPosition(targetZone);
+                }
+            }
+        }
+    }
+
+    attacker->heal(1);
+
+    std::vector<Card> cards = attacker->getrandomcard(1);
+    if (!cards.empty()) {
+        attacker->addtohand(cards);
+    }
+}
 
 // ---------------- Study Method ----------------
 
-void StudyMethodEffect::apply(Fighter* attacker,    Fighter* defender,    Battle* battle,    Card& card)
+void StudyMethodEffect::apply(Fighter* attacker,    Fighter* defender,    Battle* battle,    Card& card,int guuichoice )
 {
     if(attacker == nullptr || defender == nullptr)
         return;
@@ -740,7 +619,11 @@ void StudyMethodEffect::apply(Fighter* attacker,    Fighter* defender,    Battle
 
 // ---------------- Elementary ----------------
 
-void ElementaryEffect::apply(Fighter* attacker,    Fighter* defender,    Battle* battle,    Card& card)
+   bool ElementaryEffect::needsGUIInput() const {
+    return false;
+}
+
+void ElementaryEffect::apply(Fighter* attacker,    Fighter* defender,    Battle* battle,    Card& card,int guuichoice )
 {
     int guess;
     cout<<"Elementary Prediction\n";
@@ -764,7 +647,7 @@ void ElementaryEffect::apply(Fighter* attacker,    Fighter* defender,    Battle*
 
 
 // ---------------- Impossible ----------------
-void ImpossibleEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+void ImpossibleEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card,int guuichoice )
 {
     if(attacker == nullptr || defender == nullptr)
     return;
@@ -797,118 +680,87 @@ void ImpossibleEffect::apply(Fighter* attacker, Fighter* defender, Battle* battl
 
 // ---------------- Master Of Disguise ----------------
 
-void MasterOfDisguiseEffect::apply(Fighter* attacker, Fighter* defender,  Battle* battle,  Card& card)
-{
+bool MasterOfDisguiseEffect::needsGUIInput() const {
+    return false;
+}
+
+void MasterOfDisguiseEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice) {
     Fighter* sherlock = nullptr;
-    Fighter* dracula = nullptr;
+    Fighter* opponent = nullptr;
 
-    for(Fighter* f : battle->getFighters())
-    {
-        if(f->getName()=="Sherlock")
+    for (Fighter* f : battle->getFighters()) {
+        if (f->getName() == "Sherlock")
             sherlock = f;
-
-        if(f->getName()=="Dracula")
-            dracula = f;
     }
 
-    if(sherlock == nullptr || dracula == nullptr)
-    {
-        cout<<"Master Of Disguise failed.\n";
+    if (attacker != nullptr && attacker->getName() != "Sherlock") {
+        opponent = attacker;
+    } else if (defender != nullptr && defender->getName() != "Sherlock") {
+        opponent = defender;
+    }
+
+    if (sherlock == nullptr || opponent == nullptr) {
         return;
     }
 
     Zone* sherlockZone = sherlock->getPosition();
-    Zone* draculaZone = dracula->getPosition();
+    Zone* opponentZone = opponent->getPosition();
 
-    sherlock->setPosition(draculaZone);
-    dracula->setPosition(sherlockZone);
+    if (sherlockZone == nullptr || opponentZone == nullptr) {
+        return;
+    }
 
-    dracula->takeDamage(1);
+    sherlock->setPosition(opponentZone);
+    opponent->setPosition(sherlockZone);
 
-    cout<<"Master of Disguise activated!\n";
-    cout<<"Sherlock and Dracula swapped positions.\n";
-    cout<<"Dracula takes 1 damage.\n";
-       
+    opponent->takeDamage(1);
 }
-
 
 
 // ---------------- Game On ----------------
 
-void GameOnEffect::apply(Fighter* attacker,  Fighter* defender,   Battle* battle,   Card& card)
-{
-    if(attacker == nullptr || battle == nullptr)
-        return;
-
-
-    cout << "Game On Effect: Move 3 zones\n";
-
-
-    vector<Zone*> reachable =  battle->getBoard()->getReachableZone(*attacker, 3);
-
-
-    if(reachable.empty())
-    {
-        cout << "No available zone!\n";
-        return;
-    }
-
-
-    cout << "Available zones:\n";
-
-    for(int i = 0; i < reachable.size(); i++)
-    {
-        cout << i + 1 
-             << ") Zone "
-             << reachable[i]->getId()
-             << endl;
-    }
-
-
-    int choice;
-    cin >> choice;
-
-
-    if(choice < 1 || choice > reachable.size())
-    {
-        cout << "Invalid choice\n";
-        return;
-    }
-
-
-    Zone* targetZone = reachable[choice - 1];
-
-
-    int distance = 0;
-
-    for(auto z : reachable)
-    {
-        if(z == targetZone)
-            break;
-
-        distance++;
-    }
-
-
-    battle->getBoard()->movefighter( *attacker, targetZone->getId(), 3 );
-
-
-    cout << attacker->getName() << " moved to zone " << targetZone->getId() << endl;
+bool GameOnEffect::needsGUIInput() const {
+    return true;
 }
 
+std::vector<int> GameOnEffect::getValidZones(Fighter* attacker, Battle* battle) const {
+    std::vector<int> validIds;
+    if (attacker == nullptr || battle == nullptr) return validIds;
 
+    std::vector<Zone*> reachable = battle->getBoard()->getReachableZone(*attacker, 3);
+    for (Zone* z : reachable) {
+        if (z != nullptr) {
+            validIds.push_back(z->getId());
+        }
+    }
+
+    return validIds;
+}
+
+void GameOnEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice) {
+    if (attacker == nullptr || battle == nullptr) return;
+
+    if (guiChoice == -1) return;
+
+    std::vector<int> validZones = getValidZones(attacker, battle);
+    bool isValid = false;
+    for (int id : validZones) {
+        if (id == guiChoice) {
+            isValid = true;
+            break;
+        }
+    }
+
+    if (!isValid) return;
+
+    battle->getBoard()->movefighter(*attacker, guiChoice, 3);
+}
 // ---------------- Confirm Suspicion ----------------
 
-void ConfirmSuspicionEffect::apply(Fighter* attacker,
-                                   Fighter* defender,
-                                   Battle* battle,
-                                   Card& card)
+void ConfirmSuspicionEffect::apply(Fighter* attacker, Fighter* defender,Battle* battle, Card& card, int guichoice)
 {
-
     if(!defender)
         return;
-
-
     cout<<"Confirm Suspicion activated.\n";
 
 
@@ -925,7 +777,7 @@ void ConfirmSuspicionEffect::apply(Fighter* attacker,
 
 // ---------------- Strategic Deduction ----------------
 
-void StrategicDeductionEffect::apply( Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+void StrategicDeductionEffect::apply( Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guichoice)
 {
     if(defender == nullptr)
         return;
@@ -965,7 +817,7 @@ void StrategicDeductionEffect::apply( Fighter* attacker, Fighter* defender, Batt
 
 // ---------------- Learning Never Ends ----------------
 
-void LearningNeverEndsEffect::apply( Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+void LearningNeverEndsEffect::apply( Fighter* attacker, Fighter* defender, Battle* battle, Card& card,int guiChoice)
 {
     if(attacker == nullptr || defender == nullptr)
         return;
@@ -994,7 +846,7 @@ void LearningNeverEndsEffect::apply( Fighter* attacker, Fighter* defender, Battl
 
 // ---------------- Deception ----------------
 
-void DeceptionEffect::apply(Fighter* attacker,Fighter* defender,Battle* battle,Card& card)
+void DeceptionEffect::apply(Fighter* attacker,Fighter* defender,Battle* battle,Card& card , int guiChoice)
 {
     if(attacker == nullptr || defender == nullptr)
         return;
@@ -1030,7 +882,7 @@ void DeceptionEffect::apply(Fighter* attacker,Fighter* defender,Battle* battle,C
 
 // ---------------- Sidearm ----------------
 
-void SidearmEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+void SidearmEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice)
 {
 
     if(!defender)
@@ -1089,7 +941,7 @@ void movetoken ( Battle* battle , int v)
 
 }
 
-void CodedNotesEffect::apply(Fighter* attacker,  Fighter* defender,  Battle* battle,  Card& card)
+void CodedNotesEffect::apply(Fighter* attacker,  Fighter* defender,  Battle* battle,  Card& card , int guiChoice)
 {
     if(attacker == nullptr)
         return;
@@ -1162,7 +1014,7 @@ void CodedNotesEffect::apply(Fighter* attacker,  Fighter* defender,  Battle* bat
     cout << "\nCards returned to top of deck.\n";
 }
 
-void ConfoundEffect::apply(Fighter* attacker, Fighter* defender,   Battle* battle,   Card& card)
+void ConfoundEffect::apply(Fighter* attacker, Fighter* defender,   Battle* battle,   Card& card , int guiChoice)
 {
     if(attacker == nullptr || defender == nullptr)
         return;
@@ -1268,7 +1120,7 @@ void ConfoundEffect::apply(Fighter* attacker, Fighter* defender,   Battle* battl
     }
     }
 
- void CovertPreparationEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+ void CovertPreparationEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
 {
     if(attacker == nullptr)
         return;
@@ -1383,7 +1235,7 @@ void ConfoundEffect::apply(Fighter* attacker, Fighter* defender,   Battle* battl
 
 }
 
-void DreamingOfRevengeEffect::apply(Fighter* attacker,  Fighter* defender,  Battle* battle,  Card& card)
+void DreamingOfRevengeEffect::apply(Fighter* attacker,  Fighter* defender,  Battle* battle,  Card& card , int guiChoice)
 {
     if(attacker == nullptr || battle == nullptr)
         return;
@@ -1440,7 +1292,7 @@ void DreamingOfRevengeEffect::apply(Fighter* attacker,  Fighter* defender,  Batt
 
 }
 
-void EmergefrommistEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+void EmergefrommistEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
 {
     if(attacker == nullptr || battle == nullptr)
         return;
@@ -1452,7 +1304,7 @@ void EmergefrommistEffect::apply(Fighter* attacker, Fighter* defender, Battle* b
     
 }
 
- void ImpossibletoseeEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+ void ImpossibletoseeEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
 {
   
     Card* attackCard = battle->getCombat()->getCurrentAttackCard();
@@ -1488,7 +1340,7 @@ void EmergefrommistEffect::apply(Fighter* attacker, Fighter* defender, Battle* b
 }
 
 
-void IntoThinAirEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+void IntoThinAirEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
 {
     if(attacker == nullptr)
         return;
@@ -1522,7 +1374,7 @@ void IntoThinAirEffect::apply(Fighter* attacker, Fighter* defender, Battle* batt
 
 }
 
-void LurkingEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+void LurkingEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
 {
     if(attacker == nullptr)
         return;
@@ -1560,7 +1412,7 @@ void LurkingEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, 
     }
 }
 
-void ReignOfTerrorEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+void ReignOfTerrorEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
 {
     if(attacker == nullptr)
         return;
@@ -1608,7 +1460,7 @@ void ReignOfTerrorEffect::apply(Fighter* attacker, Fighter* defender, Battle* ba
     }
 }
 
-void RollingFogEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+void RollingFogEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
 {
      vector<FogToken>& fogs = battle->getfogtoken();
 
@@ -1690,7 +1542,7 @@ void RollingFogEffect::apply(Fighter* attacker, Fighter* defender, Battle* battl
 void SlipAwayEffect::apply(Fighter* attacker,
                            Fighter* defender,
                            Battle* battle,
-                           Card& card)
+                           Card& card  , int guiChoice)
 {
     Fighter* invisibleMan = nullptr;
 
@@ -1815,7 +1667,7 @@ void SlipAwayEffect::apply(Fighter* attacker,
 }
 
 
-void SteplightlyEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+void SteplightlyEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
 {
     Fighter* invisibleMan = nullptr;
     if (attacker != nullptr && attacker->getName() == "InvisibleMan")
@@ -1876,7 +1728,7 @@ void SteplightlyEffect::apply(Fighter* attacker, Fighter* defender, Battle* batt
     }
 }
 
-void VanishEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card)
+void VanishEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guiChoice)
 {
     Fighter* invisibleMan = nullptr;
     if (attacker != nullptr && attacker->getName() == "InvisibleMan")

@@ -11,6 +11,7 @@
 #include "fogtoken.h"
 #include "map.h"
 #include <vector>
+#include <queue>
 #include "GameTypes.h"
 
 // Forward declarations
@@ -45,6 +46,10 @@ private:
 
     std::vector<Fighter*> availableHeroes;
     int sidekickIndex = 0;
+    int fogIndex = 0;
+    std::queue<Player*> turnQueue;
+    int actionsThisTurn = 0;
+    int guiChoice = -1;
 
 public:
     Battle();
@@ -62,6 +67,7 @@ public:
     std::vector<Sisters>& getsisters();
 
     Fighter& getDracual() { return dracula; }
+    Dracula& getDraculaObj() { return dracula; }
     Fighter& getSherlock() { return sherlock; }
     Fighter& getWatson() { return watson; }
     InvisibleMan& getInvisibleMan() { return invisibleman; }
@@ -100,6 +106,16 @@ public:
     std::vector<int> getSidekickValidZones(Player& player);
     bool placeSidekickAt(Player& player, int zoneId); 
     void beginUnitSetup(); 
+    void startGame();
+    Player& getCurrentPlayer();
+    Player& getOtherPlayer(Player& );
+    void addAction() { actionsThisTurn++; }
+    void resetActionCounter() { actionsThisTurn = 0; }
+    bool turnShouldEnd() const { return actionsThisTurn >= 2; }
+    void endTurnAndAdvance();
+    void setGUIChoice(int choice);
+    bool hasGUIChoice() const;
+    int getGUIChoice();
 };
 
 #endif

@@ -7,92 +7,53 @@
 
 using namespace std;
 
-void CombatManager::combat(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int cardindex)
-{ 
-    if(cardOwner->handsize() == 0)
-    {
+  vector<int> CombatManager::getValidDefenseCards(Fighter* defender) {
+    vector<int> defenseIndexes;
+    if (defender == nullptr || defender->handsize() == 0) return defenseIndexes;
+    
+    for(int i = 0; i < defender->handsize(); i++) {
+        Cardtype type = defender->gethand()[i].getcardType();
+        if(type == DEFENSE || type == VERSATILE) {
+            defenseIndexes.push_back(i);
+        }
+    }
+    return defenseIndexes;
+}
+
+void CombatManager::resolveCombat(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int attackCardIndex, int defenseCardIndex) {
+    if(cardOwner->handsize() == 0) {
         cout << "Attacker has no cards\n";
         return;
     }
-    if(defender->handsize() == 0)
-    {
+    if(defender->handsize() == 0 && defenseCardIndex != -1) {
         cout << "Defender has no cards\n";
-        defender->takeDamage(finalAttackValue);
-        return;
+        // ToDo: handle direct damage if needed
     }
 
-    Card attackcard = cardOwner->playcard(cardindex);
+    Card attackcard = cardOwner->playcard(attackCardIndex);
     currentAttackCard = &attackcard;
     this->lastAttackCard = attackcard;
+    
     Card defendcard;
     currentDefendCard = nullptr;
-
     bool isdefended = false;
-    int choose = readInt(defender->getName() + " Do you want to defend? (yes(1) or no (0)) :", 0, 1);
 
-    if(choose == 1 && defender->handsize() > 0)
-    {
+    // اگر کاربر دفاع کرده باشه (روی ضربدر قرمز کلیک نکرده باشه)
+    if (defenseCardIndex != -1) {
+        defendcard = defender->playcard(defenseCardIndex);
+        currentDefendCard = &defendcard;
         isdefended = true;
-        vector<int> defenseIndexes;
-        for(int i = 0; i < defender->handsize(); i++)
-        {
-            Cardtype type = defender->gethand()[i].getcardType();
-            if(type == DEFENSE || type == VERSATILE)
-            {
-                defenseIndexes.push_back(i);
-            }
-        }
-
-        if(defenseIndexes.empty())
-        {
-            cout << defender->getName() << " has no defense cards.\n";
-            isdefended = false;
-            defendcard = Card();
-        }
-        else
-        {
-            for(int i = 0; i < defenseIndexes.size(); i++)
-            {
-                int idx = defenseIndexes[i];
-                cout << i + 1 << ") " << defender->gethand()[idx].getName() << " (DEF " << defender->gethand()[idx].getValue() << ")\n";
-            }
-
-            int choice = readInt("Choose a defense card: ", 1, defenseIndexes.size());
-            choice--;
-
-            if(choice < 0 || choice >= defenseIndexes.size())
-            {
-                cout << "Invalid choice.\n";
-                isdefended = false;
-                defendcard = Card();
-            }
-            else
-            {
-                int realIndex = defenseIndexes[choice];
-                defendcard = defender->playcard(realIndex);
-                currentDefendCard = &defendcard;
-                isdefended = true;
-            }
-        }
     }
-    else
-    {
-        isdefended = false;
-        currentDefendCard = nullptr;
-    }
-    
+
+    // --- ادامه منطق دقیقا مثل کد خودت است ---
     ExecuteOrder order = getexecuteCardeffect(attackcard, defendcard, attacker, defender, isdefended);
     
     applycardeffect(*order.acard, order.aowner, order.atarget);
     
-    if(order.bcard != nullptr)
-    {
-        if(!getCancel())
-        {
+    if(order.bcard != nullptr) {
+        if(!getCancel()) {
             applycardeffect(*order.bcard, order.bowner, order.btarget);
-        }
-        else
-        {
+        } else {
             cout << "Opponent card effect was cancelled\n";
         }
     }
@@ -100,25 +61,20 @@ void CombatManager::combat(Fighter* attacker, Fighter* defender, Fighter* cardOw
     int attackValue = attackcard.getValue();
     int defederValue = isdefended ? defendcard.getValue() : 0;
     
-    if(battle->getinvisibleactive() && (defendcard.getcardType() == DEFENSE || defendcard.getcardType() == VERSATILE))
-    {
+    if(battle->getinvisibleactive() && (defendcard.getcardType() == DEFENSE || defendcard.getcardType() == VERSATILE)) {
         lastFinaldefend = defederValue + 1;
-    }
-    else
-    {
+    } else {
         lastFinaldefend = defederValue;
     }
 
     cout << "Attacker played :" << attackcard.getName() << endl;
-    cout << "Defender played :" << defendcard.getName() << endl;
+    if (isdefended) cout << "Defender played :" << defendcard.getName() << endl;
     
     int damage = attackValue - lastFinaldefend;
 
-    if(damage > 0)
-    {
+    if(damage > 0) {
         defender->takeDamage(damage);
-         if(!defender->isalive())
-        {
+         if(!defender->isalive()) {
             cout << defender->getName() << " died\n";
             if(defender->getName() == "Dracula" || defender->getName() == "Sherlock" || defender->getName() == "InvisibleMan") {
                 battle->setGameOver(true);
@@ -128,9 +84,7 @@ void CombatManager::combat(Fighter* attacker, Fighter* defender, Fighter* cardOw
        }
         cout << "Damage taken ( " << damage << " )\n";
         cout << "Attacker won the combat!\n";
-    }
-    else
-    {
+    } else {
         cout << "Damage taken ( 0 )\n";
         cout << "Defender won the combat!\n";   
     }
@@ -180,4 +134,10 @@ ExecuteOrder CombatManager::getexecuteCardeffect(Card& attackCard, Card& defendC
         order.btarget = defender;
     }
     return order;
+}
+
+void CombatManager::combat(Fighter* attacker, Fighter* defender, Fighter* cardOwner,int cardindex) {
+    int attackCardIndex = 0; 
+    int defenseCardIndex = -1;
+    resolveCombat(attacker, defender, cardOwner, attackCardIndex, defenseCardIndex);
 }

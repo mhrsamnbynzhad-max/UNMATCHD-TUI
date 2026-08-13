@@ -137,6 +137,12 @@ CMakeFiles/game.dir/src/boardmanager.cpp.obj: \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/node_handle.h \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_map.h \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_multimap.h \
+ C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/queue \
+ C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/deque \
+ C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_deque.h \
+ C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/deque.tcc \
+ C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_heap.h \
+ C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_queue.h \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/iostream \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ostream \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/ostream.h \
@@ -180,12 +186,6 @@ CMakeFiles/game.dir/src/boardmanager.cpp.obj: \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/ostream.tcc \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/istream \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/istream.tcc \
- C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/queue \
- C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/deque \
- C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_deque.h \
- C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/deque.tcc \
- C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_heap.h \
- C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_queue.h \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/set \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_set.h \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_multiset.h

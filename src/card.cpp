@@ -56,7 +56,7 @@ Card Card::createFromInfo(const Cardinfo& info)
     static MonesterFormEffect beastFormEffect;
     static ExploitEffect exploitEffect;
     static HuntEyesEffect huntEyesEffect;
-    static SeductivecallEffect seductivecallEffect;
+    static SeductiveCallEffect seductivecallEffect;
     static SurvivalInstinctEffect survivalInstinctEffect;
     static FeintEffect feintEffect;
     static LookIntoMyEyesEffect lookIntoMyEyesEffect;

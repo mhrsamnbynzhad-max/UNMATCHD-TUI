@@ -25,9 +25,10 @@ private:
 
 public:
     CombatManager(Battle* b) : battle(b) {}
-
-    void combat(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int cardindex);
-    void applycardeffect(Card& card, Fighter* attacker, Fighter* defender);
+void combat(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int cardindex);
+std::vector<int> getValidDefenseCards(Fighter* defender);
+void resolveCombat(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int attackCardIndex, int defenseCardIndex); 
+   void applycardeffect(Card& card, Fighter* attacker, Fighter* defender);
 
     // Getters & Setters
     void setCancel(int v) { cancelDEfendEffect = v; }

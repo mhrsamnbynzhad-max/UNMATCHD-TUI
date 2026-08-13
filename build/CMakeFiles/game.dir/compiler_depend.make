@@ -224,6 +224,7 @@ CMakeFiles/game.dir/src/Player.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/Pla
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_forced.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/deque.tcc \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/erase_if.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception_defines.h \
@@ -263,13 +264,16 @@ CMakeFiles/game.dir/src/Player.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/Pla
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_algobase.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_bvector.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_construct.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_deque.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_function.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_heap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_map.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_multimap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_pair.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_queue.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_tree.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_uninitialized.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_vector.h \
@@ -293,6 +297,7 @@ CMakeFiles/game.dir/src/Player.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/Pla
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/cwctype \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/deque \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/exception \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/aligned_buffer.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/alloc_traits.h \
@@ -309,6 +314,7 @@ CMakeFiles/game.dir/src/Player.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/Pla
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/new \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ostream \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/queue \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdlib.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/streambuf \
@@ -406,6 +412,7 @@ CMakeFiles/game.dir/src/StatusPanel.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/sr
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_forced.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/deque.tcc \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/erase_if.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception_defines.h \
@@ -445,13 +452,16 @@ CMakeFiles/game.dir/src/StatusPanel.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/sr
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_algobase.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_bvector.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_construct.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_deque.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_function.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_heap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_map.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_multimap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_pair.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_queue.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_tree.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_uninitialized.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_vector.h \
@@ -475,6 +485,7 @@ CMakeFiles/game.dir/src/StatusPanel.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/sr
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/cwctype \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/deque \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/exception \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/aligned_buffer.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/alloc_traits.h \
@@ -491,6 +502,7 @@ CMakeFiles/game.dir/src/StatusPanel.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/sr
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/new \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ostream \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/queue \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdlib.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/streambuf \
@@ -595,6 +607,7 @@ CMakeFiles/game.dir/src/battle.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/bat
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_forced.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/deque.tcc \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/erase_if.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception_defines.h \
@@ -635,6 +648,7 @@ CMakeFiles/game.dir/src/battle.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/bat
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_algobase.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_bvector.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_construct.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_deque.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_function.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_heap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator.h \
@@ -643,6 +657,7 @@ CMakeFiles/game.dir/src/battle.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/bat
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_map.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_multimap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_pair.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_queue.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_tempbuf.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_tree.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_uninitialized.h \
@@ -669,6 +684,7 @@ CMakeFiles/game.dir/src/battle.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/bat
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/cwctype \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/deque \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/exception \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/aligned_buffer.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/alloc_traits.h \
@@ -687,6 +703,7 @@ CMakeFiles/game.dir/src/battle.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/bat
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/execution_defs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/glue_algorithm_defs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/queue \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdlib.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/streambuf \
@@ -1104,6 +1121,7 @@ CMakeFiles/game.dir/src/cardeffect.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_forced.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/deque.tcc \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/erase_if.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception_defines.h \
@@ -1144,6 +1162,7 @@ CMakeFiles/game.dir/src/cardeffect.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_algobase.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_bvector.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_construct.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_deque.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_function.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_heap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator.h \
@@ -1151,7 +1170,10 @@ CMakeFiles/game.dir/src/cardeffect.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_map.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_multimap.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_multiset.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_pair.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_queue.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_set.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_tempbuf.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_tree.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_uninitialized.h \
@@ -1177,6 +1199,7 @@ CMakeFiles/game.dir/src/cardeffect.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/cwctype \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/deque \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/exception \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/aligned_buffer.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/alloc_traits.h \
@@ -1195,6 +1218,8 @@ CMakeFiles/game.dir/src/cardeffect.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/execution_defs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/glue_algorithm_defs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/queue \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/set \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdlib.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/streambuf \
@@ -1461,6 +1486,7 @@ CMakeFiles/game.dir/src/combatmanager.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_forced.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/deque.tcc \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/erase_if.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception_defines.h \
@@ -1500,13 +1526,16 @@ CMakeFiles/game.dir/src/combatmanager.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_algobase.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_bvector.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_construct.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_deque.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_function.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_heap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_map.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_multimap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_pair.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_queue.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_tree.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_uninitialized.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_vector.h \
@@ -1530,6 +1559,7 @@ CMakeFiles/game.dir/src/combatmanager.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/cwctype \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/deque \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/exception \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/aligned_buffer.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/alloc_traits.h \
@@ -1546,6 +1576,7 @@ CMakeFiles/game.dir/src/combatmanager.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/new \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ostream \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/queue \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdlib.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/streambuf \
@@ -1643,6 +1674,7 @@ CMakeFiles/game.dir/src/dracula.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/dr
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_forced.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/deque.tcc \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/erase_if.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception_defines.h \
@@ -1682,13 +1714,16 @@ CMakeFiles/game.dir/src/dracula.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/dr
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_algobase.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_bvector.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_construct.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_deque.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_function.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_heap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_map.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_multimap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_pair.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_queue.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_tree.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_uninitialized.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_vector.h \
@@ -1712,6 +1747,7 @@ CMakeFiles/game.dir/src/dracula.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/dr
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/cwctype \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/deque \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/exception \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/aligned_buffer.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/alloc_traits.h \
@@ -1728,6 +1764,7 @@ CMakeFiles/game.dir/src/dracula.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/dr
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/new \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ostream \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/queue \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdlib.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/streambuf \
@@ -1829,6 +1866,7 @@ CMakeFiles/game.dir/src/fighter.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/fi
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_forced.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/deque.tcc \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/erase_if.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception_defines.h \
@@ -1872,6 +1910,7 @@ CMakeFiles/game.dir/src/fighter.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/fi
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_algobase.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_bvector.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_construct.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_deque.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_function.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_heap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator.h \
@@ -1881,6 +1920,7 @@ CMakeFiles/game.dir/src/fighter.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/fi
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_multimap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_numeric.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_pair.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_queue.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_tempbuf.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_tree.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_uninitialized.h \
@@ -1909,6 +1949,7 @@ CMakeFiles/game.dir/src/fighter.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/fi
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/cwctype \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/deque \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/exception \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/aligned_buffer.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/alloc_traits.h \
@@ -1930,6 +1971,7 @@ CMakeFiles/game.dir/src/fighter.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/fi
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/glue_algorithm_defs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/glue_numeric_defs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/queue \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/random \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdlib.h \
@@ -2171,7 +2213,10 @@ CMakeFiles/game.dir/src/graphic.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/gr
   C:/Users/Asus/Desktop/unmatchedd/include/GameTypes.h \
   C:/Users/Asus/Desktop/unmatchedd/include/Player.h \
   C:/Users/Asus/Desktop/unmatchedd/include/battle.h \
+  C:/Users/Asus/Desktop/unmatchedd/include/boardmanager.h \
   C:/Users/Asus/Desktop/unmatchedd/include/card.h \
+  C:/Users/Asus/Desktop/unmatchedd/include/cardeffect.h \
+  C:/Users/Asus/Desktop/unmatchedd/include/combatmanager.h \
   C:/Users/Asus/Desktop/unmatchedd/include/dracula.h \
   C:/Users/Asus/Desktop/unmatchedd/include/fighter.h \
   C:/Users/Asus/Desktop/unmatchedd/include/fogtoken.h \
@@ -2205,6 +2250,7 @@ CMakeFiles/game.dir/src/graphic.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/gr
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_forced.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/deque.tcc \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/enable_special_members.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/erase_if.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception.h \
@@ -2264,13 +2310,16 @@ CMakeFiles/game.dir/src/graphic.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/gr
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_algobase.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_bvector.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_construct.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_deque.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_function.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_heap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_map.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_multimap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_pair.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_queue.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_raw_storage_iter.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_relops.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_tempbuf.h \
@@ -2308,6 +2357,7 @@ CMakeFiles/game.dir/src/graphic.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/gr
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/cwctype \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/deque \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/exception \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/aligned_buffer.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/alloc_traits.h \
@@ -2335,6 +2385,7 @@ CMakeFiles/game.dir/src/graphic.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/gr
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/execution_defs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/glue_memory_defs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/queue \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ratio \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/sstream \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdexcept \
@@ -2784,6 +2835,7 @@ CMakeFiles/game.dir/src/invisible.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_forced.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/deque.tcc \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/erase_if.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception_defines.h \
@@ -2823,13 +2875,16 @@ CMakeFiles/game.dir/src/invisible.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_algobase.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_bvector.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_construct.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_deque.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_function.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_heap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_map.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_multimap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_pair.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_queue.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_tree.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_uninitialized.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_vector.h \
@@ -2853,6 +2908,7 @@ CMakeFiles/game.dir/src/invisible.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/cwctype \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/deque \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/exception \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/aligned_buffer.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/alloc_traits.h \
@@ -2869,6 +2925,7 @@ CMakeFiles/game.dir/src/invisible.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/new \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ostream \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/queue \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdlib.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/streambuf \
@@ -3478,6 +3535,7 @@ CMakeFiles/game.dir/src/sherlock.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/s
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_forced.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/deque.tcc \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/erase_if.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/exception_defines.h \
@@ -3517,13 +3575,16 @@ CMakeFiles/game.dir/src/sherlock.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/s
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_algobase.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_bvector.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_construct.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_deque.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_function.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_heap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_map.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_multimap.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_pair.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_queue.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_tree.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_uninitialized.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stl_vector.h \
@@ -3547,6 +3608,7 @@ CMakeFiles/game.dir/src/sherlock.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/s
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/cwctype \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/assertions.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/debug/debug.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/deque \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/exception \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/aligned_buffer.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ext/alloc_traits.h \
@@ -3563,6 +3625,7 @@ CMakeFiles/game.dir/src/sherlock.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/src/s
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/new \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ostream \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/pstl_config.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/queue \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdlib.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/streambuf \

@@ -15,6 +15,10 @@ public:
     void specialAbillity(Battle* battle)override;
     
     void setupUnits(Battle* , Player& ) override;
+
+    std::vector<Fighter*> getAbilityTargets(Battle* );
+    
+    void useAbilityOn(Fighter* );
 };
 
 #endif
