@@ -182,7 +182,7 @@ void Battle::chooseHeroes(Player& first, Player& second)
     sherlockAbilityActive = false;
     Fighter* hero = player.getHero();
 
-    if (hero != nullptr && hero->isalive() && hero->getName() != "Dracula")
+if (hero != nullptr && hero->isalive() && hero->getName() != "Dracula" && hero->getName() != "Sherlock")
     {
         hero->specialAbillity(this);
     }

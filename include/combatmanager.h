@@ -25,10 +25,8 @@ private:
 
 public:
     CombatManager(Battle* b) : battle(b) {}
-void combat(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int cardindex);
-std::vector<int> getValidDefenseCards(Fighter* defender);
-void resolveCombat(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int attackCardIndex, int defenseCardIndex); 
-   void applycardeffect(Card& card, Fighter* attacker, Fighter* defender);
+    void combat(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int cardindex);
+    std::vector<int> getValidDefenseCards(Fighter* defender);
 
     // Getters & Setters
     void setCancel(int v) { cancelDEfendEffect = v; }
@@ -45,6 +43,8 @@ void resolveCombat(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int
     Card* getCurrentAttackCard() { return currentAttackCard; }
     Card* getCurrentDefendCard() { return currentDefendCard; }
     const Card& gelastattackcard() const { return lastAttackCard; }
+    void resolveCombat(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int attackCardIndex, int defenseCardIndex, int defenseGuiChoice = -1);
+    void applycardeffect(Card& card, Fighter* attacker, Fighter* defender, int guiChoice = -1);
 };
 
 #endif

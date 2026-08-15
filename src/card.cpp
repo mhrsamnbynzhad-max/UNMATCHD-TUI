@@ -2,7 +2,8 @@
 #include "cardeffect.h"
 #include"cardfactory.h"
 
-vector<Cardinfo> Card::draculaCardDB = {
+vector<Cardinfo> Card::draculaCardDB = 
+{
     { BEAST_FORM, "Beast Form", "Dracula", ATTACK, DURING_COMBAT, "Discard cards +1 attack", 6, 4, 2 },
     { FEAST, "Feast", "Dracula", SCHEME, IMMEDIATE, "Heal 2 and revive sister", 0, 2, 2 },
     { MIST_FORM, "Mist Form", "Dracula", SCHEME, IMMEDIATE, "Teleport and gain action", 0, 2, 2 },
@@ -17,7 +18,8 @@ vector<Cardinfo> Card::draculaCardDB = {
     { SEDUCTIVE_CALL, "Seductive Call", "Sister", SCHEME, IMMEDIATE, "Move fighter and deal damage", 0, 2, 3 }
 };
 
-vector<Cardinfo> Card::sherlockCardDB = {
+vector<Cardinfo> Card::sherlockCardDB = 
+{
     { LEARNING_NEVER_ENDS,"Learning never ends","Any",VERSATILE,AFTER_COMBAT,"Draw Cards",3,1 , 2},
     { STRATEGIC_DEDUCTION,"Strategic Deduction","Sherlock",VERSATILE,DURING_COMBAT,"Use Boost Value",3,1,3},
     { COUNTER_ATTACK,"Counter attack","Sherlock",VERSATILE,AFTER_COMBAT,"Deal 2 Damage",3,1 , 3},
@@ -33,7 +35,8 @@ vector<Cardinfo> Card::sherlockCardDB = {
     {DECEPTION,"Deception","Any",SCHEME,DURING_COMBAT,"Cancel all effects on your opponent's card",0,1,3}
 };
 
-vector<Cardinfo> Card::invisiblemanCardDB = {
+vector<Cardinfo> Card::invisiblemanCardDB = 
+{
     { CODED_NOTES,"Coded Notes","InvisibleMan",DEFENSE,AFTER_COMBAT,"Draw cards, then put any 2 cards from your hand on top of your deck.",3, 2 , 2},
     { CONFOUND,"Confound","InvisibleMan",VERSATILE,AFTER_COMBAT,"Opponent may discard 1 card; otherwise, move any Fog token",3,2,2},
     { COVERT_PREPARATION,"Covert Prepation","InvisibleMan",VERSATILE,AFTER_COMBAT,"Draw 1. Move Fog tokens up to 2 spaces (one by you, one by opponent)",2,1 , 3},

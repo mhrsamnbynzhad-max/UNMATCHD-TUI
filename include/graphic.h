@@ -32,6 +32,7 @@ enum class SetupState {AGE_P1, AGE_P2, HERO_1, HERO_2,
     SIDEKICK_P1, SIDEKICK_P2, DRACULA_ABILITY, DONE,
     MANEUVER_BOOST, MANEUVER_SELECT_FIGHTER, MANEUVER_SELECT_ZONE ,
     DRACULA_CARD_BEAST,
+    SHERLOCK_ABILITY,
      DEFENSE_SELECT,
     CARD_SELECT_ZONE};    
     Battle battle;                 
@@ -63,6 +64,11 @@ enum class SetupState {AGE_P1, AGE_P2, HERO_1, HERO_2,
     };
     Card* pendingCard = nullptr;
     Fighter* pendingCardAttacker = nullptr;
+    int pendingCardOriginalIndex = -1;
+    sf::RectangleShape sherlockYesBox;
+    sf::Text sherlockYesText;
+    bool pendingIsDefenseSelection = false;
+    int pendingDefenseCardIndex = -1;
 
     void handleCardZoneClick(sf::Vector2f pos);
     void drawCardSelectedZoneUI();
@@ -108,12 +114,12 @@ enum class SetupState {AGE_P1, AGE_P2, HERO_1, HERO_2,
     void loadFighterTextures();
     void drawFighters();
     void drawfogtoken();
-      void handleAgeTextInput(char32_t );
+    void handleAgeTextInput(char32_t );
     void setupHeroButtons();
-     void handleHeroClick(sf::Vector2f );
+    void handleHeroClick(sf::Vector2f );
     void startSidekickStage();
-      void handleBoardClick(sf::Vector2f );
-      void beginTurnFlow();
+    void handleBoardClick(sf::Vector2f );
+    void beginTurnFlow();
     void handleAbilityClick(sf::Vector2f pos);
     void drawAbilityUI();
     void startManeuver();
@@ -128,8 +134,15 @@ enum class SetupState {AGE_P1, AGE_P2, HERO_1, HERO_2,
     void finishManeuver();
     void setupHandCards();
     void loadCardTextures();
-     void drawHandCards();
+    void drawHandCards();
     void handleCardClick(sf::Vector2f );
+    void handleHandSelectionClick(sf::Vector2f pos);
+    void drawHandSelectionUI();
+    void finishHandSelection();
+    void proceedToAttack(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int cardIndex);
+    void populateHandWidgets(std::vector<CardWidget>& widgets, Fighter* fighter, int excludeIndex = -1);
+    void handleSherlockAbilityClick(sf::Vector2f pos);
+    void drawSherlockAbilityUI();
 
     void drawSetupUI();
 

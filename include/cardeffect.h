@@ -7,11 +7,16 @@
 #include <vector>
 
 class Battle;
+class FogToken;
 class CardEffect {
 public:
 
     virtual ~CardEffect() {}
     virtual bool needsGUIInput() const { return false; }
+    virtual bool needsMoreInput() const { return false; } 
+    virtual bool usesHandSelection() const { return false; }
+    virtual bool handSelectionRepeats() const { return false; }
+    virtual Fighter* getHandSelectionTarget(Fighter* attacker, Fighter* defender) const { return attacker; } 
     virtual std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const 
     {
         return std::vector<int>();
@@ -45,8 +50,10 @@ public:
 class MonesterFormEffect : public CardEffect
 {
 public:
+    bool needsGUIInput() const override;
+    bool usesHandSelection() const override;
+    bool handSelectionRepeats() const override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
-  
 };
 
 class ManeuverEffect : public CardEffect
@@ -79,10 +86,10 @@ public:
 
 class SeductiveCallEffect : public CardEffect {
 private:
- Fighter* selectedCard = nullptr; 
-
+    Fighter* selectedCard = nullptr; 
 public:
     bool needsGUIInput() const override;
+    bool needsMoreInput() const override;    
     std::vector<int> getValidZones(Fighter* , Battle* ) const override;
     void apply(Fighter* , Fighter* , Battle* , Card& , int guiChoice = -1) override;
 };
@@ -94,6 +101,7 @@ private:
 
 public:
     bool needsGUIInput() const override;
+    bool needsMoreInput() const override;   
     std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice = -1) override;
 };
@@ -209,7 +217,9 @@ public:
 class DeceptionEffect : public CardEffect
 {
 public:                                                                      
-
+    bool needsGUIInput() const override;
+    bool usesHandSelection() const override;
+    Fighter* getHandSelectionTarget(Fighter* attacker, Fighter* defender) const override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
 };
 
@@ -242,12 +252,17 @@ public:
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
 };
 
-class CovertPreparationEffect : public CardEffect {
-public:
-    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice = -1) override;
-    bool needsGUIInput() const override;
-    std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
-};
+    class CovertPreparationEffect : public CardEffect {
+
+        
+        FogToken* selectedFog = nullptr;    
+    public:
+
+        void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice = -1) override;
+        bool needsMoreInput() const override;   
+        bool needsGUIInput() const override;
+        std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
+    };
 
 class DreamingOfRevengeEffect : public CardEffect
 {
@@ -296,26 +311,38 @@ public:
 
 };
 
-class RollingFogEffect : public CardEffect
-{
-public:
-    bool needsGUIInput() const override;
-    std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
-    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
-  
-};
+    class RollingFogEffect : public CardEffect {
+    private:
+        FogToken* selectedFog = nullptr;         
+    public:
+        bool needsGUIInput() const override;
+        bool needsMoreInput() const override;     
+        std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
+        void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
+    };
+
 class SlipAwayEffect : public CardEffect
 {
-public:     
-    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
+    private:
+    int selectedFogIndex = -1;
+     public:
+        bool needsGUIInput() const override;
+        bool needsMoreInput() const override;     
+        std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
+        void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
+    };
 
-};
 
 class SteplightlyEffect : public CardEffect
 {
-public:    
-    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
-
+private:
+    FogToken* selectedFog = nullptr;
+    bool damageDealt = false; 
+public:
+    bool needsGUIInput() const override;
+    bool needsMoreInput() const override;
+    std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice = -1) override;
 };
 
 class VanishEffect : public CardEffect

@@ -11,18 +11,9 @@ Sherlock::Sherlock()  :Fighter("Sherlock", 16 , 16 ,true,2 , SHERLOCK)
 {
     
 }
-void Sherlock:: specialAbillity(Battle* battle)
+ void Sherlock:: specialAbillity(Battle* battle)
 {
-    int choice = readInt("Use Sherlock Ability? ( 1 (Yes)/ 2 (No): " , 1 , 2);
-
-    if(choice == 1)
-    {
-        battle->setSherlockability(true);
-
-        cout << "Sherlock ability activated.\n";
-    }
 }
-
 void Sherlock::setupUnits(Battle* battle, Player& player)
 {
     battle->chooseSidekickPosition(player);

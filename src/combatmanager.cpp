@@ -20,7 +20,13 @@ using namespace std;
     return defenseIndexes;
 }
 
-void CombatManager::resolveCombat(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int attackCardIndex, int defenseCardIndex) {
+void CombatManager::applycardeffect(Card& card, Fighter* attacker, Fighter* defender, int guiChoice)
+{
+    CardEffect* effect = card.getEffect();
+    if(effect) effect->apply(attacker, defender, battle, card, guiChoice);
+}
+
+void CombatManager::resolveCombat(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int attackCardIndex, int defenseCardIndex , int defenseGuiChoice ) {
     if(cardOwner->handsize() == 0) {
         cout << "Attacker has no cards\n";
         return;
@@ -38,21 +44,21 @@ void CombatManager::resolveCombat(Fighter* attacker, Fighter* defender, Fighter*
     currentDefendCard = nullptr;
     bool isdefended = false;
 
-    // اگر کاربر دفاع کرده باشه (روی ضربدر قرمز کلیک نکرده باشه)
     if (defenseCardIndex != -1) {
         defendcard = defender->playcard(defenseCardIndex);
         currentDefendCard = &defendcard;
         isdefended = true;
     }
 
-    // --- ادامه منطق دقیقا مثل کد خودت است ---
     ExecuteOrder order = getexecuteCardeffect(attackcard, defendcard, attacker, defender, isdefended);
     
-    applycardeffect(*order.acard, order.aowner, order.atarget);
-    
+       applycardeffect(*order.acard, order.aowner, order.atarget,
+                     (order.aowner == defender ? defenseGuiChoice : -1));
+
     if(order.bcard != nullptr) {
         if(!getCancel()) {
-            applycardeffect(*order.bcard, order.bowner, order.btarget);
+            applycardeffect(*order.bcard, order.bowner, order.btarget,
+                             (order.bowner == defender ? defenseGuiChoice : -1));
         } else {
             cout << "Opponent card effect was cancelled\n";
         }
@@ -92,14 +98,7 @@ void CombatManager::resolveCombat(Fighter* attacker, Fighter* defender, Fighter*
     this->setCancel(false);
 }
 
-void CombatManager::applycardeffect(Card& card, Fighter* attacker, Fighter* defender)
-{
-    CardEffect* effect = card.getEffect();
-    if(effect)
-    {
-        effect->apply(attacker, defender, battle, card);
-    }
-}
+
 
 ExecuteOrder CombatManager::getexecuteCardeffect(Card& attackCard, Card& defendCard, Fighter* attacker, Fighter* defender, bool defended)
 {
