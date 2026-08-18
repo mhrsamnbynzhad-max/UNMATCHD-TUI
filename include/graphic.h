@@ -65,6 +65,8 @@ enum class SetupState {AGE_P1, AGE_P2, HERO_1, HERO_2,
     Card* pendingCard = nullptr;
     Fighter* pendingCardAttacker = nullptr;
     int pendingCardOriginalIndex = -1;
+    Fighter* pendingCardDefender = nullptr;
+    bool pendingCardIsDefense = false;
     sf::RectangleShape sherlockYesBox;
     sf::Text sherlockYesText;
     bool pendingIsDefenseSelection = false;
@@ -141,6 +143,7 @@ enum class SetupState {AGE_P1, AGE_P2, HERO_1, HERO_2,
     void finishHandSelection();
     void proceedToAttack(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int cardIndex);
     void populateHandWidgets(std::vector<CardWidget>& widgets, Fighter* fighter, int excludeIndex = -1);
+    void setupNumberPicker(int maxN);
     void handleSherlockAbilityClick(sf::Vector2f pos);
     void drawSherlockAbilityUI();
 

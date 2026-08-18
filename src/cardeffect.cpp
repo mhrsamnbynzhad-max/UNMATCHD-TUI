@@ -639,35 +639,23 @@ void ManeuverEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle,
 
 
     // ---------------- Impossible ----------------
-    void ImpossibleEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card,int guuichoice )
+   bool ImpossibleEffect::needsGUIInput() const { return true; }
+    bool ImpossibleEffect::usesNumberGuess() const { return true; }
+    int ImpossibleEffect::getNumberGuessMax() const { return 6; }
+
+    void ImpossibleEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice)
     {
-        if(attacker == nullptr || defender == nullptr)
-        return;
-
-        int guess;
-        guess = readInt("Predict opponent attack value: " , 1 , 6);
-
+        if (attacker == nullptr || defender == nullptr || battle == nullptr) return;
+        if (guiChoice < 1 || guiChoice > 6) return;
 
         Card opponentAttack = battle->getCombat()->gelastattackcard();
-
-
         int realAttack = opponentAttack.getValue();
 
-
-        if(guess == realAttack)
-        {
-            cout << "Correct prediction!\n";
-
+        if (guiChoice == realAttack) {
             battle->getCombat()->setCancel(1);
-
             battle->getCombat()->setIgnoreAttack(true);
         }
-        else
-        {
-            cout << "Wrong prediction!\n";
-        }
     }
-
 
 
     // ---------------- Master Of Disguise ----------------
@@ -902,184 +890,110 @@ void ManeuverEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle,
                     }
         }
     }
-    void CodedNotesEffect::apply(Fighter* attacker,  Fighter* defender,  Battle* battle,  Card& card , int guiChoice)
-    {
-        if(attacker == nullptr)
-            return;
+   bool CodedNotesEffect::needsGUIInput() const { return true; }
+bool CodedNotesEffect::usesHandSelection() const { return true; }
+bool CodedNotesEffect::handSelectionRepeats() const { return pickedCount < 2; }
+bool CodedNotesEffect::allowsSkip() const { return false; }
 
-        cout << "\n===== CODED NOTES =====\n";
+void CodedNotesEffect::onHandSelectionStart(Fighter* attacker, Fighter* defender, Battle* battle)
+{
+    if (attacker == nullptr) return;
+    pickedCount = 0;
+    for (int i = 0; i < 3; i++) {
+        Card c = attacker->drawTopCard();
+        if (c.getName() == "") break;
+        attacker->gethand().push_back(c);
+    }
+}
 
-        // ---------- Draw 3 ----------
-        for(int i = 0; i < 3; i++)
-        {
-            Card c = attacker->drawTopCard();
+void CodedNotesEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice)
+{
+    if (attacker == nullptr || guiChoice < 0) return;
+    vector<Card>& hand = attacker->gethand();
+    if (guiChoice >= (int)hand.size()) return;
 
-            if(c.getName() == "")
-                break;
+    Card picked = hand[guiChoice];
+    hand.erase(hand.begin() + guiChoice);
+    pickedCount++;
 
-            attacker->gethand().push_back(c);
-
-            cout << "Draw : "<< c.getName()<< endl;
+    if (pickedCount == 1) {
+        firstPicked = picked;
+        if (hand.empty()) {
+            attacker->putCardOnTop(firstPicked);
+            pickedCount = 2;
         }
-
-        vector<Card>& hand = attacker->gethand();
-
-        if(hand.size() < 2)
-            return;
-
-        cout << "\nCurrent Hand\n";
-
-        for(int i = 0; i < hand.size(); i++)
-        {
-            cout << i + 1<< ") "<< hand[i].getName()<< endl;
-        }
-
-        int first =
-        readInt("Choose first card : ", 1, hand.size());
-
-        Card firstCard = hand[first-1];
-
-        hand.erase(hand.begin() + (first-1));
-
-        cout << "\nRemaining Hand\n";
-
-        for(int i = 0; i < hand.size(); i++)
-        {
-            cout << i + 1 << ") " << hand[i].getName() << endl;
-        }
-
-        int second = readInt("Choose second card : ", 1, hand.size());
-
-        Card secondCard = hand[second-1];
-
-        hand.erase(hand.begin() + (second-1));
-
-        cout << "\nWhich card should be on TOP of deck?\n";
-        cout << "1) "<< firstCard.getName()<< endl;
-
-        cout << "2) " << secondCard.getName() << endl;
-
-        int order = readInt("Choice : ",1,2);
-
-        if(order == 1)
-        {
-            attacker->putCardOnTop(secondCard);
-            attacker->putCardOnTop(firstCard);
-        }
-        else
-        {
-            attacker->putCardOnTop(firstCard);
-            attacker->putCardOnTop(secondCard);
-        }
-
-        cout << "\nCards returned to top of deck.\n";
+        return;
     }
 
-    void ConfoundEffect::apply(Fighter* attacker, Fighter* defender,   Battle* battle,   Card& card , int guiChoice)
-    {
-        if(attacker == nullptr || defender == nullptr)
-            return;
+    attacker->putCardOnTop(firstPicked);
+    attacker->putCardOnTop(picked);
+}
 
-        cout << "\n===== CONFOUND =====\n";
+   bool ConfoundEffect::needsGUIInput() const { return true; }
+bool ConfoundEffect::usesHandSelection() const { return stage == Stage::DISCARD_CHOICE; }
+bool ConfoundEffect::allowsSkip() const { return stage == Stage::DISCARD_CHOICE; }
+bool ConfoundEffect::finishesOnSkip() const { return false; }
+bool ConfoundEffect::needsMoreInput() const { return stage == Stage::FOG_DESTINATION; }
+Fighter* ConfoundEffect::getHandSelectionTarget(Fighter*, Fighter* defender) const { return defender; }
 
-        // ---------- Opponent may discard ----------
-        cout << defender->getName()
-            << ", discard one card?\n";
+void ConfoundEffect::onSkip(Fighter*, Fighter*, Battle*)
+{
+    stage = Stage::FOG_SELECT;
+}
 
-        cout << "0) No\n";
+std::vector<int> ConfoundEffect::getValidZones(Fighter* attacker, Battle* battle) const
+{
+    std::vector<int> validIds;
+    if (battle == nullptr) return validIds;
+    auto& fogs = battle->getfogtoken();
 
-        vector<Card>& hand = defender->gethand();
-
-        for(int i = 0; i < hand.size(); i++)
-        {
-            cout << i + 1  << ") "  << hand[i].getName()  << endl;
+    if (stage == Stage::FOG_SELECT) {
+        for (auto& fog : fogs)
+            if (fog.getPosition() != nullptr) validIds.push_back(fog.getPosition()->getId());
+    } else if (stage == Stage::FOG_DESTINATION) {
+        for (int id = 1; id <= 32; id++) {
+            Zone* z = battle->getMap().getZone(id);
+            if (z == nullptr) continue;
+            bool occupiedByOtherFog = false;
+            for (auto& fog : fogs)
+                if (&fog != selectedFog && fog.getPosition() == z) { occupiedByOtherFog = true; break; }
+            if (!occupiedByOtherFog) validIds.push_back(id);
         }
+    }
+    return validIds;
+}
 
-        int choice =
-        readInt("Choice : ", 0, hand.size());
+void ConfoundEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice)
+{
+    if (attacker == nullptr || battle == nullptr || guiChoice == -1) return;
 
-        if(choice != 0)
-        {
-            cout << hand[choice-1].getName() << " discarded.\n";
-
-            hand.erase(hand.begin() + (choice-1));
-
-            return;
+    if (stage == Stage::DISCARD_CHOICE) {
+        if (defender != nullptr) {
+            vector<Card>& hand = defender->gethand();
+            if (guiChoice < (int)hand.size()) hand.erase(hand.begin() + guiChoice);
         }
+        return;
+    }
 
-        // ---------- Move Fog ----------
-        vector<FogToken>& fogs = battle->getfogtoken();
+    auto& fogs = battle->getfogtoken();
+    if (fogs.empty()) { stage = Stage::DISCARD_CHOICE; selectedFog = nullptr; return; }
 
-        vector<bool> moved(fogs.size(), false);
+    if (stage == Stage::FOG_SELECT) {
+        for (auto& fog : fogs)
+            if (fog.getPosition() != nullptr && fog.getPosition()->getId() == guiChoice) { selectedFog = &fog; break; }
+        stage = Stage::FOG_DESTINATION;
+        return;
+    }
 
-        while(true)
-        {
-            cout << "\nChoose a Fog Token to move\n";
-            cout << "0) Finish\n";
-
-            bool anyLeft = false;
-
-            for(int i = 0; i < fogs.size(); i++)
-            {
-                if(moved[i])
-                    continue;
-
-                anyLeft = true;
-
-                cout << i + 1 << ") Fog "<< i + 1<< " (Zone " << fogs[i].getPosition()->getId() << ")\n";
-            }
-
-            if(!anyLeft)
-                break;
-
-            int fogChoice =readInt("Choice : ",   0,fogs.size());
-
-            if(fogChoice == 0)
-                break;
-
-            fogChoice--;
-
-            if(moved[fogChoice])
-            {
-                cout << "This Fog Token has already been moved.\n";
-                continue;
-            }
-
-            FogToken& fog = fogs[fogChoice];
-
-            vector<int> validZones;
-
-            for(int id = 1; id <= 32; id++)
-            {
-                Zone* z = battle->getMap().getZone(id);
-
-                bool occupiedByFog = false;
-
-                for(int j = 0; j < fogs.size(); j++)
-                {
-                    if(j == fogChoice)
-                        continue;
-
-                    if(fogs[j].getPosition() == z)
-                    {
-                        occupiedByFog = true;
-                        break;
-                    }
-                }
-
-                if(!occupiedByFog)
-                    validZones.push_back(id);
-            }
-
-            int zoneId = readchoice("Destination Zone : ", validZones);
-
-            fog.setPosition( battle->getMap().getZone(zoneId) );
-
-            moved[fogChoice] = true;
-
-            cout << "Fog moved to Zone "<< zoneId<< endl;
-        }
-        }
+    Zone* targetZone = battle->getMap().getZone(guiChoice);
+    if (targetZone != nullptr) {
+        bool occupied = false;
+        for (FogToken& fog : fogs) if (&fog != selectedFog && fog.getPosition() == targetZone) { occupied = true; break; }
+        if (!occupied) selectedFog->setPosition(targetZone);
+    }
+    selectedFog = nullptr;
+    stage = Stage::DISCARD_CHOICE;
+}
 
     bool CovertPreparationEffect::needsGUIInput() const {
 

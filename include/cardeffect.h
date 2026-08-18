@@ -8,7 +8,8 @@
 
 class Battle;
 class FogToken;
-class CardEffect {
+class CardEffect 
+{
 public:
 
     virtual ~CardEffect() {}
@@ -16,6 +17,12 @@ public:
     virtual bool needsMoreInput() const { return false; } 
     virtual bool usesHandSelection() const { return false; }
     virtual bool handSelectionRepeats() const { return false; }
+    virtual bool allowsSkip() const { return handSelectionRepeats(); }
+    virtual bool finishesOnSkip() const { return true; }
+    virtual void onSkip(Fighter* attacker, Fighter* defender, Battle* battle) {}
+    virtual void onHandSelectionStart(Fighter* attacker, Fighter* defender, Battle* battle) {}
+    virtual bool usesNumberGuess() const { return false; }
+    virtual int getNumberGuessMax() const { return 6; }
     virtual Fighter* getHandSelectionTarget(Fighter* attacker, Fighter* defender) const { return attacker; } 
     virtual std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const 
     {
@@ -161,8 +168,10 @@ public:
 class ImpossibleEffect : public CardEffect
 {
 public:          
+    bool needsGUIInput() const override;
+    bool usesNumberGuess() const override;
+    int getNumberGuessMax() const override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
-
 };
 
 
@@ -239,16 +248,33 @@ public:
 
 class CodedNotesEffect : public CardEffect
 {
+private:
+    int pickedCount = 0;
+    Card firstPicked;
 public:                                                                 
-  
+    bool needsGUIInput() const override;
+    bool usesHandSelection() const override;
+    bool handSelectionRepeats() const override;
+    bool allowsSkip() const override;
+    void onHandSelectionStart(Fighter* attacker, Fighter* defender, Battle* battle) override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
 };
 
 class ConfoundEffect : public CardEffect
 {
+private:
+    enum class Stage { DISCARD_CHOICE, FOG_SELECT, FOG_DESTINATION };
+    Stage stage = Stage::DISCARD_CHOICE;
+    FogToken* selectedFog = nullptr;
 public:                                                                       
-   
-
+    bool needsGUIInput() const override;
+    bool usesHandSelection() const override;
+    bool allowsSkip() const override;
+    bool finishesOnSkip() const override;
+    bool needsMoreInput() const override;
+    Fighter* getHandSelectionTarget(Fighter* attacker, Fighter* defender) const override;
+    std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
+    void onSkip(Fighter* attacker, Fighter* defender, Battle* battle) override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
 };
 
