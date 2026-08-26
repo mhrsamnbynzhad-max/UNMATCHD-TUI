@@ -2,7 +2,7 @@
 #include "card.h"
 #include "handling.h"
 #include "battle.h"
-#include "Player.h"
+#include "player.h"
 #include "boardmanager.h"
 #include "combatmanager.h"
 
@@ -15,19 +15,6 @@
 
 
 using namespace std;
-
-const std::vector<Card>& Fighter::getDeck() const
-{
-    return deck;
-}
-
-const std::vector<Card>& Fighter::getHand() const
-{
-    return hand;
-}
-
-
-
 Fighter::Fighter(string name,int health, int Maxhealth ,bool ranged , int  movement , Team team )
 {
     this->name = name;
@@ -397,10 +384,4 @@ void Fighter::putCardOnTop(const Card& card)
     deck.push_back(card);
 }
 
-
-
-void Fighter::sethand(const std::vector<Card>& newHand)
-{
-    hand = newHand;
-}
 

@@ -1,7 +1,7 @@
 #ifndef COMBATMANAGER_H
 #define COMBATMANAGER_H
 
-#include "gametypes.h"
+#include "GameTypes.h"
 #include "card.h"
 
 class Battle;

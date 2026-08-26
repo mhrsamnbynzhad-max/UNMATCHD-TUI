@@ -1,4 +1,4 @@
-#include "boardmanager.h"
+#include "BoardManager.h"
 #include "battle.h"
 #include <iostream>
 #include <queue>

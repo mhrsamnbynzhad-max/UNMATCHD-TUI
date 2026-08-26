@@ -8,7 +8,6 @@
 #include <cmath>
 #include <unordered_set>
 
-
 static std::string sanitizeCardFilename(const std::string& title)
 {
     std::string s;
@@ -19,11 +18,8 @@ static std::string sanitizeCardFilename(const std::string& title)
     return s + ".jpg";
 }
 
-GraphicManager::GraphicManager() : window(
-    sf::VideoMode({1280, 720}),
-    "Unmatched Game",
-    sf::Style::Close | sf::Style::Titlebar
-),
+    GraphicManager::GraphicManager() : window(sf::VideoMode({ static_cast<unsigned int>(sf::VideoMode::getDesktopMode().size.x * 0.90f), static_cast<unsigned int>(sf::VideoMode::getDesktopMode().size.y * 0.90f)}),
+            "Unmatched Game", sf::Style::Close | sf::Style::Titlebar ),
     promptText(font), abilityCancelText(font), maneuverButtonText(font), noBoostText(font),maneuverdonetext(font),cancelDefenseText(font),sherlockYesText(font)    
     {
             if (!backgroundTexture.loadFromFile("background.png"))
@@ -109,7 +105,6 @@ GraphicManager::GraphicManager() : window(
         
 
         std::cout << "ok load\n";
-        
     }
 
 void GraphicManager::initSpots()
@@ -360,70 +355,11 @@ void GraphicManager::initSpots()
             loadDB(Card::invisiblemanCardDB);
         }
 
-        void GraphicManager::setupMainMenu()
-        {
-            startButton.setSize({300.f, 80.f});
-            startButton.setPosition({490.f, 300.f});
-            startButton.setFillColor(sf::Color(123, 63, 0));
-            startButton.setOutlineThickness(3.f);
-            startButton.setOutlineColor(sf::Color::White);
-
-           // startButtonText = sf::Text(font, "START GAME", 32);
-            //startButtonText.setFillColor(sf::Color::White);
-            //startButtonText.setPosition({550.f, 320.f});
-            startButtonText.emplace(font, "START GAME", 32);
-            startButtonText->setFillColor(sf::Color::White);
-            startButtonText->setPosition({550.f, 320.f});
-
-            exitButton.setSize({300.f, 80.f});
-            exitButton.setPosition({490.f, 420.f});
-            exitButton.setFillColor(sf::Color(80, 20, 20));
-            exitButton.setOutlineThickness(3.f);
-            exitButton.setOutlineColor(sf::Color::White);
-
-            // exitButtonText = sf::Text(font, "EXIT", 32);
-            // exitButtonText.setFillColor(sf::Color::White);
-            // exitButtonText.setPosition({605.f, 440.f});
-
-            exitButtonText.emplace(font, "EXIT", 32);
-            exitButtonText->setFillColor(sf::Color::White);
-            exitButtonText->setPosition({605.f, 440.f});
-        }
-        
-        void GraphicManager::handleMainMenuClick(sf::Vector2f pos)
-        {
-            if (startButton.getGlobalBounds().contains(pos))
-            {
-                setupState = SetupState::AGE_P1;
-            }
-            else if (exitButton.getGlobalBounds().contains(pos))
-            {
-                window.close();
-            }
-        }
-
-
-        void GraphicManager::drawMainMenu()
-        {
-            window.draw(startButton);
-            if (startButtonText)
-            window.draw(*startButtonText);
-
-            window.draw(exitButton);
-            if (exitButtonText)
-                window.draw(*exitButtonText);
-            //window.draw(startButtonText);
-
-            //window.draw(exitButtonText);
-        }
-   
-        void GraphicManager::run()
+    void GraphicManager::run()
     {
     
         if (!font.openFromFile("player.ttf"))   
         std::cerr << "font load failed\n";
-
-        setupMainMenu();
 
         while (window.isOpen())
         {
@@ -432,23 +368,6 @@ void GraphicManager::initSpots()
                 if (event->is<sf::Event::Closed>())
                 {
                     window.close();
-                }
-                if (setupState == SetupState::MAIN_MENU)
-                {
-                    if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>())
-                    {
-                        if (mb->button == sf::Mouse::Button::Left)
-                        {
-                            sf::Vector2f mousePos =
-                                window.mapPixelToCoords(
-                                    sf::Mouse::getPosition(window)
-                                );
-
-                            handleMainMenuClick(mousePos);
-                        }
-                    }
-
-                    continue;
                 }
             if (setupState == SetupState::AGE_P1 || setupState == SetupState::AGE_P2) 
             {
@@ -556,21 +475,14 @@ else if (setupState == SetupState::CARD_SELECT_ZONE) {
                 window.draw(*background);
             }
 
-            if (setupState == SetupState::MAIN_MENU)
-            {
-                drawMainMenu();
-            }
-            else if (setupState == SetupState::AGE_P1 ||
-                    setupState == SetupState::AGE_P2 ||
-                    setupState == SetupState::HERO_1 ||
-                    setupState == SetupState::HERO_2)
+            if (setupState == SetupState::AGE_P1 || setupState == SetupState::AGE_P2 ||
+                setupState == SetupState::HERO_1 || setupState == SetupState::HERO_2)
             {
                 drawSetupUI();
             }
-            else if (setupState == SetupState::DEFENSE_SELECT)
-            {
-                drawDefenseUI();
-            }
+            else if (setupState == SetupState::DEFENSE_SELECT) {
+                    drawDefenseUI();
+                }
             else
             {
                 for (const auto& edge : edges)
@@ -719,189 +631,47 @@ else if (setupState == SetupState::CARD_SELECT_ZONE) {
         }
     }
 
-void GraphicManager::drawFighters()
-{
-    auto zonePos = [&](int zoneId) -> sf::Vector2f {
-        for (const auto& spot : boardSpots)
-            if (spot.id == zoneId)
-                return spot.circle.getPosition();
-
-        return {0.f, 0.f};
-    };
-
-    auto drawAt = [&](Fighter& f,
-                      sf::Texture& tex,
-                      bool texOk,
-                      sf::Color fallback)
+    void GraphicManager::drawFighters()
     {
-      
-        if (!f.isalive() || f.getPosition() == nullptr)
-            return;
+        auto zonePos = [&](int zoneId) -> sf::Vector2f {
+            for (const auto& spot : boardSpots)
+                if (spot.id == zoneId) return spot.circle.getPosition();
+            return {0.f, 0.f};
+        };
 
-        sf::Vector2f pos = zonePos(f.getPosition()->getId());
-
-
-        float radius = 32.f;
-
-        sf::CircleShape marker(radius);
-        marker.setOrigin({radius, radius});
-        marker.setPosition(pos);
-
-        marker.setOutlineThickness(-3.f);
-        marker.setOutlineColor(sf::Color::Black);
-
-        if (texOk)
+        auto drawAt = [&](Fighter& f, sf::Texture& tex, bool texOk, sf::Color fallback)
         {
-            marker.setTexture(&tex);
-            marker.setFillColor(sf::Color::White);
+            if (!f.isalive() || f.getPosition() == nullptr) return;
+            sf::Vector2f pos = zonePos(f.getPosition()->getId());
+
+            float radius = 32.f;
+            sf::CircleShape marker(radius);
+            marker.setOrigin({radius, radius});
+            marker.setPosition(pos);
+            marker.setOutlineThickness(-3.f);
+            marker.setOutlineColor(sf::Color::Black);
+
+            if (texOk) {
+                marker.setTexture(&tex);
+                marker.setFillColor(sf::Color(175,175,175));
+            } else {
+                marker.setFillColor(fallback);
+            }
+
+            window.draw(marker);
+        };
+
+        drawAt(battle.getSherlock(),     sherlocktex,  sherlocktexOk,  sf::Color::Blue);
+        drawAt(battle.getWatson(),       watsontex,    watsontexOk,    sf::Color(100, 100, 255));
+        drawAt(battle.getDracual(),      draculatex,   draculatexOk,   sf::Color::Red);
+        drawAt(battle.getInvisibleMan(), invisibletex, invisibletOk, sf::Color(150, 150, 150));
+
+        vector<Sisters>& sisters = battle.getsisters();
+        for (int i = 0; i < (int)sisters.size() && i < 3; i++) {
+            drawAt(sisters[i], sistertex[i], sistertexOk[i], sf::Color(255, 100, 100));
         }
-        else
-        {
-            marker.setFillColor(fallback);
-        }
-
-        window.draw(marker);
-
-
-        int hp = f.getHealth();
-        int maxHp = f.getMaxealth();
-
-        if (maxHp <= 0)
-            maxHp = 1;
-
-        float hpRatio =
-            static_cast<float>(hp) /
-            static_cast<float>(maxHp);
-
-        if (hpRatio < 0.f)
-            hpRatio = 0.f;
-
-        if (hpRatio > 1.f)
-            hpRatio = 1.f;
-
-        float barWidth = 58.f;
-        float barHeight = 7.f;
-
-        float barX = pos.x - barWidth / 2.f;
-        float barY = pos.y - radius - 15.f;
-
-        sf::RectangleShape hpBackground;
-        hpBackground.setSize({barWidth, barHeight});
-        hpBackground.setPosition({barX, barY});
-        hpBackground.setFillColor(sf::Color(70, 70, 70));
-        hpBackground.setOutlineThickness(1.f);
-        hpBackground.setOutlineColor(sf::Color::Black);
-
-        window.draw(hpBackground);
-
-        sf::RectangleShape hpBar;
-
-        hpBar.setSize({
-            barWidth * hpRatio,
-            barHeight
-        });
-
-        hpBar.setPosition({
-            barX,
-            barY
-        });
-
-
-        // رنگ HP بر اساس مقدار جان
-        if (hpRatio > 0.6f)
-        {
-            hpBar.setFillColor(sf::Color::Green);
-        }
-        else if (hpRatio > 0.3f)
-        {
-            hpBar.setFillColor(sf::Color::Yellow);
-        }
-        else
-        {
-            hpBar.setFillColor(sf::Color::Red);
-        }
-
-        window.draw(hpBar);
-
-        sf::Text hpText(font);
-
-        hpText.setString(
-            std::to_string(hp) +
-            "/" +
-            std::to_string(maxHp)
-        );
-
-        hpText.setCharacterSize(13);
-        hpText.setFillColor(sf::Color::White);
-
-  
-        sf::FloatRect textBounds = hpText.getLocalBounds();
-
-        hpText.setOrigin({
-            textBounds.position.x + textBounds.size.x / 2.f,
-            textBounds.position.y + textBounds.size.y / 2.f
-        });
-
-        hpText.setPosition({
-            pos.x,
-            barY - 9.f
-        });
-
-        window.draw(hpText);
-    };
-
-
-    // -------------------------
-    // Hero ها
-    // -------------------------
-
-    drawAt(
-        battle.getSherlock(),
-        sherlocktex,
-        sherlocktexOk,
-        sf::Color::Blue
-    );
-
-    drawAt(
-        battle.getWatson(),
-        watsontex,
-        watsontexOk,
-        sf::Color(100, 100, 255)
-    );
-
-    drawAt(
-        battle.getDracual(),
-        draculatex,
-        draculatexOk,
-        sf::Color::Red
-    );
-
-    drawAt(
-        battle.getInvisibleMan(),
-        invisibletex,
-        invisibletOk,
-        sf::Color(150, 150, 150)
-    );
-
-
-    // -------------------------
-    // Sister ها
-    // -------------------------
-
-    vector<Sisters>& sisters = battle.getsisters();
-
-    for (int i = 0;
-         i < static_cast<int>(sisters.size()) && i < 3;
-         i++)
-    {
-        drawAt(
-            sisters[i],
-            sistertex[i],
-            sistertexOk[i],
-            sf::Color(255, 100, 100)
-        );
     }
-}
+
     void GraphicManager::drawfogtoken()
     {
         auto zonePos = [&](int zoneId) -> sf::Vector2f {
@@ -1783,4 +1553,3 @@ void GraphicManager::setupNumberPicker(int maxN)
         boostCards.push_back(std::move(cw));
     }
 }
-

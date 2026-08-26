@@ -6,22 +6,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(include)
-
 file(GLOB SOURCES "src/*.cpp")
+add_executable(game ${SOURCES} )
 
-add_executable(game ${SOURCES})
+include_directories(${CMAKE_SOURCE_DIR}/SFML/include)
+link_directories(${CMAKE_SOURCE_DIR}/SFML/lib)
 
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(SFML REQUIRED sfml-graphics sfml-audio)
-
-target_include_directories(game PRIVATE
-    ${SFML_INCLUDE_DIRS}
-)
-
-target_link_directories(game PRIVATE
-    ${SFML_LIBRARY_DIRS}
-)
-
-target_link_libraries(game PRIVATE
-    ${SFML_LIBRARIES}
+target_link_libraries(game PRIVATE 
+    ${CMAKE_SOURCE_DIR}/SFML/lib/libsfml-graphics-d.a
+    ${CMAKE_SOURCE_DIR}/SFML/lib/libsfml-window-d.a
+    ${CMAKE_SOURCE_DIR}/SFML/lib/libsfml-system-d.a
 )

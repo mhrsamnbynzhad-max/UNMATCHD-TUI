@@ -79,6 +79,7 @@ Card Card::createFromInfo(const Cardinfo& info)
     static LearningNeverEndsEffect learningNeverEndsEffect;
     static DeceptionEffect deceptionEffect;
     static SidearmEffect sidearmEffect;
+    static MistFormEffect mistFormEffect;
 
     static CodedNotesEffect codedNotesEffect;
     static ConfoundEffect confoundEffect;

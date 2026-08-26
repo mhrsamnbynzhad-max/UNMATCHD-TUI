@@ -1,9 +1,9 @@
 #include "battle.h"
-#include "combatmanager.h"
-#include "boardmanager.h"
+#include "CombatManager.h"
+#include "BoardManager.h"
 #include "cardfactory.h"
 #include "handling.h"
-#include "map.h"
+#include "Map.h"
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
@@ -156,62 +156,28 @@ Player* Battle::getPlayerOfFighter(Fighter* fighter)
     return nullptr;
 }
 
-void Battle::chooseHeroes(Player& first, Player& second)
+void Battle::chooseHeroes(Player& first, Player& second) 
 {
-    // انتخاب Hero دیگر از اینجا انجام نمی‌شود.
-    // انتخاب Hero از طریق GUI انجام می‌شود.
-}
+    vector<Fighter*> heroes = { &sherlock, &dracula, &invisibleman };
 
-void Battle::chooseHeroesGUI(
-    Player& first,
-    Player& second,
-    int choice1,
-    int choice2)
-{
-    vector<Fighter*> heroes = {
-        &sherlock,
-        &dracula,
-        &invisibleman
-    };
+    first.chooseHero(heroes);
+    heroes.erase(remove(heroes.begin(), heroes.end(), first.getHero()), heroes.end());
 
-    // انتخاب Player 1
-    first.chooseHero(heroes, choice1);
+    second.chooseHero(heroes);
+    heroes.erase(remove(heroes.begin(), heroes.end(), second.getHero()), heroes.end());
 
-    // حذف قهرمان انتخاب شده
-    heroes.erase(
-        remove(heroes.begin(), heroes.end(), first.getHero()),
-        heroes.end()
-    );
-
-    // انتخاب Player 2
-    if (choice2 < 1 || choice2 > static_cast<int>(heroes.size()))
-        throw std::runtime_error("Invalid Player 2 hero choice");
-
-    second.chooseHero(heroes, choice2);
-
-    // قهرمان انتخاب نشده را حذف می‌کنیم
-    heroes.erase(
-        remove(heroes.begin(), heroes.end(), second.getHero()),
-        heroes.end()
-    );
-
-    // Hero انتخاب نشده می‌میرد
-    for (Fighter* unchosen : heroes)
+    for (Fighter* unchosen : heroes) 
     {
         unchosen->setPosition(nullptr);
         unchosen->sethealth(0);
     }
 
-    // راه‌اندازی موقعیت‌ها
     setuppositions();
-
-    // ساخت Sidekick ها و واحدها
     first.getHero()->setupUnits(this, first);
     second.getHero()->setupUnits(this, second);
-} 
+}
 
-
-void Battle::startTurn(Player& player)
+ void Battle::startTurn(Player& player)
 {
     sherlockAbilityActive = false;
     Fighter* hero = player.getHero();
@@ -368,13 +334,4 @@ void Battle::checkInvisibleFogAtTurnStart()
     {
         if(fog.getPosition() == pos) { invisibleStartedOnFog = true; break; }
     }
-}
-
-
-Player* Battle::getCurrentPlayerPtr() const
-{
-    if (turnQueue.empty())
-        return nullptr;
-
-    return turnQueue.front();
 }

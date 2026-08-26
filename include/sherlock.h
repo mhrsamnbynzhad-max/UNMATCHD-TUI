@@ -2,7 +2,7 @@
 #define SHERLOCK_H
 
 #include "fighter.h"
-#include "Player.h"
+#include "player.h"
 
 class Sherlock : public Fighter
 {

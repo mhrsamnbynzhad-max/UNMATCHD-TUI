@@ -17,7 +17,7 @@ private:
 public:
     Player(const std::string& n);
 
-    void chooseHero(const vector<Fighter*>& heroes, int choice);    
+    void chooseHero(const vector<Fighter*>& heroes);
     Fighter* getHero() const;
     void setHero(Fighter* );
     std::string getName() const;

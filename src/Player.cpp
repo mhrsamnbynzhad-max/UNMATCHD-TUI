@@ -1,10 +1,9 @@
-#include "Player.h"
+#include "player.h"
 #include "battle.h"
 #include "handling.h"
 #include "boardmanager.h"
 #include "combatmanager.h"
 #include <iostream>
-#include <stdexcept>
 
 
 using namespace std;
@@ -23,12 +22,18 @@ Fighter* Player::getHero() const
     return hero;
 }
 
-void Player::chooseHero(const vector<Fighter*>& heroes, int choice)
+void Player::chooseHero(const vector<Fighter*>& heroes)
 {
-    if (choice < 1 || choice > static_cast<int>(heroes.size()))
-        throw std::runtime_error("Invalid hero choice");
+    cout << "\nChoose Hero\n";
 
-    hero = heroes[choice - 1];
+    for(int i = 0; i < heroes.size(); i++)
+    {
+        cout << i + 1 << ") "<< heroes[i]->getName()<< endl;
+    }
+
+    int choice = readInt("Choice: ",1,heroes.size());
+
+    hero = heroes[choice-1];
 }
 void Player::drawCard()
 {

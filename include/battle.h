@@ -12,7 +12,7 @@
 #include "map.h"
 #include <vector>
 #include <queue>
-#include "gametypes.h"
+#include "GameTypes.h"
 
 // Forward declarations
 class CombatManager;
@@ -72,11 +72,6 @@ public:
     Fighter& getWatson() { return watson; }
     InvisibleMan& getInvisibleMan() { return invisibleman; }
 
-    const Fighter& getSherlock() const { return sherlock; }
-    const Fighter& getWatson() const { return watson; }
-    const Dracula& getDracual() const { return dracula; }
-    const InvisibleMan& getInvisibleMan() const { return invisibleman; }    
-
     Fighter* getfighterat(Zone* zone);
     Player* getPlayerOfFighter(Fighter* fighter);
     std::vector<Fighter*> getAllFighters();
@@ -84,8 +79,6 @@ public:
 
     void setuppositions();
     void chooseHeroes(Player&, Player&);
-
-    void chooseHeroesGUI(Player& first, Player& second, int choice1, int choice2);
     void chooseSidekickPosition(Player&);
     void chooseFogPosition(Player&);
     void startTurn(Player& player);
@@ -120,22 +113,9 @@ public:
     void resetActionCounter() { actionsThisTurn = 0; }
     bool turnShouldEnd() const { return actionsThisTurn >= 2; }
     void endTurnAndAdvance();
-    // void setGUIChoice(int choice);
-    // bool hasGUIChoice() const;
-    // int getGUIChoice();
-
-    bool getSherlockAbility() const { return sherlockAbilityActive; }
-    bool getInvisibleAbility() const { return invisibleAbilityActive; }
-    bool getExtraAction() const { return extraAction; }
-    bool getGameOver() const { return gameover; }
-    bool getInvisibleStartedOnFog() const { return invisibleStartedOnFog; }
-
-    int getActionsThisTurn() const { return actionsThisTurn; }
-    int getSidekickIndex() const { return sidekickIndex; }
-    int getFogIndex() const { return fogIndex; }
-
-    Player* getCurrentPlayerPtr() const;
-    
+    void setGUIChoice(int choice);
+    bool hasGUIChoice() const;
+    int getGUIChoice();
 };
 
 #endif

@@ -2,7 +2,7 @@
 #define FIGHTER_H
 #include "zone.h"
 #include "card.h"
-#include "Player.h"
+#include "player.h"
 #include <string>
 #include <vector>
 
@@ -33,11 +33,6 @@ class Fighter
     Team team ;
     
     public:
-    
-   // const std::vector<Card>& getDeck() const;
-    const std::vector<Card>& getHand() const;
-
-
     Fighter(std::string , int , int ,bool , int  , Team);
 
     vector<AttackCardInfo> getPlayableCardIndexes(Battle* , Fighter*  , Fighter*);
@@ -63,19 +58,16 @@ class Fighter
     void showhand()const;
     int handsize() const;
     std::vector<Card>& gethand();
-    //const std::vector<Card>& getHand() const;
     Card playcard(int);
 
     Card remove_ranodmcard();
 
     bool isenemy (Fighter* );
-    void sethand(const std::vector<Card>&);
 
     vector<Card> getrandomcard(int);
     void addtohand(const std:: vector<Card>&);
     int getdecksize()const;
     void setdeck(const std::vector<Card>& );
-    const std::vector<Card>& getDeck() const;
     void sethealth(int);
     int getMaxealth() const;
     Card drawBoostMovement();

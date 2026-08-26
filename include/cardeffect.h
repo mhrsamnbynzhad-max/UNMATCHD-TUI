@@ -144,21 +144,13 @@ public:
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice = -1) override;
 };
 
+
 class StudyMethodEffect : public CardEffect
 {
-public:
-    bool needsGUIInput() const override;
-    bool usesHandSelection() const override;
-    Fighter* getHandSelectionTarget(
-        Fighter* attacker,
-        Fighter* defender) const override;
-
-    void apply(
-        Fighter* attacker,
-        Fighter* defender,
-        Battle* battle,
-        Card& card,
-        int guiChoice) override;
+public:                                                                         
+    
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
+   
 };
 
 
@@ -205,36 +197,22 @@ public:
 
 
 
-class StrategicDeductionEffect : public CardEffect
-{
-public:
-    bool needsGUIInput() const override;
-    bool usesHandSelection() const override;
-    Fighter* getHandSelectionTarget(
-        Fighter* attacker,
-        Fighter* defender
-    ) const override;
-
-    void apply(
-        Fighter* attacker,
-        Fighter* defender,
-        Battle* battle,
-        Card& card,
-        int guiChoice
-    ) override;
-};
-
 class ConfirmSuspicionEffect : public CardEffect
 {
-public:
-    void apply(
-        Fighter* attacker,
-        Fighter* defender,
-        Battle* battle,
-        Card& card,
-        int guiChoice
-    ) override;
+public:                                                                      
+
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
+  
 };
+
+
+class StrategicDeductionEffect : public CardEffect
+{
+public:                                                                       
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
+  
+};
+
 
 class LearningNeverEndsEffect : public CardEffect
 {

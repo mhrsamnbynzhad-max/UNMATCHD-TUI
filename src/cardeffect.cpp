@@ -564,22 +564,6 @@ void ManeuverEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle,
 
     // ---------------- Study Method ----------------
 
-    bool StudyMethodEffect::needsGUIInput() const
-    {
-        return true;
-    }
-
-    bool StudyMethodEffect::usesHandSelection() const
-    {
-        return true;
-    }
-
-    Fighter* StudyMethodEffect::getHandSelectionTarget(
-        Fighter* attacker,
-        Fighter* defender) const
-    {
-        return defender;
-    }
     void StudyMethodEffect::apply(Fighter* attacker,    Fighter* defender,    Battle* battle,    Card& card,int guuichoice )
     {
         if(attacker == nullptr || defender == nullptr)
@@ -773,49 +757,42 @@ void ManeuverEffect::apply(Fighter* attacker, Fighter* defender, Battle* battle,
 
     // ---------------- Strategic Deduction ----------------
 
-    bool StrategicDeductionEffect::needsGUIInput() const
+    void StrategicDeductionEffect::apply( Fighter* attacker, Fighter* defender, Battle* battle, Card& card , int guichoice)
     {
-        return true;
-    }
-
-    bool StrategicDeductionEffect::usesHandSelection() const
-    {
-        return true;
-    }
-
-    Fighter* StrategicDeductionEffect::getHandSelectionTarget(
-        Fighter* attacker,
-        Fighter* defender) const
-    {
-        return defender;
-    }
-    void StrategicDeductionEffect::apply(
-        Fighter* attacker,
-        Fighter* defender,
-        Battle* battle,
-        Card& card,
-        int guiChoice)
-    {
-        if (defender == nullptr)
+        if(defender == nullptr)
             return;
 
         vector<Card>& hand = defender->gethand();
 
-        if (guiChoice < 0 || guiChoice >= (int)hand.size())
+
+        if(hand.empty())
             return;
 
-        Card& enemyCard = hand[guiChoice];
+        for(int i = 0; i < hand.size(); i++)
+        {
+            cout << i+1 << ") "<< hand[i].getName()<< " Value: "<< hand[i].getValue()<< " Boost: "<< hand[i].getBoost()<< endl;
+        }
+
+
+        int choice;
+        choice = readInt("Choose opponent card to change boost:\n" ,1 , hand.size());
+
+        if(choice < 1 || choice > hand.size())
+            return;
+
+
+        Card& enemyCard = hand[choice-1];
+
 
         int printedValue = enemyCard.getValue();
 
         enemyCard.setBoost(printedValue);
 
+
         cout << "Strategic Deduction activated!\n";
-        cout << enemyCard.getName()
-            << " boost changed to "
-            << printedValue
-            << endl;
+        cout << enemyCard.getName()<< " boost changed to "<< printedValue<< endl;
     }
+
 
 
     // ---------------- Learning Never Ends ----------------
@@ -956,7 +933,6 @@ void CodedNotesEffect::apply(Fighter* attacker, Fighter* defender, Battle* battl
 bool ConfoundEffect::usesHandSelection() const { return stage == Stage::DISCARD_CHOICE; }
 bool ConfoundEffect::allowsSkip() const { return stage == Stage::DISCARD_CHOICE; }
 bool ConfoundEffect::finishesOnSkip() const { return false; }
-
 bool ConfoundEffect::needsMoreInput() const { return stage == Stage::FOG_DESTINATION; }
 Fighter* ConfoundEffect::getHandSelectionTarget(Fighter*, Fighter* defender) const { return defender; }
 

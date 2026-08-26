@@ -1,7 +1,7 @@
 #ifndef BOARDMANAGER_H
 #define BOARDMANAGER_H
 
-#include "gametypes.h"
+#include "GameTypes.h"
 #include <vector>
 
 class Battle;

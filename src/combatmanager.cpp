@@ -1,4 +1,4 @@
-#include "combatmanager.h"
+#include "CombatManager.h"
 #include "battle.h"
 #include "cardeffect.h"
 #include "handling.h"

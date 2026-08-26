@@ -1,6 +1,6 @@
 #include "sherlock.h"
 #include "handling.h"
-#include "Player.h"
+#include "player.h"
 #include "battle.h"
 #include<iostream>
 

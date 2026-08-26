@@ -2,7 +2,7 @@
 #define GAME_CONTROLLER_H
 
 #include "battle.h"
-#include "Player.h"
+#include "player.h"
 #include <queue>
 
 class GameController

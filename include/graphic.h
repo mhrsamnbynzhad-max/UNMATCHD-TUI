@@ -28,26 +28,15 @@ private:
      void initEdges(); 
     void initSpots();
  
-enum class SetupState {
-    MAIN_MENU,
-    AGE_P1,
-    AGE_P2,
-    HERO_1,
-    HERO_2,
-    SIDEKICK_P1,
-    SIDEKICK_P2,
-    DRACULA_ABILITY,
-    DONE,
-    MANEUVER_BOOST,
-    MANEUVER_SELECT_FIGHTER,
-    MANEUVER_SELECT_ZONE,
+enum class SetupState {AGE_P1, AGE_P2, HERO_1, HERO_2,
+    SIDEKICK_P1, SIDEKICK_P2, DRACULA_ABILITY, DONE,
+    MANEUVER_BOOST, MANEUVER_SELECT_FIGHTER, MANEUVER_SELECT_ZONE ,
     DRACULA_CARD_BEAST,
     SHERLOCK_ABILITY,
-    DEFENSE_SELECT,
-    CARD_SELECT_ZONE
-};
+     DEFENSE_SELECT,
+    CARD_SELECT_ZONE};    
     Battle battle;                 
-    SetupState setupState = SetupState::MAIN_MENU;
+    SetupState setupState = SetupState::AGE_P1;
     sf::Font font;
     sf::Text promptText;
     std::string ageInput;
@@ -84,6 +73,7 @@ enum class SetupState {
     int pendingDefenseCardIndex = -1;
 
     void handleCardZoneClick(sf::Vector2f pos);
+    void drawCardSelectedZoneUI();
     std::vector<CardWidget> handCards;
     std::map<Cardname, sf::Texture> cardTextures;
     std::vector<HeroButton> heroButtons;
@@ -122,17 +112,6 @@ enum class SetupState {
     Fighter* pendingAttacker;
     Fighter* pendingDefender;
     int pendingAttackCardIndex;
-
-    sf::RectangleShape startButton;
-
-    sf::RectangleShape exitButton;
-
-    std::optional<sf::Text> startButtonText;
-    std::optional<sf::Text> exitButtonText;
-
-    void setupMainMenu();
-    void handleMainMenuClick(sf::Vector2f pos);
-    void drawMainMenu();
 
     void loadFighterTextures();
     void drawFighters();
