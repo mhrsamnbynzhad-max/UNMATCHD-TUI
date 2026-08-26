@@ -1,0 +1,9 @@
+build/
+*.o
+*.a
+*.so
+*.exe
+
+SFML/
+
+savegame.txt
