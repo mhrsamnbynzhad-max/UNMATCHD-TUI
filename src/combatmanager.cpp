@@ -4,6 +4,7 @@
 #include "handling.h"
 #include <iostream>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -33,8 +34,10 @@ void CombatManager::resolveCombat(Fighter* attacker, Fighter* defender, Fighter*
     }
     if(defender->handsize() == 0 && defenseCardIndex != -1) {
         cout << "Defender has no cards\n";
-        // ToDo: handle direct damage if needed
     }
+
+    combatAttacker = attacker;
+    combatDefender = defender;
 
     Card attackcard = cardOwner->playcard(attackCardIndex);
     currentAttackCard = &attackcard;
@@ -51,11 +54,15 @@ void CombatManager::resolveCombat(Fighter* attacker, Fighter* defender, Fighter*
     }
 
     ExecuteOrder order = getexecuteCardeffect(attackcard, defendcard, attacker, defender, isdefended);
-    
-       applycardeffect(*order.acard, order.aowner, order.atarget,
-                     (order.aowner == defender ? defenseGuiChoice : -1));
 
-    if(order.bcard != nullptr) {
+    bool aBeforeDamage = order.acard->getPriority() < 2;
+    bool bBeforeDamage = (order.bcard != nullptr) && order.bcard->getPriority() < 2;
+
+    if (aBeforeDamage) {
+        applycardeffect(*order.acard, order.aowner, order.atarget,
+                         (order.aowner == defender ? defenseGuiChoice : -1));
+    }
+    if (bBeforeDamage) {
         if(!getCancel()) {
             applycardeffect(*order.bcard, order.bowner, order.btarget,
                              (order.bowner == defender ? defenseGuiChoice : -1));
@@ -64,7 +71,7 @@ void CombatManager::resolveCombat(Fighter* attacker, Fighter* defender, Fighter*
         }
     }
         
-    int attackValue = attackcard.getValue();
+   int attackValue = attackcard.getValue();
     int defederValue = isdefended ? defendcard.getValue() : 0;
     
     if(battle->getinvisibleactive() && (defendcard.getcardType() == DEFENSE || defendcard.getcardType() == VERSATILE)) {
@@ -73,8 +80,14 @@ void CombatManager::resolveCombat(Fighter* attacker, Fighter* defender, Fighter*
         lastFinaldefend = defederValue;
     }
 
-    cout << "Attacker played :" << attackcard.getName() << endl;
-    if (isdefended) cout << "Defender played :" << defendcard.getName() << endl;
+    setFinalAttackValue(attackValue);
+    setFinalDefendValue(lastFinaldefend);
+
+    ostringstream dmgMsg;
+   cout << "Attacker played :" << attackcard.getName() << endl;
+    if (isdefended) {
+        cout << "Defender played :" << defendcard.getName() << endl;
+    }
     
     int damage = attackValue - lastFinaldefend;
 
@@ -82,23 +95,52 @@ void CombatManager::resolveCombat(Fighter* attacker, Fighter* defender, Fighter*
         defender->takeDamage(damage);
          if(!defender->isalive()) {
             cout << defender->getName() << " died\n";
+            dmgMsg << defender->getName() << " died\n";
             if(defender->getName() == "Dracula" || defender->getName() == "Sherlock" || defender->getName() == "InvisibleMan") {
                 battle->setGameOver(true);
                 cout << "\n*** GAME OVER! " << defender->getName() << " has been defeated! ***\n";
+                dmgMsg << "*** GAME OVER! " << defender->getName() << " has been defeated! ***";
+                lastCombatMessage = dmgMsg.str();
                 return;
             }
        }
         cout << "Damage taken ( " << damage << " )\n";
         cout << "Attacker won the combat!\n";
+        dmgMsg << "Damage  taken  (  " << damage << "  )\n";
+        dmgMsg << "Attacker   won   the   combat!";
     } else {
-        cout << "Damage taken ( 0 )\n";
+        cout << "Damage  taken  (  0  )\n";
         cout << "Defender won the combat!\n";   
+        dmgMsg << "Damage   taken   (  0  )\n";
+        dmgMsg << "Defender   won   the   combat!";
     }
-        
+
+   if (!aBeforeDamage) {
+        applycardeffect(*order.acard, order.aowner, order.atarget,
+                         (order.aowner == defender ? defenseGuiChoice : -1));
+        if (order.acard->getEffect() != nullptr && order.acard->getEffect()->needsPostCombatGUI()) {
+            pendingPostCombatEffect = order.acard->getEffect();
+            pendingPostCombatAttacker = order.aowner;
+            pendingPostCombatDefender = order.atarget;
+        }
+    }
+    if (order.bcard != nullptr && !bBeforeDamage) {
+        if(!getCancel()) {
+            applycardeffect(*order.bcard, order.bowner, order.btarget,
+                             (order.bowner == defender ? defenseGuiChoice : -1));
+            if (order.bcard->getEffect() != nullptr && order.bcard->getEffect()->needsPostCombatGUI()) {
+                pendingPostCombatEffect = order.bcard->getEffect();
+                pendingPostCombatAttacker = order.bowner;
+                pendingPostCombatDefender = order.btarget;
+            }
+        } else {
+            cout << "Opponent card effect was cancelled\n";
+        }
+    }
+
+    lastCombatMessage = dmgMsg.str();
     this->setCancel(false);
 }
-
-
 
 ExecuteOrder CombatManager::getexecuteCardeffect(Card& attackCard, Card& defendCard, Fighter* attacker, Fighter* defender, bool defended)
 {

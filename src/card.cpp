@@ -32,7 +32,7 @@ vector<Cardinfo> Card::sherlockCardDB =
     { MASTER_OF_DISGUISE,"Master Of Disguise","Sherlock",SCHEME,IMMEDIATE,"Swap Positions",0,2,2 },
     { GAME_ON,"The Game Is Afoot","Sherlock",ATTACK,AFTER_COMBAT,"Move Holmes",5,2,2},//THE GAME IS ON
     { CONFIRM_SUSPICION,"Suspected Confirmed","Sherlock",SCHEME,IMMEDIATE,"Guess Card Value",0,1,3 },
-    {DECEPTION,"Deception","Any",SCHEME,DURING_COMBAT,"Cancel all effects on your opponent's card",0,1,3}
+    {DECEPTION,"Deception","Any",VERSATILE,DURING_COMBAT,"Cancel all effects on your opponent's card",2,1,3}
 };
 
 vector<Cardinfo> Card::invisiblemanCardDB = 

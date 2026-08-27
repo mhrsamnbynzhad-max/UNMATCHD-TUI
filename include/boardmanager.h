@@ -18,6 +18,7 @@ public:
 
     bool movefighter(Fighter& fighter, int destinationid, int Maxmove);
     bool areadjacent(Fighter& a, Fighter& b);
+    bool canReachForAttack(Fighter& a, Fighter& b);
     void showPossiblemoves(Fighter& fight);
     void showplacementzone(Fighter& hero);
     ZoneCheckResult canEnterzone(Fighter* mover, Fighter* occupant, int moveleft);

@@ -196,12 +196,12 @@ if (hero != nullptr && hero->isalive() && hero->getName() != "Dracula" && hero->
 vector<Fighter*> Battle::getAllFighters() 
 {
     vector<Fighter*> result;
-    if (player1.getHero() && player1.getHero()->isalive()) result.push_back(player1.getHero());
-    if (player2.getHero() && player2.getHero()->isalive()) result.push_back(player2.getHero());
-    if (watson.isalive() && getPlayerOfFighter(&watson) != nullptr) result.push_back(&watson);
+    if (player1.getHero() && player1.getHero()->isalive() && player1.getHero()->getPosition() != nullptr) result.push_back(player1.getHero());
+    if (player2.getHero() && player2.getHero()->isalive() && player2.getHero()->getPosition() != nullptr) result.push_back(player2.getHero());
+    if (watson.isalive() && watson.getPosition() != nullptr && getPlayerOfFighter(&watson) != nullptr) result.push_back(&watson);
         
     for (Sisters& s : sisters) {
-        if (s.isalive() && getPlayerOfFighter(&s) != nullptr) result.push_back(&s);
+        if (s.isalive() && s.getPosition() != nullptr && getPlayerOfFighter(&s) != nullptr) result.push_back(&s);
     }
     return result;
 }
@@ -209,6 +209,17 @@ vector<Fighter*> Battle::getAllFighters()
 vector<Fighter*> Battle::getFighters()
 {
     return getAllFighters();
+}
+
+vector<Fighter*> Battle::getAliveEnemies(Team myTeam)
+{
+    vector<Fighter*> result;
+    for (Fighter* f : getFighters()) {
+        if (f != nullptr && f->isalive() && f->getteam() != myTeam) {
+            result.push_back(f);
+        }
+    }
+    return result;
 }
 
 void Battle::setuppositions() 

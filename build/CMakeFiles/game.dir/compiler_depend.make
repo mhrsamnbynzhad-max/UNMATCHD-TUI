@@ -1519,6 +1519,7 @@ CMakeFiles/game.dir/src/combatmanager.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/ptr_traits.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/range_access.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/requires_hosted.h \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/sstream.tcc \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/std_abs.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stdexcept_except.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/stdexcept_throw.h \
@@ -1577,6 +1578,7 @@ CMakeFiles/game.dir/src/combatmanager.cpp.obj: C:/Users/Asus/Desktop/unmatchedd/
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ostream \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/pstl/pstl_config.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/queue \
+  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/sstream \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdexcept \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/stdlib.h \
   C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/streambuf \
@@ -4553,6 +4555,12 @@ C:/Users/Asus/Desktop/unmatchedd/src/cardeffect.cpp:
 
 C:/Users/Asus/Desktop/unmatchedd/src/cardfactory.cpp:
 
+C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/mmintrin.h:
+
+C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/sstream.tcc:
+
+C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/sstream:
+
 C:/Users/Asus/Desktop/unmatchedd/src/fighter.cpp:
 
 C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/random.h:
@@ -4604,10 +4612,6 @@ C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.
 C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/x86_64-w64-mingw32/bits/opt_random.h:
 
 C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/emmintrin.h:
-
-C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/sstream.tcc:
-
-C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/mmintrin.h:
 
 C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/mwaitintrin.h:
 
@@ -4782,8 +4786,6 @@ C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.
 C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/optional:
 
 C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/ratio:
-
-C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/sstream:
 
 C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/unordered_set:
 

@@ -24,6 +24,9 @@ public:
     virtual bool usesNumberGuess() const { return false; }
     virtual int getNumberGuessMax() const { return 6; }
     virtual Fighter* getHandSelectionTarget(Fighter* attacker, Fighter* defender) const { return attacker; } 
+    virtual bool needsPostCombatGUI() const { return false; }
+    virtual bool postCombatUsesHandDisplay() const { return false; }
+    virtual bool highlightAsTargetSelection() const { return false; }
     virtual std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const 
     {
         return std::vector<int>();
@@ -105,10 +108,13 @@ public:
 class SurvivalInstinctEffect : public CardEffect {
 private:
     Fighter* selectedOpponent = nullptr; 
+    bool awaitingSelection = false;
 
 public:
     bool needsGUIInput() const override;
     bool needsMoreInput() const override;   
+    bool needsPostCombatGUI() const override;
+    bool highlightAsTargetSelection() const override;
     std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int guiChoice = -1) override;
 };
@@ -147,30 +153,29 @@ public:
 
 class StudyMethodEffect : public CardEffect
 {
+private:
+    bool canViewHand = false;
 public:                                                                         
-    
+    bool needsPostCombatGUI() const override;
+    bool postCombatUsesHandDisplay() const override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
-   
 };
 
 
 class ElementaryEffect : public CardEffect
 {
 public:
-    bool needsGUIInput() const ;
 
-    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
-   
+    void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override; 
     
 };
-
 
 class ImpossibleEffect : public CardEffect
 {
 public:          
     bool needsGUIInput() const override;
-    bool usesNumberGuess() const override;
-    int getNumberGuessMax() const override;
+    bool usesHandSelection() const override;
+    Fighter* getHandSelectionTarget(Fighter* attacker, Fighter* defender) const override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
 };
 
@@ -209,8 +214,10 @@ public:
 class StrategicDeductionEffect : public CardEffect
 {
 public:                                                                       
+    bool needsGUIInput() const override;
+    bool usesHandSelection() const override;
+    Fighter* getHandSelectionTarget(Fighter* attacker, Fighter* defender) const override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
-  
 };
 
 
@@ -242,7 +249,8 @@ public:
 class MistFormEffect : public CardEffect
 {
 public:                                                                      
-  
+    bool needsGUIInput() const override;
+    std::vector<int> getValidZones(Fighter* attacker, Battle* battle) const override;
     void apply(Fighter* attacker, Fighter* defender, Battle* battle, Card& card, int) override;
 };
 

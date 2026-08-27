@@ -208,14 +208,7 @@ void  Fighter :: sethealth(int h)
 {
     vector<AttackCardInfo> result;
 
-    vector<Fighter*> aliveEnemies;
-    for (Fighter* f : battle->getFighters())
-    {
-        if (f != nullptr && f->isalive() && f->getteam() != actingfighter->getteam())
-        {
-            aliveEnemies.push_back(f);
-        }
-    }
+    vector<Fighter*> aliveEnemies = battle->getAliveEnemies(actingfighter->getteam());
 
     for (int i = 0; i < hand.size(); i++)
     {
@@ -299,24 +292,29 @@ void  Fighter :: sethealth(int h)
                     if(usable) break;
                 }
             }
-            else if (owner == "Any")
-            {
+       else if (owner == "Any")
+        {
+            vector<Fighter*> friendlyMembers;
+                       if (actingfighter->getteam() == DRACULA) {
+                    friendlyMembers.push_back(&battle->getDracual());
+                for (auto& s : battle->getsisters()) friendlyMembers.push_back(&s);
+            } else if (actingfighter->getteam() == SHERLOCK) {
+                friendlyMembers.push_back(&battle->getSherlock());
+                friendlyMembers.push_back(&battle->getWatson());
+            } else {
+                friendlyMembers.push_back(actingfighter);
+            }
+
+            for (Fighter* member : friendlyMembers) {
+                if (!member->isalive() || member->getPosition() == nullptr) continue;
                 for (Fighter* enemy : aliveEnemies) {
-                    if (battle->getBoard()->areadjacent(battle->getDracual(), *enemy)) {
+                    if (battle->getBoard()->canReachForAttack(*member, *enemy)) {
                         usable = true; break;
                     }
                 }
-                if (!usable) {
-                    for (auto& s : battle->getsisters()) {
-                        if (!s.isalive()) continue;
-                        for (Fighter* enemy : aliveEnemies) {if (battle->getBoard()->areadjacent(s, *enemy)) {
-                                usable = true; break;
-                            }
-                        }
-                        if(usable) break;
-                    }
-                }
+                if (usable) break;
             }
+        }
             else
             {
                 if (actingfighter->isRanged())

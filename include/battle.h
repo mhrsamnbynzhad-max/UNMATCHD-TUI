@@ -72,10 +72,11 @@ public:
     Fighter& getWatson() { return watson; }
     InvisibleMan& getInvisibleMan() { return invisibleman; }
 
-    Fighter* getfighterat(Zone* zone);
+   Fighter* getfighterat(Zone* zone);
     Player* getPlayerOfFighter(Fighter* fighter);
     std::vector<Fighter*> getAllFighters();
     std::vector<Fighter*> getFighters();
+    std::vector<Fighter*> getAliveEnemies(Team myTeam);
 
     void setuppositions();
     void chooseHeroes(Player&, Player&);

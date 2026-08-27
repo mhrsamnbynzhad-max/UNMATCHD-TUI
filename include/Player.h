@@ -28,6 +28,7 @@ public:
     void playScheme(Player& , Battle& ,Fighter*, int );
     Fighter* chooseAttacker( Battle& , Card& , Fighter*);
     bool chooseAttackerIfNeeded (Battle& , Card& , Fighter*& ,Fighter* );
+    vector<Fighter*> getAttackerChoices(Battle&, Card&, Fighter*);
 };
 
 #endif

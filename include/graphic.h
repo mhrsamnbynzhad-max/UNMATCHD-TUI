@@ -28,15 +28,15 @@ private:
      void initEdges(); 
     void initSpots();
  
-enum class SetupState {AGE_P1, AGE_P2, HERO_1, HERO_2,
+enum class SetupState {MAIN_MENU, AGE_P1, AGE_P2, HERO_1, HERO_2,
     SIDEKICK_P1, SIDEKICK_P2, DRACULA_ABILITY, DONE,
     MANEUVER_BOOST, MANEUVER_SELECT_FIGHTER, MANEUVER_SELECT_ZONE ,
     DRACULA_CARD_BEAST,
     SHERLOCK_ABILITY,
      DEFENSE_SELECT,
-    CARD_SELECT_ZONE};    
+  CARD_SELECT_ZONE, INVISIBLE_REAPPEAR, POST_COMBAT_ZONE_SELECT,POST_COMBAT_HAND_DISPLAY, ATTACKER_SELECT};    
     Battle battle;                 
-    SetupState setupState = SetupState::AGE_P1;
+    SetupState setupState = SetupState::MAIN_MENU;
     sf::Font font;
     sf::Text promptText;
     std::string ageInput;
@@ -71,6 +71,7 @@ enum class SetupState {AGE_P1, AGE_P2, HERO_1, HERO_2,
     sf::Text sherlockYesText;
     bool pendingIsDefenseSelection = false;
     int pendingDefenseCardIndex = -1;
+    int pendingDefenseGuiChoice = -1;
 
     void handleCardZoneClick(sf::Vector2f pos);
     void drawCardSelectedZoneUI();
@@ -149,10 +150,32 @@ enum class SetupState {AGE_P1, AGE_P2, HERO_1, HERO_2,
 
     void drawSetupUI();
 
-    void setupDefenseCards(Fighter* defender, const std::vector<int>& defIndexes);
+void setupDefenseCards(Fighter* defender, const std::vector<int>& defIndexes);
     void handleDefenseClick(sf::Vector2f pos);
     void drawDefenseUI();
     void finishAttack();
+
+    std::vector<HeroButton> mainMenuButtons;
+    sf::RectangleShape combatMessageBar;
+    sf::Text combatMessageText;
+
+    void setupMainMenu();
+    void handleMainMenuClick(sf::Vector2f pos);
+    void drawMainMenu();
+  void handleInvisibleReappearClick(sf::Vector2f pos);
+    void drawCombatMessage();
+
+    CardEffect* postCombatEffect = nullptr;
+    Fighter* postCombatAttacker = nullptr;
+    Fighter* postCombatDefender = nullptr;
+    int pendingAttackerCardIndex = -1;
+
+    void playCardWithAttacker(Fighter* attacker, Card& chosenCard, int handIndex);
+    void handlePostCombatZoneClick(sf::Vector2f pos);
+    void handlePostCombatHandDisplayClick(sf::Vector2f pos);
+    void drawPostCombatHandDisplay();
+    void handleAttackerSelectClick(sf::Vector2f pos);
+    void advanceAfterAction();
 
 public:
     GraphicManager();

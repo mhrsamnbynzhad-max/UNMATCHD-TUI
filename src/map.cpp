@@ -11,14 +11,14 @@ Map::Map()
     zones[25] = new Zone(25, {'P','X'});
 
     
-    zones[2]  = new Zone(2,{'R','B'});
-    zones[16] = new Zone(16,'B');
+    zones[2]  = new Zone(2,{'R','L'});
+    zones[16] = new Zone(16,'L');
     
     zones[5]  = new Zone(5,'G');
     zones[6]  = new Zone(6,'G');
-    zones[7]  = new Zone(7,'G');
+    zones[7]  = new Zone(7,{'X' , 'G'});
 
-    zones[8]  = new Zone(8,{'D','d'}); // Dark blue Zone
+    zones[8]  = new Zone(8,{'D','G'}); // Dark blue Zone
     zones[9]  = new Zone(9,{'D','X'});
 
     zones[10] = new Zone(10,'D');

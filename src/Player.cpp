@@ -371,4 +371,74 @@ void Player::playScheme(Player& enemy, Battle& battle, Fighter* attacker, int ca
     return attacker != nullptr;
 }
 
+vector<Fighter*> Player::getAttackerChoices(Battle& battle, Card& attackCard, Fighter* opponent)
+{
+    vector<Fighter*> choices;
+    string owner = attackCard.getowner();
+
+    if (owner == "Dracula")
+    {
+        if (hero->getName() == "Dracula" && hero->isalive()) choices.push_back(hero);
+        return choices;
+    }
+
+    if (owner == "Sherlock")
+    {
+        if (hero->getName() == "Sherlock" && hero->isalive()) choices.push_back(hero);
+        return choices;
+    }
+
+    if (owner == "Watson")
+    {
+        Fighter& watson = battle.getWatson();
+        if (watson.isalive() && battle.getPlayerOfFighter(&watson) != nullptr) choices.push_back(&watson);
+        return choices;
+    }
+
+    if (owner == "Sister")
+    {
+        vector<Fighter*> aliveEnemies = battle.getAliveEnemies(hero->getteam());
+        for (auto& s : battle.getsisters())
+        {
+            if (!s.isalive()) continue;
+            for (Fighter* enemy : aliveEnemies) {
+                if (battle.getBoard()->areadjacent(s, *enemy)) {
+                    choices.push_back(&s);
+                    break;
+                }
+            }
+        }
+        return choices;
+    }
+
+ if (owner == "Any")
+    {
+        vector<Fighter*> aliveEnemies = battle.getAliveEnemies(hero->getteam());
+        vector<Fighter*> friendlyMembers;
+        if (hero->getteam() == DRACULA) {
+            friendlyMembers.push_back(hero);
+            for (auto& s : battle.getsisters()) friendlyMembers.push_back(&s);
+        } else if (hero->getteam() == SHERLOCK) {
+            friendlyMembers.push_back(hero);
+            friendlyMembers.push_back(&battle.getWatson());
+        } else {
+            friendlyMembers.push_back(hero);
+        }
+
+        for (Fighter* member : friendlyMembers) {
+            if (!member->isalive() || member->getPosition() == nullptr) continue;
+            for (Fighter* enemy : aliveEnemies) {
+                if (battle.getBoard()->canReachForAttack(*member, *enemy)) {
+                    choices.push_back(member);
+                    break;
+                }
+            }
+        }
+
+        return choices;
+    }
+
+    choices.push_back(hero);
+    return choices;
+}
 

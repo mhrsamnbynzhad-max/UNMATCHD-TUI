@@ -187,4 +187,6 @@ CMakeFiles/game.dir/src/combatmanager.cpp.obj: \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/ostream_print.h \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/ostream.tcc \
  C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/istream \
- C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/istream.tcc
+ C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/istream.tcc \
+ C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/sstream \
+ C:/Users/Asus/scoop/apps/mingw/16.1.0-rt_v14-rev1/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/sstream.tcc

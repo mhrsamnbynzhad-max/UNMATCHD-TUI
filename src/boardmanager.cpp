@@ -115,6 +115,21 @@ bool BoardManager::areadjacent(Fighter& a, Fighter& b)
     return false;
 }
 
+bool BoardManager::canReachForAttack(Fighter& a, Fighter& b)
+{
+    if (a.getPosition() == nullptr || b.getPosition() == nullptr) return false;
+    if (areadjacent(a, b)) return true;
+
+     if (a.getteam() == SHERLOCK )
+     {
+         vector<Zone*> zones = battle->getMap().getplacementZone(a.getPosition());
+         for (Zone* z : zones) 
+         {
+             if (z == b.getPosition()) return true;
+         }
+     }
+    return false;
+}
 void BoardManager::showPossiblemoves(Fighter& fight)
 {
     Zone* now = fight.getPosition();
