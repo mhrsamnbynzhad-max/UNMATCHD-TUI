@@ -1,0 +1,2430 @@
+#include "graphic.h"
+#include "boardmanager.h"
+#include "combatmanager.h"
+#include "cardeffect.h"
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <cmath>
+#include <unordered_set>
+#include <sstream>
+#include "intro.h"
+
+#include "SaveManager.h"
+
+static std::string sanitizeCardFilename(const std::string& title)
+{
+    std::string s;
+    for (char c : title) {
+        if (std::isalnum(static_cast<unsigned char>(c)))
+            s += std::tolower(static_cast<unsigned char>(c));
+    }
+    return s + ".jpg";
+}
+
+static std::vector<std::string> wrapTextLines(const std::string& text, size_t maxCharsPerLine)
+{
+    std::vector<std::string> lines;
+    std::istringstream words(text);
+    std::string word, currentLine;
+
+    while (words >> word) {
+        if (currentLine.empty()) {
+            currentLine = word;
+        } else if (currentLine.size() + 1 + word.size() <= maxCharsPerLine) {
+            currentLine += " " + word;
+        } else {
+            lines.push_back(currentLine);
+            currentLine = word;
+        }
+    }
+    if (!currentLine.empty()) lines.push_back(currentLine);
+    return lines;
+}
+
+    GraphicManager::GraphicManager() : window(sf::VideoMode({ static_cast<unsigned int>(sf::VideoMode::getDesktopMode().size.x * 0.90f), static_cast<unsigned int>(sf::VideoMode::getDesktopMode().size.y * 0.90f)}),
+            "Unmatched Game", sf::Style::Close | sf::Style::Titlebar ),
+   promptText(font), abilityCancelText(font), maneuverButtonText(font), noBoostText(font),maneuverdonetext(font),cancelDefenseText(font),sherlockYesText(font),combatMessageText(font) ,helpButtonText(font), helpBodyText(helpFont), helpPageIndicatorText(font),
+    helpCloseText(font), helpPrevText(font), helpNextText(font), saveGameText(font) 
+    {
+
+            if (!music.openFromFile("assets/music/01. 2nd Phase and Harry Square - The Awakening (Original Mix).mp3"))
+            {
+                std::cerr << "Error: Could not load music\n";
+            }
+            else
+            {
+                music.setLooping(true);
+                music.play();
+                musicLoaded = true;
+                std::cout << "Music started!\n";
+            }
+
+            if (!backgroundTexture.loadFromFile("background.png"))
+        {
+            std::cerr << "faild load\n";
+        }
+        else
+        {
+            background.emplace(backgroundTexture);
+            sf::Vector2u size = backgroundTexture.getSize();
+            background->setScale({ 1280.f / static_cast<float>(size.x), 720.f / static_cast<float>(size.y) });
+        }
+
+        cancelDefenseBox.setSize({60.f, 60.f});
+        cancelDefenseBox.setPosition({20.f, 630.f}); 
+        cancelDefenseBox.setFillColor(sf::Color(180, 40, 40));
+        cancelDefenseBox.setOutlineThickness(2.f);
+        cancelDefenseBox.setOutlineColor(sf::Color::White);
+
+        cancelDefenseText.setString("X");
+        cancelDefenseText.setCharacterSize(30);
+        cancelDefenseText.setFillColor(sf::Color::White);
+        cancelDefenseText.setPosition({40.f, 640.f});
+
+        sf::View gameView(sf::FloatRect({0.f, 0.f}, {1280.f, 720.f}));
+        window.setView(gameView);
+
+        initSpots();
+        initEdges();
+        loadFighterTextures();
+        //setupSaveGameButton();add
+        loadCardTextures();
+        setupSaveGameButton();
+        abilityCancelBox.setSize({60.f, 60.f});
+        abilityCancelBox.setPosition({20.f, 630.f});
+        abilityCancelBox.setFillColor(sf::Color(180, 40, 40));
+        abilityCancelBox.setOutlineThickness(2.f);
+        abilityCancelBox.setOutlineColor(sf::Color::White);
+
+        abilityCancelText.setString("X");
+        abilityCancelText.setCharacterSize(30);
+        abilityCancelText.setFillColor(sf::Color::White);
+        abilityCancelText.setPosition({40.f, 640.f});
+        maneuverButton.setSize({140.f, 60.f});
+        maneuverButton.setPosition({20.f, 630.f});
+        maneuverButton.setFillColor(sf::Color(70, 70, 140));
+        maneuverButton.setOutlineThickness(2.f);
+        maneuverButton.setOutlineColor(sf::Color::White);
+        maneuverButtonText.setString("Maneuver");
+        maneuverButtonText.setCharacterSize(18);
+        maneuverButtonText.setFillColor(sf::Color::White);
+        maneuverButtonText.setPosition({30.f, 650.f});
+
+        sherlockYesBox.setSize({60.f, 60.f});
+        sherlockYesBox.setPosition({100.f, 630.f});
+        sherlockYesBox.setFillColor(sf::Color(40, 140, 40));
+        sherlockYesBox.setOutlineThickness(2.f);
+        sherlockYesBox.setOutlineColor(sf::Color::White);
+
+        sherlockYesText.setString("Y");
+        sherlockYesText.setCharacterSize(30);
+        sherlockYesText.setFillColor(sf::Color::White);
+        sherlockYesText.setPosition({120.f, 640.f});
+
+        noBoostBox.setSize({140.f, 60.f});
+        noBoostBox.setPosition({20.f, 630.f});
+        noBoostBox.setFillColor(sf::Color(120, 40, 40));
+        noBoostBox.setOutlineThickness(2.f);
+        noBoostBox.setOutlineColor(sf::Color::White);
+        noBoostText.setString("No Boost");
+        noBoostText.setCharacterSize(16);
+        noBoostText.setFillColor(sf::Color::White);
+        noBoostText.setPosition({30.f, 650.f});
+
+        maneuverdonebox.setSize({140.f, 60.f});
+        maneuverdonebox.setPosition({20.f, 630.f});
+        maneuverdonebox.setFillColor(sf::Color(40, 120, 40));
+        maneuverdonebox.setOutlineThickness(2.f);
+        maneuverdonebox.setOutlineColor(sf::Color::White);
+        maneuverdonetext.setString("Done");
+        maneuverdonetext.setCharacterSize(18);
+        maneuverdonetext.setFillColor(sf::Color::White);
+        maneuverdonetext.setPosition({60.f, 650.f});
+
+        combatMessageText.setCharacterSize(16);
+        combatMessageText.setFillColor(sf::Color::White);
+        combatMessageText.setPosition({60.f, 62.96f});
+
+        setupMainMenu();
+        setupHelpUI();
+
+        std::cout << "ok load\n";
+
+        std::cout << "ok load\n";
+    }
+
+void GraphicManager::initSpots()
+{
+
+    sf::Texture tex1, tex2, tex3, tex4,tex5,tex6 ,tex7,tex8,tex9,tex10,tex11,tex12,tex13,tex14,tex15,tex16,tex17;
+   if (!tex1.loadFromFile("img1.jpg")) {
+        std::cerr << "Error: Could not load img1.jpg\n";
+    }
+    if (!tex2.loadFromFile("img2.jpg")) {
+        std::cerr << "Error: Could not load img2.jpg\n";
+    }
+    if (!tex3.loadFromFile("img3.jpg")) {
+        std::cerr << "Error: Could not load img3.jpg\n";
+    }
+    if (!tex4.loadFromFile("img4.jpg")) {
+        std::cerr << "Error: Could not load img4.jpg\n";
+    }
+    if (!tex5.loadFromFile("img5.jpg")) {
+        std::cerr << "Error: Could not load img4.jpg\n";
+    }
+    if (!tex6.loadFromFile("img6.jpg")) {
+        std::cerr << "Error: Could not load img4.jpg\n";
+    }
+       if (!tex7.loadFromFile("img7.jpg")) {
+        std::cerr << "Error: Could not load img7.jpg\n";
+    }
+     if (!tex8.loadFromFile("img8.jpg")) {
+        std::cerr << "Error: Could not load img8.jpg\n";
+    }
+    if (!tex9.loadFromFile("img9.jpg")) {
+        std::cerr << "Error: Could not load img8.jpg\n";
+    }
+    if (!tex10.loadFromFile("img10.jpg")) {
+        std::cerr << "Error: Could not load img8.jpg\n";
+    }
+
+     if (!tex11.loadFromFile("img11.jpg")) {
+        std::cerr << "Error: Could not load img4.jpg\n";
+    }
+       if (!tex12.loadFromFile("img12.jpg")) {
+        std::cerr << "Error: Could not load img7.jpg\n";
+    }
+     if (!tex13.loadFromFile("img13.jpg")) {
+        std::cerr << "Error: Could not load img8.jpg\n";
+    }
+    if (!tex14.loadFromFile("img14.jpg")) {
+        std::cerr << "Error: Could not load img8.jpg\n";
+    }
+    if (!tex15.loadFromFile("img15.jpg")) {
+        std::cerr << "Error: Could not load img8.jpg\n";
+    }
+    if (!tex16.loadFromFile("img16.jpg")) {
+        std::cerr << "Error: Could not load img16.jpg\n";
+    }
+    if (!tex17.loadFromFile("img17.jpg")) {
+        std::cerr << "Error: Could not load img17.jpg\n";
+    }
+
+    spotTextures = {tex1, tex2, tex3, tex4,tex5,tex6,tex7 ,tex8 ,tex9,tex10,tex11,tex12,tex13,tex14,tex15,tex16 ,tex17};
+
+
+    float radius = 32.f;
+
+    sf::Vector2f positions[33] = {
+        {0, 0},
+        {784.444f, 300.741f}, // 1
+        { 602.963f, 59.2593f},  // 2
+        {933.333f, 260.741f}, // 3
+        {640.741f, 282.963f}, // 4
+        {574.074f,  207.407f}, // 5
+        {477.037f, 258.519f}, // 6
+        {549.63f, 305.926f}, // 7
+        {397.778f, 223.704f}, // 8
+        {287.407f,351.852f}, // 9
+        {233.333f,  252.593f}, // 10
+        {249.63f, 162.963f}, // 11
+        {462.963f, 167.407f}, // 12
+        {289.63f, 80.7407f}, // 13
+        {380.f, 53.3333f}, // 14
+        {431.111f, 99.2593f}, // 15
+        {530.37f, 70.3704f},  // 16
+        {892.593f, 328.148f}, // 17
+        {670.37f, 54.8148f}, // 18
+        {665.185f,  151.111f}, // 19
+        {757.037f, 80.f}, // 20
+        {804.444f, 148.148f}, // 21
+        {939.259f, 128.889f},// 22
+        {864.444f,  39.2592f},// 23
+        {829.63f, 225.185f},// 24
+        {848.889f, 408.889f}, // 25
+        {764.444f, 445.185f}, // 26
+        {725.185f, 369.63f}, // 27
+        {659.259f, 397.037f}, // 28
+        {591.111f, 427.407f}, // 29
+        {518.519f, 451.852f}, // 30
+        {428.889f,  405.185f}, // 31
+        {340.741f, 397.778f}  // 32
+    };
+
+    std::unordered_set<int>pinkspots={1,3,17};
+    std::unordered_set<int>grayspots={29,28,27,26 , 30 , 31 ,32};
+    std::unordered_set<int>bluespots={13 , 14 , 15 ,16};
+    std::unordered_set<int>brownspots={18 , 19 , 20 ,16};
+    std::unordered_set<int>yellowspots={22 , 24 , 23 };
+    std::unordered_set<int>greenspots={ 5 , 6 };
+    std::unordered_set<int>ppinkkkpots={ 4};
+    std::unordered_set<int>darkbulespots={ 10 , 11 };
+    std::unordered_set<int>darkbuleandbulespots={ 12 };
+    std::unordered_set<int>DBgreenspots={ 8 };
+    std::unordered_set<int>pinkgreenspots={4};
+    std::unordered_set<int>pinkgrayspots={ 25};
+    std::unordered_set<int>greengrayspots={ 7};
+    std::unordered_set<int>bluebrownspots={2 };
+    std::unordered_set<int>brownyellowgreenspots={ 21};
+    std::unordered_set<int>dbgrayspots={ 9};
+
+
+
+    for (int i = 1; i <= 32; ++i)
+    {
+        Spot spot;
+        spot.id = i;
+        spot.circle.setRadius(radius);
+        spot.circle.setOrigin({radius, radius});
+        spot.circle.setPosition(positions[i]);
+        
+        if (pinkspots.count(i) ) 
+        {
+            spot.circle.setTexture(&spotTextures[0]); 
+        }
+        else if (grayspots.count(i)) 
+        {
+            spot.circle.setTexture(&spotTextures[1]); 
+        }
+        else if (greenspots.count(i)) 
+        {
+            spot.circle.setTexture(&spotTextures[2]); 
+        }
+        else if (bluespots.count(i)) 
+        {
+            spot.circle.setTexture(&spotTextures[3]); 
+        }
+        else if(yellowspots.count(i))
+        {
+           spot.circle.setTexture(&spotTextures[4]); 
+        }
+        else if(brownspots.count(i))
+        {
+           spot.circle.setTexture(&spotTextures[5]); 
+        }
+          else if(darkbulespots.count(i))
+        {
+           spot.circle.setTexture(&spotTextures[6]); 
+        }
+         else if(darkbuleandbulespots.count(i))
+        {
+           spot.circle.setTexture(&spotTextures[7]); 
+        }
+             else if(DBgreenspots.count(i))
+        {
+           spot.circle.setTexture(&spotTextures[8]); 
+        }
+        else if(pinkgrayspots.count(i))
+        {
+           spot.circle.setTexture(&spotTextures[10]); 
+        }
+         else if(pinkgrayspots.count(i))
+        {
+           spot.circle.setTexture(&spotTextures[11]); 
+        }
+          else if(bluebrownspots.count(i))
+        {
+           spot.circle.setTexture(&spotTextures[12]); 
+        }
+         else if(brownyellowgreenspots.count(i))
+        {
+           spot.circle.setTexture(&spotTextures[13]); 
+        }
+         else if(dbgrayspots.count(i))
+        {
+           spot.circle.setTexture(&spotTextures[14]); 
+        }
+
+          else if(greengrayspots.count(i))
+        {
+           spot.circle.setTexture(&spotTextures[15]); 
+        }
+
+         else if(ppinkkkpots.count(i))
+        {
+           spot.circle.setTexture(&spotTextures[16]); 
+        }
+        
+        
+
+         spot.circle.setOutlineThickness(-3.f); 
+
+    spot.circle.setOutlineColor(sf::Color(70, 55, 40)); 
+
+        boardSpots.push_back(spot);
+    }
+}
+
+    void GraphicManager::initEdges()
+    {
+        edges = {
+            {1, 17}, {3, 17}, {17, 25}, {25, 26}, {25, 27}, {26, 27},
+            {27, 28}, {28, 4}, {28, 29}, {29, 30}, {29, 7}, {30, 31},
+            {30, 7}, {31, 32}, {32, 9}, {9, 10}, {10, 11}, {11, 12},
+            {11, 13}, {13, 14}, {14, 15}, {15, 16}, {16, 2}, {2, 12},
+            {2, 18}, {18, 19}, {18, 20}, {19, 20}, {19, 21}, {20, 21},
+            {21, 22}, {21, 24}, {21, 4}, {22, 23}, {22, 24}, {24, 3},
+            {4, 1}, {4, 5}, {5, 6}, {6, 7}, {6, 8}, {7, 28}, {8, 9}, {4, 27}
+        };
+    }
+    void GraphicManager::loadFighterTextures()
+    {
+        sherlocktexOk = sherlocktex.loadFromFile("sherlock.jpg");
+        draculatexOk  = draculatex.loadFromFile("dracula.jpg");
+        watsontexOk   = watsontex.loadFromFile("watson.jpg");
+        sistertexOk[0]   = sistertex[0].loadFromFile("sister1.jpg");
+        sistertexOk[1]   = sistertex[1].loadFromFile("sister2.jpg");
+        sistertexOk[02]   = sistertex[2].loadFromFile("sister3.jpg");
+        invisibletOk  = invisibletex.loadFromFile("invisibleman.jpg");
+        fogOk  = fogtex.loadFromFile("fogtoken.jpg");
+
+
+        if (!sherlocktexOk) std::cerr << "Error: Could not load sherlock.jpg\n";
+        if (!draculatexOk)  std::cerr << "Error: Could not load dracula.jpg\n";
+        if (!watsontexOk)   std::cerr << "Error: Could not load watson.jpg\n";
+        if (!invisibletOk)   std::cerr << "Error: Could not load watson.jpg\n";
+        if (!fogOk)   std::cerr << "Error: Could not load watson.jpg\n";
+        if (!sistertexOk[0])   std::cerr << "Error: Could not load sister1.jpg\n";
+        if (!sistertexOk[1])   std::cerr << "Error: Could not load sister2.jpg\n";
+        if (!sistertexOk[2])   std::cerr << "Error: Could not load sister3.jpg\n";
+    }
+
+    void GraphicManager::loadCardTextures()
+        {
+            auto loadDB = [&](const std::vector<Cardinfo>& db) {
+                for (const Cardinfo& info : db) {
+                    std::string filename = sanitizeCardFilename(info.title);
+                    sf::Texture tex;
+                    bool ok = tex.loadFromFile(filename);
+                    if (!ok) {
+                        std::cerr << "Error: Could not load card image \"" << filename
+                                << "\" for card \"" << info.title << "\"\n";
+                    }
+                    cardTextures[info.name] = std::move(tex);
+                }
+            };
+
+            loadDB(Card::draculaCardDB);
+            loadDB(Card::sherlockCardDB);
+            loadDB(Card::invisiblemanCardDB);
+        }
+
+        void GraphicManager::setupMainMenu()
+{
+    mainMenuButtons.clear();
+    std::vector<std::string> labels = {"Start", "Load Game", "Exit"};
+    float y = 250.f;
+    for (const auto& lbl : labels) {
+        HeroButton b(font);
+        b.box.setSize({260.f, 60.f});
+        b.box.setPosition({510.f, y});
+        b.box.setFillColor(sf::Color(123, 63, 0));
+        b.box.setOutlineThickness(3.f);
+        b.box.setOutlineColor(sf::Color::White);
+        b.label.setString(lbl);
+        b.label.setCharacterSize(24);
+        b.label.setPosition({530.f, y + 15.f});
+        mainMenuButtons.push_back(b);
+        y += 90.f;
+    }
+}
+
+void GraphicManager::handleMainMenuClick(sf::Vector2f pos)
+{
+    for (size_t i = 0; i < mainMenuButtons.size(); i++) {
+        if (mainMenuButtons[i].box.getGlobalBounds().contains(pos)) {
+            if (i == 0) {
+                setupState = SetupState::AGE_P1;
+            } 
+            else if (i == 1)
+            {
+                setupLoadSlots();
+
+                setupState = SetupState::LOAD_SLOTS;
+            }
+                        
+            else if (i == 2) {
+                window.close();
+            }
+            return;
+        }
+    }
+}
+
+void GraphicManager::drawMainMenu()
+{
+    for (auto& b : mainMenuButtons) {
+        window.draw(b.box);
+        window.draw(b.label);
+    }
+}
+
+
+
+
+
+
+void GraphicManager::setupSaveGameButton()
+{
+    saveGameBox.setSize({140.f, 50.f});
+    saveGameBox.setPosition({1120.f, 650.f});
+
+    saveGameBox.setFillColor(sf::Color(40, 120, 40));
+    saveGameBox.setOutlineThickness(2.f);
+    saveGameBox.setOutlineColor(sf::Color::White);
+
+    saveGameText.setString("SAVE");
+    saveGameText.setCharacterSize(20);
+    saveGameText.setFillColor(sf::Color::White);
+    saveGameText.setPosition({1155.f, 660.f});
+}
+
+
+void GraphicManager::drawSaveGameButton()
+{
+    window.draw(saveGameBox);
+    window.draw(saveGameText);
+}
+
+
+
+
+void GraphicManager::setupSaveSlots()
+{
+    saveSlotButtons.clear();
+
+    for (int i = 0; i < 3; i++)
+    {
+        HeroButton button(font);
+
+        button.box.setSize({300.f, 60.f});
+        button.box.setPosition({490.f, 220.f + i * 85.f});
+
+        button.box.setFillColor(sf::Color(40, 120, 40));
+        button.box.setOutlineThickness(3.f);
+        button.box.setOutlineColor(sf::Color::White);
+
+        button.label.setString("SAVE SLOT " + std::to_string(i + 1));
+        button.label.setCharacterSize(24);
+        button.label.setFillColor(sf::Color::White);
+        button.label.setPosition({545.f, 235.f + i * 85.f});
+
+        saveSlotButtons.push_back(button);
+    }
+}
+
+
+void GraphicManager::setupLoadSlots()
+{
+    loadSlotButtons.clear();
+
+    for (int i = 0; i < 3; i++)
+    {
+        HeroButton button(font);
+
+        button.box.setSize({300.f, 60.f});
+        button.box.setPosition({490.f, 220.f + i * 85.f});
+
+        button.box.setFillColor(sf::Color(50, 80, 150));
+        button.box.setOutlineThickness(3.f);
+        button.box.setOutlineColor(sf::Color::White);
+
+        button.label.setString("LOAD SLOT " + std::to_string(i + 1));
+        button.label.setCharacterSize(24);
+        button.label.setFillColor(sf::Color::White);
+        button.label.setPosition({545.f, 235.f + i * 85.f});
+
+        loadSlotButtons.push_back(button);
+    }
+}
+
+
+void GraphicManager::drawSaveSlots()
+{
+    if (background)
+    {
+        window.draw(*background);
+    }
+
+    for (auto& button : saveSlotButtons)
+    {
+        window.draw(button.box);
+        window.draw(button.label);
+    }
+}
+
+void GraphicManager::drawLoadSlots()
+{
+    if (background)
+    {
+        window.draw(*background);
+    }
+
+    for (auto& button : loadSlotButtons)
+    {
+        window.draw(button.box);
+        window.draw(button.label);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void GraphicManager::handleSaveGameClick(sf::Vector2f pos)
+{
+    if (saveGameBox.getGlobalBounds().contains(pos))
+    {
+        setupSaveSlots();
+
+        setupState = SetupState::SAVE_SLOTS;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+void GraphicManager::handleSaveSlotClick(sf::Vector2f pos)
+{
+    for (size_t i = 0; i < saveSlotButtons.size(); i++)
+    {
+        if (saveSlotButtons[i].box.getGlobalBounds().contains(pos))
+        {
+            std::string filename =
+                "savegame" + std::to_string(i + 1) + ".txt";
+
+            if (SaveManager::saveGame(battle, filename))
+            {
+                std::cout << "Game saved to Slot "
+                          << (i + 1) << "!\n";
+
+                setupState = SetupState::DONE;
+            }
+            else
+            {
+                std::cout << "Failed to save game!\n";
+            }
+
+            return;
+        }
+    }
+}
+
+
+
+
+void GraphicManager::handleLoadSlotClick(sf::Vector2f pos)
+{
+    for (size_t i = 0; i < loadSlotButtons.size(); i++)
+    {
+        if (loadSlotButtons[i].box.getGlobalBounds().contains(pos))
+        {
+            std::string filename =
+                "savegame" + std::to_string(i + 1) + ".txt";
+
+            if (SaveManager::loadGame(battle, filename))
+            {
+                setupState = SetupState::DONE;
+
+                setupHandCards();
+
+                std::cout << "Game loaded from Slot "
+                          << (i + 1) << "!\n";
+            }
+            else
+            {
+                std::cout << "No save file found in Slot "
+                          << (i + 1) << "!\n";
+            }
+
+            return;
+        }
+    }
+}
+
+
+
+void GraphicManager::setupHelpUI()
+{
+    helpButtonBox.setSize({110.f, 40.f});
+    helpButtonBox.setPosition({1150.f, 15.f});
+    helpButtonBox.setFillColor(sf::Color(60, 60, 90));
+    helpButtonBox.setOutlineThickness(2.f);
+    helpButtonBox.setOutlineColor(sf::Color::White);
+
+    helpButtonText.setString("Help");
+    helpButtonText.setCharacterSize(20);
+    helpButtonText.setFillColor(sf::Color::White);
+    helpButtonText.setPosition({1170.f, 24.f});
+
+    helpOverlayBg.setSize({1280.f, 720.f});
+    helpOverlayBg.setPosition({0.f, 0.f});
+    helpOverlayBg.setFillColor(sf::Color(0, 0, 0, 210));
+
+    helpPanelBox.setSize({1040.f, 600.f});
+    helpPanelBox.setPosition({120.f, 60.f});
+    helpPanelBox.setFillColor(sf::Color(235, 225, 200));
+    helpPanelBox.setOutlineThickness(3.f);
+    helpPanelBox.setOutlineColor(sf::Color(90, 60, 20));
+
+    helpBodyText.setCharacterSize(15);
+    helpBodyText.setFillColor(sf::Color::Black);
+    helpBodyText.setPosition({150.f, 100.f});
+    helpBodyText.setLineSpacing(1.3f);
+
+    helpPageIndicatorText.setCharacterSize(16);
+    helpPageIndicatorText.setFillColor(sf::Color(90, 60, 20));
+    helpPageIndicatorText.setPosition({600.f, 632.f});
+
+    helpCloseBox.setSize({50.f, 40.f});
+    helpCloseBox.setPosition({1110.f, 72.f});
+    helpCloseBox.setFillColor(sf::Color(180, 40, 40));
+    helpCloseBox.setOutlineThickness(2.f);
+    helpCloseBox.setOutlineColor(sf::Color::White);
+    helpCloseText.setString("X");
+    helpCloseText.setCharacterSize(24);
+    helpCloseText.setFillColor(sf::Color::White);
+    helpCloseText.setPosition({1128.f, 78.f});
+
+    helpPrevBox.setSize({120.f, 45.f});
+    helpPrevBox.setPosition({150.f, 630.f});
+    helpPrevBox.setFillColor(sf::Color(70, 70, 140));
+    helpPrevBox.setOutlineThickness(2.f);
+    helpPrevBox.setOutlineColor(sf::Color::White);
+    helpPrevText.setString("< Prev");
+    helpPrevText.setCharacterSize(18);
+    helpPrevText.setFillColor(sf::Color::White);
+    helpPrevText.setPosition({168.f, 643.f});
+
+    helpNextBox.setSize({120.f, 45.f});
+    helpNextBox.setPosition({990.f, 630.f});
+    helpNextBox.setFillColor(sf::Color(70, 70, 140));
+    helpNextBox.setOutlineThickness(2.f);
+    helpNextBox.setOutlineColor(sf::Color::White);
+    helpNextText.setString("Next >");
+    helpNextText.setCharacterSize(18);
+    helpNextText.setFillColor(sf::Color::White);
+    helpNextText.setPosition({1008.f, 643.f});
+
+    buildHelpPages();
+}
+
+
+void GraphicManager::buildHelpPages()
+{
+    std::vector<std::string> rawPages;
+
+   rawPages.push_back(
+        "1. Main Menu\n\n"
+        "After launching the game, you will see the main menu. You have three options:\n"
+        "Start - Start a new game\n"
+        "Load Game - Load a saved game\n"
+        "Exit - Exit the game\n"
+        "Click Start to begin.\n\n"
+        "2. Setting Player Ages\n\n"
+        "At the beginning of the game, you will be asked to enter the ages of the two players. "
+        "First enter the age of Player 1, then enter the age of Player 2. After entering a number, press Enter. "
+        "The players' ages are used to determine the starting player.\n\n"
+        "3. Choosing a Hero\n\n"
+        "After the starting order is determined, the hero selection screen will appear. Three heroes are available:\n"
+        "Sherlock Holmes: Plays with Watson.\n"
+        "Dracula: Plays with three Sisters.\n"
+        "Invisible Man: Plays with three Fog Tokens.\n"
+        "Click on the hero you want to play. Player 2 will then choose a hero from the remaining heroes."
+    );
+
+    rawPages.push_back(
+        "4. Game Setup\n\n"
+        "After choosing the heroes, you will enter the setup phase. The game will ask you to place your supporting characters or tokens on the map. "
+        "The valid spaces for each character are highlighted; click on the desired space.\n"
+        "If you have Sherlock: you must choose Watson's starting location.\n"
+        "If you have Dracula: you must choose the locations of the three Sisters.\n"
+        "If you have Invisible Man: you must place the three Fog Tokens on the map.\n\n"
+        "5. Understanding the Main Game Screen\n\n"
+        "Map: Shows the locations of fighters, spaces, and Fog Tokens.\n"
+        "Fighter Information: Shows the status and HP of your selected fighter.\n"
+        "Cards in Hand: Your cards are displayed at the bottom of the screen with their name, type, Attack/Defense value, and Boost.\n"
+        "Actions: Each turn starts with 2 Actions.\n\n"
+        "6. Your Turn\n\n"
+        "You can use a card, attack, perform a Maneuver, or use your hero's special ability. "
+        "After each Action, the number of remaining Actions on the screen is updated."
+    );
+
+    rawPages.push_back(
+        "7. Using Cards\n\n"
+        "Click on a card. If the card cannot be used, nothing will happen. If it can be used, "
+        "the game may ask you to choose a fighter, target, space on the map, an opponent's card, "
+        "a Fog Token, or one of several options. Valid choices are always highlighted on the screen.\n\n"
+        "8. Attacking\n\n"
+        "Choose an Attack card. If more than one fighter can use it, the fighter selection screen will appear. "
+        "Choose the attacker and then the target to enter the battle screen.\n\n"
+        "9. Battle Screen\n\n"
+        "The two sides are shown: the attacker and the defender. The Attack card and Defense card are displayed. "
+        "If the defender has a suitable card, they can choose to defend."
+    );
+
+    rawPages.push_back(
+        "10. Defense\n\n"
+        "Available Defense cards are displayed. Choose a card or press X to skip defense. "
+        "After that, the battle result will be displayed.\n\n"
+        "11. Maneuver\n\n"
+        "Choose Maneuver. First, you draw a card and decide whether to use it as a Boost. "
+        "Then choose a fighter and a destination space. You can repeat this process for other fighters and press Done when finished.\n\n"
+        "12. Boost\n\n"
+        "You can use one card from your hand as a Movement Boost by clicking on the card, "
+        "or choose No Boost. The used card is removed from your hand."
+    );
+
+    rawPages.push_back(
+        "13. Choosing a Space on the Map\n\n"
+        "Whenever you need to choose a space, all valid spaces on the map will be highlighted. "
+        "Simply click on one of them. This is used when moving, placing characters, placing or moving Fog Tokens, "
+        "Teleporting, and for some special cards.\n\n"
+        "14. Fog Tokens\n\n"
+        "As the Invisible Man, you have three Fog Tokens on the map. They are visible to you. "
+        "Some abilities depend on the location of the Fog Tokens. To move one, click on the Fog Token and then click on its destination.\n\n"
+        "15. Hero Special Abilities\n\n"
+        "Each hero has their own interface and special abilities. If you see an option such as Y = Yes and X = No: "
+        "Y means activate the ability, while X means decline it."
+    );
+
+    rawPages.push_back(
+        "16. Sherlock and Watson\n\n"
+        "If you play Sherlock, Watson will also be on the map and can be moved like other fighters on your team. "
+        "Watson's special cards can only be used when their required conditions are met; always keep track of his position.\n\n"
+        "17. Dracula and the Sisters\n\n"
+        "Dracula has three Sisters, each acting as a separate fighter on the map. "
+        "You can move them and use suitable cards. Their positions are important for some of Dracula's abilities.\n\n"
+        "18. Invisible Man\n\n"
+        "In addition to your hero, you must pay attention to the Fog Tokens. "
+        "Under certain conditions, the Invisible Man can leave the map and enter it again later."
+    );
+
+    rawPages.push_back(
+        "19. Ending Your Turn\n\n"
+        "When you have used all of your Actions, your turn ends and the opponent's turn begins. "
+        "If you have more cards in your hand than the allowed hand limit, you must discard the extra cards.\n\n"
+        "20. Ending the Game\n\n"
+        "Your goal is to defeat the opponent's main hero. If the opponent's main hero reaches 0 HP, you win the game.\n\n"
+        "21. Quick Guide for Your First Game\n\n"
+        "Start -> Enter Ages -> Choose Heroes -> Set Up Fighters -> Start Turn -> Choose an Action -> "
+        "Move or Play a Card -> (If Attacking) Choose Attacker and Target -> Opponent Defends -> "
+        "Battle Result -> Second Action -> End Turn -> Opponent's Turn -> Continue until a Main Hero is defeated."
+    );
+
+    helpPages.clear();
+    const size_t maxCharsPerLine = 130; 
+
+    for(const std::string& raw : rawPages) {
+        std::string finalPage;
+        size_t start = 0;
+        while (start <= raw.size()) {
+            size_t pos = raw.find('\n', start);
+            std::string line = (pos == std::string::npos) ? raw.substr(start) : raw.substr(start, pos - start);
+            if (line.empty()) {
+                finalPage += "\n";
+            } else {
+                for (const std::string& wline : wrapTextLines(line, maxCharsPerLine))
+                    finalPage += wline + "\n";
+            }
+            if (pos == std::string::npos) break;
+            start = pos + 1;
+        }
+        helpPages.push_back(finalPage);
+    }
+}
+
+void GraphicManager::handleHelpClick(sf::Vector2f pos)
+{
+    if (helpCloseBox.getGlobalBounds().contains(pos)) { helpOpen = false; return; }
+    if (helpPrevBox.getGlobalBounds().contains(pos)) { if (helpPageIndex > 0) helpPageIndex--; return; }
+    if (helpNextBox.getGlobalBounds().contains(pos)) {
+        if (helpPageIndex < (int)helpPages.size() - 1) helpPageIndex++;
+        return;
+    }
+}
+
+void GraphicManager::drawHelpButton()
+{
+    window.draw(helpButtonBox);
+    window.draw(helpButtonText);
+}
+
+void GraphicManager::drawHelpOverlay()
+{
+    window.draw(helpOverlayBg);
+    window.draw(helpPanelBox);
+
+    if (!helpPages.empty() && helpPageIndex >= 0 && helpPageIndex < (int)helpPages.size())
+        helpBodyText.setString(helpPages[helpPageIndex]);
+    window.draw(helpBodyText);
+
+    helpPageIndicatorText.setString(std::to_string(helpPageIndex + 1) + " / " + std::to_string((int)helpPages.size()));
+    window.draw(helpPageIndicatorText);
+
+    window.draw(helpPrevBox);  window.draw(helpPrevText);
+    window.draw(helpNextBox);  window.draw(helpNextText);
+    window.draw(helpCloseBox); window.draw(helpCloseText);
+}
+    void GraphicManager::run()
+    {
+    
+        if (!font.openFromFile("player.ttf"))   
+        std::cerr << "font load failed\n";
+
+         if (!helpFont.openFromFile("help.ttf"))   
+        std::cerr << "font load failed\n";
+
+
+            music.stop();
+            Intro intro;
+
+            if (!intro.run(window))
+            {
+                return;
+            }
+
+
+                music.setLooping(true);
+                music.play();
+        while (window.isOpen())
+        {
+            while (const std::optional event = window.pollEvent())
+            {
+                if (event->is<sf::Event::Closed>())
+                {
+                    window.close();
+                }
+
+                if (helpOpen)
+                {
+                    if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+                        if (mb->button == sf::Mouse::Button::Left)
+                            handleHelpClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+                    }
+                    continue;
+                }
+
+                if (const auto* helpMb = event->getIf<sf::Event::MouseButtonPressed>()) {
+                    if (helpMb->button == sf::Mouse::Button::Left) {
+                        sf::Vector2f hp = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                        if (helpButtonBox.getGlobalBounds().contains(hp)) {
+                            helpOpen = true;
+                            helpPageIndex = 0;
+                            continue;
+                        }
+                    }
+                }
+
+                if (setupState == SetupState::MAIN_MENU)
+            {
+                if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+                    if (mb->button == sf::Mouse::Button::Left)
+                        handleMainMenuClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+                }
+            }
+            else if (setupState == SetupState::INVISIBLE_REAPPEAR)
+            {
+                if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+                    if (mb->button == sf::Mouse::Button::Left)
+                        handleInvisibleReappearClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+                }
+            }
+else if (setupState == SetupState::AGE_P1 || setupState == SetupState::AGE_P2)            {
+                if (const auto* txt = event->getIf<sf::Event::TextEntered>())
+                handleAgeTextInput(txt->unicode);
+            }
+            else if (setupState == SetupState::HERO_1 || setupState == SetupState::HERO_2) {
+                if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+                    if (mb->button == sf::Mouse::Button::Left)
+                        handleHeroClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+                }
+            }
+            else if (setupState == SetupState::SIDEKICK_P1 || setupState == SetupState::SIDEKICK_P2) {
+                if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+                    if (mb->button == sf::Mouse::Button::Left)
+                        handleBoardClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+                }
+            }
+            else if (setupState == SetupState::DRACULA_ABILITY) {
+                if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+                    if (mb->button == sf::Mouse::Button::Left)
+                        handleAbilityClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+                }
+            }
+            else if (setupState == SetupState::MANEUVER_BOOST) {
+                if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+                    if (mb->button == sf::Mouse::Button::Left)
+                        handleBoostClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+                }
+            }
+            else if (setupState == SetupState::MANEUVER_SELECT_FIGHTER) {
+                if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+                    if (mb->button == sf::Mouse::Button::Left)
+                        handleManeuverFighterClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+                }
+            }
+            else if (setupState == SetupState::MANEUVER_SELECT_ZONE) {
+                if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+                    if (mb->button == sf::Mouse::Button::Left)
+                        handleManeuverZoneClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+                }
+            }
+            else if (setupState == SetupState::DRACULA_CARD_BEAST) {
+            if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+                if (mb->button == sf::Mouse::Button::Left)
+                    handleHandSelectionClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+            }
+        }
+        else if (setupState == SetupState::SHERLOCK_ABILITY) {
+            if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+                if (mb->button == sf::Mouse::Button::Left)
+                    handleSherlockAbilityClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+            }
+        }
+            else if (setupState == SetupState::DEFENSE_SELECT) {
+    if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+        if (mb->button == sf::Mouse::Button::Left)
+            handleDefenseClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+    }
+}
+
+else if (setupState == SetupState::CARD_SELECT_ZONE) {
+    if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+        if (mb->button == sf::Mouse::Button::Left) {
+            handleCardZoneClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+        }
+    }
+}
+else if (setupState == SetupState::POST_COMBAT_ZONE_SELECT) {
+    if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+        if (mb->button == sf::Mouse::Button::Left) {
+            handlePostCombatZoneClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+        }
+    }
+}
+
+else if (setupState == SetupState::POST_COMBAT_HAND_DISPLAY) {
+    if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+        if (mb->button == sf::Mouse::Button::Left) {
+            handlePostCombatHandDisplayClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+        }
+    }
+}
+
+else if (setupState == SetupState::ATTACKER_SELECT) {
+    if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+        if (mb->button == sf::Mouse::Button::Left) {
+            handleAttackerSelectClick(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+        }
+    }
+}
+
+
+else if (setupState == SetupState::SAVE_SLOTS)
+{
+    if (const auto* mouseBtn =
+            event->getIf<sf::Event::MouseButtonPressed>())
+    {
+        if (mouseBtn->button == sf::Mouse::Button::Left)
+        {
+            handleSaveSlotClick(
+                window.mapPixelToCoords(
+                    sf::Mouse::getPosition(window)
+                )
+            );
+        }
+    }
+}
+
+else if (setupState == SetupState::LOAD_SLOTS)
+{
+    if (const auto* mouseBtn =
+            event->getIf<sf::Event::MouseButtonPressed>())
+    {
+        if (mouseBtn->button == sf::Mouse::Button::Left)
+        {
+            handleLoadSlotClick(
+                window.mapPixelToCoords(
+                    sf::Mouse::getPosition(window)
+                )
+            );
+        }
+    }
+}
+
+            else if(setupState == SetupState::DONE)
+
+
+            {
+                if (const auto* mouseBtn = event->getIf<sf::Event::MouseButtonPressed>())
+                {
+                    if (mouseBtn->button == sf::Mouse::Button::Left)
+                    {
+
+                        handleSaveGameClick(
+                        window.mapPixelToCoords(
+                            sf::Mouse::getPosition(window)
+                        )
+                    );
+
+
+
+                        sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                    handleCardClick(mousePos);
+                        if (maneuverButton.getGlobalBounds().contains(mousePos))
+                        {
+                            startManeuver();
+                        }
+                        std::cout << "Clicked -> X: " << mousePos.x << " | Y: " << mousePos.y << std::endl;
+
+                        bool hitSpot = false;for (const auto& spot : boardSpots)
+                        {
+                            sf::Vector2f center = spot.circle.getPosition();
+                            float dx = mousePos.x - center.x;
+                            float dy = mousePos.y - center.y;
+                            
+                            if (std::sqrt(dx * dx + dy * dy) <= spot.circle.getRadius())
+                            {
+                                std::cout << "-> Clicked on Spot #" << spot.id << std::endl;
+                                hitSpot = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            }
+
+        window.clear();
+
+        if (background)
+        {
+            window.draw(*background);
+        }
+
+        if (setupState == SetupState::MAIN_MENU)
+        {
+            drawMainMenu();
+        }
+        else if (setupState == SetupState::SAVE_SLOTS)
+        {
+            drawSaveSlots();
+        }
+        else if (setupState == SetupState::LOAD_SLOTS)
+        {
+            drawLoadSlots();
+        }
+        else if (setupState == SetupState::AGE_P1 || setupState == SetupState::AGE_P2 ||
+                setupState == SetupState::HERO_1 || setupState == SetupState::HERO_2)
+        {
+            drawSetupUI();
+        }
+        else if (setupState == SetupState::DEFENSE_SELECT)
+        {
+            drawDefenseUI();
+            drawCombatMessage();
+        }
+        else
+        {
+                for (const auto& edge : edges)
+                {
+                    sf::Vector2f p1 = boardSpots[edge.first - 1].circle.getPosition();
+                    sf::Vector2f p2 = boardSpots[edge.second - 1].circle.getPosition();
+                    sf::VertexArray line(sf::PrimitiveType::Lines, 2);
+                    line[0].position = p1; line[0].color = sf::Color(250, 200, 200, 150);
+                    line[1].position = p2; line[1].color = sf::Color(250, 200, 200, 150);
+                    window.draw(line);
+                }
+
+                for (const auto& spot : boardSpots)
+                {
+                    bool highlight = false;
+                   if (setupState == SetupState::SIDEKICK_P1 || setupState == SetupState::SIDEKICK_P2 ||
+                        setupState == SetupState::INVISIBLE_REAPPEAR) {
+                        for (int id : validZoneIds) if (id == spot.id) { highlight = true; break; }
+                    }
+                    if (highlight) {
+                        sf::CircleShape glow = spot.circle;
+                        glow.setOutlineThickness(3.f);
+                        glow.setOutlineColor(sf::Color::Yellow);
+                        window.draw(glow);
+                    } else {
+                        window.draw(spot.circle);
+                    }
+                }
+               for (const auto& spot : boardSpots)
+                {
+                      bool highlight = false;
+                      if (setupState == SetupState::SIDEKICK_P1 || setupState == SetupState::SIDEKICK_P2 || 
+                            setupState == SetupState::MANEUVER_SELECT_ZONE || setupState == SetupState::CARD_SELECT_ZONE ||
+                            setupState == SetupState::INVISIBLE_REAPPEAR || setupState == SetupState::POST_COMBAT_ZONE_SELECT ||
+                            setupState == SetupState::ATTACKER_SELECT) 
+                        {
+                            for (int id : validZoneIds) 
+                                if (id == spot.id) { highlight = true; break; }
+                        }
+
+                    if (highlight) 
+                    {
+                         sf::CircleShape glow = spot.circle;
+                         glow.setOutlineThickness(3.f);
+                         sf::Color highlightColor = sf::Color::Yellow;
+                         if (setupState == SetupState::ATTACKER_SELECT) {
+                             highlightColor = sf::Color::Green;
+                         } else if (setupState == SetupState::POST_COMBAT_ZONE_SELECT &&
+                                    postCombatEffect != nullptr && postCombatEffect->highlightAsTargetSelection()) {
+                             highlightColor = sf::Color::Green;
+                         }
+                         highlightColor.a = 150;
+                         glow.setOutlineColor(highlightColor);
+                         window.draw(glow);
+                    }
+                    else 
+                    {
+                        window.draw(spot.circle);
+                    }
+                }
+                drawFighters(); 
+                drawfogtoken();
+
+                if (setupState == SetupState::DONE) 
+                {
+                    drawHandCards();
+                    window.draw(maneuverButton);
+                    window.draw(maneuverButtonText);
+
+                    
+                    drawSaveGameButton();
+                } 
+                
+                else if (setupState == SetupState::DRACULA_ABILITY)
+                {
+                    drawAbilityUI();
+                } 
+                else if (setupState == SetupState::MANEUVER_BOOST) 
+                {
+                    drawBoostCards();
+                } 
+                else if (setupState == SetupState::MANEUVER_SELECT_FIGHTER) 
+                {
+                    drawManeuverFighterButtons();
+                }
+                else if (setupState == SetupState::DRACULA_CARD_BEAST)
+                {
+                    drawHandSelectionUI();
+                }
+           else if (setupState == SetupState::SHERLOCK_ABILITY)
+                {
+                    drawSherlockAbilityUI();
+                }
+
+                else if (setupState == SetupState::POST_COMBAT_HAND_DISPLAY)
+                    {
+                        drawPostCombatHandDisplay();
+                    }
+
+                drawCombatMessage();
+                            
+            }
+
+            drawHelpButton();
+            if (helpOpen)
+            {
+                drawHelpOverlay();
+            }
+            window.display();
+        }
+
+    }
+
+        void GraphicManager::handleAgeTextInput(char32_t u) {
+            if (u == 8) { if (!ageInput.empty()) ageInput.pop_back(); return; }      // Backspace
+            if (u == 13) {                                                          // Enter
+                if (ageInput.empty()) return;
+                int age = std::stoi(ageInput);
+                if (age < 1 || age > 100) { ageInput.clear(); return; }
+                if (setupState == SetupState::AGE_P1) {
+                    age1 = age; ageInput.clear();
+                    setupState = SetupState::AGE_P2;
+                } else {
+                    age2 = age; ageInput.clear();
+                    battle.setAges(age1, age2);
+                    setupState = SetupState::HERO_1;
+                    setupHeroButtons();
+                }
+                return;
+            }
+            if (u >= '0' && u <= '9' && ageInput.size() < 3) ageInput += static_cast<char>(u);
+        }
+
+        void GraphicManager::setupHeroButtons() {
+            heroButtons.clear();
+            float y = 200.f;
+            for (Fighter* h : battle.getAvailableHeroes()) {
+                HeroButton b(font);
+                b.box.setSize({250.f, 60.f});
+                b.box.setPosition({100.f, y});
+                b.box.setFillColor(sf::Color(123,63,0));
+                b.box.setOutlineThickness(3.f);
+                b.box.setOutlineColor(sf::Color::White);
+                b.label.setString(h->getName());
+                b.label.setCharacterSize(24);
+                b.label.setPosition({120.f, y + 15.f});
+                b.hero = h;
+                heroButtons.push_back(b);
+                y += 90.f;
+            }
+        }
+
+    void GraphicManager::handleHeroClick(sf::Vector2f pos)
+    {
+        for (auto& b : heroButtons) {
+            if (b.box.getGlobalBounds().contains(pos)) {
+                Player& chooser = (setupState == SetupState::HERO_1)
+                                ? battle.getFirstChooser() : battle.getSecondChooser();
+                battle.assignHero(chooser, b.hero);
+                if (setupState == SetupState::HERO_1) {
+                    setupState = SetupState::HERO_2;
+                    setupHeroButtons();
+                } else {
+                    battle.beginUnitSetup();
+                    setupState = SetupState::SIDEKICK_P1;
+                    startSidekickStage();
+                }
+                return;
+            }
+        }
+    }
+
+    void GraphicManager::drawFighters()
+    {
+        auto zonePos = [&](int zoneId) -> sf::Vector2f {
+            for (const auto& spot : boardSpots)
+                if (spot.id == zoneId) return spot.circle.getPosition();
+            return {0.f, 0.f};
+        };
+
+        auto drawAt = [&](Fighter& f, sf::Texture& tex, bool texOk, sf::Color fallback)
+        {
+            if (!f.isalive() || f.getPosition() == nullptr) return;
+            sf::Vector2f pos = zonePos(f.getPosition()->getId());
+
+            float radius = 32.f;
+            sf::CircleShape marker(radius);
+            marker.setOrigin({radius, radius});
+            marker.setPosition(pos);
+            marker.setOutlineThickness(-3.f);
+            marker.setOutlineColor(sf::Color::Black);
+
+            if (texOk) {
+                marker.setTexture(&tex);
+                marker.setFillColor(sf::Color(175,175,175));
+            } else {
+                marker.setFillColor(fallback);
+            }
+
+            window.draw(marker);
+            sf::Text hpText(font);
+            hpText.setString("HP: " + std::to_string(f.getHealth()));
+            hpText.setCharacterSize(14);
+            hpText.setFillColor(sf::Color::White);
+            hpText.setOutlineColor(sf::Color::Black);
+            hpText.setOutlineThickness(2.f);
+
+            sf::FloatRect textBounds = hpText.getLocalBounds();
+
+            hpText.setOrigin({
+                textBounds.position.x + textBounds.size.x / 2.f,
+                textBounds.position.y + textBounds.size.y
+            });
+
+            hpText.setPosition({
+                pos.x,
+                pos.y - radius - 5.f
+            });
+
+            window.draw(hpText);
+        };
+
+        drawAt(battle.getSherlock(),     sherlocktex,  sherlocktexOk,  sf::Color::Blue);
+        drawAt(battle.getWatson(),       watsontex,    watsontexOk,    sf::Color(100, 100, 255));
+        drawAt(battle.getDracual(),      draculatex,   draculatexOk,   sf::Color::Red);
+        drawAt(battle.getInvisibleMan(), invisibletex, invisibletOk, sf::Color(150, 150, 150));
+
+        vector<Sisters>& sisters = battle.getsisters();
+        for (int i = 0; i < (int)sisters.size() && i < 3; i++) {
+            drawAt(sisters[i], sistertex[i], sistertexOk[i], sf::Color(255, 100, 100));
+        }
+    }
+
+    void GraphicManager::drawfogtoken()
+    {
+        auto zonePos = [&](int zoneId) -> sf::Vector2f {
+            for (const auto& spot : boardSpots)
+                if (spot.id == zoneId) return spot.circle.getPosition();
+            return {0.f, 0.f};
+        };
+
+        for (FogToken& fog : battle.getfogtoken()) {
+            if (fog.getPosition() == nullptr) continue;
+            sf::Vector2f pos = zonePos(fog.getPosition()->getId());
+
+            float radius = 32.f;
+            sf::CircleShape marker(radius);
+            marker.setOrigin({radius, radius});
+            marker.setPosition(pos);
+            marker.setOutlineThickness(-3.f);
+            marker.setOutlineColor(sf::Color(80, 80, 80));
+
+            if (fogOk) {
+                marker.setTexture(&fogtex);
+                marker.setFillColor(sf::Color(255, 255, 255, 90));
+            } else {
+                marker.setFillColor(sf::Color(200, 200, 200, 90));
+
+            }
+
+            window.draw(marker);
+        }
+    }
+
+        void GraphicManager::startSidekickStage() {
+            Player& current = (setupState == SetupState::SIDEKICK_P1)
+                            ? battle.getplayer1() : battle.getplayer2();
+            validZoneIds = battle.getSidekickValidZones(current);
+
+            if (validZoneIds.empty()) 
+            {
+                if (setupState == SetupState::SIDEKICK_P1) 
+                {
+                    setupState = SetupState::SIDEKICK_P2;
+                    startSidekickStage();
+                }
+                else
+                {
+                   battle.finalizeSetup();
+                    battle.startGame();
+                    beginTurnFlow();
+                }
+            }
+        }
+
+        void GraphicManager::handleBoardClick(sf::Vector2f pos) 
+        {
+            for (const auto& spot : boardSpots) {
+                sf::Vector2f center = spot.circle.getPosition();
+                float dx = pos.x - center.x, dy = pos.y - center.y;
+                if (std::sqrt(dx * dx + dy * dy) > spot.circle.getRadius()) continue;
+
+                bool isValid = false;
+                for (int id : validZoneIds) if (id == spot.id) { isValid = true; break; }
+                if (!isValid) return;
+
+                Player& current = (setupState == SetupState::SIDEKICK_P1)
+                                ? battle.getplayer1() : battle.getplayer2();
+                bool stepDone = battle.placeSidekickAt(current, spot.id);
+
+                if (stepDone) {
+                    if (setupState == SetupState::SIDEKICK_P1) {
+                        setupState = SetupState::SIDEKICK_P2;
+                        startSidekickStage();
+                    } else {
+                        battle.finalizeSetup();
+    
+                        battle.startGame();
+                        beginTurnFlow();
+                       
+                    }
+                } else {
+                    validZoneIds = battle.getSidekickValidZones(current); 
+                }
+                return;
+            }
+        }
+
+         void GraphicManager::setupHandCards()
+        {
+            handCards.clear();
+
+            Player& current = battle.getCurrentPlayer();
+            Player& other = battle.getOtherPlayer(current);
+            vector<Card>& hand = current.getHero()->gethand();
+            vector<AttackCardInfo> info = current.getHero()->getPlayableCardIndexes(&battle, other.getHero(), current.getHero());
+
+            float cardW = 120.f, cardH = 160.f, gap = 20.f;
+            float totalW = info.size() * cardW + (info.empty() ? 0 : (info.size() - 1) * gap);
+            float startX = (1280.f - totalW) / 2.f;
+            float y = 720.f - cardH - 20.f;
+
+            for (size_t i = 0; i < info.size(); i++) 
+            {
+                CardWidget cw(font);
+                float x = startX + i * (cardW + gap);
+
+                cw.box.setSize({cardW, cardH});
+                cw.box.setPosition({x, y});
+                cw.box.setOutlineThickness(2.f);
+                cw.box.setOutlineColor(sf::Color::Black);
+                cw.usable = info[i].usable;
+                cw.handIndex = info[i].index;
+
+                Card& c = hand[info[i].index];
+
+                auto it = cardTextures.find(c.getcardname());
+                if (it != cardTextures.end()) 
+                {
+                    cw.tex = &it->second;
+                    cw.box.setTexture(cw.tex);
+                    cw.box.setFillColor(cw.usable ? sf::Color::White : sf::Color(120, 120, 120));
+                } 
+                else 
+                {
+                    cw.box.setFillColor(cw.usable ? sf::Color(230, 220, 190) : sf::Color(120, 120, 120));
+                    cw.nameText.setString(c.getName());
+                    cw.nameText.setCharacterSize(16);
+                    cw.nameText.setFillColor(sf::Color::Black);
+                    cw.nameText.setPosition({x + 8.f, y + 8.f});
+                }
+
+                cw.valueText.setString("V:" + std::to_string(c.getValue()) + " B:" + std::to_string(c.getBoost()));
+                cw.valueText.setCharacterSize(14);
+                cw.valueText.setFillColor(cw.tex ? sf::Color::Yellow : sf::Color::Black);
+                cw.valueText.setPosition({x + 6.f, y + cardH - 26.f});
+
+                handCards.push_back(std::move(cw));
+            }
+        }
+    void GraphicManager::beginTurnFlow()
+    {
+        Fighter* hero = battle.getCurrentPlayer().getHero();
+
+        if (hero != nullptr && hero->getName() == "InvisibleMan" && hero->getPosition() == nullptr)
+        {
+            validZoneIds.clear();
+            for (int id = 1; id <= 32; id++) {
+                Zone* z = battle.getMap().getZone(id);
+                if (z == nullptr) continue;
+                Fighter* occ = battle.getfighterat(z);
+                if (occ != nullptr && occ->getteam() != hero->getteam()) continue;
+                validZoneIds.push_back(id);
+            }
+            setupState = SetupState::INVISIBLE_REAPPEAR;
+            return;
+        }
+
+        if (hero != nullptr && hero->getName() == "Dracula" && hero->isalive()) 
+        {
+            abilityTargets = battle.getDraculaObj().getAbilityTargets(&battle);
+            setupState = SetupState::DRACULA_ABILITY;
+        } 
+        else if (hero != nullptr && hero->getName() == "Sherlock" && hero->isalive())
+        {
+            setupState = SetupState::SHERLOCK_ABILITY;
+        }
+        else 
+        {
+            setupState = SetupState::DONE;
+            setupHandCards();
+        }
+    }
+    void GraphicManager::handleInvisibleReappearClick(sf::Vector2f pos)
+{
+    for (const auto& spot : boardSpots) {
+        sf::Vector2f center = spot.circle.getPosition();
+        float dx = pos.x - center.x, dy = pos.y - center.y;
+        if (std::sqrt(dx * dx + dy * dy) > spot.circle.getRadius()) continue;
+
+        bool valid = false;
+        for (int id : validZoneIds) if (id == spot.id) { valid = true; break; }
+        if (!valid) return;
+
+        battle.getCurrentPlayer().getHero()->setPosition(battle.getMap().getZone(spot.id));
+        validZoneIds.clear();
+        beginTurnFlow();
+        return;
+    }
+}
+    void GraphicManager::drawHandCards()
+    {
+        for (auto& cw : handCards) {
+            window.draw(cw.box);
+            window.draw(cw.nameText);
+            window.draw(cw.valueText);
+        }
+    }
+
+   void GraphicManager::handleCardClick(sf::Vector2f pos) {
+    for (auto& cw : handCards) {
+        if (!cw.box.getGlobalBounds().contains(pos)) continue;
+        if (!cw.usable) return;
+        Player& current = battle.getCurrentPlayer();
+        Player& other = battle.getOtherPlayer(current);
+        Card& chosenCard = current.getHero()->gethand()[cw.handIndex];
+
+        if (chosenCard.getcardType() == SCHEME) {
+            playCardWithAttacker(current.getHero(), chosenCard, cw.handIndex);
+            return;
+        }
+
+        std::vector<Fighter*> choices = current.getAttackerChoices(battle, chosenCard, other.getHero());
+        if (choices.empty()) {
+            setupHandCards();
+            return;
+        }
+        if (choices.size() > 1) {
+            validZoneIds.clear();
+            for (Fighter* f : choices) {
+                if (f != nullptr && f->getPosition() != nullptr) validZoneIds.push_back(f->getPosition()->getId());
+            }
+            pendingAttackerCardIndex = cw.handIndex;
+            setupState = SetupState::ATTACKER_SELECT;
+            return;
+        }
+
+        playCardWithAttacker(choices[0], chosenCard, cw.handIndex);
+        return;
+    }
+}
+
+void GraphicManager::playCardWithAttacker(Fighter* attacker, Card& chosenCard, int handIndex)
+{
+    Player& current = battle.getCurrentPlayer();
+    Player& other = battle.getOtherPlayer(current);
+
+    if (chosenCard.getEffect() != nullptr && chosenCard.getEffect()->needsGUIInput()) {
+        CardEffect* effect = chosenCard.getEffect();
+        pendingCardAttacker = attacker;
+        pendingCardDefender = other.getHero();
+        pendingCardOriginalIndex = handIndex;
+
+     if (effect->usesHandSelection()) {
+            Fighter* cardOwner = current.getHero();
+            effect->onHandSelectionStart(attacker, other.getHero(), &battle);
+            pendingCard = &cardOwner->gethand()[pendingCardOriginalIndex];
+            Fighter* target = effect->getHandSelectionTarget(attacker, other.getHero());
+            int excludeIdx = (target == cardOwner) ? pendingCardOriginalIndex : -1;
+            populateHandWidgets(boostCards, target, excludeIdx);
+            if (boostCards.empty()) { finishHandSelection(); return; }
+            setupState = SetupState::DRACULA_CARD_BEAST;
+            return;
+        }
+        if (effect->usesNumberGuess()) {
+            pendingCard = &chosenCard;
+            setupNumberPicker(effect->getNumberGuessMax());
+            setupState = SetupState::DRACULA_CARD_BEAST;
+            return;
+        }
+
+        pendingCard = &chosenCard;
+        validZoneIds = effect->getValidZones(attacker, &battle);
+        setupState = SetupState::CARD_SELECT_ZONE;
+        return;
+    }
+   if (chosenCard.getcardType() == SCHEME) {
+        current.playScheme(other, battle, attacker, handIndex); 
+
+        if (current.getHero()->getName() == "InvisibleMan" && current.getHero()->getPosition() == nullptr) {
+            battle.endTurnAndAdvance();
+            beginTurnFlow();
+            return;
+        }
+
+        advanceAfterAction();
+    } else {
+        proceedToAttack(attacker, other.getHero(), current.getHero(), handIndex);
+    }
+}
+void GraphicManager::handleAttackerSelectClick(sf::Vector2f pos)
+{
+    for (const auto& spot : boardSpots) {
+        sf::Vector2f center = spot.circle.getPosition();
+        float dx = pos.x - center.x, dy = pos.y - center.y;
+        if (std::sqrt(dx * dx + dy * dy) > spot.circle.getRadius()) continue;
+
+        bool valid = false;
+        for (int id : validZoneIds) if (id == spot.id) { valid = true; break; }
+        if (!valid) return;
+
+        Fighter* chosen = battle.getfighterat(battle.getMap().getZone(spot.id));
+        if (chosen == nullptr) return;
+
+        Player& current = battle.getCurrentPlayer();
+        Card& chosenCard = current.getHero()->gethand()[pendingAttackerCardIndex];
+        int handIndex = pendingAttackerCardIndex;
+        validZoneIds.clear();
+        playCardWithAttacker(chosen, chosenCard, handIndex);
+        return;
+    }
+}
+
+  void GraphicManager::proceedToAttack(Fighter* attacker, Fighter* defender, Fighter* cardOwner, int cardIndex)
+{
+    pendingAttacker = attacker;
+    pendingDefender = defender;
+    pendingAttackCardIndex = cardIndex;
+
+    std::vector<int> defIndexes = battle.getCombat()->getValidDefenseCards(pendingDefender);
+    if (defIndexes.empty()) {
+        battle.getCombat()->resolveCombat(pendingAttacker, pendingDefender, cardOwner, pendingAttackCardIndex, -1);
+        finishAttack();
+    } else {
+        setupDefenseCards(pendingDefender, defIndexes);
+        setupState = SetupState::DEFENSE_SELECT;
+    }
+}
+
+ void GraphicManager::handleHandSelectionClick(sf::Vector2f pos)
+{
+    if (pendingCard == nullptr || pendingCard->getEffect() == nullptr) return;
+    CardEffect* effect = pendingCard->getEffect();
+    Fighter* target = effect->getHandSelectionTarget(pendingCardAttacker, pendingCardDefender);
+
+    if (effect->allowsSkip() && noBoostBox.getGlobalBounds().contains(pos)) {
+        if (effect->finishesOnSkip()) {
+            finishHandSelection();
+        } else {
+            effect->onSkip(pendingCardAttacker, pendingCardDefender, &battle);
+            boostCards.clear();
+            validZoneIds = effect->getValidZones(pendingCardAttacker, &battle);
+            setupState = SetupState::CARD_SELECT_ZONE;
+        }
+        return;
+    }
+
+    for (auto& cw : boostCards) {
+        if (cw.box.getGlobalBounds().contains(pos)) {
+            int choiceIdx = cw.handIndex;
+            if (effect->usesNumberGuess() && pendingCardIsDefense) {
+                pendingDefenseGuiChoice = choiceIdx;
+                finishHandSelection();
+                return;
+            }
+            effect->apply(pendingCardAttacker, target, &battle, *pendingCard, choiceIdx);
+
+            if (effect->usesHandSelection() && target == pendingCardAttacker && choiceIdx < pendingCardOriginalIndex) {
+                pendingCardOriginalIndex--;
+            }
+
+            if (effect->handSelectionRepeats()) {
+                int excludeIdx = (target == pendingCardAttacker) ? pendingCardOriginalIndex : -1;
+                populateHandWidgets(boostCards, target, excludeIdx);
+                if (boostCards.empty()) finishHandSelection();
+            } else {
+                finishHandSelection();
+            }
+            return;
+        }
+    }
+}
+
+  void GraphicManager::finishHandSelection()
+{
+    if (pendingCard == nullptr) { boostCards.clear(); return; }
+
+   if (pendingCardIsDefense) {
+        int defIdx = pendingCardOriginalIndex;
+        int guiChoiceToUse = pendingDefenseGuiChoice;
+        pendingDefenseGuiChoice = -1;
+        boostCards.clear();
+        pendingCard = nullptr;
+        pendingCardAttacker = nullptr;
+        pendingCardDefender = nullptr;
+        pendingCardOriginalIndex = -1;
+        pendingCardIsDefense = false;
+        battle.getCombat()->resolveCombat(pendingAttacker, pendingDefender, battle.getCurrentPlayer().getHero(),
+                                           pendingAttackCardIndex, defIdx, guiChoiceToUse);
+        finishAttack();
+        return;
+    }
+
+    Cardtype playedType = pendingCard->getcardType();
+    Fighter* attacker = pendingCardAttacker;
+    int idx = pendingCardOriginalIndex;
+
+    boostCards.clear();
+    pendingCard = nullptr;
+    pendingCardAttacker = nullptr;
+    pendingCardDefender = nullptr;
+    pendingCardOriginalIndex = -1;
+
+    Player& current = battle.getCurrentPlayer();
+    Player& other = battle.getOtherPlayer(current);
+
+    auto& hand = current.getHero()->gethand();
+    if (idx < 0 || idx >= (int)hand.size()) {
+        setupState = SetupState::DONE;
+        setupHandCards();
+        return;
+    }
+
+  if (playedType == SCHEME) {
+        hand.erase(hand.begin() + idx);
+        advanceAfterAction();
+    } else {
+        proceedToAttack(attacker, other.getHero(), current.getHero(), idx);
+    }
+}
+
+   void GraphicManager::drawHandSelectionUI()
+{
+    for (auto& cw : boostCards) {
+        window.draw(cw.box);
+        window.draw(cw.nameText);
+        window.draw(cw.valueText);
+    }
+    if (pendingCard != nullptr && pendingCard->getEffect() != nullptr &&
+        pendingCard->getEffect()->allowsSkip()) {
+        window.draw(noBoostBox);
+        window.draw(noBoostText);
+    }
+}
+    void GraphicManager::handleSherlockAbilityClick(sf::Vector2f pos)
+    {
+        if (sherlockYesBox.getGlobalBounds().contains(pos)) {
+            battle.setSherlockability(true);
+        } else if (abilityCancelBox.getGlobalBounds().contains(pos)) {
+            battle.setSherlockability(false);
+        } else {
+            return;
+        }
+        setupState = SetupState::DONE;
+        setupHandCards();
+    }
+
+    void GraphicManager::drawSherlockAbilityUI()
+    {
+        window.draw(sherlockYesBox);
+        window.draw(sherlockYesText);
+        window.draw(abilityCancelBox);
+        window.draw(abilityCancelText);
+    }
+    void GraphicManager::drawSetupUI()
+    {
+        std::string msg;
+        if (setupState == SetupState::AGE_P1) msg = "Player (1)  age: " + ageInput;
+        else if (setupState == SetupState::AGE_P2) msg = "Player (2)    age: " + ageInput;
+        else msg = "Choose   your  hero";
+        promptText.setFont(font);
+        promptText.setString(msg);
+        promptText.setCharacterSize(28);
+        promptText.setPosition({50.f, 50.f});
+        window.draw(promptText);
+        for (auto& b : heroButtons) { window.draw(b.box); window.draw(b.label); }
+    }
+    void GraphicManager::handleAbilityClick(sf::Vector2f pos)
+    {
+        if (abilityCancelBox.getGlobalBounds().contains(pos)) {
+            setupState = SetupState::DONE;
+            setupHandCards();
+            return;
+        }
+
+        for (const auto& spot : boardSpots) {
+            sf::Vector2f center = spot.circle.getPosition();
+            float dx = pos.x - center.x, dy = pos.y - center.y;
+            if (std::sqrt(dx * dx + dy * dy) > spot.circle.getRadius()) continue;
+
+            for (Fighter* target : abilityTargets) {
+            if (target->getPosition() != nullptr && target->getPosition()->getId() == spot.id) {
+                battle.getDraculaObj().useAbilityOn(target);
+                setupState = SetupState::DONE;
+                setupHandCards();
+                return;
+            }
+           }
+            return;
+        }
+    }
+
+    void GraphicManager::drawAbilityUI()
+    {
+        for (Fighter* target : abilityTargets) 
+        {
+            if (target->getPosition() == nullptr) continue;
+            for (const auto& spot : boardSpots) 
+            {
+                if (spot.id == target->getPosition()->getId()) 
+                {
+                    sf::CircleShape ring = spot.circle;
+                    ring.setFillColor(sf::Color::Transparent);
+                    ring.setTexture(nullptr);
+                    ring.setOutlineThickness(-5.f);
+                    ring.setOutlineColor(sf::Color::Red);
+                    window.draw(ring);
+                    break;
+                }
+            }
+        }
+        window.draw(abilityCancelBox);
+        window.draw(abilityCancelText);
+    }
+
+    void GraphicManager::startManeuver()
+{
+    Player& current = battle.getCurrentPlayer();
+    current.getHero()->drawBoostMovement();
+    setupBoostCards();
+    setupState = SetupState::MANEUVER_BOOST;
+}
+
+  void GraphicManager::setupBoostCards()
+{
+    populateHandWidgets(boostCards, battle.getCurrentPlayer().getHero());
+}
+
+void GraphicManager::populateHandWidgets(std::vector<CardWidget>& widgets, Fighter* fighter, int excludeIndex)
+{
+    widgets.clear();
+    if (fighter == nullptr) return;
+
+    vector<Card>& hand = fighter->gethand();
+
+    float cardW = 120.f, cardH = 160.f, gap = 20.f;
+    float totalW = hand.size() * cardW + (hand.empty() ? 0 : (hand.size() - 1) * gap);
+    float startX = (1280.f - totalW) / 2.f;
+    float y = 720.f - cardH - 20.f;
+
+    for (size_t i = 0; i < hand.size(); i++) {
+        if ((int)i == excludeIndex) continue;
+
+        CardWidget cw(font);
+        float x = startX + i * (cardW + gap);
+
+        cw.box.setSize({cardW, cardH});
+        cw.box.setPosition({x, y});
+        cw.box.setOutlineThickness(2.f);
+        cw.box.setOutlineColor(sf::Color::Black);
+        cw.usable = true;
+        cw.handIndex = (int)i;
+
+        Card& c = hand[i];
+        auto it = cardTextures.find(c.getcardname());
+        if (it != cardTextures.end()) {
+            cw.tex = &it->second;
+            cw.box.setTexture(cw.tex);
+            cw.box.setFillColor(sf::Color::White);
+        } else {
+            cw.box.setFillColor(sf::Color(230, 220, 190));
+            cw.nameText.setString(c.getName());
+            cw.nameText.setCharacterSize(16);
+            cw.nameText.setFillColor(sf::Color::Black);
+            cw.nameText.setPosition({x + 8.f, y + 8.f});
+        }
+
+        cw.valueText.setString("V:" + std::to_string(c.getValue()) + " B:" + std::to_string(c.getBoost()));
+        cw.valueText.setCharacterSize(14);
+        cw.valueText.setFillColor(cw.tex ? sf::Color::Yellow : sf::Color::Black);
+        cw.valueText.setPosition({x + 6.f, y + cardH - 26.f});
+
+        widgets.push_back(std::move(cw));
+    }
+}
+
+
+void GraphicManager::drawBoostCards()
+{
+    for (auto& cw : boostCards) {
+        window.draw(cw.box);
+        window.draw(cw.nameText);
+        window.draw(cw.valueText);
+    }
+    window.draw(noBoostBox);
+    window.draw(noBoostText);
+}
+
+void GraphicManager::handleBoostClick(sf::Vector2f pos)
+{
+    Player& current = battle.getCurrentPlayer();
+    Fighter* hero = current.getHero();
+
+    if (noBoostBox.getGlobalBounds().contains(pos)) {
+        maneuverMax = hero->getmovement();
+        beginManeuverMovement();
+        return;
+    }
+
+    for (auto& cw : boostCards) {
+        if (cw.box.getGlobalBounds().contains(pos)) {
+            vector<Card>& hand = hero->gethand();
+            int boost = hand[cw.handIndex].getBoost();
+            hand.erase(hand.begin() + cw.handIndex);
+            maneuverMax = hero->getmovement() + boost;
+            beginManeuverMovement();
+            return;
+        }
+    }
+}
+
+void GraphicManager::beginManeuverMovement()
+{
+    maneuverMovable.clear();
+    Fighter* hero = battle.getCurrentPlayer().getHero();
+
+    for (Fighter* f : battle.getFighters()) {
+        if (f != nullptr && f->isalive() && f->getteam() == hero->getteam())
+            maneuverMovable.push_back(f);
+    }
+    maneuverMoved.assign(maneuverMovable.size(), false);
+
+    setupState = SetupState::MANEUVER_SELECT_FIGHTER;
+    setupManeuverFighterButtons();
+}
+
+void GraphicManager::setupManeuverFighterButtons()
+{
+    maneuverFighterButtons.clear();
+    
+    float y = 350.f; 
+    float boxW = 160.f, boxH = 40.f, gap = 10.f;
+    float x = 20.f;
+    float bottomY = 630.f - gap;
+
+    for (size_t i = 0; i < maneuverMovable.size(); i++) 
+    {
+        if (maneuverMoved[i]) continue;
+
+        HeroButton b(font);
+        b.box.setSize({boxW, boxH});
+        b.box.setPosition({x, y});
+        
+        b.box.setFillColor(sf::Color(100, 50, 10 , 150)); 
+        b.box.setOutlineThickness(2.f);
+        b.box.setOutlineColor(sf::Color::Black);
+        
+        b.label.setString(maneuverMovable[i]->getName());
+        b.label.setCharacterSize(16);
+        
+        sf::FloatRect textRect = b.label.getLocalBounds();
+        
+        b.label.setOrigin({ textRect.position.x + textRect.size.x / 2.0f,  textRect.position.y + textRect.size.y / 2.0f });
+        
+        b.label.setPosition({x + boxW / 2.0f, y + boxH / 2.0f});
+        
+        b.hero = maneuverMovable[i];
+        maneuverFighterButtons.push_back(b);
+        
+        y += boxH + gap;
+    }
+}
+
+void GraphicManager::drawManeuverFighterButtons()
+{
+    for (auto& b : maneuverFighterButtons) 
+    {
+        window.draw(b.box);
+        window.draw(b.label);
+    }
+    window.draw(maneuverdonebox);
+    window.draw(maneuverdonetext);
+}
+
+void GraphicManager::handleManeuverFighterClick(sf::Vector2f pos)
+{
+    if (maneuverdonebox.getGlobalBounds().contains(pos)) 
+    {
+        finishManeuver();
+        return;
+    }
+
+    for (auto& b : maneuverFighterButtons) 
+    {
+        if (b.box.getGlobalBounds().contains(pos))
+        {
+            maneuverSelectedFighter = b.hero;
+            validZoneIds.clear();
+            vector<Zone*> zones = battle.getBoard()->getReachableZone(*maneuverSelectedFighter, maneuverMax);
+            for (Zone* z : zones) validZoneIds.push_back(z->getId());
+            setupState = SetupState::MANEUVER_SELECT_ZONE;
+            return;
+        }
+    }
+}
+
+void GraphicManager::handleManeuverZoneClick(sf::Vector2f pos)
+{
+    for (const auto& spot : boardSpots) {
+        sf::Vector2f center = spot.circle.getPosition();
+        float dx = pos.x - center.x, dy = pos.y - center.y;
+        if (std::sqrt(dx * dx + dy * dy) > spot.circle.getRadius()) continue;
+
+        bool valid = false;
+        for (int id : validZoneIds) if (id == spot.id) { valid = true; break; }
+        if (!valid) return;
+
+        if (battle.getBoard()->movefighter(*maneuverSelectedFighter, spot.id, maneuverMax)) {
+            for (size_t i = 0; i < maneuverMovable.size(); i++)
+                if (maneuverMovable[i] == maneuverSelectedFighter) maneuverMoved[i] = true;
+        }
+
+        maneuverSelectedFighter = nullptr;
+        validZoneIds.clear();
+
+        bool anyLeft = false;
+        for (bool m : maneuverMoved) if (!m) { anyLeft = true; break; }
+
+        if (!anyLeft) {
+            finishManeuver();
+        } else {
+            setupState = SetupState::MANEUVER_SELECT_FIGHTER;
+            setupManeuverFighterButtons();
+        }
+        return;
+    }
+}
+
+void GraphicManager::finishManeuver()
+{
+    maneuverFighterButtons.clear();
+    validZoneIds.clear();
+    maneuverSelectedFighter = nullptr;
+
+    battle.addAction();
+    if (battle.turnShouldEnd()) {
+        battle.endTurnAndAdvance();
+        beginTurnFlow();
+    } else {
+        setupState = SetupState::DONE;
+        setupHandCards();
+    }
+}
+
+
+void GraphicManager::setupDefenseCards(Fighter* defender, const std::vector<int>& defIndexes) {
+    defenseCardsUI.clear();
+    std::vector<Card>& hand = defender->gethand();
+    
+    float cardW = 120.f, cardH = 160.f, gap = 20.f;
+    float totalW = defIndexes.size() * cardW + (defIndexes.empty() ? 0 : (defIndexes.size() - 1) * gap);
+    float startX = (1280.f - totalW) / 2.f;
+    float y = 720.f - cardH - 20.f;
+
+    for (size_t i = 0; i < defIndexes.size(); i++) {
+        int realIdx = defIndexes[i];
+        CardWidget cw(font);
+        float x = startX + i * (cardW + gap);
+
+        cw.box.setSize({cardW, cardH});
+        cw.box.setPosition({x, y});
+        cw.box.setOutlineThickness(3.f);
+        cw.box.setOutlineColor(sf::Color(200, 50, 50)); // حاشیه قرمز برای کارت‌های دفاع
+        cw.usable = true;
+        cw.handIndex = realIdx;
+
+        Card& c = hand[realIdx];
+        auto it = cardTextures.find(c.getcardname());
+        if (it != cardTextures.end()) {
+            cw.tex = &it->second;
+            cw.box.setTexture(cw.tex);
+            cw.box.setFillColor(sf::Color::White);
+        } else {
+            cw.box.setFillColor(sf::Color(230, 200, 200));
+            cw.nameText.setString(c.getName());
+            cw.nameText.setCharacterSize(16);
+            cw.nameText.setFillColor(sf::Color::Black);
+            cw.nameText.setPosition({x + 8.f, y + 8.f});
+        }
+        
+        cw.valueText.setString("DEF:" + std::to_string(c.getValue()));
+        cw.valueText.setCharacterSize(14);
+        cw.valueText.setFillColor(cw.tex ? sf::Color::Yellow : sf::Color::Black);
+        cw.valueText.setPosition({x + 6.f, y + cardH - 26.f});
+
+        defenseCardsUI.push_back(std::move(cw));
+    }
+}
+
+void GraphicManager::drawDefenseUI() {
+    for (auto& cw : defenseCardsUI) {
+        window.draw(cw.box);
+        if (!cw.tex) window.draw(cw.nameText);
+        window.draw(cw.valueText);
+    }
+    window.draw(cancelDefenseBox);
+    window.draw(cancelDefenseText);
+}
+void GraphicManager::drawCombatMessage()
+{
+    if (combatMessageText.getString().isEmpty()) return;
+    window.draw(combatMessageBar);
+    window.draw(combatMessageText);
+}
+ void GraphicManager::handleDefenseClick(sf::Vector2f pos) {
+    if (cancelDefenseBox.getGlobalBounds().contains(pos)) {
+        battle.getCombat()->resolveCombat(pendingAttacker, pendingDefender, battle.getCurrentPlayer().getHero(), pendingAttackCardIndex, -1);
+        finishAttack();
+        return;
+    }
+
+    for (auto& cw : defenseCardsUI) {
+        if (cw.box.getGlobalBounds().contains(pos)) {
+            Card& defCard = pendingDefender->gethand()[cw.handIndex];
+            CardEffect* effect = defCard.getEffect();
+
+            if (effect != nullptr && effect->needsGUIInput()) {
+                pendingDefenseCardIndex = cw.handIndex;
+
+                if (effect->usesHandSelection() || effect->usesNumberGuess()) {
+                    pendingCardAttacker = pendingDefender;
+                    pendingCardDefender = pendingAttacker;
+                    pendingCardOriginalIndex = cw.handIndex;
+                    pendingCardIsDefense = true;
+                    defenseCardsUI.clear();
+
+                   if (effect->usesHandSelection()) {
+                        effect->onHandSelectionStart(pendingDefender, pendingAttacker, &battle);
+                        pendingCard = &pendingDefender->gethand()[pendingCardOriginalIndex];
+                        Fighter* target = effect->getHandSelectionTarget(pendingDefender, pendingAttacker);
+                        int excludeIdx = (target == pendingDefender) ? pendingCardOriginalIndex : -1;
+                        populateHandWidgets(boostCards, target, excludeIdx);
+                        if (boostCards.empty()) { finishHandSelection(); return; }
+                    } else {
+                        pendingCard = &defCard;
+                        setupNumberPicker(effect->getNumberGuessMax());
+                    }
+                    setupState = SetupState::DRACULA_CARD_BEAST;
+                    return;
+                }
+
+                pendingIsDefenseSelection = true;
+                validZoneIds = effect->getValidZones(pendingDefender, &battle);
+                defenseCardsUI.clear();
+                setupState = SetupState::CARD_SELECT_ZONE;
+                return;
+            }
+
+            battle.getCombat()->resolveCombat(pendingAttacker, pendingDefender, battle.getCurrentPlayer().getHero(), pendingAttackCardIndex, cw.handIndex);
+            finishAttack();
+            return;
+        }
+    }
+}
+ void GraphicManager::finishAttack() {
+    defenseCardsUI.clear();
+    combatMessageText.setString(battle.getCombat()->getLastCombatMessage());
+
+    if (battle.isgameover()) {
+        window.close();
+        return;
+    }
+
+  if (battle.getCombat()->getPendingPostCombatEffect() != nullptr) {
+        postCombatEffect = battle.getCombat()->getPendingPostCombatEffect();
+        postCombatAttacker = battle.getCombat()->getPendingPostCombatAttacker();
+        postCombatDefender = battle.getCombat()->getPendingPostCombatDefender();
+        battle.getCombat()->clearPendingPostCombat();
+
+        if (postCombatEffect->postCombatUsesHandDisplay()) {
+            populateHandWidgets(boostCards, postCombatDefender);
+            setupState = SetupState::POST_COMBAT_HAND_DISPLAY;
+            return;
+        }
+
+        validZoneIds = postCombatEffect->getValidZones(postCombatAttacker, &battle);
+        setupState = SetupState::POST_COMBAT_ZONE_SELECT;
+        return;
+    }
+
+    advanceAfterAction();
+}
+
+void GraphicManager::advanceAfterAction()
+{
+    if (battle.hasExtraAction()) {
+        battle.resetExtraAction();
+        battle.resetActionCounter();
+    } else {
+        battle.addAction();
+    }
+
+    if (battle.turnShouldEnd()) {
+        battle.endTurnAndAdvance();
+        beginTurnFlow();
+    } else {
+        setupState = SetupState::DONE;
+        setupHandCards();
+    }
+}
+
+void GraphicManager::handlePostCombatZoneClick(sf::Vector2f pos)
+{
+    if (postCombatEffect == nullptr) { setupState = SetupState::DONE; setupHandCards(); return; }
+
+    for (const auto& spot : boardSpots) {
+        sf::Vector2f center = spot.circle.getPosition();
+        float dx = pos.x - center.x, dy = pos.y - center.y;
+        if (std::sqrt(dx * dx + dy * dy) > spot.circle.getRadius()) continue;
+
+        bool valid = false;
+        for (int id : validZoneIds) if (id == spot.id) { valid = true; break; }
+        if (!valid) return;
+
+        Card dummy;
+        postCombatEffect->apply(postCombatAttacker, nullptr, &battle, dummy, spot.id);
+
+        if (postCombatEffect->needsMoreInput()) {
+            validZoneIds = postCombatEffect->getValidZones(postCombatAttacker, &battle);
+            return;
+        }
+
+        postCombatEffect = nullptr;
+        postCombatAttacker = nullptr;
+        validZoneIds.clear();
+        advanceAfterAction();
+        return;
+    }
+}
+
+
+void GraphicManager::handlePostCombatHandDisplayClick(sf::Vector2f pos)
+{
+    if (!abilityCancelBox.getGlobalBounds().contains(pos)) return;
+    boostCards.clear();
+    postCombatEffect = nullptr;
+    postCombatAttacker = nullptr;
+    postCombatDefender = nullptr;
+    advanceAfterAction();
+}
+
+void GraphicManager::drawPostCombatHandDisplay()
+{
+    for (auto& cw : boostCards) {
+        window.draw(cw.box);
+        window.draw(cw.nameText);
+        window.draw(cw.valueText);
+    }
+    window.draw(abilityCancelBox);
+    window.draw(abilityCancelText);
+}
+
+void GraphicManager::handleCardZoneClick(sf::Vector2f pos) {
+    for (const auto& spot : boardSpots) {
+        sf::Vector2f center = spot.circle.getPosition();
+        float dx = pos.x - center.x, dy = pos.y - center.y;
+        if (std::sqrt(dx * dx + dy * dy) > spot.circle.getRadius()) continue;
+
+        bool valid = false;
+        for (int id : validZoneIds) {
+            if (id == spot.id) { valid = true; break; }
+        }
+        if (!valid) return;
+
+        if (pendingIsDefenseSelection) {
+            battle.getCombat()->resolveCombat(pendingAttacker, pendingDefender, battle.getCurrentPlayer().getHero(),
+                                            pendingAttackCardIndex, pendingDefenseCardIndex, spot.id);
+            pendingIsDefenseSelection = false;
+            pendingDefenseCardIndex = -1;
+            validZoneIds.clear();
+            finishAttack();
+            return;
+        }
+
+        if (pendingCard != nullptr && pendingCard->getEffect() != nullptr) {
+            CardEffect* effect = pendingCard->getEffect();
+            Fighter* zoneOpponent = pendingCardIsDefense
+                ? pendingCardDefender
+                : battle.getOtherPlayer(battle.getCurrentPlayer()).getHero();
+
+            effect->apply(pendingCardAttacker, zoneOpponent, &battle, *pendingCard, spot.id);
+
+            if (effect->needsMoreInput()) {
+                validZoneIds = effect->getValidZones(pendingCardAttacker, &battle);
+                return;
+            }
+
+            if (pendingCardIsDefense) {
+                int defIdx = pendingCardOriginalIndex;
+                pendingCard = nullptr;
+                pendingCardAttacker = nullptr;
+                pendingCardDefender = nullptr;
+                pendingCardOriginalIndex = -1;
+                pendingCardIsDefense = false;
+                validZoneIds.clear();
+                battle.getCombat()->resolveCombat(pendingAttacker, pendingDefender, battle.getCurrentPlayer().getHero(),
+                                                   pendingAttackCardIndex, defIdx, -1);
+                finishAttack();
+                return;
+            }
+
+            Cardtype playedType = pendingCard->getcardType();
+            Fighter* cardAttacker = pendingCardAttacker;
+            int idx = pendingCardOriginalIndex;
+
+            pendingCard = nullptr;
+            pendingCardAttacker = nullptr;
+            pendingCardDefender = nullptr;
+            pendingCardOriginalIndex = -1;
+            validZoneIds.clear();
+
+            if (playedType != SCHEME) {
+                Player& current = battle.getCurrentPlayer();
+                Player& other = battle.getOtherPlayer(current);
+                proceedToAttack(cardAttacker, other.getHero(), current.getHero(), idx);
+                return;
+            }
+
+            Player& current = battle.getCurrentPlayer();
+            auto& hand = current.getHero()->gethand();
+            if (idx >= 0 && idx < (int)hand.size()) hand.erase(hand.begin() + idx);
+            advanceAfterAction();
+            return;
+        }
+
+        pendingCard = nullptr;
+        pendingCardAttacker = nullptr;
+        pendingCardDefender = nullptr;
+        validZoneIds.clear();
+
+        if (battle.turnShouldEnd()) {
+            battle.endTurnAndAdvance();
+            beginTurnFlow();
+        } else {
+            setupState = SetupState::DONE;
+            setupHandCards();
+        }
+        return;
+    }
+}
+void GraphicManager::setupNumberPicker(int maxN)
+{
+    boostCards.clear();
+    float cardW = 90.f, cardH = 90.f, gap = 15.f;
+    float totalW = maxN * cardW + (maxN > 0 ? (maxN - 1) * gap : 0);
+    float startX = (1280.f - totalW) / 2.f;
+    float y = 720.f - cardH - 20.f;
+
+    for (int n = 1; n <= maxN; n++) {
+        CardWidget cw(font);
+        float x = startX + (n - 1) * (cardW + gap);
+        cw.box.setSize({cardW, cardH});
+        cw.box.setPosition({x, y});
+        cw.box.setOutlineThickness(2.f);
+        cw.box.setOutlineColor(sf::Color::Black);
+        cw.box.setFillColor(sf::Color(230, 220, 190));
+        cw.usable = true;
+        cw.handIndex = n;
+        cw.nameText.setString(std::to_string(n));
+        cw.nameText.setCharacterSize(28);
+        cw.nameText.setFillColor(sf::Color::Black);
+        cw.nameText.setPosition({x + cardW / 2.f - 8.f, y + cardH / 2.f - 16.f});
+        boostCards.push_back(std::move(cw));
+    }
+}
